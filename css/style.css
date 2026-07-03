@@ -92,78 +92,69 @@ body::before {
   z-index: 2;
 }
 
-/* Scene 2 */
+/* =====================================================
+   Scene 2
+===================================================== */
 
 .movie-container {
   width: 100%;
   height: 100%;
-  padding: 58px 52px 60px;
+  padding: 48px 52px 50px;
 
   display: grid;
-  grid-template-rows: 17% 67% 16%;
+  grid-template-rows: 14% 70% 16%;
 }
+
+/* Header */
 
 .movie-header {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
-
-  border-bottom: 1px solid rgba(199, 120, 57, 0.24);
 }
 
 .now-playing {
-  margin-bottom: 18px;
-  font-size: 24px;
+  font-size: 50px;
   font-weight: 600;
-  letter-spacing: 15px;
+  letter-spacing: 16px;
   color: #e59a5c;
   text-transform: uppercase;
+
   text-shadow:
-    0 0 10px rgba(229,154,92,.45),
-    0 0 26px rgba(229,154,92,.22);
+    0 0 10px rgba(229,154,92,.50),
+    0 0 30px rgba(229,154,92,.28);
 }
 
-.movie-header h1 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 86px;
-  font-weight: 400;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #f2e8d5;
-  text-shadow:
-    0 0 16px rgba(242,232,213,.16),
-    0 0 44px rgba(199,120,57,.24);
-}
+/* Poster */
 
 .poster-wrap {
   position: relative;
+  overflow: visible;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 24px 0;
 }
 
 .poster-wrap::before {
   content: "";
   position: absolute;
 
-  width: 98%;
+  width: 95%;
   height: 92%;
 
   background:
     radial-gradient(
       ellipse,
-      rgba(229,154,92,.48) 0%,
-      rgba(199,120,57,.34) 28%,
-      rgba(199,120,57,.18) 52%,
-      rgba(199,120,57,0) 82%
+      rgba(229,154,92,.55) 0%,
+      rgba(229,154,92,.28) 28%,
+      rgba(229,154,92,.12) 52%,
+      transparent 82%
     );
 
-  filter: blur(95px);
-  opacity: .95;
+  filter: blur(85px);
+  opacity: 0.95;
   animation: posterGlow 8s ease-in-out infinite;
   z-index: 0;
 }
@@ -173,19 +164,19 @@ body::before {
   position: absolute;
 
   width: 78%;
-  height: 96%;
+  height: 95%;
 
   background:
     linear-gradient(
       90deg,
       rgba(229,154,92,.36),
-      transparent 22%,
-      transparent 78%,
+      transparent 24%,
+      transparent 76%,
       rgba(229,154,92,.36)
     );
 
   filter: blur(70px);
-  opacity: .75;
+  opacity: 0.75;
   animation: sideGlow 9s ease-in-out infinite;
   z-index: 0;
 }
@@ -194,31 +185,93 @@ body::before {
   position: relative;
   z-index: 2;
 
-  height: 105%;
-  max-width: 90%;
+  height: 102%;
+  max-width: 88%;
   object-fit: contain;
 
-  border: 1px solid rgba(199, 120, 57, 0.50);
+  border: 1px solid rgba(199,120,57,.45);
+
   box-shadow:
-    0 0 0 1px rgba(229,154,92,.16),
+    0 0 0 1px rgba(255,200,120,.12),
     0 0 42px rgba(199,120,57,.28),
-    0 0 110px rgba(199,120,57,.14),
-    0 32px 95px rgba(0,0,0,.92);
+    0 0 110px rgba(199,120,57,.16),
+    0 32px 100px rgba(0,0,0,.94);
 }
+
+/* Footer */
 
 .movie-footer {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
-  border-top: 1px solid rgba(199, 120, 57, 0.20);
 }
 
 .movie-footer p {
-  font-size: 30px;
-  letter-spacing: 8px;
-  color: #b9b9b9;
+  font-size: 40px;
+  letter-spacing: 6px;
+  line-height: 1.6;
+  color: #bebebe;
   text-transform: uppercase;
-  text-shadow: 0 0 18px rgba(255,255,255,.10);
+
+  text-shadow:
+    0 0 12px rgba(255,255,255,.08);
+}
+/* =====================================================
+   Idle Scene
+===================================================== */
+
+.hidden {
+  display: none !important;
+}
+
+.idle-container {
+  width: 100%;
+  height: 100%;
+  padding: 48px 52px 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.idle-content {
+  max-width: 90%;
+}
+
+.idle-kicker {
+  margin-bottom: 26px;
+
+  color: #bebebe;
+  font-size: 34px;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+
+  text-shadow: 0 0 12px rgba(255,255,255,.08);
+}
+
+.idle-title {
+  color: #e59a5c;
+  font-size: 76px;
+  font-weight: 700;
+  letter-spacing: 10px;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 12px rgba(229,154,92,.52),
+    0 0 42px rgba(229,154,92,.30),
+    0 0 120px rgba(199,120,57,.20);
+}
+
+.idle-subtitle {
+  margin-top: 32px;
+
+  color: #bebebe;
+  font-size: 30px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+
+  opacity: 0.85;
 }

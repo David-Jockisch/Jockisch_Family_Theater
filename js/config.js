@@ -1,11 +1,15 @@
 const theaterConfig = {
-  theaterName: "Jockisch Family Theater",
+activeMovieId: "",
 
-  movie: {
-    title: "Iron Man",
-    year: "2008",
-    rating: "PG-13",
-    runtime: "2h 6m",
-    poster: "assets/posters/iron-man.jpg"
+  timings: {
+    logoBuild: 6800,
+    logoHold: 1800,
+
+    logoToPosterFade: 1800,
+    logoToPosterBlack: 600,
+
+    posterHold: 12000,
+
+    posterToLogoFade: 700
   }
 };

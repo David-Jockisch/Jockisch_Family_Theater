@@ -1,0 +1,11 @@
+{
+  id: "",
+  collection: "",
+  franchise: "",
+  title: "",
+  edition: "",
+  year: "",
+  rating: "",
+  runtime: "",
+  poster: ""
+},

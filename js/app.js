@@ -3,23 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   runTheaterLoop();
 });
 
-const timing = {
-  logoBuild: 6800,
-  logoHold: 1800,
-
-  logoToPosterFade: 1800,
-  logoToPosterBlack: 600,
-
-  posterHold: 12000,
-
-  posterToLogoFade: 700
-};
+function getTiming() {
+  return theaterConfig.timings;
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function runTheaterLoop() {
+  const timing = getTiming();
+
   const scene1 = document.getElementById("scene1");
   const scene2 = document.getElementById("scene2");
 
