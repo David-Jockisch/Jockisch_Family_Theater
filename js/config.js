@@ -1,5 +1,5 @@
 const theaterConfig = {
-activeMovieId: "",
+activeMovieId: "iron-man",
 
   timings: {
     logoBuild: 6800,
