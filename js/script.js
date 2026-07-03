@@ -1,25 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
   loadMovieInfo();
-  playLogoIntro();
-  startSceneRotation();
+  runTheaterLoop();
 });
 
-function startSceneRotation() {
+const timing = {
+  logoBuild: 6800,
+  logoHold: 1800,
+
+  logoToPosterFade: 1800,
+  logoToPosterBlack: 600,
+
+  posterHold: 12000,
+
+  posterToLogoFade: 700
+};
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function runTheaterLoop() {
   const scene1 = document.getElementById("scene1");
   const scene2 = document.getElementById("scene2");
 
-  let showingLogo = true;
+  while (true) {
+    scene1.style.transitionDuration = `${timing.logoToPosterFade}ms`;
+    scene2.style.transitionDuration = `${timing.posterToLogoFade}ms`;
 
-  setInterval(() => {
-    showingLogo = !showingLogo;
+    scene1.classList.add("active");
+    scene2.classList.remove("active");
 
-    scene1.classList.toggle("active", showingLogo);
-    scene2.classList.toggle("active", !showingLogo);
+    playLogoIntro();
 
-    if (showingLogo) {
-      playLogoIntro();
-    }
-  }, 12000);
+    await sleep(timing.logoBuild + timing.logoHold);
+
+    scene1.classList.remove("active");
+
+    await sleep(timing.logoToPosterFade + timing.logoToPosterBlack);
+
+    scene2.style.transitionDuration = `${timing.logoToPosterFade}ms`;
+    scene2.classList.add("active");
+
+    await sleep(timing.posterHold);
+
+    scene2.style.transitionDuration = `${timing.posterToLogoFade}ms`;
+    scene2.classList.remove("active");
+
+    await sleep(timing.posterToLogoFade);
+  }
 }
 
 function playLogoIntro() {

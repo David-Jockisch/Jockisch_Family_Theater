@@ -119,3 +119,29 @@
     filter: brightness(1.22);
   }
 }
+
+@keyframes posterGlow {
+  0%, 100% {
+    opacity: .72;
+    transform: scale(.96);
+    filter: blur(90px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+    filter: blur(110px);
+  }
+}
+
+@keyframes sideGlow {
+  0%, 100% {
+    opacity: .55;
+    transform: scaleX(.96);
+  }
+
+  50% {
+    opacity: .88;
+    transform: scaleX(1.06);
+  }
+}
