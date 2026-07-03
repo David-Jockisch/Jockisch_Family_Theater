@@ -1,9 +1,3 @@
-/* =====================================================
-   Jockisch Family Theater OS
-   style.css
-   Layout + visual design
-===================================================== */
-
 * {
   margin: 0;
   padding: 0;
@@ -37,10 +31,6 @@ body {
     );
 }
 
-/* =====================================================
-   Scenes
-===================================================== */
-
 .scene {
   position: absolute;
   inset: 0;
@@ -54,9 +44,7 @@ body {
   pointer-events: auto;
 }
 
-/* =====================================================
-   Scene 1 - Layered Logo
-===================================================== */
+/* Scene 1 */
 
 #logoScene {
   position: relative;
@@ -96,25 +84,53 @@ body {
   z-index: 2;
 }
 
-/* =====================================================
-   Scene 2 - Poster
-===================================================== */
+/* Scene 2 */
 
 .movie-container {
   width: 100%;
   height: 100%;
-  padding: 72px 70px 76px;
+  padding: 76px 70px 78px;
 
   display: grid;
-  grid-template-rows: 68% 32%;
+  grid-template-rows: 20% 64% 16%;
   align-items: center;
 }
 
-.poster {
-  justify-self: center;
-  align-self: center;
+.movie-header {
+  text-align: center;
+  align-self: end;
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(199, 120, 57, 0.22);
+}
 
-  width: 72%;
+.now-playing {
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 11px;
+  color: #e59a5c;
+  text-transform: uppercase;
+}
+
+.movie-header h1 {
+  font-size: 58px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #f3f3f3;
+  text-shadow: 0 0 24px rgba(199, 120, 57, 0.18);
+}
+
+.poster-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 34px 0;
+}
+
+.poster {
+  width: 76%;
   max-height: 100%;
   object-fit: contain;
 
@@ -125,31 +141,14 @@ body {
     0 32px 90px rgba(0, 0, 0, 0.88);
 }
 
-.movie-info {
+.movie-footer {
   text-align: center;
-  padding-top: 34px;
-  border-top: 1px solid rgba(199, 120, 57, 0.22);
+  align-self: start;
+  padding-top: 26px;
+  border-top: 1px solid rgba(199, 120, 57, 0.18);
 }
 
-.now-playing {
-  margin-bottom: 20px;
-
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 11px;
-  color: #e59a5c;
-  text-transform: uppercase;
-}
-
-.movie-info h1 {
-  font-size: 56px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  color: #f3f3f3;
-}
-
-.movie-info p {
-  margin-top: 16px;
+.movie-footer p {
   font-size: 19px;
   letter-spacing: 5px;
   color: #aaaaaa;

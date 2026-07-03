@@ -1,16 +1,13 @@
 function loadMovieInfo() {
-  document.getElementById("theaterName").textContent =
-    theaterConfig.theaterName;
+  const title = document.getElementById("movieTitle");
+  const poster = document.getElementById("moviePoster");
+  const details = document.getElementById("movieDetails");
 
-  document.getElementById("movieTitle").textContent =
-    theaterConfig.movie.title;
+  title.textContent = theaterConfig.movie.title;
 
-  document.getElementById("moviePoster").src =
-    theaterConfig.movie.poster;
+  poster.src = theaterConfig.movie.poster;
+  poster.alt = `${theaterConfig.movie.title} Poster`;
 
-  document.getElementById("moviePoster").alt =
-    `${theaterConfig.movie.title} Poster`;
-
-  document.getElementById("movieDetails").textContent =
+  details.textContent =
     `${theaterConfig.movie.rating} • ${theaterConfig.movie.runtime} • ${theaterConfig.movie.year}`;
 }

@@ -1,98 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jockisch Family Theater</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Jockisch Family Theater</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
 </head>
 
 <body>
+  <div id="app">
 
-<div id="app">
-
-    <!-- ===================================================== -->
-    <!-- SCENE 1 - INTRO -->
-    <!-- ===================================================== -->
-
+    <!-- Scene 1: Logo Intro -->
     <section id="scene1" class="scene active">
-
-        <div id="logoScene">
-
-            <img class="logo-layer glow"
-                src="assets/logos/logo-cross-glow.png"
-                alt="">
-
-            <img class="logo-layer cross"
-                src="assets/logos/logo-cross.png"
-                alt="">
-
-            <img class="logo-layer ring"
-                src="assets/logos/logo-ring.png"
-                alt="">
-
-            <img class="logo-layer j"
-                src="assets/logos/logo-j.png"
-                alt="">
-
-            <img class="logo-layer jockisch"
-                src="assets/logos/logo-jockisch.png"
-                alt="">
-
-            <img class="logo-layer family"
-                src="assets/logos/logo-family.png"
-                alt="">
-
-            <img class="logo-layer private"
-                src="assets/logos/logo-private.png"
-                alt="">
-
-        </div>
-
+      <div id="logoScene">
+        <img class="logo-layer glow" src="assets/logos/logo-cross-glow.png" alt="">
+        <img class="logo-layer cross" src="assets/logos/logo-cross.png" alt="">
+        <img class="logo-layer ring" src="assets/logos/logo-ring.png" alt="">
+        <img class="logo-layer j" src="assets/logos/logo-j.png" alt="">
+        <img class="logo-layer jockisch" src="assets/logos/logo-jockisch.png" alt="">
+        <img class="logo-layer family" src="assets/logos/logo-family.png" alt="">
+        <img class="logo-layer private" src="assets/logos/logo-private.png" alt="">
+      </div>
     </section>
 
-
-    <!-- ===================================================== -->
-    <!-- SCENE 2 -->
-    <!-- ===================================================== -->
-
+    <!-- Scene 2: Now Playing -->
     <section id="scene2" class="scene">
+      <div class="movie-container">
 
-        <div class="movie-container">
+        <header class="movie-header">
+          <div class="now-playing">Now Playing</div>
+          <h1 id="movieTitle">Iron Man</h1>
+        </header>
 
-            <img
-                class="poster"
-                src="assets/posters/ironman.jpg"
-                alt="Movie Poster">
+        <main class="poster-wrap">
+          <img
+            id="moviePoster"
+            class="poster"
+            src="assets/posters/iron-man.jpg"
+            alt="Movie Poster">
+        </main>
 
-            <div class="movie-info">
+        <footer class="movie-footer">
+          <p id="movieDetails">PG-13 • 2h 6m • 2008</p>
+        </footer>
 
-                <div class="now-playing">
-                    NOW PLAYING
-                </div>
-
-                <h1>Iron Man</h1>
-
-                <p>
-                    PG-13 • 2H 6M • 2008
-                </p>
-
-            </div>
-
-        </div>
-
+      </div>
     </section>
 
-</div>
+  </div>
 
-<script src="js/script.js"></script>
-
+  <script src="js/config.js"></script>
+  <script src="js/movie.js"></script>
+  <script src="js/script.js"></script>
 </body>
-
 </html>
