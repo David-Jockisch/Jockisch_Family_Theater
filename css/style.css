@@ -1,0 +1,157 @@
+/* =====================================================
+   Jockisch Family Theater OS
+   style.css
+   Layout + visual design
+===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+  background:
+    radial-gradient(
+      ellipse at top,
+      rgba(201, 139, 82, 0.11) 0%,
+      rgba(201, 139, 82, 0.05) 24%,
+      rgba(0, 0, 0, 0) 62%
+    ),
+    linear-gradient(
+      180deg,
+      #181411 0%,
+      #090909 38%,
+      #040404 100%
+    );
+}
+
+/* =====================================================
+   Scenes
+===================================================== */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.4s ease;
+}
+
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =====================================================
+   Scene 1 - Layered Logo
+===================================================== */
+
+#logoScene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#logoScene::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -180px;
+  width: 900px;
+  height: 900px;
+  transform: translateX(-50%);
+
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 243, 220, 0.16) 0%,
+    rgba(219, 158, 91, 0.09) 28%,
+    rgba(0, 0, 0, 0) 72%
+  );
+
+  filter: blur(50px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.logo-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* =====================================================
+   Scene 2 - Poster
+===================================================== */
+
+.movie-container {
+  width: 100%;
+  height: 100%;
+  padding: 72px 70px 76px;
+
+  display: grid;
+  grid-template-rows: 68% 32%;
+  align-items: center;
+}
+
+.poster {
+  justify-self: center;
+  align-self: center;
+
+  width: 72%;
+  max-height: 100%;
+  object-fit: contain;
+
+  border: 1px solid rgba(199, 120, 57, 0.42);
+  box-shadow:
+    0 0 0 1px rgba(229, 154, 92, 0.1),
+    0 0 38px rgba(199, 120, 57, 0.16),
+    0 32px 90px rgba(0, 0, 0, 0.88);
+}
+
+.movie-info {
+  text-align: center;
+  padding-top: 34px;
+  border-top: 1px solid rgba(199, 120, 57, 0.22);
+}
+
+.now-playing {
+  margin-bottom: 20px;
+
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 11px;
+  color: #e59a5c;
+  text-transform: uppercase;
+}
+
+.movie-info h1 {
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #f3f3f3;
+}
+
+.movie-info p {
+  margin-top: 16px;
+  font-size: 19px;
+  letter-spacing: 5px;
+  color: #aaaaaa;
+  text-transform: uppercase;
+}

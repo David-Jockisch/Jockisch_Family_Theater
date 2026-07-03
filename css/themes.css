@@ -1,0 +1,21 @@
+:root {
+  --jft-black: #090909;
+  --jft-black-deep: #030303;
+  --jft-surface: #161616;
+  --jft-surface-2: #202020;
+
+  --jft-copper: #c77839;
+  --jft-copper-light: #e59a5c;
+  --jft-copper-dark: #7a4724;
+
+  --jft-text: #f3f3f3;
+  --jft-muted: #aaaaaa;
+
+  --jft-shadow: rgba(0, 0, 0, 0.75);
+}
+
+.classic-theme {
+  background:
+    radial-gradient(circle at top, rgba(199, 120, 57, 0.13), transparent 34%),
+    linear-gradient(180deg, #181818 0%, #090909 45%, #030303 100%);
+}
