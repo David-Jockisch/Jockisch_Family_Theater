@@ -1,0 +1,29 @@
+:root {
+  --accent: #e59a5c;
+  --accent-glow: rgba(229,154,92,.55);
+  --accent-border: rgba(229,154,92,.45);
+}
+
+.theme-movie {
+  --accent: #e59a5c;
+  --accent-glow: rgba(229,154,92,.55);
+  --accent-border: rgba(229,154,92,.45);
+}
+
+.theme-ps5 {
+  --accent: #4f8cff;
+  --accent-glow: rgba(79,140,255,.55);
+  --accent-border: rgba(79,140,255,.45);
+}
+
+.theme-xbox {
+  --accent: #61c854;
+  --accent-glow: rgba(97,200,84,.55);
+  --accent-border: rgba(97,200,84,.45);
+}
+
+.theme-switch {
+  --accent: #e60012;
+  --accent-glow: rgba(230,0,18,.55);
+  --accent-border: rgba(230,0,18,.45);
+}
