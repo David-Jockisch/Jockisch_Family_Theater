@@ -1,12 +1,14 @@
 # 🎬 Jockisch Family Theater OS
 
-A custom-built digital theater display designed for the Jockisch Family Theater.
+A custom-built digital signage system for the Jockisch Family Theater.
 
-Current Version: **0.5**
+Designed to display movie nights, game nights, and theater information on a dedicated portrait display.
+
+Current Version: **0.6**
 
 ---
 
-# Folder Structure
+# Project Structure
 
 ```
 Jockisch-Theater/
@@ -15,45 +17,79 @@ Jockisch-Theater/
 │
 ├── css/
 │   ├── style.css
+│   ├── themes.css
 │   └── animations.css
 │
 ├── js/
-│   ├── app.js
 │   ├── config.js
-│   ├── library.js
-│   └── movie.js
+│   │
+│   ├── movie-library.js
+│   ├── game-library.js
+│   ├── platforms.js
+│   │
+│   ├── movie-template.js
+│   ├── game-template.js
+│   ├── idle-template.js
+│   │
+│   ├── media.js
+│   └── app.js
 │
 ├── assets/
 │   ├── logos/
+│   ├── platforms/
 │   ├── posters/
-│   └── backgrounds/
+│   └── games/
+│       ├── ps5/
+│       ├── xbox/
+│       └── switch/
 │
 └── README.md
 ```
 
 ---
 
-# How the Theater Works
+# Theater Modes
 
-The theater runs two scenes continuously.
+The theater now supports three display modes.
 
-### Scene 1
-Jockisch Family Theater animated logo.
+## 🎬 Movie
 
-↓
+Displays:
 
-### Scene 2
-Now Playing screen with movie poster and information.
-
-↓
-
-Returns to Scene 1.
-
-The loop repeats until closed.
+- Movie Poster
+- Rating
+- Runtime
+- Release Year
+- Edition
 
 ---
 
-# Playing a Movie
+## 🎮 Game
+
+Displays:
+
+- Full-screen artwork
+- Game title
+- Platform logo
+- Genre
+- Players
+- Release year
+
+Platform themes are automatically applied.
+
+- PlayStation = Blue
+- Xbox = Green
+- Nintendo = Red
+
+---
+
+## 🏛 Idle
+
+Displays a welcome screen when no event is selected.
+
+---
+
+# Selecting Tonight's Media
 
 Open:
 
@@ -61,18 +97,36 @@ Open:
 js/config.js
 ```
 
-Locate:
+Choose the mode:
 
 ```js
-activeMovieId: "",
+mode: "movie"
 ```
 
-Replace the blank with the movie ID.
+or
+
+```js
+mode: "game"
+```
+
+or
+
+```js
+mode: "idle"
+```
+
+Then choose the media ID.
 
 Example:
 
 ```js
-activeMovieId: "iron-man",
+mediaId: "iron-man"
+```
+
+or
+
+```js
+mediaId: "snowrunner"
 ```
 
 Save.
@@ -85,11 +139,13 @@ Done.
 
 # Adding a New Movie
 
-## Step 1
+## 1
 
-Download the poster.
+Save the poster:
 
-Save it into the correct folder.
+```
+assets/posters/CollectionName/
+```
 
 Example:
 
@@ -99,15 +155,15 @@ assets/posters/Marvel/
 
 ---
 
-## Step 2
+## 2
 
-Open
+Open:
 
 ```
-js/library.js
+js/movie-library.js
 ```
 
-Copy the template below.
+Copy:
 
 ```js
 {
@@ -123,139 +179,157 @@ Copy the template below.
 },
 ```
 
-Paste it at the bottom of the movie list.
+Fill in the information.
+
+Done.
 
 ---
 
-## Step 3
+# Adding a New Game
 
-Fill in the movie information.
+## 1
+
+Save the artwork:
+
+PlayStation
+
+```
+assets/games/ps5/
+```
+
+Xbox
+
+```
+assets/games/xbox/
+```
+
+Switch
+
+```
+assets/games/switch/
+```
+
+---
+
+## 2
+
+Open:
+
+```
+js/game-library.js
+```
+
+Copy:
+
+```js
+{
+  id: "",
+  platform: "",
+
+  title: "",
+  genre: "",
+  players: "",
+  release: "",
+
+  background: ""
+},
+```
 
 Example:
 
 ```js
 {
-  id: "thor-ragnarok",
-  collection: "Marvel",
-  franchise: "Marvel Cinematic Universe",
-  title: "Thor: Ragnarok",
-  edition: "4K Ultra HD",
-  year: "2017",
-  rating: "PG-13",
-  runtime: "2h 10m",
-  poster: "assets/posters/Marvel/thor-ragnarok.jpg"
+  id: "snowrunner",
+  platform: "ps5",
+
+  title: "SnowRunner",
+  genre: "Off-Road, Simulation, Open World",
+  players: "1-4 Players Online Co-op",
+  release: "2020",
+
+  background: "assets/games/ps5/snowrunner.jpg"
 },
 ```
 
-Save.
-
-Movie complete.
+Done.
 
 ---
 
-# Naming Rules
+# Platform Definitions
 
-## Movie IDs
+Platform information is stored separately.
 
-Always lowercase.
+```
+js/platforms.js
+```
 
-Always use hyphens.
+Each platform controls:
+
+- Display Name
+- Theme
+- Logo
+- Logo Scale
+
+Games only reference:
+
+```js
+platform: "ps5"
+```
+
+or
+
+```js
+platform: "xbox"
+```
+
+---
+
+# Naming Standards
+
+## IDs
+
+Always:
+
+- lowercase
+- hyphen-separated
 
 Example
 
 ```
 iron-man
 
-thor-ragnarok
+snowrunner
 
-back-to-the-future-part-2
+the-last-of-us-part-2-remastered
 ```
 
-Never use spaces.
+Never use:
 
-Never use underscores.
+- spaces
+- underscores
+- capital letters
 
 ---
 
-## Poster Names
+## Artwork
 
-Poster filename should ALWAYS match the Movie ID.
-
-Example
-
-Movie ID
-
-```
-thor-ragnarok
-```
-
-Poster
-
-```
-thor-ragnarok.jpg
-```
-
----
-
-## Folder Names
-
-One folder per collection.
+Artwork filename should always match the ID.
 
 Example
 
 ```
-Marvel
+snowrunner.jpg
+```
 
-HarryPotter
+belongs to
 
-LotR
-
-BackToTheFuture
-
-SuperMario
+```
+snowrunner
 ```
 
 ---
 
-# Editing Timings
-
-Open
-
-```
-js/config.js
-```
-
-```
-logoBuild
-```
-
-Controls the logo animation length.
-
-```
-logoHold
-```
-
-How long the completed logo remains on screen.
-
-```
-posterHold
-```
-
-How long the movie poster remains visible.
-
-Fade timings can also be adjusted in this file.
-
----
-
-# File Responsibilities
-
-## index.html
-
-Page structure only.
-
-No movie data belongs here.
-
----
+# CSS Responsibilities
 
 ## style.css
 
@@ -263,101 +337,172 @@ Layout
 
 Sizing
 
-Colors
+Movie styling
 
-Poster styling
+Game styling
+
+Idle styling
+
+---
+
+## themes.css
+
+Application colors
+
+Movie theme
+
+Platform themes
+
+Future seasonal themes
 
 ---
 
 ## animations.css
 
-Logo animations
+Logo animation
 
-Poster glow animations
+Glow effects
 
 Keyframes
 
 ---
 
+# JavaScript Responsibilities
+
 ## config.js
 
-Settings
+Application settings
 
-Movie selection
+Media selection
 
 Scene timings
 
 ---
 
-## library.js
+## movie-library.js
 
 Movie database.
 
-Every movie belongs here.
+---
+
+## game-library.js
+
+Game database.
 
 ---
 
-## movie.js
+## platforms.js
 
-Loads movie information from library.js.
+Platform information.
+
+Logos
+
+Themes
+
+Scaling
+
+---
+
+## movie-template.js
+
+Movie scene.
+
+---
+
+## game-template.js
+
+Game scene.
+
+---
+
+## idle-template.js
+
+Idle scene.
+
+---
+
+## media.js
+
+Loads the correct Scene 2 template.
 
 ---
 
 ## app.js
 
-Controls scene switching and theater loop.
+Controls the theater loop.
 
 ---
 
-# Current Standards
+# Current Features
 
-Every movie should contain:
+✔ Animated logo
 
-```js
-id
-collection
-franchise
-title
-edition
-year
-rating
-runtime
-poster
-```
+✔ Movie Mode
+
+✔ Game Mode
+
+✔ Idle Mode
+
+✔ Theme system
+
+✔ Platform branding
+
+✔ Movie library
+
+✔ Game library
+
+✔ Shared platform database
+
+✔ Responsive game titles
+
+✔ Continuous theater loop
 
 ---
 
 # Future Ideas
 
-- Library browser
-- Random movie mode
-- Coming Soon screen
-- Countdown timer
-- Movie trivia
-- Background music
-- Theater statistics
-- Seasonal themes
+□ Local media selector
+
+□ Collection browser
+
+□ Coming Soon screen
+
+□ Movie countdown
+
+□ Random movie mode
+
+□ Seasonal themes
+
+□ Music mode
+
+□ Dynamic backgrounds
+
+□ Theater statistics
 
 ---
 
 # Version History
 
-## Version 0.5
+## Version 0.6
 
-✔ Movie Library
+✔ Multi-mode architecture
 
-✔ Config system
+✔ Movie template
 
-✔ Animated logo
+✔ Game template
 
-✔ Poster scene
+✔ Idle template
 
-✔ Scene manager
+✔ Theme engine
 
-✔ Continuous loop
+✔ Platform database
 
-✔ Dynamic movie loading
+✔ Platform logos
+
+✔ Responsive title sizing
+
+✔ Modular Scene 2
 
 ---
 
-Built for the Jockisch Family Theater.
+Built with ❤️ for the Jockisch Family Theater.
