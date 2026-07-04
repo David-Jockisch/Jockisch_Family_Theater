@@ -6,9 +6,9 @@ const theaterConfig = {
   |   "game"  = game artwork screen
   */
 
-  mode: "game",
+  mode: "movie",
 
-  mediaId: "indiana-jones-and-the-great-circle",
+  mediaId: "the-mummy-tomb-dragon-emperor",
 
   timings: {
     logoBuild: 6800,
