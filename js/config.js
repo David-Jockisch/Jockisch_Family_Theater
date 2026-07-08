@@ -6,9 +6,9 @@ const theaterConfig = {
   |   "game"  = game artwork screen
   */
 
-  mode: "movie",
+  mode: "game",
 
-  mediaId: "the-mummy-tomb-dragon-emperor",
+  mediaId: "astro-bot",
 
   timings: {
     logoBuild: 6800,

@@ -216,7 +216,7 @@ const movieLibrary = [
   year: "2023",
   rating: "PG",
   runtime: "1h 32m",
-  poster: "assets/posters/SuperMario/the-super-mario-bros-movie.jpg"
+  poster: "assets/posters/Mario/the-super-mario-bros-movie.jpg"
 },
 
 {
@@ -227,6 +227,17 @@ const movieLibrary = [
   year: "2026",
   rating: "PG",
   runtime: "1h 38m",
-  poster: "assets/posters/SuperMario/the-super-mario-galaxy-movie.jpg"
+  poster: "assets/posters/Mario/the-super-mario-galaxy-movie.jpg"
+},
+{
+  id: "saving-private-ryan",
+  collection: "Saving Private Ryan",
+  franchise: "",
+  title: "Saving Private Ryan",
+  edition: "4K UHD",
+  year: "1998",
+  rating: "R",
+  runtime: "169 min",
+  poster: "assets/posters/saving_private_ryan.jpg"
 },
 ];

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projection Booth</title>
+  <link rel="stylesheet" href="booth.css" />
+</head>
+<body>
+  <main id="app">
+    <header class="booth-header">
+      <div class="eyebrow">Jockisch Family Theater</div>
+      <h1>Projection Booth</h1>
+    </header>
+
+    <section id="libraryView" class="view active">
+      <div id="movieRows"></div>
+    </section>
+
+<section id="detailView" class="view">
+  <div id="movieDetail"></div>
+</section>
+
+    <section id="builderView" class="view">
+      <div id="presentationBuilder"></div>
+    </section>
+  </main>
+
+  <script src="../js/movie-library.js"></script>
+  <script src="../js/demo-library.js"></script>
+  <script src="booth.js"></script>
+</body>
+</html>
