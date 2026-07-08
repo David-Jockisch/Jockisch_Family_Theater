@@ -1,0 +1,21 @@
+{
+  "name": "Jockisch Family Theater Booth",
+  "short_name": "JFT Booth",
+  "start_url": "booth.html",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#070707",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/jft-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/jft-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

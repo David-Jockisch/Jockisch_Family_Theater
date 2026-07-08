@@ -1,33 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projection Booth</title>
-  <link rel="stylesheet" href="booth.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Jockisch Family Theater - Projection Booth</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="booth.css" />
+
+    <!-- Progressive Web App -->
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#070707">
+
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="JFT Booth">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="apple-touch-icon" href="icons/jft-icon-192.png">
+    <link rel="icon" type="image/png" href="icons/jft-icon-192.png">
 </head>
+
 <body>
-  <main id="app">
+
+<div id="app">
+
     <header class="booth-header">
-      <div class="eyebrow">Jockisch Family Theater</div>
-      <h1>Projection Booth</h1>
+        <div class="eyebrow">Jockisch Family Theater</div>
+        <h1>Select a Movie</h1>
     </header>
 
+    <!-- ========================= -->
+    <!-- PAGE 1 - LIBRARY -->
+    <!-- ========================= -->
+
     <section id="libraryView" class="view active">
-      <div id="movieRows"></div>
+        <div id="movieRows"></div>
     </section>
 
-<section id="detailView" class="view">
-  <div id="movieDetail"></div>
-</section>
+    <!-- ========================= -->
+    <!-- PAGE 2 - MOVIE DETAILS -->
+    <!-- ========================= -->
+
+    <section id="detailView" class="view">
+        <div id="movieDetail"></div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- PAGE 3 - PRESENTATION BUILDER -->
+    <!-- ========================= -->
 
     <section id="builderView" class="view">
-      <div id="presentationBuilder"></div>
+        <div id="presentationBuilder"></div>
     </section>
-  </main>
 
-  <script src="../js/movie-library.js"></script>
-  <script src="../js/demo-library.js"></script>
-  <script src="booth.js"></script>
+    <!-- ========================= -->
+    <!-- PAGE 4 - PRESENTATION READY -->
+    <!-- ========================= -->
+
+    <section id="readyView" class="view">
+        <div id="presentationReady"></div>
+    </section>
+
+</div>
+
+<!-- Shared Data -->
+<script src="../js/movie-library.js"></script>
+<script src="../js/demo-library.js"></script>
+
+<!-- Projection Booth -->
+<script src="booth.js"></script>
+
 </body>
 </html>
