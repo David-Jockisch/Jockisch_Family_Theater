@@ -6,7 +6,7 @@ const movieLibrary = [
     year: "2008",
     rating: "PG-13",
     runtime: "2h 6m",
-    poster: "assets/posters/marvel/iron-man.jpg"
+    poster: "/assets/posters/movies/marvel/iron-man.jpg"
   },
 
   {
@@ -18,8 +18,7 @@ const movieLibrary = [
     year: "2002",
     rating: "PG-13",
     runtime: "3h 55m",
-    poster: "assets/posters/LotR/lotr-two-towers.jpg"
-  },
+    poster: "/assets/posters/movies/lord-of-the-rings/lotr-two-towers.jpg"  },
 
   {
   id: "lotr-fellowship",
@@ -30,7 +29,7 @@ const movieLibrary = [
   year: "2001",
   rating: "PG-13",
   runtime: "3h 48m",
-  poster: "assets/posters/LotR/lotr-fellowship.jpg"
+  poster: "/assets/posters/movies/lord-of-the-rings/lotr-fellowship.jpg"
 },
 
 {
@@ -42,7 +41,7 @@ const movieLibrary = [
   year: "2003",
   rating: "PG-13",
   runtime: "4h 23m",
-  poster: "assets/posters/LotR/lotr-return-king.jpg"
+  poster: "/assets/posters/movies/lord-of-the-rings/lotr-return-king.jpg"
 },
 {
   id: "harry-potter-sorcerers-stone",
@@ -52,7 +51,7 @@ const movieLibrary = [
   year: "2001",
   rating: "PG",
   runtime: "2h 32m",
-  poster: "assets/posters/HarryPotter/harry-potter-sorcerers-stone.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-sorcerers-stone.jpg"
 },
 
 {
@@ -63,7 +62,7 @@ const movieLibrary = [
   year: "2002",
   rating: "PG",
   runtime: "2h 41m",
-  poster: "assets/posters/HarryPotter/harry-potter-chamber-secrets.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-chamber-secrets.jpg"
 },
 
 {
@@ -74,7 +73,7 @@ const movieLibrary = [
   year: "2004",
   rating: "PG",
   runtime: "2h 22m",
-  poster: "assets/posters/HarryPotter/harry-potter-prisoner-azkaban.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-prisoner-azkaban.jpg"
 },
 
 {
@@ -85,7 +84,7 @@ const movieLibrary = [
   year: "2005",
   rating: "PG-13",
   runtime: "2h 37m",
-  poster: "assets/posters/HarryPotter/harry-potter-goblet-fire.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-goblet-fire.jpg"
 },
 
 {
@@ -96,7 +95,7 @@ const movieLibrary = [
   year: "2007",
   rating: "PG-13",
   runtime: "2h 18m",
-  poster: "assets/posters/HarryPotter/harry-potter-order-phoenix.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-order-phoenix.jpg"
 },
 
 {
@@ -107,7 +106,7 @@ const movieLibrary = [
   year: "2009",
   rating: "PG",
   runtime: "2h 33m",
-  poster: "assets/posters/HarryPotter/harry-potter-half-blood-prince.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-half-blood-prince.jpg"
 },
 
 {
@@ -118,7 +117,7 @@ const movieLibrary = [
   year: "2010",
   rating: "PG-13",
   runtime: "2h 26m",
-  poster: "assets/posters/HarryPotter/harry-potter-deathly-hallows-part-1.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-deathly-hallows-part-1.jpg"
 },
 
 {
@@ -129,7 +128,7 @@ const movieLibrary = [
   year: "2011",
   rating: "PG-13",
   runtime: "2h 10m",
-  poster: "assets/posters/HarryPotter/harry-potter-deathly-hallows-part-2.jpg"
+  poster: "/assets/posters/movies/harry-potter/harry-potter-deathly-hallows-part-2.jpg"
 },
 {
   id: "the-mummy",
@@ -139,7 +138,7 @@ const movieLibrary = [
   year: "1999",
   rating: "PG-13",
   runtime: "2h 4m",
-  poster: "assets/posters/TheMummy/the-mummy.jpg"
+  poster: "/assets/posters/movies/the-mummy/the-mummy.jpg"
 },
 
 {
@@ -150,7 +149,7 @@ const movieLibrary = [
   year: "2001",
   rating: "PG-13",
   runtime: "2h 10m",
-  poster: "assets/posters/TheMummy/the-mummy-returns.jpg"
+  poster: "/assets/posters/movies/the-mummy/the-mummy-returns.jpg"
 },
 
 {
@@ -161,7 +160,7 @@ const movieLibrary = [
   year: "2008",
   rating: "PG-13",
   runtime: "1h 52m",
-  poster: "assets/posters/TheMummy/the-mummy-tomb-dragon-emperor.jpg"
+  poster: "/assets/posters/movies/the-mummy/the-mummy-tomb-dragon-emperor.jpg"
 },
 
 {
@@ -172,7 +171,7 @@ const movieLibrary = [
   year: "1985",
   rating: "PG",
   runtime: "1h 56m",
-  poster: "assets/posters/BackToTheFuture/back-to-the-future.jpg"
+  poster: "/assets/posters/movies/back-to-the-future/back-to-the-future.jpg"
 },
 
 {
@@ -183,7 +182,7 @@ const movieLibrary = [
   year: "1989",
   rating: "PG",
   runtime: "1h 48m",
-  poster: "assets/posters/BackToTheFuture/back-to-the-future-part-2.jpg"
+  poster: "/assets/posters/movies/back-to-the-future/back-to-the-future-part-2.jpg"
 },
 
 {
@@ -194,7 +193,7 @@ const movieLibrary = [
   year: "1990",
   rating: "PG",
   runtime: "1h 58m",
-  poster: "assets/posters/BackToTheFuture/back-to-the-future-part-3.jpg"
+  poster: "/assets/posters/movies/back-to-the-future/back-to-the-future-part-3.jpg"
 },
 
 {
@@ -205,7 +204,7 @@ const movieLibrary = [
   year: "2017",
   rating: "PG-13",
   runtime: "2h 10m",
-  poster: "assets/posters/marvel/thor-ragnarok.jpg"
+  poster: "/assets/posters/movies/marvel/thor-ragnarok.jpg"
 },
 
 {
@@ -216,7 +215,7 @@ const movieLibrary = [
   year: "2023",
   rating: "PG",
   runtime: "1h 32m",
-  poster: "assets/posters/Mario/the-super-mario-bros-movie.jpg"
+  poster: "/assets/posters/movies/mario/the-super-mario-bros-movie.jpg"
 },
 
 {
@@ -227,7 +226,7 @@ const movieLibrary = [
   year: "2026",
   rating: "PG",
   runtime: "1h 38m",
-  poster: "assets/posters/Mario/the-super-mario-galaxy-movie.jpg"
+  poster: "/assets/posters/movies/mario/the-super-mario-galaxy-movie.jpg"
 },
 {
   id: "saving-private-ryan",
@@ -238,6 +237,18 @@ const movieLibrary = [
   year: "1998",
   rating: "R",
   runtime: "169 min",
-  poster: "assets/posters/saving_private_ryan.jpg"
+  poster: "/assets/posters/movies/saving_private_ryan.jpg"
+},
+
+{
+  id: "games-library",
+  collection: "Games",
+  franchise: "Jockisch Family Theater",
+  title: "Games",
+  year: "",
+  rating: "",
+  runtime: "",
+  poster: "/assets/posters/games/games-library.png",
+  type: "games-library"
 },
 ];

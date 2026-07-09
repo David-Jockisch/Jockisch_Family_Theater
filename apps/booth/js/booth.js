@@ -6,6 +6,11 @@ const detailView = document.getElementById("detailView");
 const builderView = document.getElementById("builderView");
 const readyView = document.getElementById("readyView");
 
+const gameLibraryView = document.getElementById("gameLibraryView");
+const gameDetailView = document.getElementById("gameDetailView");
+const gameRows = document.getElementById("gameRows");
+const gameDetail = document.getElementById("gameDetail");
+
 const movieDetail = document.getElementById("movieDetail");
 const presentationBuilder = document.getElementById("presentationBuilder");
 const presentationReady = document.getElementById("presentationReady");
@@ -15,7 +20,7 @@ const boothHeader = document.querySelector(".booth-header");
 let selectedMovie = null;
 
 function assetPath(path) {
-  return `../${path}`;
+  return path || "";
 }
 
 function forceScrollTop() {
@@ -31,17 +36,19 @@ function forceScrollTop() {
 }
 
 function showView(targetView, direction = "right") {
-  [libraryView, detailView, builderView, readyView].forEach(view => {
+  [
+    libraryView,
+    detailView,
+    builderView,
+    readyView,
+    gameLibraryView,
+    gameDetailView
+  ].forEach(view => {
     view.classList.remove("active", "slide-in-right", "slide-in-left");
   });
 
   targetView.classList.add("active");
-
-  if (direction === "right") {
-    targetView.classList.add("slide-in-right");
-  } else {
-    targetView.classList.add("slide-in-left");
-  }
+  targetView.classList.add(direction === "right" ? "slide-in-right" : "slide-in-left");
 
   if (targetView === libraryView) {
     boothHeader.classList.remove("hidden");
@@ -67,6 +74,19 @@ function groupMoviesByCollection(movies) {
   }, {});
 }
 
+function groupGamesByPlatform(games) {
+  return games.reduce((groups, game) => {
+    const platform = game.platform || "Other";
+
+    if (!groups[platform]) {
+      groups[platform] = [];
+    }
+
+    groups[platform].push(game);
+    return groups;
+  }, {});
+}
+
 function renderLibrary() {
   const grouped = groupMoviesByCollection(movieLibrary);
   const collections = Object.keys(grouped).sort();
@@ -84,8 +104,9 @@ function renderLibrary() {
     const strip = document.createElement("div");
     strip.className = "poster-strip";
 
-    const moviesInCollection = grouped[collection]
-      .sort((a, b) => Number(a.year) - Number(b.year));
+    const moviesInCollection = grouped[collection].sort(
+      (a, b) => Number(a.year || 0) - Number(b.year || 0)
+    );
 
     const isSingleMovieCollection = moviesInCollection.length === 1;
 
@@ -100,7 +121,14 @@ function renderLibrary() {
         ${isSingleMovieCollection ? "" : `<div class="movie-tile-title">${movie.title}</div>`}
       `;
 
-      tile.addEventListener("click", () => showMovieDetail(movie));
+      tile.addEventListener("click", () => {
+        if (movie.id === "games-library") {
+          showGameLibrary();
+        } else {
+          showMovieDetail(movie);
+        }
+      });
+
       strip.appendChild(tile);
     });
 
@@ -108,6 +136,106 @@ function renderLibrary() {
     row.appendChild(strip);
     movieRows.appendChild(row);
   });
+}
+
+function showGameLibrary() {
+  renderGameLibrary();
+  showView(gameLibraryView, "right");
+}
+
+function renderGameLibrary() {
+  const grouped = groupGamesByPlatform(gameLibrary);
+  const platforms = Object.keys(grouped).sort();
+
+  gameRows.innerHTML = "";
+
+  platforms.forEach(platform => {
+    const row = document.createElement("section");
+    row.className = "collection-row";
+
+    const title = document.createElement("h2");
+    title.className = "collection-title";
+    title.textContent = platform.toUpperCase();
+
+    const strip = document.createElement("div");
+    strip.className = "poster-strip";
+
+    grouped[platform]
+      .sort((a, b) => a.title.localeCompare(b.title))
+      .forEach(game => {
+        const tile = document.createElement("button");
+        tile.className = "movie-tile game-tile";
+
+        const gameImage = game.poster || game.background || game.cover;
+
+        tile.innerHTML = `
+          <img src="${assetPath(gameImage)}" alt="${game.title}">
+          <div class="game-tile-title">${game.title}</div>
+        `;
+
+        tile.addEventListener("click", () => showGameDetail(game));
+        strip.appendChild(tile);
+      });
+
+    row.appendChild(title);
+    row.appendChild(strip);
+    gameRows.appendChild(row);
+  });
+
+  const backContainer = document.createElement("div");
+  backContainer.className = "builder-actions";
+
+  backContainer.innerHTML = `
+    <button id="gameLibraryBackButton" class="back-button">
+      ← Back to Movies
+    </button>
+  `;
+
+  gameRows.appendChild(backContainer);
+
+  document
+    .getElementById("gameLibraryBackButton")
+    .addEventListener("click", () => {
+      showView(libraryView, "left");
+    });
+
+  enableDragScroll();
+}
+function showGameDetail(game) {
+  const gameImage = game.poster || game.background || game.cover;
+
+  gameDetail.innerHTML = `
+    <div class="detail-card detail-hero" style="--detail-bg: url('${assetPath(gameImage)}')">
+      <img src="${assetPath(gameImage)}" alt="${game.title}">
+
+      <h2>${game.title}</h2>
+
+      <div class="detail-meta">
+        ${game.platform || ""}<br>
+        ${game.year || game.release || ""}
+      </div>
+
+      <div class="detail-actions">
+        <button id="pushGameButton" class="primary-button">
+          Push to Display
+        </button>
+
+        <button id="gameDetailBackButton" class="back-button">
+          ← Back to Games
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("pushGameButton").addEventListener("click", () => {
+    console.log("Push game to display:", game);
+  });
+
+  document.getElementById("gameDetailBackButton").addEventListener("click", () => {
+    showView(gameLibraryView, "left");
+  });
+
+  showView(gameDetailView, "right");
 }
 
 function showMovieDetail(movie) {
@@ -139,15 +267,13 @@ function showMovieDetail(movie) {
     </div>
   `;
 
-  document
-    .getElementById("configureButton")
-    .addEventListener("click", () => showPresentationBuilder(movie));
+  document.getElementById("configureButton").addEventListener("click", () => {
+    showPresentationBuilder(movie);
+  });
 
-  document
-    .getElementById("detailBackButton")
-    .addEventListener("click", () => {
-      showView(libraryView, "left");
-    });
+  document.getElementById("detailBackButton").addEventListener("click", () => {
+    showView(libraryView, "left");
+  });
 
   showView(detailView, "right");
 }
@@ -220,20 +346,16 @@ function showPresentationBuilder(movie) {
     </div>
   `;
 
-  document
-    .getElementById("builderBackButton")
-    .addEventListener("click", () => {
-      showView(detailView, "left");
-    });
+  document.getElementById("builderBackButton").addEventListener("click", () => {
+    showView(detailView, "left");
+  });
 
-  document
-    .getElementById("startPresentationButton")
-    .addEventListener("click", () => {
-      const presentationPlan = buildPresentationPlan(movie);
+  document.getElementById("startPresentationButton").addEventListener("click", () => {
+    const presentationPlan = buildPresentationPlan(movie);
 
-      console.log("Presentation Plan:", presentationPlan);
-      showPresentationReady(presentationPlan, movie);
-    });
+    console.log("Presentation Plan:", presentationPlan);
+    showPresentationReady(presentationPlan, movie);
+  });
 
   showView(builderView, "right");
 }
@@ -258,17 +380,17 @@ function showPresentationReady(plan, movie) {
           <strong>${plan.intro ? "Yes" : "No"}</strong>
         </div>
 
-<div class="builder-option">
-  <span>Demos</span>
+        <div class="builder-option">
+          <span>Demos</span>
+          <strong>
+            ${
+              selectedDemoTitles.length
+                ? selectedDemoTitles.map(title => `<div>${title}</div>`).join("")
+                : "None"
+            }
+          </strong>
+        </div>
 
-  <strong>
-    ${
-      selectedDemoTitles.length
-        ? selectedDemoTitles.map(title => `<div>${title}</div>`).join("")
-        : "None"
-    }
-  </strong>
-</div>
         <div class="builder-option">
           <span>Trailers</span>
           <strong>${plan.randomTrailers ? "Yes" : "No"}</strong>
@@ -277,17 +399,16 @@ function showPresentationReady(plan, movie) {
 
       <div class="builder-actions">
         <button id="readyHomeButton" class="primary-button start-button">
-        Return to Library
-      </button>
+          Return to Library
+        </button>
       </div>    
     </div>
   `;
 
-  document
-    .getElementById("readyHomeButton")
-    .addEventListener("click", () => {
+  document.getElementById("readyHomeButton").addEventListener("click", () => {
     showView(libraryView, "left");
   });
+
   showView(readyView, "right");
 }
 

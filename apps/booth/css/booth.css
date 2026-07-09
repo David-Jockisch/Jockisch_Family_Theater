@@ -480,6 +480,28 @@ h1 {
 .builder-back-button:hover {
   color: var(--gold);
 }
+  .game-tile {
+  position: relative;
+  overflow: hidden;
+}
+
+.game-tile-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 14px;
+  color: #f6e6bd;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  background: rgba(18, 14, 8, 0.55);
+  border-top: 1px solid rgba(218, 178, 83, 0.38);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
 
 /* PHONE TUNING */
 
@@ -518,4 +540,5 @@ h1 {
     grid-template-columns: 105px 1fr;
     column-gap: 14px;
   }
+
 }

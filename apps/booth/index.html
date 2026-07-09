@@ -7,10 +7,10 @@
     <title>Jockisch Family Theater - Projection Booth</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="booth.css" />
+    <link rel="stylesheet" href="./css/booth.css">
 
     <!-- Progressive Web App -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
 
     
     <meta name="theme-color" content="#050505">
@@ -64,14 +64,24 @@
         <div id="presentationReady"></div>
     </section>
 
+    <section id="gameLibraryView" class="view">
+        <div id="gameRows"></div>
+    </section>
+
+    <section id="gameDetailView" class="view">
+        <div id="gameDetail"></div>
+    </section>
+
 </div>
 
 <!-- Shared Data -->
-<script src="../js/movie-library.js"></script>
-<script src="../js/demo-library.js"></script>
+<script src="/library/movies/movie-library.js"></script>
+<script src="/library/games/game-library.js"></script>
+<script src="/library/platforms/platforms.js"></script>
+<script src="/library/demos/demo-library.js"></script>
 
 <!-- Projection Booth -->
-<script src="booth.js"></script>
+<script src="./js/booth.js"></script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ const gameLibrary = [
   genre: "Platformer",
   players: "1 Player",
   release: "2024",
-  background: "assets/games/ps5/astro-bot.jpg"
+  background: "/assets/posters/games/ps5/astro-bot.jpg"
 },
 
 {
@@ -16,7 +16,7 @@ const gameLibrary = [
   genre: "Racing",
   players: "1 Player",
   release: "2021",
-  background: "assets/games/xbox/forza-horizon-5.jpg"
+  background: "/assets/posters/games/xbox/forza-horizon-5.jpg"
 },
 
 {
@@ -26,7 +26,7 @@ const gameLibrary = [
   genre: "Action Adventure",
   players: "1 Player",
   release: "2022",
-  background: "assets/games/ps5/the-last-of-us-part-1.jpg"
+  background: "/assets/posters/games/ps5/the-last-of-us-part-1.jpg"
 },
 
 {
@@ -36,7 +36,7 @@ const gameLibrary = [
   genre: "Action Adventure",
   players: "1 Player",
   release: "2024",
-  background: "assets/games/ps5/the-last-of-us-part-2-remastered.jpg"
+  background: "/assets/posters/games/ps5/the-last-of-us-part-2-remastered.jpg"
 },
 
 {
@@ -46,7 +46,7 @@ const gameLibrary = [
   genre: "Off-Road, Simulation, Open World",
   players: "1-4 Players Online Co-op",
   release: "2020",
-  background: "assets/games/ps5/snowrunner.jpg"
+  background: "/assets/posters/games/ps5/snowrunner.jpg"
 },
 
 {
@@ -56,7 +56,7 @@ const gameLibrary = [
   genre: "Action-Adventure, Platformer, Co-op",
   players: "2 Players Online or Local Co-op",
   release: "2025",
-  background: "assets/games/ps5/split-fiction.jpg"
+  background: "/assets/posters/games/ps5/split-fiction.jpg"
 },
 
 {
@@ -66,7 +66,7 @@ const gameLibrary = [
   genre: "Simulation, Farming",
   players: "1-6 Players Online",
   release: "2024",
-  background: "assets/games/ps5/farming-simulator-25.jpg"
+  background: "/assets/posters/games/ps5/farming-simulator-25.jpg"
 },
 
 {
@@ -76,6 +76,6 @@ const gameLibrary = [
   genre: "Action-Adventure, First-Person, Puzzle",
   players: "1 Player",
   release: "2024",
-  background: "assets/games/xbox/indiana-jones-and-the-great-circle.jpg"
+  background: "/assets/posters/games/xbox/indiana-jones-and-the-great-circle.jpg"
 },
 ];
