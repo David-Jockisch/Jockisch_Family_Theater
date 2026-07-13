@@ -228,17 +228,6 @@ const movieLibrary = [
   runtime: "1h 38m",
   poster: "/assets/posters/movies/mario/the-super-mario-galaxy-movie.jpg"
 },
-{
-  id: "saving-private-ryan",
-  collection: "Saving Private Ryan",
-  franchise: "",
-  title: "Saving Private Ryan",
-  edition: "4K UHD",
-  year: "1998",
-  rating: "R",
-  runtime: "169 min",
-  poster: "/assets/posters/movies/saving_private_ryan.jpg"
-},
 
 {
   id: "games-library",
@@ -250,5 +239,29 @@ const movieLibrary = [
   runtime: "",
   poster: "/assets/posters/games/games-library.png",
   type: "games-library"
+},
+
+{
+  id: "dunkirk",
+  collection: "Dunkirk",
+  franchise: "",
+  title: "Dunkirk",
+  edition: "4K UHD",
+  year: "2017",
+  rating: "PG-13",
+  runtime: "106 min",
+  poster: "/assets/posters/movies/dunkirk.jpg"
+},
+
+{
+  id: "top-gun-maverick",
+  collection: "Top Gun",
+  franchise: "Top Gun",
+  title: "Top Gun: Maverick",
+  edition: "4K UHD",
+  year: "2022",
+  rating: "PG-13",
+  runtime: "131 min",
+  poster: "/assets/posters/movies/top-gun-maverick.jpg"
 },
 ];

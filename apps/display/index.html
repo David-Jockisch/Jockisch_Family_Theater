@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jockisch Family Theater</title>
+
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/animations.css">
+<link rel="stylesheet" href="./css/themes.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- Scene 1: Logo Intro -->
+    <section id="scene1" class="scene active">
+      <div id="logoScene">
+<img class="logo-layer glow" src="../../assets/logos/logo-cross-glow.png" alt="">
+<img class="logo-layer cross" src="../../assets/logos/logo-cross.png" alt="">
+<img class="logo-layer ring" src="../../assets/logos/logo-ring.png" alt="">
+<img class="logo-layer j" src="../../assets/logos/logo-j.png" alt="">
+<img class="logo-layer jockisch" src="../../assets/logos/logo-jockisch.png" alt="">
+<img class="logo-layer family" src="../../assets/logos/logo-family.png" alt="">
+<img class="logo-layer private" src="../../assets/logos/logo-private.png" alt="">      </div>
+    </section>
+
+<!-- Scene 2: Media Display -->
+    <section id="scene2" class="scene">
+
+  <!-- Movie Template -->
+    <div id="movieTemplate" class="movie-container scene-template">
+    <header class="movie-header">
+      <div class="now-playing">NOW PLAYING</div>
+    </header>
+
+    <main class="poster-wrap">
+      <img
+        id="moviePoster"
+        class="poster"
+        src=""
+        alt="Movie Poster"
+      >
+    </main>
+
+    <footer class="movie-footer">
+      <p id="movieDetails"></p>
+    </footer>
+  </div>
+
+<!-- Game Template -->
+<div id="gameTemplate" class="game-container scene-template hidden">
+
+    <div id="gameBackground" class="game-background"></div>
+    <div class="game-overlay"></div>
+    <div class="game-content">
+        <div class="game-info">
+            <div class="game-kicker">
+                GAME NIGHT
+            </div>
+            <div id="gameTitle" class="game-title"></div>
+            <img
+             id="gamePlatformLogo"
+             class="game-platform-logo"
+             src=""
+              alt=""
+            >
+            <p id="gameDetails" class="game-details"></p>
+        </div>
+
+    </div>
+
+</div>  <!-- Idle Template -->
+  <div id="idleTemplate" class="idle-container scene-template hidden">
+    <div class="idle-content">
+      <div class="idle-kicker">WELCOME TO THE</div>
+      <div class="idle-title">JOCKISCH FAMILY THEATER</div>
+      <div class="idle-subtitle">No Event Selected</div>
+    </div>
+  </div>
+
+</section>
+  </div>
+
+<script src="../../library/movies/movie-library.js"></script>
+<script src="../../library/games/game-library.js"></script>
+<script src="../../library/demos/demo-library.js"></script>
+<script src="../../library/platforms/platforms.js"></script>
+
+<script src="./js/config.js"></script>
+<script src="./js/media.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

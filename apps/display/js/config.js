@@ -6,9 +6,9 @@ const theaterConfig = {
   |   "game"  = game artwork screen
   */
 
-  mode: "game",
+  mode: "movie",
 
-  mediaId: "astro-bot",
+  mediaId: "iron-man",
 
   timings: {
     logoBuild: 6800,
