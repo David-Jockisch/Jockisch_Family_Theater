@@ -368,7 +368,7 @@ function showPresentationBuilder(movie) {
 document.getElementById("startPresentationButton").addEventListener("click", async () => {
   const presentationPlan = buildPresentationPlan(movie);
 
-  const response = await fetch("/api/state", {
+  const stateResponse = await fetch("/api/state", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -380,9 +380,26 @@ document.getElementById("startPresentationButton").addEventListener("click", asy
     })
   });
 
-  if (!response.ok) {
+  if (!stateResponse.ok) {
     console.error("Failed to update theater state");
     return;
+  }
+
+  for (const demoId of presentationPlan.demos) {
+    const demoResponse = await fetch("/api/kodi/play-demo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        demoId
+      })
+    });
+
+    if (!demoResponse.ok) {
+      console.error(`Failed to play demo: ${demoId}`);
+      return;
+    }
   }
 
   console.log("Presentation Plan:", presentationPlan);

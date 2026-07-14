@@ -79,3 +79,7 @@ const gameLibrary = [
   background: "/assets/posters/games/xbox/indiana-jones-and-the-great-circle.jpg"
 },
 ];
+
+if (typeof module !== "undefined") {
+  module.exports = movieLibrary;
+}

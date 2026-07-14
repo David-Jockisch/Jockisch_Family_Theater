@@ -265,3 +265,6 @@ const movieLibrary = [
   poster: "/assets/posters/movies/top-gun-maverick.jpg"
 },
 ];
+if (typeof module !== "undefined") {
+  module.exports = movieLibrary;
+}
