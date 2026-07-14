@@ -1,0 +1,25 @@
+{
+  "name": "jockisch_family_theater",
+  "version": "1.0.0",
+  "description": "A custom-built digital signage system for the Jockisch Family Theater.",
+  "main": "index.js",
+"scripts": {
+  "start": "node server/server.js"
+}
+,
+"repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Jockisch/Jockisch_Family_Theater.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/David-Jockisch/Jockisch_Family_Theater/issues"
+  },
+  "homepage": "https://github.com/David-Jockisch/Jockisch_Family_Theater#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

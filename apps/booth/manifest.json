@@ -1,7 +1,8 @@
 {
   "name": "Jockisch Family Theater Booth",
   "short_name": "JFT Booth",
-  "start_url": "booth.html",
+  "start_url": "/apps/booth/",
+  "scope": "/apps/booth/",
   "display": "standalone",
   "background_color": "#070707",
   "theme_color": "#070707",

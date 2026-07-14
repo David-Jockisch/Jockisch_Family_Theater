@@ -227,10 +227,25 @@ function showGameDetail(game) {
     </div>
   `;
 
-  document.getElementById("pushGameButton").addEventListener("click", () => {
-    console.log("Push game to display:", game);
+document.getElementById("pushGameButton").addEventListener("click", async () => {
+  const response = await fetch("/api/state", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      mode: "game",
+      mediaId: game.id
+    })
   });
 
+  if (!response.ok) {
+    console.error("Failed to update theater state");
+    return;
+  }
+
+  console.log("Game pushed to display:", game);
+});
   document.getElementById("gameDetailBackButton").addEventListener("click", () => {
     showView(gameLibraryView, "left");
   });
@@ -350,13 +365,29 @@ function showPresentationBuilder(movie) {
     showView(detailView, "left");
   });
 
-  document.getElementById("startPresentationButton").addEventListener("click", () => {
-    const presentationPlan = buildPresentationPlan(movie);
+document.getElementById("startPresentationButton").addEventListener("click", async () => {
+  const presentationPlan = buildPresentationPlan(movie);
 
-    console.log("Presentation Plan:", presentationPlan);
-    showPresentationReady(presentationPlan, movie);
+  const response = await fetch("/api/state", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      mode: "movie",
+      mediaId: movie.id,
+      presentation: presentationPlan
+    })
   });
 
+  if (!response.ok) {
+    console.error("Failed to update theater state");
+    return;
+  }
+
+  console.log("Presentation Plan:", presentationPlan);
+  showPresentationReady(presentationPlan, movie);
+});
   showView(builderView, "right");
 }
 

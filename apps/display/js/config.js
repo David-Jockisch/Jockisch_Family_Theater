@@ -22,3 +22,11 @@ const theaterConfig = {
     posterToLogoFade: 700
   }
 };
+
+async function loadTheaterState() {
+  const response = await fetch("/api/state");
+  const state = await response.json();
+
+  theaterConfig.mode = state.mode;
+  theaterConfig.mediaId = state.mediaId;
+}

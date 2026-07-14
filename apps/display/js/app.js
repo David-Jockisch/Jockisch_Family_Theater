@@ -1,8 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadTheaterState();
   loadMediaInfo();
   runTheaterLoop();
+
+  setInterval(checkForStateChange, 1000);
 });
 
+async function checkForStateChange() {
+  const response = await fetch("/api/state");
+  const state = await response.json();
+
+  const stateChanged =
+    state.mode !== theaterConfig.mode ||
+    state.mediaId !== theaterConfig.mediaId;
+
+  if (!stateChanged) return;
+
+  theaterConfig.mode = state.mode;
+  theaterConfig.mediaId = state.mediaId;
+
+  loadMediaInfo();
+}
 function getTiming() {
   return theaterConfig.timings;
 }
