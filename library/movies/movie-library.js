@@ -264,6 +264,42 @@ const movieLibrary = [
   runtime: "131 min",
   poster: "/assets/posters/movies/top-gun-maverick.jpg"
 },
+
+{
+  id: "interstellar",
+  collection: "Interstellar",
+  franchise: "",
+  title: "Interstellar",
+  edition: "4K UHD",
+  year: "2014",
+  rating: "PG-13",
+  runtime: "169 min",
+  poster: "/assets/posters/movies/interstellar.jpg"
+},
+
+{
+  id: "dune-part-one",
+  collection: "Dune",
+  franchise: "Dune",
+  title: "Dune",
+  edition: "4K UHD",
+  year: "2021",
+  rating: "PG-13",
+  runtime: "155 min",
+  poster: "/assets/posters/movies/dune-part-one.jpg"
+},
+
+{
+  id: "dune-part-two",
+  collection: "Dune",
+  franchise: "Dune",
+  title: "Dune: Part Two",
+  edition: "4K UHD",
+  year: "2024",
+  rating: "PG-13",
+  runtime: "166 min",
+  poster: "/assets/posters/movies/dune-part-two.jpg"
+},
 ];
 if (typeof module !== "undefined") {
   module.exports = movieLibrary;
