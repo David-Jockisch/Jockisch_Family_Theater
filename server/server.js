@@ -25,6 +25,45 @@ app.post("/api/state", (req, res) => {
 });
 
 //
+// Presentation Preparation
+//
+
+app.post("/api/prepare", (req, res) => {
+  const { mode, mediaId } = req.body;
+
+  if (!mode) {
+    return res.status(400).json({
+      success: false,
+      error: "Presentation mode is required"
+    });
+  }
+
+  if (!mediaId) {
+    return res.status(400).json({
+      success: false,
+      error: "Media ID is required"
+    });
+  }
+
+  if (!["movie", "game"].includes(mode)) {
+    return res.status(400).json({
+      success: false,
+      error: "Presentation mode must be movie or game"
+    });
+  }
+
+  const updatedState = updateState({
+    mode,
+    mediaId
+  });
+
+  res.json({
+    success: true,
+    state: updatedState || getState()
+  });
+});
+
+//
 // Kodi
 //
 
@@ -67,9 +106,8 @@ app.post("/api/kodi/play-demo", async (req, res) => {
       title: demo.title,
       kodi: result
     });
-
   } catch (error) {
-    console.error(error);
+    console.error("Kodi demo playback failed:", error);
 
     res.status(500).json({
       success: false,
@@ -85,5 +123,7 @@ app.post("/api/kodi/play-demo", async (req, res) => {
 app.use(express.static(path.join(__dirname, "..")));
 
 app.listen(PORT, () => {
-  console.log(`🎬 Jockisch Family Theater running at http://localhost:${PORT}`);
+  console.log(
+    `🎬 Jockisch Family Theater running at http://localhost:${PORT}`
+  );
 });

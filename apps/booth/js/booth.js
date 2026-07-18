@@ -315,7 +315,48 @@ function buildPresentationPlan(movie) {
   };
 }
 
-function showPresentationBuilder(movie) {
+
+async function showPresentationBuilder(movie) {
+  /*
+   * Prepare Presentation
+   *
+   * Update the outside Display OS immediately when the user
+   * leaves the movie-details page and enters the builder.
+   */
+  try {
+    const prepareResponse = await fetch("/api/prepare", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        mode: "movie",
+        mediaId: movie.id
+      })
+    });
+
+    if (!prepareResponse.ok) {
+      const errorData = await prepareResponse.json().catch(() => ({}));
+
+      throw new Error(
+        errorData.error || "The Display OS could not be updated."
+      );
+    }
+
+    const prepareResult = await prepareResponse.json();
+
+    console.log("Presentation prepared:", prepareResult);
+  } catch (error) {
+    console.error("Prepare Presentation failed:", error);
+
+    alert(
+      "The movie could not be sent to the Display OS. " +
+      "Please confirm the Theater Server is running."
+    );
+
+    return;
+  }
+
   const demoOptions = demoLibrary
     .filter(demo => demo.enabled)
     .map(demo => `
@@ -327,13 +368,20 @@ function showPresentationBuilder(movie) {
     .join("");
 
   presentationBuilder.innerHTML = `
-    <div class="builder-hero" style="--builder-bg: url('${assetPath(movie.poster)}')">
+    <div
+      class="builder-hero"
+      style="--builder-bg: url('${assetPath(movie.poster)}')"
+    >
       <h2>Tonight's Presentation</h2>
       <h3>${movie.title}</h3>
 
       <div class="builder-options">
         <label class="builder-option">
-          <input type="checkbox" checked data-presentation-item="theater-intro">
+          <input
+            type="checkbox"
+            checked
+            data-presentation-item="theater-intro"
+          >
           <span>Theater Intro</span>
         </label>
 
@@ -344,69 +392,99 @@ function showPresentationBuilder(movie) {
         <div class="builder-section-title">Trailers</div>
 
         <label class="builder-option">
-          <input type="checkbox" checked data-presentation-item="random-trailers">
+          <input
+            type="checkbox"
+            checked
+            data-presentation-item="random-trailers"
+          >
           <span>Play Movie Trailers</span>
         </label>
       </div>
 
       <div class="builder-actions">
-        <button id="startPresentationButton" class="primary-button start-button">
+        <button
+          id="startPresentationButton"
+          class="primary-button start-button"
+        >
           Start Presentation
         </button>
 
-        <button id="builderBackButton" class="builder-back-button">
+        <button
+          id="builderBackButton"
+          class="builder-back-button"
+        >
           ← Back to Movie Details
         </button>
       </div>
     </div>
   `;
 
-  document.getElementById("builderBackButton").addEventListener("click", () => {
-    showView(detailView, "left");
-  });
-
-document.getElementById("startPresentationButton").addEventListener("click", async () => {
-  const presentationPlan = buildPresentationPlan(movie);
-
-  const stateResponse = await fetch("/api/state", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      mode: "movie",
-      mediaId: movie.id,
-      presentation: presentationPlan
-    })
-  });
-
-  if (!stateResponse.ok) {
-    console.error("Failed to update theater state");
-    return;
-  }
-
-  for (const demoId of presentationPlan.demos) {
-    const demoResponse = await fetch("/api/kodi/play-demo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        demoId
-      })
+  document
+    .getElementById("builderBackButton")
+    .addEventListener("click", () => {
+      showView(detailView, "left");
     });
 
-    if (!demoResponse.ok) {
-      console.error(`Failed to play demo: ${demoId}`);
-      return;
-    }
-  }
+  document
+    .getElementById("startPresentationButton")
+    .addEventListener("click", async () => {
+      const startButton = document.getElementById(
+        "startPresentationButton"
+      );
 
-  console.log("Presentation Plan:", presentationPlan);
-  showPresentationReady(presentationPlan, movie);
-});
+      const presentationPlan = buildPresentationPlan(movie);
+
+      startButton.disabled = true;
+      startButton.textContent = "Starting Presentation...";
+
+      try {
+        /*
+         * The Display OS was already updated when Prepare
+         * Presentation was selected. Start Presentation now
+         * handles only the Kodi presentation.
+         */
+        for (const demoId of presentationPlan.demos) {
+          const demoResponse = await fetch("/api/kodi/play-demo", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              demoId
+            })
+          });
+
+          if (!demoResponse.ok) {
+            const errorData = await demoResponse
+              .json()
+              .catch(() => ({}));
+
+            throw new Error(
+              errorData.error ||
+              `Failed to play demo: ${demoId}`
+            );
+          }
+        }
+
+        console.log("Presentation Plan:", presentationPlan);
+
+        showPresentationReady(presentationPlan, movie);
+      } catch (error) {
+        console.error("Presentation startup failed:", error);
+
+        alert(
+          "The presentation could not be started. " +
+          "Please confirm Kodi is running."
+        );
+
+        startButton.disabled = false;
+        startButton.textContent = "Start Presentation";
+      }
+    });
+
   showView(builderView, "right");
 }
+
 
 function showPresentationReady(plan, movie) {
   const selectedDemoTitles = plan.demos
@@ -414,7 +492,10 @@ function showPresentationReady(plan, movie) {
     .filter(Boolean);
 
   presentationReady.innerHTML = `
-    <div class="builder-hero" style="--builder-bg: url('${assetPath(movie.poster)}')">
+    <div
+      class="builder-hero"
+      style="--builder-bg: url('${assetPath(movie.poster)}')"
+    >
       <h2>FEATURE PRESENTATION</h2>
 
       <div class="builder-options">
@@ -430,10 +511,13 @@ function showPresentationReady(plan, movie) {
 
         <div class="builder-option">
           <span>Demos</span>
+
           <strong>
             ${
               selectedDemoTitles.length
-                ? selectedDemoTitles.map(title => `<div>${title}</div>`).join("")
+                ? selectedDemoTitles
+                    .map(title => `<div>${title}</div>`)
+                    .join("")
                 : "None"
             }
           </strong>
@@ -446,20 +530,24 @@ function showPresentationReady(plan, movie) {
       </div>
 
       <div class="builder-actions">
-        <button id="readyHomeButton" class="primary-button start-button">
+        <button
+          id="readyHomeButton"
+          class="primary-button start-button"
+        >
           Return to Library
         </button>
-      </div>    
+      </div>
     </div>
   `;
 
-  document.getElementById("readyHomeButton").addEventListener("click", () => {
-    showView(libraryView, "left");
-  });
+  document
+    .getElementById("readyHomeButton")
+    .addEventListener("click", () => {
+      showView(libraryView, "left");
+    });
 
   showView(readyView, "right");
 }
-
 function enableDragScroll() {
   const strips = document.querySelectorAll(".poster-strip");
 
