@@ -76,7 +76,10 @@ function showView(targetView, direction = "right") {
 
 function groupMoviesByCollection(movies) {
   return movies.reduce((groups, movie) => {
-    const collection = movie.collection || "Other";
+    const collection =
+      movie.boothGroup ||
+      movie.collection ||
+      "Other";
 
     if (!groups[collection]) {
       groups[collection] = [];
