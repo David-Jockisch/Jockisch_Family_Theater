@@ -1,0 +1,63 @@
+{
+    "version": 1,
+    "presentationCount": 8,
+    "shuffle": {
+        "demos": [
+            "021",
+            "015",
+            "013",
+            "025",
+            "024",
+            "017",
+            "001",
+            "009",
+            "022"
+        ],
+        "trailers": [
+            "y",
+            "j",
+            "o",
+            "x",
+            "s",
+            "q"
+        ]
+    },
+    "lastPresentation": {
+        "number": 8,
+        "startedAt": "2026-07-18T23:34:52.477Z",
+        "pid": 9900,
+        "playlistFile": "C:\\Users\\david\\AppData\\Local\\Temp\\Jockisch Family Theater\\presentation.m3u",
+        "items": [
+            {
+                "type": "intro",
+                "id": "jft-intro",
+                "filename": "jft-intro.mp4",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\01 Intros\\jft-intro.mp4"
+            },
+            {
+                "type": "demo",
+                "id": "002",
+                "filename": "002.mkv",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\03 Demos\\002.mkv"
+            },
+            {
+                "type": "trailer",
+                "id": "n",
+                "filename": "n.mkv",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\02 Trailers\\n.mkv"
+            },
+            {
+                "type": "trailer",
+                "id": "b",
+                "filename": "b.mp4",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\02 Trailers\\b.mp4"
+            },
+            {
+                "type": "utility",
+                "id": "feature_presentation",
+                "filename": "feature_presentation.mkv",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\04 Utilities\\feature_presentation.mkv"
+            }
+        ]
+    }
+}

@@ -12,8 +12,12 @@ const gameRows = document.getElementById("gameRows");
 const gameDetail = document.getElementById("gameDetail");
 
 const movieDetail = document.getElementById("movieDetail");
-const presentationBuilder = document.getElementById("presentationBuilder");
-const presentationReady = document.getElementById("presentationReady");
+const presentationBuilder = document.getElementById(
+  "presentationBuilder"
+);
+const presentationReady = document.getElementById(
+  "presentationReady"
+);
 
 const boothHeader = document.querySelector(".booth-header");
 
@@ -44,11 +48,20 @@ function showView(targetView, direction = "right") {
     gameLibraryView,
     gameDetailView
   ].forEach(view => {
-    view.classList.remove("active", "slide-in-right", "slide-in-left");
+    view.classList.remove(
+      "active",
+      "slide-in-right",
+      "slide-in-left"
+    );
   });
 
   targetView.classList.add("active");
-  targetView.classList.add(direction === "right" ? "slide-in-right" : "slide-in-left");
+
+  targetView.classList.add(
+    direction === "right"
+      ? "slide-in-right"
+      : "slide-in-left"
+  );
 
   if (targetView === libraryView) {
     boothHeader.classList.remove("hidden");
@@ -70,6 +83,7 @@ function groupMoviesByCollection(movies) {
     }
 
     groups[collection].push(movie);
+
     return groups;
   }, {});
 }
@@ -83,6 +97,7 @@ function groupGamesByPlatform(games) {
     }
 
     groups[platform].push(game);
+
     return groups;
   }, {});
 }
@@ -105,20 +120,35 @@ function renderLibrary() {
     strip.className = "poster-strip";
 
     const moviesInCollection = grouped[collection].sort(
-      (a, b) => Number(a.year || 0) - Number(b.year || 0)
+      (a, b) =>
+        Number(a.year || 0) - Number(b.year || 0)
     );
 
-    const isSingleMovieCollection = moviesInCollection.length === 1;
+    const isSingleMovieCollection =
+      moviesInCollection.length === 1;
 
     moviesInCollection.forEach(movie => {
       const tile = document.createElement("button");
+
       tile.className = isSingleMovieCollection
         ? "movie-tile single-movie-tile"
         : "movie-tile";
 
       tile.innerHTML = `
-        <img src="${assetPath(movie.poster)}" alt="${movie.title}">
-        ${isSingleMovieCollection ? "" : `<div class="movie-tile-title">${movie.title}</div>`}
+        <img
+          src="${assetPath(movie.poster)}"
+          alt="${movie.title}"
+        >
+
+        ${
+          isSingleMovieCollection
+            ? ""
+            : `
+              <div class="movie-tile-title">
+                ${movie.title}
+              </div>
+            `
+        }
       `;
 
       tile.addEventListener("click", () => {
@@ -161,19 +191,34 @@ function renderGameLibrary() {
     strip.className = "poster-strip";
 
     grouped[platform]
-      .sort((a, b) => a.title.localeCompare(b.title))
+      .sort((a, b) =>
+        a.title.localeCompare(b.title)
+      )
       .forEach(game => {
         const tile = document.createElement("button");
+
         tile.className = "movie-tile game-tile";
 
-        const gameImage = game.poster || game.background || game.cover;
+        const gameImage =
+          game.poster ||
+          game.background ||
+          game.cover;
 
         tile.innerHTML = `
-          <img src="${assetPath(gameImage)}" alt="${game.title}">
-          <div class="game-tile-title">${game.title}</div>
+          <img
+            src="${assetPath(gameImage)}"
+            alt="${game.title}"
+          >
+
+          <div class="game-tile-title">
+            ${game.title}
+          </div>
         `;
 
-        tile.addEventListener("click", () => showGameDetail(game));
+        tile.addEventListener("click", () => {
+          showGameDetail(game);
+        });
+
         strip.appendChild(tile);
       });
 
@@ -186,7 +231,10 @@ function renderGameLibrary() {
   backContainer.className = "builder-actions";
 
   backContainer.innerHTML = `
-    <button id="gameLibraryBackButton" class="back-button">
+    <button
+      id="gameLibraryBackButton"
+      class="back-button"
+    >
       ← Back to Movies
     </button>
   `;
@@ -201,12 +249,25 @@ function renderGameLibrary() {
 
   enableDragScroll();
 }
+
 function showGameDetail(game) {
-  const gameImage = game.poster || game.background || game.cover;
+  const gameImage =
+    game.poster ||
+    game.background ||
+    game.cover;
 
   gameDetail.innerHTML = `
-    <div class="detail-card detail-hero" style="--detail-bg: url('${assetPath(gameImage)}')">
-      <img src="${assetPath(gameImage)}" alt="${game.title}">
+    <div
+      class="detail-card detail-hero"
+      style="
+        --detail-bg:
+        url('${assetPath(gameImage)}')
+      "
+    >
+      <img
+        src="${assetPath(gameImage)}"
+        alt="${game.title}"
+      >
 
       <h2>${game.title}</h2>
 
@@ -216,39 +277,71 @@ function showGameDetail(game) {
       </div>
 
       <div class="detail-actions">
-        <button id="pushGameButton" class="primary-button">
+        <button
+          id="pushGameButton"
+          class="primary-button"
+        >
           Push to Display
         </button>
 
-        <button id="gameDetailBackButton" class="back-button">
+        <button
+          id="gameDetailBackButton"
+          class="back-button"
+        >
           ← Back to Games
         </button>
       </div>
     </div>
   `;
 
-document.getElementById("pushGameButton").addEventListener("click", async () => {
-  const response = await fetch("/api/state", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      mode: "game",
-      mediaId: game.id
-    })
-  });
+  document
+    .getElementById("pushGameButton")
+    .addEventListener("click", async () => {
+      try {
+        const response = await fetch("/api/state", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            mode: "game",
+            mediaId: game.id
+          })
+        });
 
-  if (!response.ok) {
-    console.error("Failed to update theater state");
-    return;
-  }
+        if (!response.ok) {
+          const errorData = await response
+            .json()
+            .catch(() => ({}));
 
-  console.log("Game pushed to display:", game);
-});
-  document.getElementById("gameDetailBackButton").addEventListener("click", () => {
-    showView(gameLibraryView, "left");
-  });
+          throw new Error(
+            errorData.error ||
+            "Failed to update theater state."
+          );
+        }
+
+        console.log(
+          "Game pushed to display:",
+          game
+        );
+      } catch (error) {
+        console.error(
+          "Game display update failed:",
+          error
+        );
+
+        alert(
+          "The game could not be sent to the Display OS. " +
+          "Please confirm the Theater Server is running."
+        );
+      }
+    });
+
+  document
+    .getElementById("gameDetailBackButton")
+    .addEventListener("click", () => {
+      showView(gameLibraryView, "left");
+    });
 
   showView(gameDetailView, "right");
 }
@@ -257,12 +350,25 @@ function showMovieDetail(movie) {
   selectedMovie = movie;
 
   movieDetail.innerHTML = `
-    <div class="detail-card detail-hero" style="--detail-bg: url('${assetPath(movie.poster)}')">
-      <img src="${assetPath(movie.poster)}" alt="${movie.title}">
+    <div
+      class="detail-card detail-hero"
+      style="
+        --detail-bg:
+        url('${assetPath(movie.poster)}')
+      "
+    >
+      <img
+        src="${assetPath(movie.poster)}"
+        alt="${movie.title}"
+      >
 
       <h2>${movie.title}</h2>
 
-      ${movie.edition ? `<div>${movie.edition}</div>` : ""}
+      ${
+        movie.edition
+          ? `<div>${movie.edition}</div>`
+          : ""
+      }
 
       <div class="detail-meta">
         ${movie.year || ""}<br>
@@ -271,24 +377,34 @@ function showMovieDetail(movie) {
       </div>
 
       <div class="detail-actions">
-        <button id="configureButton" class="primary-button">
+        <button
+          id="configureButton"
+          class="primary-button"
+        >
           Prepare Presentation
         </button>
 
-        <button id="detailBackButton" class="back-button">
+        <button
+          id="detailBackButton"
+          class="back-button"
+        >
           ← Back to Library
         </button>
       </div>
     </div>
   `;
 
-  document.getElementById("configureButton").addEventListener("click", () => {
-    showPresentationBuilder(movie);
-  });
+  document
+    .getElementById("configureButton")
+    .addEventListener("click", () => {
+      showPresentationBuilder(movie);
+    });
 
-  document.getElementById("detailBackButton").addEventListener("click", () => {
-    showView(libraryView, "left");
-  });
+  document
+    .getElementById("detailBackButton")
+    .addEventListener("click", () => {
+      showView(libraryView, "left");
+    });
 
   showView(detailView, "right");
 }
@@ -298,56 +414,71 @@ function buildPresentationPlan(movie) {
     '[data-presentation-item="theater-intro"]'
   )?.checked;
 
-  const randomTrailersEnabled = document.querySelector(
-    '[data-presentation-item="random-trailers"]'
+  const demosEnabled = document.querySelector(
+    '[data-presentation-item="random-demos"]'
   )?.checked;
 
-  const selectedDemos = Array.from(
-    document.querySelectorAll("[data-demo-id]:checked")
-  ).map(input => input.dataset.demoId);
+  const trailersEnabled = document.querySelector(
+    '[data-presentation-item="random-trailers"]'
+  )?.checked;
 
   return {
     movieId: movie.id,
     title: movie.title,
     intro: Boolean(introEnabled),
-    demos: selectedDemos,
-    randomTrailers: Boolean(randomTrailersEnabled)
+    demos: Boolean(demosEnabled),
+    randomTrailers: Boolean(trailersEnabled),
+    demoCount: demosEnabled ? 2 : 0,
+    trailerCount: trailersEnabled ? 2 : 0
   };
 }
-
 
 async function showPresentationBuilder(movie) {
   /*
    * Prepare Presentation
    *
    * Update the outside Display OS immediately when the user
-   * leaves the movie-details page and enters the builder.
+   * enters the presentation builder.
    */
+
   try {
-    const prepareResponse = await fetch("/api/prepare", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        mode: "movie",
-        mediaId: movie.id
-      })
-    });
+    const prepareResponse = await fetch(
+      "/api/prepare",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          mode: "movie",
+          mediaId: movie.id
+        })
+      }
+    );
 
     if (!prepareResponse.ok) {
-      const errorData = await prepareResponse.json().catch(() => ({}));
+      const errorData = await prepareResponse
+        .json()
+        .catch(() => ({}));
 
       throw new Error(
-        errorData.error || "The Display OS could not be updated."
+        errorData.error ||
+        "The Display OS could not be updated."
       );
     }
 
-    const prepareResult = await prepareResponse.json();
+    const prepareResult =
+      await prepareResponse.json();
 
-    console.log("Presentation prepared:", prepareResult);
+    console.log(
+      "Presentation prepared:",
+      prepareResult
+    );
   } catch (error) {
-    console.error("Prepare Presentation failed:", error);
+    console.error(
+      "Prepare Presentation failed:",
+      error
+    );
 
     alert(
       "The movie could not be sent to the Display OS. " +
@@ -357,20 +488,13 @@ async function showPresentationBuilder(movie) {
     return;
   }
 
-  const demoOptions = demoLibrary
-    .filter(demo => demo.enabled)
-    .map(demo => `
-      <label class="builder-option">
-        <input type="checkbox" data-demo-id="${demo.id}">
-        <span>${demo.title}</span>
-      </label>
-    `)
-    .join("");
-
   presentationBuilder.innerHTML = `
     <div
       class="builder-hero"
-      style="--builder-bg: url('${assetPath(movie.poster)}')"
+      style="
+        --builder-bg:
+        url('${assetPath(movie.poster)}')
+      "
     >
       <h2>Tonight's Presentation</h2>
       <h3>${movie.title}</h3>
@@ -382,14 +506,19 @@ async function showPresentationBuilder(movie) {
             checked
             data-presentation-item="theater-intro"
           >
+
           <span>Theater Intro</span>
         </label>
 
-        <div class="builder-section-title">Demo Clips</div>
+        <label class="builder-option">
+          <input
+            type="checkbox"
+            checked
+            data-presentation-item="random-demos"
+          >
 
-        ${demoOptions}
-
-        <div class="builder-section-title">Trailers</div>
+          <span>Demo Clips</span>
+        </label>
 
         <label class="builder-option">
           <input
@@ -397,7 +526,8 @@ async function showPresentationBuilder(movie) {
             checked
             data-presentation-item="random-trailers"
           >
-          <span>Play Movie Trailers</span>
+
+          <span>Movie Trailers</span>
         </label>
       </div>
 
@@ -432,69 +562,107 @@ async function showPresentationBuilder(movie) {
         "startPresentationButton"
       );
 
-      const presentationPlan = buildPresentationPlan(movie);
+      const presentationPlan =
+        buildPresentationPlan(movie);
 
       startButton.disabled = true;
-      startButton.textContent = "Starting Presentation...";
+      startButton.textContent =
+        "Starting Presentation...";
 
       try {
         /*
-         * The Display OS was already updated when Prepare
-         * Presentation was selected. Start Presentation now
-         * handles only the Kodi presentation.
+         * The Display OS was already updated when
+         * Prepare Presentation was selected.
+         *
+         * Start Presentation now sends the selected
+         * options to the mpv playback system.
          */
-        for (const demoId of presentationPlan.demos) {
-          const demoResponse = await fetch("/api/kodi/play-demo", {
+
+        const response = await fetch(
+          "/api/playback/start",
+          {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              demoId
+              includeIntro:
+                presentationPlan.intro,
+
+              includeDemos:
+                presentationPlan.demos,
+
+              includeTrailers:
+                presentationPlan.randomTrailers,
+
+              includeFeaturePresentation:
+                true,
+
+              demoCount:
+                presentationPlan.demoCount,
+
+              trailerCount:
+                presentationPlan.trailerCount
             })
-          });
-
-          if (!demoResponse.ok) {
-            const errorData = await demoResponse
-              .json()
-              .catch(() => ({}));
-
-            throw new Error(
-              errorData.error ||
-              `Failed to play demo: ${demoId}`
-            );
           }
+        );
+
+        const result = await response
+          .json()
+          .catch(() => ({}));
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.error ||
+            "Unable to start the presentation."
+          );
         }
 
-        console.log("Presentation Plan:", presentationPlan);
+        console.log(
+          "Presentation started:",
+          result
+        );
 
-        showPresentationReady(presentationPlan, movie);
+        console.log(
+          "Presentation plan:",
+          presentationPlan
+        );
+
+        showPresentationReady(
+          presentationPlan,
+          movie
+        );
       } catch (error) {
-        console.error("Presentation startup failed:", error);
+        console.error(
+          "Presentation startup failed:",
+          error
+        );
 
         alert(
-          "The presentation could not be started. " +
-          "Please confirm Kodi is running."
+          "The presentation could not be started.\n\n" +
+          (
+            error.message ||
+            "Please confirm the Theater Server is running."
+          )
         );
 
         startButton.disabled = false;
-        startButton.textContent = "Start Presentation";
+        startButton.textContent =
+          "Start Presentation";
       }
     });
 
   showView(builderView, "right");
 }
 
-
 function showPresentationReady(plan, movie) {
-  const selectedDemoTitles = plan.demos
-    .map(id => demoLibrary.find(demo => demo.id === id)?.title)
-    .filter(Boolean);
-
   presentationReady.innerHTML = `
     <div
       class="builder-hero"
-      style="--builder-bg: url('${assetPath(movie.poster)}')"
+      style="
+        --builder-bg:
+        url('${assetPath(movie.poster)}')
+      "
     >
       <h2>FEATURE PRESENTATION</h2>
 
@@ -506,26 +674,34 @@ function showPresentationReady(plan, movie) {
 
         <div class="builder-option">
           <span>Theater Intro</span>
-          <strong>${plan.intro ? "Yes" : "No"}</strong>
+
+          <strong>
+            ${plan.intro ? "Yes" : "No"}
+          </strong>
         </div>
 
         <div class="builder-option">
-          <span>Demos</span>
+          <span>Demo Clips</span>
 
           <strong>
             ${
-              selectedDemoTitles.length
-                ? selectedDemoTitles
-                    .map(title => `<div>${title}</div>`)
-                    .join("")
-                : "None"
+              plan.demos
+                ? `${plan.demoCount} Random`
+                : "No"
             }
           </strong>
         </div>
 
         <div class="builder-option">
-          <span>Trailers</span>
-          <strong>${plan.randomTrailers ? "Yes" : "No"}</strong>
+          <span>Movie Trailers</span>
+
+          <strong>
+            ${
+              plan.randomTrailers
+                ? `${plan.trailerCount} Random`
+                : "No"
+            }
+          </strong>
         </div>
       </div>
 
@@ -548,42 +724,67 @@ function showPresentationReady(plan, movie) {
 
   showView(readyView, "right");
 }
+
 function enableDragScroll() {
-  const strips = document.querySelectorAll(".poster-strip");
+  const strips = document.querySelectorAll(
+    ".poster-strip"
+  );
 
   strips.forEach(strip => {
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    strip.addEventListener("mousedown", e => {
-      isDown = true;
-      strip.classList.add("dragging");
-      startX = e.pageX - strip.offsetLeft;
-      scrollLeft = strip.scrollLeft;
-    });
+    strip.addEventListener(
+      "mousedown",
+      event => {
+        isDown = true;
+        strip.classList.add("dragging");
 
-    strip.addEventListener("mouseleave", () => {
-      isDown = false;
-      strip.classList.remove("dragging");
-    });
+        startX =
+          event.pageX - strip.offsetLeft;
 
-    strip.addEventListener("mouseup", () => {
-      isDown = false;
-      strip.classList.remove("dragging");
-    });
-
-    strip.addEventListener("mousemove", e => {
-      if (!isDown) return;
-
-      const x = e.pageX - strip.offsetLeft;
-      const walk = (x - startX) * 1.4;
-
-      if (Math.abs(walk) > 5) {
-        e.preventDefault();
-        strip.scrollLeft = scrollLeft - walk;
+        scrollLeft = strip.scrollLeft;
       }
-    });
+    );
+
+    strip.addEventListener(
+      "mouseleave",
+      () => {
+        isDown = false;
+        strip.classList.remove("dragging");
+      }
+    );
+
+    strip.addEventListener(
+      "mouseup",
+      () => {
+        isDown = false;
+        strip.classList.remove("dragging");
+      }
+    );
+
+    strip.addEventListener(
+      "mousemove",
+      event => {
+        if (!isDown) {
+          return;
+        }
+
+        const x =
+          event.pageX - strip.offsetLeft;
+
+        const walk =
+          (x - startX) * 1.4;
+
+        if (Math.abs(walk) > 5) {
+          event.preventDefault();
+
+          strip.scrollLeft =
+            scrollLeft - walk;
+        }
+      }
+    );
   });
 }
 
