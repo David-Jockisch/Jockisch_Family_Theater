@@ -312,6 +312,17 @@ const movieLibrary = [
   runtime: "129 min",
   poster: "/assets/posters/movies/marvel/spider-man-far-from-home.jpg"
 },
+{
+  id: "spider-man-no-way-home",
+  collection: "Spider-Man",
+  franchise: "Marvel Cinematic Universe",
+  title: "Spider-Man: No Way Home",
+  edition: "Digital",
+  year: "2021",
+  rating: "PG-13",
+  runtime: "148 min",
+  poster: "/assets/posters/movies/marvel/spider-man-no-way-home.jpg"
+},
 ];
 if (typeof module !== "undefined") {
   module.exports = movieLibrary;
