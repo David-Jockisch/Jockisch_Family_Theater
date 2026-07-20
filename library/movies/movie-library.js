@@ -300,6 +300,18 @@ const movieLibrary = [
   runtime: "166 min",
   poster: "/assets/posters/movies/dune-part-two.jpg"
 },
+
+{
+  id: "spider-man-far-from-home",
+  collection: "Spider-Man",
+  franchise: "Marvel Cinematic Universe",
+  title: "Spider-Man: Far From Home",
+  edition: "Digital",
+  year: "2019",
+  rating: "PG-13",
+  runtime: "129 min",
+  poster: "/assets/posters/movies/marvel/spider-man-far-from-home.jpg"
+},
 ];
 if (typeof module !== "undefined") {
   module.exports = movieLibrary;
