@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>JFT Collection</title>
+
+  <link
+    rel="stylesheet"
+    href="./collection.css"
+  >
+</head>
+
+<body>
+  <div id="app" class="collection-app">
+    <header class="collection-header">
+      <div class="header-copy">
+        <p class="eyebrow">
+          Jockisch Family Theater
+        </p>
+
+        <h1>
+          My Collection
+        </h1>
+      </div>
+
+      <div class="library-count">
+        <span id="movieCount">
+          0
+        </span>
+
+        <span>
+          Movies
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <section
+        id="libraryView"
+        class="view active"
+        aria-label="Movie Library"
+      >
+        <div class="library-tools">
+          <label
+            class="search-field"
+            for="movieSearch"
+          >
+            <span class="search-label">
+              Search Movies
+            </span>
+
+            <input
+              id="movieSearch"
+              type="search"
+              placeholder="Search by title..."
+              autocomplete="off"
+            >
+          </label>
+
+          <button
+            id="clearSearchButton"
+            class="secondary-button"
+            type="button"
+          >
+            Clear
+          </button>
+        </div>
+
+        <div
+          id="emptyState"
+          class="empty-state"
+          hidden
+        >
+          <h2>
+            No movies found
+          </h2>
+
+          <p>
+            Try a different search.
+          </p>
+        </div>
+
+        <div
+          id="movieGrid"
+          class="movie-grid"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section
+        id="detailView"
+        class="view"
+        aria-label="Movie Details"
+      >
+        <div id="movieDetail"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../../library/movies/movie-library.js"></script>
+  <script src="./collection.js"></script>
+</body>
+</html>
