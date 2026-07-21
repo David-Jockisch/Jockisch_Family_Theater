@@ -1024,3 +1024,129 @@ button {
 .platform-game-grid[hidden] {
   display: none;
 }
+
+
+/* Step 6: compact mobile filters and focused detail pages */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.mobile-filter-actions {
+  display: none;
+}
+
+.filter-options {
+  display: contents;
+}
+
+.detail-view-active .library-nav {
+  display: none;
+}
+
+.detail-view-active .movie-count-card,
+.detail-view-active .game-count-card {
+  opacity: 0.72;
+}
+
+.detail-view-active main {
+  padding-top: 0.75rem;
+}
+
+.detail-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(212, 154, 98, 0.45);
+  border-radius: 0.75rem;
+  background: rgba(184, 115, 51, 0.14);
+  color: var(--accent-light);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.detail-back-button:hover,
+.detail-back-button:focus-visible {
+  background: rgba(184, 115, 51, 0.22);
+}
+
+@media (max-width: 44rem) {
+  .filter-panel {
+    display: block;
+    padding-top: 1rem;
+  }
+
+  .search-field {
+    margin-bottom: 0.75rem;
+  }
+
+  .mobile-filter-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .mobile-filter-toggle,
+  .mobile-sort-field select {
+    width: 100%;
+    min-height: 2.85rem;
+  }
+
+  .mobile-sort-field {
+    display: block;
+  }
+
+  .mobile-sort-field select {
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--panel-bg);
+    color: var(--text-main);
+    font: inherit;
+    padding: 0 0.8rem;
+  }
+
+  .filter-options {
+    display: none;
+  }
+
+  .filter-options.open {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+    padding: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .filter-options .filter-field[for="movieSort"],
+  .filter-options .filter-field[for="gameSort"] {
+    display: none;
+  }
+
+  .clear-filter-button {
+    width: 100%;
+  }
+
+  .detail-view-active .library-nav {
+    display: none;
+  }
+
+  .detail-back-button {
+    width: 100%;
+  }
+}

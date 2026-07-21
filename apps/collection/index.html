@@ -223,6 +223,29 @@
             <input id="movieSearch" type="search" placeholder="Search by title..." autocomplete="off">
           </label>
 
+          <div class="mobile-filter-actions" aria-label="Movie filter controls">
+            <button
+              id="movieFiltersToggle"
+              class="secondary-button mobile-filter-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="movieFilterOptions"
+            >
+              Filters (0)
+            </button>
+
+            <label class="mobile-sort-field" for="movieSortMobile">
+              <span class="visually-hidden">Sort movies</span>
+              <select id="movieSortMobile">
+                <option value="az">Sort: A–Z</option>
+                <option value="za">Sort: Z–A</option>
+                <option value="newest">Sort: Newest</option>
+                <option value="oldest">Sort: Oldest</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="movieFilterOptions" class="filter-options">
           <label class="filter-field" for="movieFormatFilter">
             <span>Format</span>
             <select id="movieFormatFilter"><option value="">All Formats</option></select>
@@ -302,6 +325,29 @@
             <input id="gameSearch" type="search" placeholder="Search by title..." autocomplete="off">
           </label>
 
+          <div class="mobile-filter-actions" aria-label="Game filter controls">
+            <button
+              id="gameFiltersToggle"
+              class="secondary-button mobile-filter-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="gameFilterOptions"
+            >
+              Filters (0)
+            </button>
+
+            <label class="mobile-sort-field" for="gameSortMobile">
+              <span class="visually-hidden">Sort games</span>
+              <select id="gameSortMobile">
+                <option value="az">Sort: A–Z</option>
+                <option value="za">Sort: Z–A</option>
+                <option value="newest">Sort: Newest</option>
+                <option value="oldest">Sort: Oldest</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="gameFilterOptions" class="filter-options">
           <label class="filter-field" for="gamePlatformFilter">
             <span>Platform</span>
             <select id="gamePlatformFilter"><option value="">All Platforms</option></select>
@@ -325,6 +371,7 @@
           <button id="clearGameFiltersButton" class="secondary-button clear-filter-button" type="button">
             Clear Filters
           </button>
+          </div>
         </div>
 
         <div id="gameEmptyState" class="empty-state" hidden>

@@ -190,12 +190,59 @@ function getFilteredGames() {
   return sortItems(filtered, gameSort.value, "release");
 }
 
+
+function updateFilterCounts() {
+  const movieCount = [
+    movieFormatFilter.value,
+    movieCollectionFilter.value,
+    movieRatingFilter.value
+  ].filter(Boolean).length;
+
+  const gameCount = [
+    gamePlatformFilter.value,
+    gameGenreFilter.value
+  ].filter(Boolean).length;
+
+  movieFiltersToggle.textContent = `Filters (${movieCount})`;
+  gameFiltersToggle.textContent = `Filters (${gameCount})`;
+}
+
+function toggleFilterPanel(button, panel) {
+  const isOpen = panel.classList.toggle("open");
+  button.setAttribute("aria-expanded", String(isOpen));
+}
+
+function setDetailViewMode(isDetail) {
+  document.body.classList.toggle("detail-view-active", isDetail);
+}
+
+function syncMovieSort(value, source) {
+  movieSort.value = value;
+  movieSortMobile.value = value;
+  if (source !== "render") {
+    renderMovies();
+  }
+}
+
+function syncGameSort(value, source) {
+  gameSort.value = value;
+  gameSortMobile.value = value;
+  if (source !== "render") {
+    renderGames();
+  }
+}
+
 function setActiveLibraryTab(activeLibrary) {
   byId("movieTabButton").classList.toggle("active", activeLibrary === "movies");
   byId("gameTabButton").classList.toggle("active", activeLibrary === "games");
 }
 
 function showView(targetView, activeLibrary = "") {
+  const isDetailView =
+    targetView === movieDetailView ||
+    targetView === gameDetailView;
+
+  setDetailViewMode(isDetailView);
   views.forEach(view => view.classList.remove("active"));
   targetView.classList.add("active");
   byId("pageTitle").textContent = "Collection";
@@ -228,6 +275,8 @@ function createMovieCard(movie) {
 }
 
 function renderMovies() {
+  movieSortMobile.value = movieSort.value;
+  updateFilterCounts();
   const movies = getFilteredMovies();
   movieGrid.innerHTML = "";
   movies.forEach(movie => movieGrid.appendChild(createMovieCard(movie)));
@@ -307,6 +356,8 @@ function renderPlatformGames(games) {
 }
 
 function renderGames() {
+  gameSortMobile.value = gameSort.value;
+  updateFilterCounts();
   const games = getFilteredGames();
   gameGroups.innerHTML = "";
   if (gameViewMode === "platform") renderPlatformGames(games);
