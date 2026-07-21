@@ -422,40 +422,6 @@ const ps5Games = [
     ownership: ["disc"],
     poster: "/assets/posters/games/ps5/watch-dogs-legion.jpg",
     theaterEnabled: true
-  },
-
-  {
-    id: "astro-bot",
-    title: "Astro Bot",
-    sortTitle: "Astro Bot",
-    platform: "ps5",
-    release: "2024",
-    publisher: "Sony Interactive Entertainment",
-    developer: "Team Asobi",
-    genre: "Platform, Adventure",
-    players: "Unknown",
-    rating: "Unknown",
-    collection: "Astro Bot",
-    ownership: ["disc"],
-    poster: "/assets/posters/games/ps5/astro-bot.jpg",
-    theaterEnabled: true
-  },
-
-  {
-    id: "goat-simulator-3",
-    title: "Goat Simulator 3",
-    sortTitle: "Goat Simulator 3",
-    platform: "ps5",
-    release: "2022",
-    publisher: "Coffee Stain Publishing",
-    developer: "Coffee Stain Studios",
-    genre: "Simulator, Adventure",
-    players: "Unknown",
-    rating: "Unknown",
-    collection: "Goat Simulator 3",
-    ownership: ["disc"],
-    poster: "/assets/posters/games/ps5/goat-simulator-3.jpg",
-    theaterEnabled: true
   }
 ];
 

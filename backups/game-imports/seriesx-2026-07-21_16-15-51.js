@@ -167,23 +167,6 @@ const seriesxGames = [
     ownership: ["disc"],
     poster: "/assets/posters/games/seriesx/yakuza-like-a-dragon.jpg",
     theaterEnabled: false
-  },
-
-  {
-    id: "indiana-jones-and-the-great-circle",
-    title: "Indiana Jones and the Great Circle",
-    sortTitle: "Indiana Jones and the Great Circle",
-    platform: "seriesx",
-    release: "2024",
-    publisher: "Bethesda Softworks",
-    developer: "MachineGames",
-    genre: "Puzzle, Role-playing (RPG), Adventure",
-    players: "Unknown",
-    rating: "Unknown",
-    collection: "Indiana Jones",
-    ownership: ["digital"],
-    poster: "/assets/posters/games/seriesx/indiana-jones-and-the-great-circle.jpg",
-    theaterEnabled: false
   }
 ];
 

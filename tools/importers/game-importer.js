@@ -11,6 +11,12 @@ require("dotenv").config({
 //
 
 const PROJECT_ROOT = path.resolve(__dirname, "../..");
+const GAME_LIBRARY_DIRECTORY = path.join(PROJECT_ROOT, "library", "games");
+const GAME_IMPORT_BACKUP_DIRECTORY = path.join(
+  PROJECT_ROOT,
+  "backups",
+  "game-imports"
+);
 
 const CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
@@ -419,6 +425,148 @@ function getCollectionName(game) {
   );
 }
 
+function getPlatformLibraryPath(platform) {
+  return path.join(GAME_LIBRARY_DIRECTORY, `${platform.value}.js`);
+}
+
+function getTheaterEnabledDefault(platform) {
+  const libraryPath = getPlatformLibraryPath(platform);
+
+  if (!fs.existsSync(libraryPath)) {
+    return false;
+  }
+
+  const librarySource = fs.readFileSync(libraryPath, "utf8");
+  const matches = [
+    ...librarySource.matchAll(/theaterEnabled:\s*(true|false)/g)
+  ].map((match) => match[1] === "true");
+
+  if (matches.length === 0) {
+    return false;
+  }
+
+  const firstValue = matches[0];
+  const allMatch = matches.every((value) => value === firstValue);
+
+  if (!allMatch) {
+    console.log(
+      `Warning: ${platform.value}.js contains mixed theaterEnabled values.`
+    );
+    console.log("Using false as the safe preview default.");
+    return false;
+  }
+
+  return firstValue;
+}
+
+function normalizeDuplicateValue(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’]/g, "\'")
+    .trim()
+    .toLowerCase();
+}
+
+function findDuplicateGame(platform, gameObject) {
+  const libraryPath = getPlatformLibraryPath(platform);
+
+  if (!fs.existsSync(libraryPath)) {
+    throw new Error(`Target library does not exist: ${libraryPath}`);
+  }
+
+  const librarySource = fs.readFileSync(libraryPath, "utf8");
+  const idMatches = [
+    ...librarySource.matchAll(/\bid:\s*["\']([^"\']+)["\']/g)
+  ].map((match) => match[1]);
+  const titleMatches = [
+    ...librarySource.matchAll(/\btitle:\s*["\']([^"\']+)["\']/g)
+  ].map((match) => match[1]);
+
+  const duplicateId = idMatches.find(
+    (id) => normalizeDuplicateValue(id) === normalizeDuplicateValue(gameObject.id)
+  );
+  const duplicateTitle = titleMatches.find(
+    (title) =>
+      normalizeDuplicateValue(title) === normalizeDuplicateValue(gameObject.title)
+  );
+
+  if (!duplicateId && !duplicateTitle) {
+    return null;
+  }
+
+  return { duplicateId, duplicateTitle };
+}
+
+function createTimestamp() {
+  const now = new Date();
+  const pad = (value) => String(value).padStart(2, "0");
+
+  return (
+    `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_` +
+    `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`
+  );
+}
+
+function indentBlock(value, spaces) {
+  const indentation = " ".repeat(spaces);
+  return String(value)
+    .split(/\r?\n/)
+    .map((line) => `${indentation}${line}`)
+    .join("\n");
+}
+
+function writeGameToLibrary(platform, gameObject) {
+  const libraryPath = getPlatformLibraryPath(platform);
+
+  if (!fs.existsSync(libraryPath)) {
+    throw new Error(`Target library does not exist: ${libraryPath}`);
+  }
+
+  const originalSource = fs.readFileSync(libraryPath, "utf8");
+  const lineEnding = originalSource.includes("\r\n") ? "\r\n" : "\n";
+  const normalizedSource = originalSource.replace(/\r\n/g, "\n");
+
+  const arrayClosePattern = /\n\];(?=\n\s*export\s+default\s+)/;
+
+  if (!arrayClosePattern.test(normalizedSource)) {
+    throw new Error(
+      `Could not find the end of the game array in ${path.basename(libraryPath)}.`
+    );
+  }
+
+  const objectText = indentBlock(formatJavaScriptValue(gameObject), 2);
+  const updatedSource = normalizedSource.replace(
+    arrayClosePattern,
+    `,\n\n${objectText}\n];`
+  );
+
+  fs.mkdirSync(GAME_IMPORT_BACKUP_DIRECTORY, { recursive: true });
+
+  const backupName = `${platform.value}-${createTimestamp()}.js`;
+  const backupPath = path.join(GAME_IMPORT_BACKUP_DIRECTORY, backupName);
+  fs.copyFileSync(libraryPath, backupPath);
+
+  const temporaryPath = `${libraryPath}.tmp`;
+
+  try {
+    fs.writeFileSync(
+      temporaryPath,
+      updatedSource.replace(/\n/g, lineEnding),
+      "utf8"
+    );
+    fs.renameSync(temporaryPath, libraryPath);
+  } catch (error) {
+    if (fs.existsSync(temporaryPath)) {
+      fs.rmSync(temporaryPath, { force: true });
+    }
+
+    throw error;
+  }
+
+  return { libraryPath, backupPath };
+}
+
 function buildGameObject(game, platform, ownership) {
   return {
     id: slugify(game.name),
@@ -434,7 +582,7 @@ function buildGameObject(game, platform, ownership) {
     collection: getCollectionName(game),
     ownership: [ownership],
     poster: getPosterRelativePath(platform, game.name),
-    theaterEnabled: true
+    theaterEnabled: getTheaterEnabledDefault(platform)
   };
 }
 
@@ -678,7 +826,7 @@ async function main() {
   console.log("");
   console.log("========================================");
   console.log("Jockisch Family Theater");
-  console.log("Game Importer - Version 2.2");
+  console.log("Game Importer - Version 2.3");
   console.log("========================================\n");
 
   const platform = await choosePlatform();
@@ -729,6 +877,28 @@ async function main() {
   printSelectedGame(gameDetails, platform);
 
   const ownership = await chooseOwnership();
+  const gameObject = buildGameObject(
+    gameDetails,
+    platform,
+    ownership
+  );
+
+  const duplicate = findDuplicateGame(platform, gameObject);
+
+  if (duplicate) {
+    console.log("\nImport stopped: this game appears to already exist.");
+
+    if (duplicate.duplicateId) {
+      console.log(`Matching ID: ${duplicate.duplicateId}`);
+    }
+
+    if (duplicate.duplicateTitle) {
+      console.log(`Matching title: ${duplicate.duplicateTitle}`);
+    }
+
+    console.log("No files were changed.");
+    return;
+  }
 
   if (!gameDetails.cover?.image_id) {
     console.log("\nThis IGDB entry does not have a cover image.");
@@ -767,29 +937,29 @@ async function main() {
     `Library path: ${getPosterRelativePath(platform, gameDetails.name)}`
   );
 
-  const gameObject = buildGameObject(
-    gameDetails,
-    platform,
-    ownership
-  );
-
+  console.log(`\nTarget library: ${getPlatformLibraryPath(platform)}`);
   printGameObjectPreview(gameObject);
 
   console.log("");
   const approved = await confirm(
-    "Approve this entry for future library import"
+    "Add this game to the platform library"
   );
 
   if (!approved) {
-    console.log("\nEntry not approved. No library files were changed.");
+    console.log("\nImport canceled. No library files were changed.");
+    console.log("The downloaded poster was left in place.");
     return;
   }
 
-  console.log("\nEntry approved.");
-  console.log(
-    "Version 2.2 does not write to the game library yet."
-  );
-  console.log("No game library files were changed.");
+  const result = writeGameToLibrary(platform, gameObject);
+
+  console.log("\n========================================");
+  console.log("Import Complete");
+  console.log("========================================");
+  console.log(`Added: ${gameObject.title}`);
+  console.log(`Library: ${result.libraryPath}`);
+  console.log(`Poster: ${posterFile}`);
+  console.log(`Backup: ${result.backupPath}`);
 }
 
 main()
