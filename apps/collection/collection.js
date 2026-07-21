@@ -207,6 +207,10 @@ function toggleFilterPanel(button, panel) {
 
 function setPageViewMode(targetView) {
   const isHomeView = targetView === homeView;
+  const isDetailView =
+    targetView === movieDetailView ||
+    targetView === gameDetailView;
+
   document.body.classList.toggle("home-view-active", isHomeView);
   document.body.classList.toggle("detail-view-active", isDetailView);
 }
