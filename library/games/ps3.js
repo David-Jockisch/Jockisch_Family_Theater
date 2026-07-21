@@ -1513,23 +1513,6 @@ const ps3Games = [
   },
 
   {
-    id: "metal-gear-solid-2-bande-dessinee",
-    title: "Metal Gear Solid 2: Bande Dessinee",
-    sortTitle: "Metal Gear Solid 2 Bande Dessinee",
-    platform: "ps3",
-    release: "2013",
-    publisher: "Konami",
-    developer: "Kojima Productions",
-    genre: "Interactive Digital Graphic Novel",
-    players: "1",
-    rating: "M",
-    collection: "Metal Gear",
-    ownership: ["disc"],
-    poster: "/assets/posters/games/ps3/metal-gear-solid-2-bande-dessinee.jpg",
-    theaterEnabled: false
-  },
-
-  {
     id: "metal-gear-solid-2-sons-of-liberty",
     title: "Metal Gear Solid 2: Sons of Liberty",
     sortTitle: "Metal Gear Solid 2 Sons of Liberty",

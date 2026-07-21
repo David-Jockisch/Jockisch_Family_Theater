@@ -1,2 +1,4 @@
 
 tools/mpv/mpv.exe
+node_modules/
+.env

@@ -1,4 +1,4 @@
-const 3dsGames = [
+const threedsGames = [
   {
     id: "frozen-olafs-quest",
     title: "Frozen: Olaf’s Quest",
@@ -153,4 +153,4 @@ const 3dsGames = [
   }
 ];
 
-export default 3dsGames;
+export default threedsGames;

@@ -34,23 +34,6 @@ const dsGames = [
   },
 
   {
-    id: "brain-age",
-    title: "Brain Age",
-    sortTitle: "Brain Age",
-    platform: "ds",
-    release: "2006",
-    publisher: "Nintendo",
-    developer: "Nintendo SPD",
-    genre: "Educational, Puzzle",
-    players: "1",
-    rating: "E",
-    collection: "Brain Age",
-    ownership: ["disc"],
-    poster: "/assets/posters/games/ds/brain-age.jpg",
-    theaterEnabled: false
-  },
-
-  {
     id: "brain-age-2",
     title: "Brain Age 2",
     sortTitle: "Brain Age 2",
