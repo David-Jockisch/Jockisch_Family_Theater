@@ -1098,24 +1098,9 @@ button {
     gap: 0.75rem;
     margin-bottom: 0.75rem;
   }
-
-  .mobile-filter-toggle,
-  .mobile-sort-field select {
+  .mobile-filter-toggle {
     width: 100%;
     min-height: 2.85rem;
-  }
-
-  .mobile-sort-field {
-    display: block;
-  }
-
-  .mobile-sort-field select {
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    background: var(--panel-bg);
-    color: var(--text-main);
-    font: inherit;
-    padding: 0 0.8rem;
   }
 
   .filter-options {
@@ -1148,5 +1133,107 @@ button {
 
   .detail-back-button {
     width: 100%;
+  }
+}
+
+
+/* Step 7: simplified filters and movie collection browsing */
+
+.mobile-filter-actions.single-action {
+  grid-template-columns: 1fr;
+}
+
+.movie-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1rem;
+  padding-top: 0.35rem;
+}
+
+.movie-collection-grid[hidden],
+.movie-grid[hidden] {
+  display: none;
+}
+
+.collection-card {
+  position: relative;
+  min-height: 15rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: var(--panel-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+}
+
+.collection-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.96) 0%,
+    rgba(0, 0, 0, 0.68) 45%,
+    rgba(0, 0, 0, 0.12) 80%
+  );
+}
+
+.collection-card-copy {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  display: grid;
+  gap: 0.3rem;
+  padding: 1rem;
+}
+
+.collection-card-title {
+  font-size: 1rem;
+}
+
+.collection-card-count {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.collection-card:hover,
+.collection-card:focus-visible {
+  border-color: rgba(212, 154, 98, 0.65);
+}
+
+.collection-mode .filter-options,
+.collection-mode .mobile-filter-actions {
+  display: none !important;
+}
+
+.collection-mode .search-label {
+  font-size: 0;
+}
+
+.collection-mode .search-label::after {
+  content: "Search Collections";
+  font-size: 0.76rem;
+}
+
+@media (max-width: 44rem) {
+  .mobile-filter-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .collection-card {
+    min-height: 13rem;
   }
 }

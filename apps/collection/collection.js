@@ -16,7 +16,6 @@ const movieSearch = byId("movieSearch");
 const movieFormatFilter = byId("movieFormatFilter");
 const movieCollectionFilter = byId("movieCollectionFilter");
 const movieRatingFilter = byId("movieRatingFilter");
-const movieSort = byId("movieSort");
 
 const gameGroups = byId("gameGroups");
 const gameDetail = byId("gameDetail");
@@ -24,10 +23,20 @@ const gameEmptyState = byId("gameEmptyState");
 const gameSearch = byId("gameSearch");
 const gamePlatformFilter = byId("gamePlatformFilter");
 const gameGenreFilter = byId("gameGenreFilter");
-const gameSort = byId("gameSort");
 const allGamesViewButton = byId("allGamesViewButton");
 const platformGamesViewButton = byId("platformGamesViewButton");
 
+const allMoviesViewButton = byId("allMoviesViewButton");
+const movieCollectionsViewButton = byId("movieCollectionsViewButton");
+const movieCollectionGrid = byId("movieCollectionGrid");
+const collectionEmptyState = byId("collectionEmptyState");
+
+const movieFiltersToggle = byId("movieFiltersToggle");
+const gameFiltersToggle = byId("gameFiltersToggle");
+const movieFilterOptions = byId("movieFilterOptions");
+const gameFilterOptions = byId("gameFilterOptions");
+
+let movieViewMode = "all";
 let gameViewMode = "all";
 
 const platformOrder = [
@@ -88,22 +97,6 @@ function compareTitles(a, b) {
   return titleValue(a).localeCompare(titleValue(b), undefined, { numeric: true, sensitivity: "base" });
 }
 
-function releaseYear(item, field = "year") {
-  const match = String(item[field] || "").match(/\d{4}/);
-  return match ? Number(match[0]) : 0;
-}
-
-function sortItems(items, mode, yearField) {
-  const sorted = items.slice();
-  if (mode === "za") return sorted.sort((a, b) => compareTitles(b, a));
-  if (mode === "newest") return sorted.sort((a, b) => releaseYear(b, yearField) - releaseYear(a, yearField) || compareTitles(a, b));
-  if (mode === "oldest") return sorted.sort((a, b) => {
-    const ay = releaseYear(a, yearField) || 9999;
-    const by = releaseYear(b, yearField) || 9999;
-    return ay - by || compareTitles(a, b);
-  });
-  return sorted.sort(compareTitles);
-}
 
 function getMovieFormat(movie) {
   const source = normalizeText([movie.format, movie.media, movie.edition].filter(Boolean).join(" "));
@@ -173,7 +166,7 @@ function getFilteredMovies() {
       (!rating || movie.rating === rating);
   });
 
-  return sortItems(filtered, movieSort.value, "year");
+  return filtered.sort(compareTitles);
 }
 
 function getFilteredGames() {
@@ -187,7 +180,7 @@ function getFilteredGames() {
       (!genre || valueList(game.genre).includes(genre));
   });
 
-  return sortItems(filtered, gameSort.value, "release");
+  return filtered.sort(compareTitles);
 }
 
 
@@ -216,21 +209,6 @@ function setDetailViewMode(isDetail) {
   document.body.classList.toggle("detail-view-active", isDetail);
 }
 
-function syncMovieSort(value, source) {
-  movieSort.value = value;
-  movieSortMobile.value = value;
-  if (source !== "render") {
-    renderMovies();
-  }
-}
-
-function syncGameSort(value, source) {
-  gameSort.value = value;
-  gameSortMobile.value = value;
-  if (source !== "render") {
-    renderGames();
-  }
-}
 
 function setActiveLibraryTab(activeLibrary) {
   byId("movieTabButton").classList.toggle("active", activeLibrary === "movies");
@@ -274,13 +252,98 @@ function createMovieCard(movie) {
   return card;
 }
 
+function collectionGroups() {
+  const query = normalizeText(movieSearch.value);
+  const groups = new Map();
+
+  getCollectionMovies().forEach(movie => {
+    const name = String(movie.collection || movie.title || "Uncategorized").trim();
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(movie);
+  });
+
+  return [...groups.entries()]
+    .filter(([name, movies]) => {
+      if (!query) return true;
+      return normalizeText(name).includes(query) ||
+        movies.some(movie => movieSearchText(movie).includes(query));
+    })
+    .sort(([a], [b]) => a.localeCompare(b, undefined, {
+      sensitivity: "base",
+      numeric: true
+    }));
+}
+
+function createCollectionCard(name, movies) {
+  const card = document.createElement("button");
+  const representative = movies[0] || {};
+  const poster = escapeHtml(assetPath(representative.poster));
+  const safeName = escapeHtml(name);
+
+  card.className = "collection-card";
+  card.type = "button";
+  card.innerHTML = `
+    ${poster ? `<img class="collection-card-image" src="${poster}" alt="" loading="lazy">` : ""}
+    <span class="collection-card-overlay" aria-hidden="true"></span>
+    <span class="collection-card-copy">
+      <strong class="collection-card-title">${safeName}</strong>
+      <span class="collection-card-count">
+        ${movies.length} ${movies.length === 1 ? "Movie" : "Movies"}
+      </span>
+    </span>`;
+
+  card.addEventListener("click", () => {
+    movieViewMode = "all";
+    movieCollectionFilter.value = name;
+    setMovieViewMode("all");
+  });
+
+  return card;
+}
+
 function renderMovies() {
-  movieSortMobile.value = movieSort.value;
   updateFilterCounts();
+
+  const showingCollections = movieViewMode === "collections";
+  movieLibraryView.classList.toggle("collection-mode", showingCollections);
+  movieGrid.hidden = showingCollections;
+  movieCollectionGrid.hidden = !showingCollections;
+  emptyState.hidden = true;
+  collectionEmptyState.hidden = true;
+
+  if (showingCollections) {
+    const groups = collectionGroups();
+    movieCollectionGrid.innerHTML = "";
+    groups.forEach(([name, movies]) => {
+      movieCollectionGrid.appendChild(createCollectionCard(name, movies));
+    });
+    collectionEmptyState.hidden = groups.length !== 0;
+    return;
+  }
+
   const movies = getFilteredMovies();
   movieGrid.innerHTML = "";
   movies.forEach(movie => movieGrid.appendChild(createMovieCard(movie)));
   emptyState.hidden = movies.length !== 0;
+}
+
+function setMovieViewMode(mode) {
+  movieViewMode = mode;
+  const allActive = mode === "all";
+
+  allMoviesViewButton.classList.toggle("active", allActive);
+  movieCollectionsViewButton.classList.toggle("active", !allActive);
+  allMoviesViewButton.setAttribute("aria-current", allActive ? "page" : "false");
+  movieCollectionsViewButton.setAttribute(
+    "aria-current",
+    allActive ? "false" : "page"
+  );
+
+  movieSearch.placeholder = allActive
+    ? "Search by title..."
+    : "Search collections...";
+
+  renderMovies();
 }
 
 function createGameCard(game) {
@@ -328,7 +391,7 @@ function renderPlatformGames(games) {
   }, {});
 
   sortPlatforms(Object.keys(grouped)).forEach(platform => {
-    const platformGames = sortItems(grouped[platform], gameSort.value, "release");
+    const platformGames = grouped[platform].slice().sort(compareTitles);
     const section = document.createElement("section");
     section.className = "game-platform-section collapsed";
     section.innerHTML = `
@@ -356,7 +419,6 @@ function renderPlatformGames(games) {
 }
 
 function renderGames() {
-  gameSortMobile.value = gameSort.value;
   updateFilterCounts();
   const games = getFilteredGames();
   gameGroups.innerHTML = "";
@@ -413,16 +475,54 @@ function showGameDetail(game) {
 }
 
 function clearMovieFilters() {
-  movieSearch.value = ""; movieFormatFilter.value = ""; movieCollectionFilter.value = "";
-  movieRatingFilter.value = ""; movieSort.value = "az"; renderMovies();
+  movieSearch.value = "";
+  movieFormatFilter.value = "";
+  movieCollectionFilter.value = "";
+  movieRatingFilter.value = "";
+  movieFilterOptions.classList.remove("open");
+  movieFiltersToggle.setAttribute("aria-expanded", "false");
+  renderMovies();
 }
 function clearGameFilters() {
-  gameSearch.value = ""; gamePlatformFilter.value = ""; gameGenreFilter.value = "";
-  gameSort.value = "az"; renderGames();
+  gameSearch.value = "";
+  gamePlatformFilter.value = "";
+  gameGenreFilter.value = "";
+  gameFilterOptions.classList.remove("open");
+  gameFiltersToggle.setAttribute("aria-expanded", "false");
+  renderGames();
 }
 
-[movieSearch, movieFormatFilter, movieCollectionFilter, movieRatingFilter, movieSort].forEach(control => control.addEventListener(control === movieSearch ? "input" : "change", renderMovies));
-[gameSearch, gamePlatformFilter, gameGenreFilter, gameSort].forEach(control => control.addEventListener(control === gameSearch ? "input" : "change", renderGames));
+[movieSearch, movieFormatFilter, movieCollectionFilter, movieRatingFilter]
+  .forEach(control => {
+    control.addEventListener(
+      control === movieSearch ? "input" : "change",
+      renderMovies
+    );
+  });
+
+[gameSearch, gamePlatformFilter, gameGenreFilter]
+  .forEach(control => {
+    control.addEventListener(
+      control === gameSearch ? "input" : "change",
+      renderGames
+    );
+  });
+
+movieFiltersToggle.addEventListener("click", () => {
+  toggleFilterPanel(movieFiltersToggle, movieFilterOptions);
+});
+
+gameFiltersToggle.addEventListener("click", () => {
+  toggleFilterPanel(gameFiltersToggle, gameFilterOptions);
+});
+
+allMoviesViewButton.addEventListener("click", () => {
+  setMovieViewMode("all");
+});
+
+movieCollectionsViewButton.addEventListener("click", () => {
+  setMovieViewMode("collections");
+});
 
 byId("clearMovieFiltersButton").addEventListener("click", clearMovieFilters);
 byId("clearGameFiltersButton").addEventListener("click", clearGameFilters);
