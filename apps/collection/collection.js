@@ -205,8 +205,10 @@ function toggleFilterPanel(button, panel) {
   button.setAttribute("aria-expanded", String(isOpen));
 }
 
-function setDetailViewMode(isDetail) {
-  document.body.classList.toggle("detail-view-active", isDetail);
+function setPageViewMode(targetView) {
+  const isHomeView = targetView === homeView;
+  document.body.classList.toggle("home-view-active", isHomeView);
+  document.body.classList.toggle("detail-view-active", isDetailView);
 }
 
 
@@ -216,11 +218,7 @@ function setActiveLibraryTab(activeLibrary) {
 }
 
 function showView(targetView, activeLibrary = "") {
-  const isDetailView =
-    targetView === movieDetailView ||
-    targetView === gameDetailView;
-
-  setDetailViewMode(isDetailView);
+  setPageViewMode(targetView);
   views.forEach(view => view.classList.remove("active"));
   targetView.classList.add("active");
   byId("pageTitle").textContent = "Collection";

@@ -1237,3 +1237,13 @@ button {
     min-height: 13rem;
   }
 }
+
+
+/* Step 8: the Home view uses its own library cards, so hide the tab bar. */
+.home-view-active .library-nav {
+  display: none;
+}
+
+.home-view-active main {
+  padding-top: 0.75rem;
+}
