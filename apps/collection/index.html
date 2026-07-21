@@ -8,7 +8,24 @@
     content="width=device-width, initial-scale=1"
   >
 
+  <meta
+    name="theme-color"
+    content="#070707"
+  >
+
   <title>JFT Collection</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="./icon-192.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="./icon-192.png"
+  >
 
   <link
     rel="stylesheet"
@@ -19,22 +36,39 @@
 <body>
   <div id="app" class="collection-app">
     <header class="collection-header">
-      <div class="header-copy">
-        <p class="eyebrow">
-          Jockisch Family Theater
-        </p>
+      <button
+        id="homeButton"
+        class="brand-button"
+        type="button"
+        aria-label="Return to collection home"
+      >
+        <img
+          src="./icon-192.png"
+          alt=""
+          class="brand-icon"
+        >
 
-        <h1>
-          My Collection
-        </h1>
-      </div>
+        <span class="header-copy">
+          <span class="eyebrow">
+            Jockisch Family Theater
+          </span>
 
-      <div class="library-count">
-        <span id="movieCount">
+          <span id="pageTitle" class="page-title">
+            My Collection
+          </span>
+        </span>
+      </button>
+
+      <div
+        id="libraryCount"
+        class="library-count"
+        hidden
+      >
+        <span id="itemCount">
           0
         </span>
 
-        <span>
+        <span id="itemCountLabel">
           Movies
         </span>
       </div>
@@ -42,10 +76,108 @@
 
     <main>
       <section
-        id="libraryView"
+        id="homeView"
         class="view active"
+        aria-label="Collection Home"
+      >
+        <div class="home-intro">
+          <img
+            src="./icon-512.png"
+            alt="Jockisch Family Theater"
+            class="home-logo"
+          >
+
+          <div>
+            <p class="eyebrow">
+              Browse the collection
+            </p>
+
+            <h1>
+              Choose a Library
+            </h1>
+
+            <p class="home-description">
+              Browse movies by title or collection, or open the game library by console.
+            </p>
+          </div>
+        </div>
+
+        <div class="library-choice-grid">
+          <button
+            id="openMoviesButton"
+            class="library-choice"
+            type="button"
+          >
+            <span class="library-choice-icon" aria-hidden="true">
+              🎬
+            </span>
+
+            <span class="library-choice-copy">
+              <strong>
+                Movies
+              </strong>
+
+              <span>
+                Browse the movie collection
+              </span>
+            </span>
+
+            <span class="library-choice-arrow" aria-hidden="true">
+              →
+            </span>
+          </button>
+
+          <button
+            id="openGamesButton"
+            class="library-choice"
+            type="button"
+          >
+            <span class="library-choice-icon" aria-hidden="true">
+              🎮
+            </span>
+
+            <span class="library-choice-copy">
+              <strong>
+                Games
+              </strong>
+
+              <span>
+                Game library coming next
+              </span>
+            </span>
+
+            <span class="library-choice-arrow" aria-hidden="true">
+              →
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section
+        id="movieLibraryView"
+        class="view"
         aria-label="Movie Library"
       >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">
+              Movie Library
+            </p>
+
+            <h1>
+              Movies
+            </h1>
+          </div>
+
+          <button
+            id="movieHomeButton"
+            class="secondary-button"
+            type="button"
+          >
+            ← Libraries
+          </button>
+        </div>
+
         <div class="library-tools">
           <label
             class="search-field"
@@ -94,11 +226,51 @@
       </section>
 
       <section
-        id="detailView"
+        id="movieDetailView"
         class="view"
         aria-label="Movie Details"
       >
         <div id="movieDetail"></div>
+      </section>
+
+      <section
+        id="gameLibraryView"
+        class="view"
+        aria-label="Game Library"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">
+              Game Library
+            </p>
+
+            <h1>
+              Games
+            </h1>
+          </div>
+
+          <button
+            id="gameHomeButton"
+            class="secondary-button"
+            type="button"
+          >
+            ← Libraries
+          </button>
+        </div>
+
+        <div class="coming-soon">
+          <span aria-hidden="true">
+            🎮
+          </span>
+
+          <h2>
+            Game Library Next
+          </h2>
+
+          <p>
+            This section is ready for the console-grouped game library in the next step.
+          </p>
+        </div>
       </section>
     </main>
   </div>

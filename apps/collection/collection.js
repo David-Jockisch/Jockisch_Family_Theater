@@ -1,15 +1,25 @@
-const libraryView = document.getElementById("libraryView");
-const detailView = document.getElementById("detailView");
+const homeView = document.getElementById("homeView");
+const movieLibraryView = document.getElementById("movieLibraryView");
+const movieDetailView = document.getElementById("movieDetailView");
+const gameLibraryView = document.getElementById("gameLibraryView");
+
+const homeButton = document.getElementById("homeButton");
+const movieHomeButton = document.getElementById("movieHomeButton");
+const gameHomeButton = document.getElementById("gameHomeButton");
+
+const openMoviesButton = document.getElementById("openMoviesButton");
+const openGamesButton = document.getElementById("openGamesButton");
+
+const pageTitle = document.getElementById("pageTitle");
+const libraryCount = document.getElementById("libraryCount");
+const itemCount = document.getElementById("itemCount");
+const itemCountLabel = document.getElementById("itemCountLabel");
 
 const movieGrid = document.getElementById("movieGrid");
 const movieDetail = document.getElementById("movieDetail");
-const movieCount = document.getElementById("movieCount");
 
 const movieSearch = document.getElementById("movieSearch");
-const clearSearchButton = document.getElementById(
-  "clearSearchButton"
-);
-
+const clearSearchButton = document.getElementById("clearSearchButton");
 const emptyState = document.getElementById("emptyState");
 
 let currentMovies = [];
@@ -47,6 +57,15 @@ function assetPath(path) {
     : `/${path}`;
 
   return `${siteBasePath}${normalizedPath}`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function normalizeText(value) {
@@ -98,31 +117,75 @@ function getSearchText(movie) {
 }
 
 function getCollectionMovies() {
-  if (!Array.isArray(movieLibrary)) {
+  if (!Array.isArray(window.movieLibrary)) {
     return [];
   }
 
-  return movieLibrary
+  return window.movieLibrary
     .filter(movie => {
       return movie.type !== "games-library";
     })
     .slice()
     .sort((a, b) => {
-      return a.title.localeCompare(b.title);
+      return String(a.title || "").localeCompare(
+        String(b.title || ""),
+        undefined,
+        {
+          numeric: true,
+          sensitivity: "base"
+        }
+      );
     });
 }
 
-function showView(targetView) {
-  [libraryView, detailView].forEach(view => {
+function showView(targetView, title, countOptions = null) {
+  [
+    homeView,
+    movieLibraryView,
+    movieDetailView,
+    gameLibraryView
+  ].forEach(view => {
     view.classList.remove("active");
   });
 
   targetView.classList.add("active");
+  pageTitle.textContent = title;
+
+  if (countOptions) {
+    libraryCount.hidden = false;
+    itemCount.textContent = String(countOptions.count);
+    itemCountLabel.textContent = countOptions.label;
+  } else {
+    libraryCount.hidden = true;
+  }
 
   window.scrollTo({
     top: 0,
     behavior: "instant"
   });
+}
+
+function showHome() {
+  showView(homeView, "My Collection");
+}
+
+function showMovieLibrary() {
+  const movies = filterMovies(movieSearch.value);
+
+  renderMovies(movies);
+
+  showView(
+    movieLibraryView,
+    "Movies",
+    {
+      count: movies.length,
+      label: movies.length === 1 ? "Movie" : "Movies"
+    }
+  );
+}
+
+function showGameLibrary() {
+  showView(gameLibraryView, "Games");
 }
 
 function createMovieCard(movie) {
@@ -132,11 +195,15 @@ function createMovieCard(movie) {
   card.className = "movie-card";
   card.type = "button";
 
+  const title = escapeHtml(movie.title || "Untitled");
+  const poster = escapeHtml(assetPath(movie.poster));
+  const year = escapeHtml(movie.year || "Year unknown");
+
   card.innerHTML = `
     <div class="movie-poster-shell">
       <img
-        src="${assetPath(movie.poster)}"
-        alt="${movie.title}"
+        src="${poster}"
+        alt="${title}"
         loading="lazy"
       >
 
@@ -144,7 +211,7 @@ function createMovieCard(movie) {
         format
           ? `
             <span class="format-badge">
-              ${format}
+              ${escapeHtml(format)}
             </span>
           `
           : ""
@@ -153,11 +220,11 @@ function createMovieCard(movie) {
 
     <div class="movie-card-copy">
       <h2 class="movie-card-title">
-        ${movie.title}
+        ${title}
       </h2>
 
       <p class="movie-card-meta">
-        ${movie.year || "Year unknown"}
+        ${year}
       </p>
     </div>
   `;
@@ -171,7 +238,6 @@ function createMovieCard(movie) {
 
 function renderMovies(movies) {
   currentMovies = movies;
-
   movieGrid.innerHTML = "";
 
   movies.forEach(movie => {
@@ -180,8 +246,13 @@ function renderMovies(movies) {
     );
   });
 
-  movieCount.textContent = String(movies.length);
   emptyState.hidden = movies.length !== 0;
+
+  if (movieLibraryView.classList.contains("active")) {
+    itemCount.textContent = String(movies.length);
+    itemCountLabel.textContent =
+      movies.length === 1 ? "Movie" : "Movies";
+  }
 }
 
 function filterMovies(query) {
@@ -208,87 +279,68 @@ function runSearch() {
 function showMovieDetail(movie) {
   const format = getMovieFormat(movie);
 
+  const title = escapeHtml(movie.title || "Untitled");
+  const poster = escapeHtml(assetPath(movie.poster));
+  const edition = escapeHtml(movie.edition || "");
+  const year = escapeHtml(movie.year || "");
+  const rating = escapeHtml(movie.rating || "");
+  const runtime = escapeHtml(movie.runtime || "");
+  const collection = escapeHtml(movie.collection || "");
+  const franchise = escapeHtml(movie.franchise || "");
+
   movieDetail.innerHTML = `
     <article
       class="detail-card"
-      style="
-        --detail-bg:
-        url('${assetPath(movie.poster)}')
-      "
+      style="--detail-bg: url('${poster}')"
     >
       <div class="detail-backdrop"></div>
 
       <div class="detail-content">
         <img
           class="detail-poster"
-          src="${assetPath(movie.poster)}"
-          alt="${movie.title}"
+          src="${poster}"
+          alt="${title}"
         >
 
         <div class="detail-copy">
           <h2>
-            ${movie.title}
+            ${title}
           </h2>
 
           ${
-            movie.edition
+            edition
               ? `
                 <p class="detail-edition">
-                  ${movie.edition}
+                  ${edition}
                 </p>
               `
               : ""
           }
 
           <div class="detail-meta">
-            ${
-              movie.year
-                ? `<span>${movie.year}</span>`
-                : ""
-            }
-
-            ${
-              movie.rating
-                ? `<span>${movie.rating}</span>`
-                : ""
-            }
-
-            ${
-              movie.runtime
-                ? `<span>${movie.runtime}</span>`
-                : ""
-            }
-
-            ${
-              format
-                ? `<span>${format}</span>`
-                : ""
-            }
+            ${year ? `<span>${year}</span>` : ""}
+            ${rating ? `<span>${rating}</span>` : ""}
+            ${runtime ? `<span>${runtime}</span>` : ""}
+            ${format ? `<span>${escapeHtml(format)}</span>` : ""}
           </div>
 
           ${
-            movie.collection
+            collection
               ? `
                 <section class="detail-section">
                   <h3>Collection</h3>
-
-                  <p>
-                    ${movie.collection}
-                  </p>
+                  <p>${collection}</p>
                 </section>
               `
               : ""
           }
 
           ${
-            movie.franchise
+            franchise
               ? `
                 <section class="detail-section">
                   <h3>Franchise</h3>
-
-                  <p>
-                    ${movie.franchise}
-                  </p>
+                  <p>${franchise}</p>
                 </section>
               `
               : ""
@@ -301,7 +353,7 @@ function showMovieDetail(movie) {
             class="back-button"
             type="button"
           >
-            ← Back to Collection
+            ← Back to Movies
           </button>
         </div>
       </div>
@@ -310,11 +362,9 @@ function showMovieDetail(movie) {
 
   document
     .getElementById("detailBackButton")
-    .addEventListener("click", () => {
-      showView(libraryView);
-    });
+    .addEventListener("click", showMovieLibrary);
 
-  showView(detailView);
+  showView(movieDetailView, movie.title || "Movie Details");
 }
 
 movieSearch.addEventListener("input", runSearch);
@@ -325,4 +375,12 @@ clearSearchButton.addEventListener("click", () => {
   movieSearch.focus();
 });
 
+homeButton.addEventListener("click", showHome);
+movieHomeButton.addEventListener("click", showHome);
+gameHomeButton.addEventListener("click", showHome);
+
+openMoviesButton.addEventListener("click", showMovieLibrary);
+openGamesButton.addEventListener("click", showGameLibrary);
+
 renderMovies(getCollectionMovies());
+showHome();

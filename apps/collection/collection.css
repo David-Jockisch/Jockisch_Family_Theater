@@ -58,14 +58,34 @@ button {
 
 .collection-header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 0 1.5rem;
+  padding: 0.75rem 0 1.25rem;
   border-bottom: 1px solid var(--border);
 }
 
+.brand-button {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 0.85rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.brand-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  border-radius: 0.9rem;
+}
+
 .header-copy {
+  display: grid;
   min-width: 0;
 }
 
@@ -78,15 +98,23 @@ button {
   text-transform: uppercase;
 }
 
-.collection-header h1 {
+.page-title,
+.section-heading h1,
+.home-intro h1 {
   margin: 0;
   font-family:
     Georgia,
     "Times New Roman",
     serif;
-  font-size: clamp(2rem, 8vw, 4.5rem);
   font-weight: 500;
-  line-height: 0.95;
+}
+
+.page-title {
+  overflow: hidden;
+  font-size: clamp(1.55rem, 5vw, 2.6rem);
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .library-count {
@@ -123,6 +151,106 @@ button {
 
 .view.active {
   display: block;
+}
+
+.home-intro {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.home-logo {
+  width: min(65vw, 15rem);
+  margin: 0 auto;
+  border-radius: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.home-intro h1,
+.section-heading h1 {
+  font-size: clamp(2.4rem, 9vw, 5rem);
+  line-height: 0.95;
+}
+
+.home-description {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.library-choice-grid {
+  display: grid;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.library-choice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 8rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(184, 115, 51, 0.12),
+      transparent 45%
+    ),
+    var(--panel-bg);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.library-choice:hover,
+.library-choice:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(212, 154, 98, 0.55);
+}
+
+.library-choice-icon {
+  font-size: 2.2rem;
+}
+
+.library-choice-copy {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.library-choice-copy strong {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.library-choice-copy span {
+  color: var(--text-muted);
+}
+
+.library-choice-arrow {
+  color: var(--accent-light);
+  font-size: 1.75rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 0 0.5rem;
 }
 
 .library-tools {
@@ -276,7 +404,8 @@ button {
   backdrop-filter: blur(8px);
 }
 
-.empty-state {
+.empty-state,
+.coming-soon {
   margin: 2rem 0;
   padding: 2rem;
   border: 1px dashed var(--border);
@@ -285,13 +414,21 @@ button {
   text-align: center;
 }
 
-.empty-state h2 {
+.empty-state h2,
+.coming-soon h2 {
   margin-top: 0;
 }
 
-.empty-state p {
+.empty-state p,
+.coming-soon p {
   margin-bottom: 0;
   color: var(--text-muted);
+}
+
+.coming-soon > span {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 3rem;
 }
 
 .detail-card {
@@ -409,6 +546,19 @@ button {
     padding: 2rem;
   }
 
+  .home-intro {
+    grid-template-columns: minmax(12rem, 18rem) 1fr;
+    padding: 3rem 0;
+  }
+
+  .home-logo {
+    width: 100%;
+  }
+
+  .library-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .movie-grid {
     grid-template-columns:
       repeat(
@@ -435,5 +585,30 @@ button {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+  }
+}
+
+@media (max-width: 36rem) {
+  .collection-header {
+    align-items: flex-start;
+  }
+
+  .brand-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .library-count {
+    min-width: 4.75rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  .section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .section-heading .secondary-button {
+    width: 100%;
   }
 }
