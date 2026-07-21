@@ -117,9 +117,14 @@ button {
   white-space: nowrap;
 }
 
+.library-counts {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.65rem;
+}
+
 .library-count {
   display: grid;
-  flex: 0 0 auto;
   min-width: 5.5rem;
   padding: 0.85rem 1rem;
   border: 1px solid var(--border);
@@ -128,6 +133,14 @@ button {
   text-align: center;
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
+  color: inherit;
+  cursor: pointer;
+}
+
+.library-count:hover,
+.library-count:focus-visible {
+  border-color: rgba(212, 154, 98, 0.55);
+  background: #181818;
 }
 
 .library-count span:first-child {
@@ -598,9 +611,13 @@ button {
     height: 2.75rem;
   }
 
+  .library-counts {
+    gap: 0.4rem;
+  }
+
   .library-count {
-    min-width: 4.75rem;
-    padding: 0.7rem 0.75rem;
+    min-width: 4.35rem;
+    padding: 0.65rem 0.55rem;
   }
 
   .section-heading {
@@ -611,4 +628,399 @@ button {
   .section-heading .secondary-button {
     width: 100%;
   }
+}
+
+
+.game-groups {
+  display: grid;
+  gap: 2rem;
+  padding: 0.25rem 0 2rem;
+}
+
+.game-platform-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.game-platform-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.game-platform-heading h2 {
+  margin: 0;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 500;
+}
+
+.game-platform-heading span {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(min(9.5rem, 42vw), 1fr)
+    );
+  gap: 1rem;
+}
+
+.game-card {
+  display: grid;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--panel-bg);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.game-card:hover,
+.game-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(212, 154, 98, 0.55);
+}
+
+.game-poster-shell {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: #1b1b1b;
+}
+
+.game-poster-shell img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.game-card-copy {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem;
+}
+
+.game-card-title {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.game-card-meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.platform-badge {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.76);
+  color: var(--text-main);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.game-detail-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.75rem 1rem;
+  margin: 1.25rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.game-detail-list dt {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-detail-list dd {
+  margin: 0;
+  line-height: 1.45;
+}
+
+@media (min-width: 48rem) {
+  .game-grid {
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(11rem, 1fr)
+      );
+    gap: 1.25rem;
+  }
+}
+
+
+/* Step 4: simplified collection navigation */
+
+.library-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.library-tab {
+  min-height: 2.65rem;
+  padding: 0 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.library-tab:hover,
+.library-tab:focus-visible {
+  border-color: var(--border);
+  background: var(--panel-bg);
+  color: var(--text-main);
+}
+
+.library-tab.active {
+  border-color: rgba(212, 154, 98, 0.45);
+  background: rgba(184, 115, 51, 0.14);
+  color: var(--accent-light);
+}
+
+.library-tools {
+  top: 0;
+  padding: 1rem 0 0.9rem;
+}
+
+.movie-grid,
+.game-groups {
+  padding-top: 0.35rem;
+}
+
+@media (max-width: 36rem) {
+  .library-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .library-tab {
+    width: 100%;
+  }
+}
+
+
+/* Step 5: filters and game browsing modes */
+
+.library-subnav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 0 0;
+}
+
+.subview-tab {
+  min-height: 2.6rem;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--panel-bg);
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.subview-tab:hover:not(:disabled),
+.subview-tab:focus-visible:not(:disabled) {
+  color: var(--text-main);
+  border-color: rgba(212, 154, 98, 0.45);
+}
+
+.subview-tab.active {
+  color: var(--accent-light);
+  border-color: rgba(212, 154, 98, 0.45);
+  background: rgba(184, 115, 51, 0.14);
+}
+
+.subview-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.filter-panel {
+  display: grid;
+  grid-template-columns:
+    minmax(15rem, 2fr)
+    repeat(4, minmax(9rem, 1fr))
+    auto;
+  gap: 0.75rem;
+  align-items: end;
+  padding: 1rem 0;
+}
+
+.filter-field,
+.search-field {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.filter-field > span,
+.search-label {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.filter-field select,
+.search-field input {
+  width: 100%;
+  min-height: 2.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--panel-bg);
+  color: var(--text-main);
+  font: inherit;
+  padding: 0 0.8rem;
+}
+
+.filter-field select:focus,
+.search-field input:focus {
+  outline: 2px solid rgba(212, 154, 98, 0.35);
+  outline-offset: 1px;
+  border-color: rgba(212, 154, 98, 0.6);
+}
+
+.clear-filter-button {
+  min-height: 2.85rem;
+  white-space: nowrap;
+}
+
+.all-games-grid {
+  padding-top: 0.35rem;
+}
+
+.game-platform-section {
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.015);
+  overflow: hidden;
+}
+
+.game-platform-section + .game-platform-section {
+  margin-top: 0.7rem;
+}
+
+.game-platform-heading {
+  width: 100%;
+  min-height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+}
+
+.game-platform-heading:hover,
+.game-platform-heading:focus-visible {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.platform-heading-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.collapse-chevron {
+  width: 1rem;
+  color: var(--accent-light);
+}
+
+.platform-game-grid {
+  padding: 0.25rem 1rem 1rem;
+}
+
+@media (max-width: 72rem) {
+  .filter-panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .search-field {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 44rem) {
+  .filter-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .search-field {
+    grid-column: 1 / -1;
+  }
+
+  .clear-filter-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 30rem) {
+  .filter-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .search-field {
+    grid-column: auto;
+  }
+
+  .library-subnav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* Ensure collapsed platform grids actually stay hidden.
+   This must come after the general .game-grid display rule. */
+.platform-game-grid[hidden] {
+  display: none;
 }

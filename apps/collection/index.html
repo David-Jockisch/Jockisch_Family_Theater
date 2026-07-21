@@ -13,18 +13,48 @@
     content="#070707"
   >
 
+  <meta
+    name="description"
+    content="Browse the Jockisch Family Theater movie and game collection."
+  >
+
+  <meta
+    name="application-name"
+    content="JFT Collection"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="JFT Collection"
+  >
+
   <title>JFT Collection</title>
+
+  <link
+    rel="manifest"
+    href="./manifest.webmanifest"
+  >
 
   <link
     rel="icon"
     type="image/png"
     sizes="192x192"
-    href="./icon-192.png"
+    href="./icons/icon-192.png"
   >
 
   <link
     rel="apple-touch-icon"
-    href="./icon-192.png"
+    href="./icons/icon-192.png"
   >
 
   <link
@@ -43,7 +73,7 @@
         aria-label="Return to collection home"
       >
         <img
-          src="./icon-192.png"
+          src="./icons/icon-192.png"
           alt=""
           class="brand-icon"
         >
@@ -54,25 +84,55 @@
           </span>
 
           <span id="pageTitle" class="page-title">
-            My Collection
+            Collection
           </span>
         </span>
       </button>
 
-      <div
-        id="libraryCount"
-        class="library-count"
-        hidden
-      >
-        <span id="itemCount">
-          0
-        </span>
+      <div class="library-counts" aria-label="Collection totals">
+        <button
+          id="movieCountButton"
+          class="library-count"
+          type="button"
+          aria-label="Open movie library"
+        >
+          <span id="movieCount">0</span>
+          <span>Movies</span>
+        </button>
 
-        <span id="itemCountLabel">
-          Movies
-        </span>
+        <button
+          id="gameCountButton"
+          class="library-count"
+          type="button"
+          aria-label="Open game library"
+        >
+          <span id="gameCount">0</span>
+          <span>Games</span>
+        </button>
       </div>
     </header>
+
+    <nav
+      id="libraryNav"
+      class="library-nav"
+      aria-label="Collection libraries"
+    >
+      <button
+        id="movieTabButton"
+        class="library-tab"
+        type="button"
+      >
+        Movies
+      </button>
+
+      <button
+        id="gameTabButton"
+        class="library-tab"
+        type="button"
+      >
+        Games
+      </button>
+    </nav>
 
     <main>
       <section
@@ -82,7 +142,7 @@
       >
         <div class="home-intro">
           <img
-            src="./icon-512.png"
+            src="./icons/icon-512.png"
             alt="Jockisch Family Theater"
             class="home-logo"
           >
@@ -113,13 +173,8 @@
             </span>
 
             <span class="library-choice-copy">
-              <strong>
-                Movies
-              </strong>
-
-              <span>
-                Browse the movie collection
-              </span>
+              <strong>Movies</strong>
+              <span>Browse the movie collection</span>
             </span>
 
             <span class="library-choice-arrow" aria-hidden="true">
@@ -137,13 +192,8 @@
             </span>
 
             <span class="library-choice-copy">
-              <strong>
-                Games
-              </strong>
-
-              <span>
-                Game library coming next
-              </span>
+              <strong>Games</strong>
+              <span>Browse games by console</span>
             </span>
 
             <span class="library-choice-arrow" aria-hidden="true">
@@ -158,71 +208,57 @@
         class="view"
         aria-label="Movie Library"
       >
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">
-              Movie Library
-            </p>
-
-            <h1>
-              Movies
-            </h1>
-          </div>
-
-          <button
-            id="movieHomeButton"
-            class="secondary-button"
-            type="button"
-          >
-            ← Libraries
+        <div class="library-subnav" aria-label="Movie views">
+          <button class="subview-tab active" type="button" aria-current="page">
+            All Movies
+          </button>
+          <button class="subview-tab" type="button" disabled title="Coming later">
+            Collections
           </button>
         </div>
 
-        <div class="library-tools">
-          <label
-            class="search-field"
-            for="movieSearch"
-          >
-            <span class="search-label">
-              Search Movies
-            </span>
-
-            <input
-              id="movieSearch"
-              type="search"
-              placeholder="Search by title..."
-              autocomplete="off"
-            >
+        <div class="filter-panel">
+          <label class="search-field" for="movieSearch">
+            <span class="search-label">Search Movies</span>
+            <input id="movieSearch" type="search" placeholder="Search by title..." autocomplete="off">
           </label>
 
-          <button
-            id="clearSearchButton"
-            class="secondary-button"
-            type="button"
-          >
-            Clear
+          <label class="filter-field" for="movieFormatFilter">
+            <span>Format</span>
+            <select id="movieFormatFilter"><option value="">All Formats</option></select>
+          </label>
+
+          <label class="filter-field" for="movieCollectionFilter">
+            <span>Collection</span>
+            <select id="movieCollectionFilter"><option value="">All Collections</option></select>
+          </label>
+
+          <label class="filter-field" for="movieRatingFilter">
+            <span>Rating</span>
+            <select id="movieRatingFilter"><option value="">All Ratings</option></select>
+          </label>
+
+          <label class="filter-field" for="movieSort">
+            <span>Sort</span>
+            <select id="movieSort">
+              <option value="az">A–Z</option>
+              <option value="za">Z–A</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+            </select>
+          </label>
+
+          <button id="clearMovieFiltersButton" class="secondary-button clear-filter-button" type="button">
+            Clear Filters
           </button>
         </div>
 
-        <div
-          id="emptyState"
-          class="empty-state"
-          hidden
-        >
-          <h2>
-            No movies found
-          </h2>
-
-          <p>
-            Try a different search.
-          </p>
+        <div id="emptyState" class="empty-state" hidden>
+          <h2>No movies found</h2>
+          <p>Try changing the search or filters.</p>
         </div>
 
-        <div
-          id="movieGrid"
-          class="movie-grid"
-          aria-live="polite"
-        ></div>
+        <div id="movieGrid" class="movie-grid" aria-live="polite"></div>
       </section>
 
       <section
@@ -238,44 +274,81 @@
         class="view"
         aria-label="Game Library"
       >
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">
-              Game Library
-            </p>
-
-            <h1>
-              Games
-            </h1>
-          </div>
+        <div class="library-subnav" role="tablist" aria-label="Game views">
+          <button
+            id="allGamesViewButton"
+            class="subview-tab active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+          >
+            All Games
+          </button>
 
           <button
-            id="gameHomeButton"
-            class="secondary-button"
+            id="platformGamesViewButton"
+            class="subview-tab"
             type="button"
+            role="tab"
+            aria-selected="false"
           >
-            ← Libraries
+            By Platform
           </button>
         </div>
 
-        <div class="coming-soon">
-          <span aria-hidden="true">
-            🎮
-          </span>
+        <div class="filter-panel">
+          <label class="search-field" for="gameSearch">
+            <span class="search-label">Search Games</span>
+            <input id="gameSearch" type="search" placeholder="Search by title..." autocomplete="off">
+          </label>
 
-          <h2>
-            Game Library Next
-          </h2>
+          <label class="filter-field" for="gamePlatformFilter">
+            <span>Platform</span>
+            <select id="gamePlatformFilter"><option value="">All Platforms</option></select>
+          </label>
 
-          <p>
-            This section is ready for the console-grouped game library in the next step.
-          </p>
+          <label class="filter-field" for="gameGenreFilter">
+            <span>Genre</span>
+            <select id="gameGenreFilter"><option value="">All Genres</option></select>
+          </label>
+
+          <label class="filter-field" for="gameSort">
+            <span>Sort</span>
+            <select id="gameSort">
+              <option value="az">A–Z</option>
+              <option value="za">Z–A</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+            </select>
+          </label>
+
+          <button id="clearGameFiltersButton" class="secondary-button clear-filter-button" type="button">
+            Clear Filters
+          </button>
         </div>
+
+        <div id="gameEmptyState" class="empty-state" hidden>
+          <h2>No games found</h2>
+          <p>Try changing the search or filters.</p>
+        </div>
+
+        <div id="gameGroups" class="game-groups" aria-live="polite"></div>
+      </section>
+
+      <section
+        id="gameDetailView"
+        class="view"
+        aria-label="Game Details"
+      >
+        <div id="gameDetail"></div>
       </section>
     </main>
   </div>
 
   <script src="../../library/movies/movie-library.js"></script>
-  <script src="./collection.js"></script>
+  <script
+    type="module"
+    src="./collection.js"
+  ></script>
 </body>
 </html>
