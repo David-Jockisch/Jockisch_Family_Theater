@@ -89,6 +89,18 @@
         </span>
       </button>
 
+
+      <button
+        id="refreshAppButton"
+        class="refresh-app-button"
+        type="button"
+        aria-label="Check for collection updates"
+        title="Refresh collection"
+      >
+        <span aria-hidden="true">↻</span>
+        <span class="refresh-app-label">Refresh</span>
+      </button>
+
       <div class="library-counts" aria-label="Collection totals">
         <button
           id="movieCountButton"
@@ -372,6 +384,14 @@
         <div id="gameDetail"></div>
       </section>
     </main>
+
+    <div
+      id="appUpdateStatus"
+      class="app-update-status"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
   </div>
 
   <script src="../../library/movies/movie-library.js"></script>

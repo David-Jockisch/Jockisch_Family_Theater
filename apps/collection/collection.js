@@ -547,13 +547,148 @@ renderGames();
 showHome();
 
 
-// Register the Collection PWA service worker after the page is fully loaded.
+// PWA update handling.
+//
+// The installed iPhone app checks for a newer service worker whenever it
+// launches or returns to the foreground. The Refresh button also clears the
+// app caches and reloads the latest files without removing the Home Screen app.
+const refreshAppButton = byId("refreshAppButton");
+const appUpdateStatus = byId("appUpdateStatus");
+
+let serviceWorkerRegistration = null;
+let updateReloadStarted = false;
+let updateStatusTimer = null;
+
+function showUpdateStatus(message, duration = 2400) {
+  if (!appUpdateStatus) return;
+
+  window.clearTimeout(updateStatusTimer);
+  appUpdateStatus.textContent = message;
+  appUpdateStatus.hidden = false;
+
+  if (duration > 0) {
+    updateStatusTimer = window.setTimeout(() => {
+      appUpdateStatus.hidden = true;
+    }, duration);
+  }
+}
+
+function setRefreshButtonBusy(isBusy) {
+  if (!refreshAppButton) return;
+
+  refreshAppButton.disabled = isBusy;
+  refreshAppButton.classList.toggle("refreshing", isBusy);
+  refreshAppButton.setAttribute("aria-busy", String(isBusy));
+}
+
+async function requestLatestServiceWorker() {
+  if (!("serviceWorker" in navigator)) return null;
+
+  serviceWorkerRegistration =
+    serviceWorkerRegistration ||
+    await navigator.serviceWorker.getRegistration("./");
+
+  if (serviceWorkerRegistration) {
+    await serviceWorkerRegistration.update();
+  }
+
+  return serviceWorkerRegistration;
+}
+
+async function refreshInstalledApp() {
+  setRefreshButtonBusy(true);
+  showUpdateStatus("Checking for collection updates…", 0);
+
+  try {
+    const registration = await requestLatestServiceWorker();
+
+    const worker =
+      registration?.waiting ||
+      registration?.installing ||
+      registration?.active ||
+      navigator.serviceWorker.controller;
+
+    if (worker) {
+      worker.postMessage({ type: "CLEAR_APP_CACHES" });
+    }
+
+    // Force the HTML document to be revalidated before reloading.
+    await fetch(window.location.href, {
+      cache: "reload",
+      credentials: "same-origin"
+    });
+
+    showUpdateStatus("Collection updated. Reloading…", 0);
+
+    window.setTimeout(() => {
+      window.location.reload();
+    }, 350);
+  } catch (error) {
+    console.warn("JFT Collection refresh failed:", error);
+    showUpdateStatus("Could not refresh. Check your connection and try again.");
+    setRefreshButtonBusy(false);
+  }
+}
+
+if (refreshAppButton) {
+  refreshAppButton.addEventListener("click", refreshInstalledApp);
+}
+
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("./service-worker.js")
-      .catch(error => {
-        console.warn("JFT Collection service worker registration failed:", error);
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (updateReloadStarted) return;
+    updateReloadStarted = true;
+    window.location.reload();
+  });
+
+  window.addEventListener("load", async () => {
+    try {
+      serviceWorkerRegistration = await navigator.serviceWorker.register(
+        "./service-worker.js",
+        { updateViaCache: "none" }
+      );
+
+      await serviceWorkerRegistration.update();
+
+      if (serviceWorkerRegistration.waiting) {
+        serviceWorkerRegistration.waiting.postMessage({
+          type: "SKIP_WAITING"
+        });
+      }
+
+      serviceWorkerRegistration.addEventListener("updatefound", () => {
+        const installingWorker = serviceWorkerRegistration.installing;
+        if (!installingWorker) return;
+
+        installingWorker.addEventListener("statechange", () => {
+          if (
+            installingWorker.state === "installed" &&
+            navigator.serviceWorker.controller
+          ) {
+            showUpdateStatus("A collection update is ready…", 0);
+            installingWorker.postMessage({ type: "SKIP_WAITING" });
+          }
+        });
       });
+    } catch (error) {
+      console.warn(
+        "JFT Collection service worker registration failed:",
+        error
+      );
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      requestLatestServiceWorker().catch(error => {
+        console.warn("JFT Collection update check failed:", error);
+      });
+    }
+  });
+
+  window.addEventListener("pageshow", () => {
+    requestLatestServiceWorker().catch(error => {
+      console.warn("JFT Collection update check failed:", error);
+    });
   });
 }
