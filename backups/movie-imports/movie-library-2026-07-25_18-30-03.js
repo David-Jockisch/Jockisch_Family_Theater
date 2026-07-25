@@ -320,23 +320,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Christmas Story
-  // ==================================================
-
-  {
-    id: "a-christmas-story",
-    collection: "Christmas Story",
-    franchise: "Christmas Story",
-    boothGroup: "Christmas Story",
-    title: "A Christmas Story",
-    edition: "Digital",
-    year: "1983",
-    rating: "PG",
-    runtime: "1hr 33min",
-    poster: "/assets/posters/movies/christmas-story/a-christmas-story.jpg"
-  },
-
-  // ==================================================
   // Daredevil
   // ==================================================
 
@@ -852,23 +835,6 @@ const movieLibrary = [,
     rating: "PG-13",
     runtime: "2hr 10min",
     poster: "/assets/posters/movies/marvel/thor-ragnarok.jpg"
-  },
-
-  // ==================================================
-  // National Lampoon's Vacation
-  // ==================================================
-
-  {
-    id: "national-lampoons-christmas-vacation",
-    collection: "National Lampoon's Vacation",
-    franchise: "National Lampoon's Vacation",
-    boothGroup: "National Lampoon's Vacation",
-    title: "National Lampoon's Christmas Vacation",
-    edition: "Digital",
-    year: "1989",
-    rating: "PG-13",
-    runtime: "1hr 37min",
-    poster: "/assets/posters/movies/national-lampoons-vacation/national-lampoons-christmas-vacation.jpg"
   },
 
   // ==================================================

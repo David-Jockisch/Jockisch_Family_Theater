@@ -320,23 +320,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Christmas Story
-  // ==================================================
-
-  {
-    id: "a-christmas-story",
-    collection: "Christmas Story",
-    franchise: "Christmas Story",
-    boothGroup: "Christmas Story",
-    title: "A Christmas Story",
-    edition: "Digital",
-    year: "1983",
-    rating: "PG",
-    runtime: "1hr 33min",
-    poster: "/assets/posters/movies/christmas-story/a-christmas-story.jpg"
-  },
-
-  // ==================================================
   // Daredevil
   // ==================================================
 
