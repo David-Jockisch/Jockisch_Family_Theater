@@ -56,25 +56,7 @@
 //  - X-Men
 // ==================================================
 
-const movieLibrary = [,
-
-  // ==================================================
-  // 1917
-  // ==================================================
-
-  {
-    id: "1917",
-    collection: "1917",
-    franchise: "",
-    boothGroup: "1917",
-    title: "1917",
-    edition: "4K",
-    year: "2019",
-    rating: "R",
-    runtime: "1hr 59min",
-    poster: "/assets/posters/movies/1917.jpg"
-  },
-
+const movieLibrary = [
   // ==================================================
   // Agent Carter
   // ==================================================
@@ -458,36 +440,6 @@ const movieLibrary = [,
     rating: "PG",
     runtime: "1hr 32min",
     poster: "/assets/posters/movies/marvel/fantastic-four-rise-of-the-silver-surfer.jpg"
-  },
-
-  // ==================================================
-  // Ghostbusters
-  // ==================================================
-
-  {
-    id: "ghostbusters",
-    collection: "Ghostbusters",
-    franchise: "Ghostbusters",
-    boothGroup: "Ghostbusters",
-    title: "Ghostbusters",
-    edition: "Blu Ray",
-    year: "1984",
-    rating: "PG",
-    runtime: "1hr 45min",
-    poster: "/assets/posters/movies/ghostbusters/ghostbusters.jpg"
-  },
-
-  {
-    id: "ghostbusters-ii",
-    collection: "Ghostbusters",
-    franchise: "Ghostbusters",
-    boothGroup: "Ghostbusters",
-    title: "Ghostbusters II",
-    edition: "Blu Ray",
-    year: "1989",
-    rating: "PG",
-    runtime: "1hr 48min",
-    poster: "/assets/posters/movies/ghostbusters/ghostbusters-ii.jpg"
   },
 
   // ==================================================
