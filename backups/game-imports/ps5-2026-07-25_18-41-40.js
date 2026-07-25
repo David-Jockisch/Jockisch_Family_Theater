@@ -456,23 +456,6 @@ const ps5Games = [
     ownership: ["disc"],
     poster: "/assets/posters/games/ps5/goat-simulator-3.jpg",
     theaterEnabled: true
-  },
-
-  {
-    id: "sackboy-a-big-adventure",
-    title: "Sackboy: A Big Adventure",
-    sortTitle: "Sackboy A Big Adventure",
-    platform: "ps5",
-    release: "2020",
-    publisher: "Sony Interactive Entertainment",
-    developer: "Sumo Digital",
-    genre: "Platform, Adventure",
-    players: "Unknown",
-    rating: "Unknown",
-    collection: "LittleBigPlanet",
-    ownership: ["digital"],
-    poster: "/assets/posters/games/ps5/sackboy-a-big-adventure.jpg",
-    theaterEnabled: true
   }
 ];
 
