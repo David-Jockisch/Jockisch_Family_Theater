@@ -1083,23 +1083,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // The Incredible Hulk
-  // ==================================================
-
-  {
-    id: "the-incredible-hulk",
-    collection: "The Incredible Hulk",
-    franchise: "",
-    boothGroup: "The Incredible Hulk",
-    title: "The Incredible Hulk",
-    edition: "Blu Ray",
-    year: "2008",
-    rating: "PG-13",
-    runtime: "1hr 54min",
-    poster: "/assets/posters/movies/the-incredible-hulk.jpg"
-  },
-
-  // ==================================================
   // The Mummy
   // ==================================================
 
