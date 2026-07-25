@@ -727,23 +727,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // King of Kings
-  // ==================================================
-
-  {
-    id: "the-king-of-kings",
-    collection: "King of Kings",
-    franchise: "King of Kings",
-    boothGroup: "King of Kings",
-    title: "The King of Kings",
-    edition: "Digital",
-    year: "2025",
-    rating: "PG",
-    runtime: "1hr 42min",
-    poster: "/assets/posters/movies/king-of-kings/the-king-of-kings.jpg"
-  },
-
-  // ==================================================
   // Lethal Weapon
   // ==================================================
 
