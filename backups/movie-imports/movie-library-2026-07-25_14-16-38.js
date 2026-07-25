@@ -105,23 +105,6 @@ const movieLibrary = [
   },
 
   // ==================================================
-  // Avatar
-  // ==================================================
-
-  {
-    id: "avatar",
-    collection: "Avatar",
-    franchise: "Avatar",
-    boothGroup: "Avatar",
-    title: "Avatar",
-    edition: "4K Collectors Edition",
-    year: "2009",
-    rating: "PG-13",
-    runtime: "2hr 42min",
-    poster: "/assets/posters/movies/avatar/avatar.jpg"
-  },
-
-  // ==================================================
   // Back to the Future
   // ==================================================
 
@@ -689,32 +672,6 @@ const movieLibrary = [
     rating: "R",
     runtime: "1hr 54min",
     poster: "/assets/posters/movies/lethal-weapon/lethal-weapon-2.jpg"
-  },
-
-  {
-    id: "lethal-weapon-3",
-    collection: "Lethal Weapon",
-    franchise: "Lethal Weapon",
-    boothGroup: "Lethal Weapon",
-    title: "Lethal Weapon 3",
-    edition: "Blu Ray",
-    year: "1992",
-    rating: "R",
-    runtime: "1hr 58min",
-    poster: "/assets/posters/movies/lethal-weapon/lethal-weapon-3.jpg"
-  },
-
-  {
-    id: "lethal-weapon-4",
-    collection: "Lethal Weapon",
-    franchise: "Lethal Weapon",
-    boothGroup: "Lethal Weapon",
-    title: "Lethal Weapon 4",
-    edition: "Blu Ray",
-    year: "1998",
-    rating: "R",
-    runtime: "2hr 7min",
-    poster: "/assets/posters/movies/lethal-weapon/lethal-weapon-4.jpg"
   },
 
   // ==================================================

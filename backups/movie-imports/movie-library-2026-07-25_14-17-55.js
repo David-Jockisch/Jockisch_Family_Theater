@@ -105,23 +105,6 @@ const movieLibrary = [
   },
 
   // ==================================================
-  // Avatar
-  // ==================================================
-
-  {
-    id: "avatar",
-    collection: "Avatar",
-    franchise: "Avatar",
-    boothGroup: "Avatar",
-    title: "Avatar",
-    edition: "4K Collectors Edition",
-    year: "2009",
-    rating: "PG-13",
-    runtime: "2hr 42min",
-    poster: "/assets/posters/movies/avatar/avatar.jpg"
-  },
-
-  // ==================================================
   // Back to the Future
   // ==================================================
 
