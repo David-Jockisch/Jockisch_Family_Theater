@@ -1,16 +1,18 @@
 import gameLibrary from "../../library/games/game-library.js";
 
 const byId = id => document.getElementById(id);
-const views = ["homeView", "movieLibraryView", "movieDetailView", "gameLibraryView", "gameDetailView"].map(byId);
+const views = ["homeView", "movieLibraryView", "movieDetailView", "movieGuideView", "gameLibraryView", "gameDetailView"].map(byId);
 
 const homeView = byId("homeView");
 const movieLibraryView = byId("movieLibraryView");
 const movieDetailView = byId("movieDetailView");
+const movieGuideView = byId("movieGuideView");
 const gameLibraryView = byId("gameLibraryView");
 const gameDetailView = byId("gameDetailView");
 
 const movieGrid = byId("movieGrid");
 const movieDetail = byId("movieDetail");
+const movieGuide = byId("movieGuide");
 const emptyState = byId("emptyState");
 const movieSearch = byId("movieSearch");
 const movieFormatFilter = byId("movieFormatFilter");
@@ -209,6 +211,7 @@ function setPageViewMode(targetView) {
   const isHomeView = targetView === homeView;
   const isDetailView =
     targetView === movieDetailView ||
+    targetView === movieGuideView ||
     targetView === gameDetailView;
 
   document.body.classList.toggle("home-view-active", isHomeView);
@@ -439,6 +442,361 @@ function setGameViewMode(mode) {
   renderGames();
 }
 
+
+function ratingFilePath(movieId) {
+  return `${siteBasePath}/library/ratings/movies/${encodeURIComponent(movieId)}.js`;
+}
+
+async function loadMovieGuide(movie) {
+  const url = ratingFilePath(movie.id);
+  const cacheBustedUrl = `${url}?v=${Date.now()}`;
+
+  try {
+    // Future-proof path: supports ES module rating files.
+    const module = await import(cacheBustedUrl);
+    return module.default || module.movieGuide || module;
+  } catch (moduleError) {
+    // Current generated files use CommonJS (`module.exports = {...}`).
+    // GitHub Pages cannot import CommonJS directly, so load and evaluate
+    // the trusted, same-origin guide file as a fallback.
+    const response = await fetch(cacheBustedUrl, { cache: "no-store" });
+
+    if (!response.ok) {
+      if (response.status === 404) return null;
+      throw new Error(`Movie guide request failed with ${response.status}`);
+    }
+
+    const source = await response.text();
+    const module = { exports: {} };
+    const exports = module.exports;
+
+    try {
+      new Function("module", "exports", `"use strict";\n${source}`)(
+        module,
+        exports
+      );
+    } catch (error) {
+      console.error("Could not read JFT Movie Guide file:", error);
+      throw new Error("The movie guide file could not be read.");
+    }
+
+    return module.exports && Object.keys(module.exports).length
+      ? module.exports
+      : null;
+  }
+}
+
+function guideValue(guide, ...keys) {
+  for (const key of keys) {
+    const value = guide?.[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  return "";
+}
+
+function nestedGuideValue(guide, path, ...fallbackKeys) {
+  const value = path.split(".").reduce((current, key) => current?.[key], guide);
+  if (value !== undefined && value !== null && value !== "") return value;
+  return guideValue(guide, ...fallbackKeys);
+}
+
+function paragraphSection(title, value, className = "") {
+  if (!value) return "";
+  return `
+    <section class="guide-panel ${className}">
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(value)}</p>
+    </section>`;
+}
+
+function renderWhyItems(items) {
+  if (!Array.isArray(items) || !items.length) return "";
+
+  const rows = items.map(item => {
+    const entry = typeof item === "object" ? item : { type: "positive", text: item };
+    const type = entry.type === "warning" ? "warning" : "positive";
+    const icon = type === "warning" ? "⚠" : "✓";
+    return `
+      <li class="guide-why-item ${type}">
+        <span aria-hidden="true">${icon}</span>
+        <span>${escapeHtml(entry.text)}</span>
+      </li>`;
+  }).join("");
+
+  return `
+    <section class="guide-panel guide-why">
+      <h3>Why It Earned Its Score</h3>
+      <ul>${rows}</ul>
+    </section>`;
+}
+
+function renderTheaterSection(theater) {
+  if (!theater || typeof theater !== "object") return "";
+
+  const cards = [
+    ["Picture", theater.picture],
+    ["HDR", theater.hdr],
+    ["Dolby Atmos", theater.audio],
+    ["Bass", theater.bass],
+    ["Replay Value", theater.replayValue],
+    ["Demo Value", theater.demoValue]
+  ].filter(([, value]) => value);
+
+  if (!theater.overview && !cards.length) return "";
+
+  return `
+    <section class="guide-major-section">
+      <div class="guide-section-heading">
+        <span>Theater Experience</span>
+        <h3>Built for the big screen</h3>
+      </div>
+      ${theater.overview ? `<p class="guide-section-intro">${escapeHtml(theater.overview)}</p>` : ""}
+      <div class="guide-experience-grid">
+        ${cards.map(([title, value]) => `
+          <article class="guide-experience-card">
+            <h4>${escapeHtml(title)}</h4>
+            <p>${escapeHtml(value)}</p>
+          </article>`).join("")}
+      </div>
+    </section>`;
+}
+
+function renderDiscernmentSection(section) {
+  if (!section || typeof section !== "object") return "";
+
+  const details = [
+    ["Violence", section.violence],
+    ["Language", section.language],
+    ["Sexual Content", section.sexualContent],
+    ["Nudity", section.nudity],
+    ["Substances", section.substances],
+    ["Spiritual Themes", section.spiritualThemes],
+    ["Family Suitability", section.familySuitability]
+  ].filter(([, value]) => value);
+
+  if (!section.overview && !details.length) return "";
+
+  return `
+    <section class="guide-major-section guide-discernment">
+      <div class="guide-section-heading">
+        <span>Biblical Discernment</span>
+        <h3>Family awareness</h3>
+      </div>
+      ${section.note ? `<p class="guide-discernment-note">${escapeHtml(section.note)}</p>` : ""}
+      ${section.overview ? `<div class="guide-discernment-overview"><h4>Overview</h4><p>${escapeHtml(section.overview)}</p></div>` : ""}
+      <div class="guide-accordion-list">
+        ${details.map(([title, value]) => `
+          <details class="guide-accordion">
+            <summary>${escapeHtml(title)}<span aria-hidden="true">+</span></summary>
+            <p>${escapeHtml(value)}</p>
+          </details>`).join("")}
+      </div>
+    </section>`;
+}
+
+function renderOwnershipSection(ownership) {
+  if (!ownership) return "";
+  if (typeof ownership === "string") return paragraphSection("Ownership Guide", ownership, "guide-ownership");
+
+  const rows = [
+    ["Preferred Format", ownership.preferredFormat],
+    ["Streaming Comparison", ownership.streamingComparison],
+    ["Upgrade Value", ownership.upgradeValue],
+    ["Collection Role", ownership.collectionRole]
+  ].filter(([, value]) => value);
+
+  if (!ownership.recommendation && !rows.length) return "";
+
+  return `
+    <section class="guide-major-section guide-ownership">
+      <div class="guide-section-heading">
+        <span>Ownership Guide</span>
+        <h3>${escapeHtml(ownership.recommendation || "Physical Media Guidance")}</h3>
+      </div>
+      <div class="guide-ownership-grid">
+        ${rows.map(([title, value]) => `
+          <article class="guide-ownership-card">
+            <h4>${escapeHtml(title)}</h4>
+            <p>${escapeHtml(value)}</p>
+          </article>`).join("")}
+      </div>
+    </section>`;
+}
+
+function renderDemoScenes(demo) {
+  const scenes = Array.isArray(demo) ? demo : demo?.scenes;
+  if (!Array.isArray(scenes) || !scenes.length) return "";
+
+  return `
+    <section class="guide-major-section guide-demo-scenes">
+      <div class="guide-section-heading">
+        <span>Best Demo Scenes</span>
+        <h3>Show the theater off</h3>
+      </div>
+      <div class="guide-demo-grid">
+        ${scenes.map((scene, index) => {
+          const item = typeof scene === "object" ? scene : { title: scene, description: "" };
+          return `
+            <article class="guide-demo-card">
+              <span class="guide-demo-number">${String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h4>${escapeHtml(item.title)}</h4>
+                ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ""}
+              </div>
+            </article>`;
+        }).join("")}
+      </div>
+    </section>`;
+}
+
+function hasCompletedGuideFields(guide) {
+  if (!guide || typeof guide !== "object") return false;
+  if (guide.rating || guide.theater || guide.biblicalDiscernment || guide.ownership || guide.demo || guide.finalThoughts) return true;
+
+  const metadataKeys = new Set([
+    "id", "title", "collection", "franchise", "boothGroup",
+    "edition", "year", "rating", "runtime"
+  ]);
+
+  return Object.entries(guide).some(([key, value]) => {
+    if (metadataKeys.has(key)) return false;
+    if (value === undefined || value === null || value === "") return false;
+    if (Array.isArray(value)) return value.length > 0;
+    if (typeof value === "object") return Object.keys(value).length > 0;
+    return true;
+  });
+}
+
+function renderLegacyGuideSections(guide) {
+  const section = (title, value) => paragraphSection(title, value);
+  return `
+    ${section("JFT Verdict", guideValue(guide, "verdict", "summary", "overview"))}
+    ${section("Picture", guideValue(guide, "picture", "pictureQuality", "video"))}
+    ${section("HDR", guideValue(guide, "hdr", "hdrQuality"))}
+    ${section("Dolby Atmos", guideValue(guide, "audio", "audioQuality", "sound"))}
+    ${section("Bass", guideValue(guide, "bass", "bassQuality"))}
+    ${section("Demo Value", guideValue(guide, "demoValue"))}
+    ${section("Replay Value", guideValue(guide, "rewatchability", "rewatch"))}
+    ${renderOwnershipSection(guideValue(guide, "ownership", "ownershipValue", "recommendation"))}
+    ${section("Final Thoughts", guideValue(guide, "notes", "review", "finalThoughts"))}`;
+}
+
+function renderMovieGuide(movie, guide) {
+  const info = guide?.info || guide || {};
+  const rating = guide?.rating || {};
+  const title = escapeHtml(movie.title || info.title || "Untitled");
+  const poster = escapeHtml(assetPath(movie.poster));
+  const completed = hasCompletedGuideFields(guide);
+  const score = rating.score ?? guideValue(guide, "jftScore", "score");
+  const classification = rating.classification || guideValue(guide, "classification", "jftClassification", "tier");
+  const tagline = rating.tagline || "";
+  const edition = movie.edition || info.edition || "";
+  const isGroupedGuide = Boolean(guide?.rating || guide?.theater || guide?.biblicalDiscernment || guide?.demo);
+
+  movieGuide.innerHTML = `
+    <article class="guide-card" style="--detail-bg: url('${poster}')">
+      <div class="detail-backdrop"></div>
+
+      <div class="guide-content">
+        <header class="guide-hero">
+          <img class="guide-poster" src="${poster}" alt="${title}">
+
+          <div class="guide-heading">
+            <p class="eyebrow">JFT Movie Guide</p>
+            <h2>${title}</h2>
+            ${edition ? `<p class="detail-edition">${escapeHtml(edition)}</p>` : ""}
+
+            <div class="guide-rating-lockup">
+              ${classification ? `<div class="guide-classification-badge"><span>★</span>${escapeHtml(classification)}</div>` : ""}
+              ${score !== "" ? `<div class="guide-score-line"><strong>${escapeHtml(score)}</strong><span>/ 10</span></div>` : ""}
+            </div>
+
+            ${tagline ? `<p class="guide-tagline">${escapeHtml(tagline)}</p>` : ""}
+          </div>
+        </header>
+
+        ${completed ? `
+          <div class="guide-body">
+            ${isGroupedGuide ? `
+              ${renderWhyItems(rating.why)}
+              ${paragraphSection("JFT Verdict", rating.verdict, "guide-verdict")}
+              ${renderTheaterSection(guide.theater)}
+              ${renderDiscernmentSection(guide.biblicalDiscernment)}
+              ${renderOwnershipSection(guide.ownership)}
+              ${renderDemoScenes(guide.demo)}
+              ${paragraphSection("Final Thoughts", guide.finalThoughts, "guide-final-thoughts")}
+            ` : renderLegacyGuideSections(guide)}
+          </div>` : `
+          <div class="guide-coming-soon">
+            <span aria-hidden="true">🎬</span>
+            <h3>Guide coming soon</h3>
+            <p>This movie has a JFT Movie Guide file, but the theater review has not been completed yet.</p>
+          </div>`}
+
+        <div class="guide-actions">
+          <button id="guideBackButton" class="back-button" type="button">← Back to Movie</button>
+        </div>
+      </div>
+    </article>`;
+
+  byId("guideBackButton").addEventListener("click", () => showMovieDetail(movie));
+  showView(movieGuideView, "movies");
+}
+
+async function showMovieGuide(movie) {
+  movieGuide.innerHTML = `
+    <div class="guide-loading" role="status">
+      <span class="guide-loading-mark" aria-hidden="true">JFT</span>
+      <p>Loading Movie Guide…</p>
+    </div>`;
+
+  showView(movieGuideView, "movies");
+
+  try {
+    const guide = await loadMovieGuide(movie);
+
+    if (!guide) {
+      movieGuide.innerHTML = `
+        <div class="guide-coming-soon guide-missing">
+          <span aria-hidden="true">🎬</span>
+          <h2>Guide not created yet</h2>
+          <p>
+            Run the JFT Movie Guide generator from Developer Tools to create
+            this movie's starter file.
+          </p>
+          <button id="guideMissingBackButton" class="back-button" type="button">
+            ← Back to Movie
+          </button>
+        </div>`;
+
+      byId("guideMissingBackButton").addEventListener(
+        "click",
+        () => showMovieDetail(movie)
+      );
+      return;
+    }
+
+    renderMovieGuide(movie, guide);
+  } catch (error) {
+    console.error("JFT Movie Guide failed to load:", error);
+
+    movieGuide.innerHTML = `
+      <div class="guide-coming-soon guide-error">
+        <span aria-hidden="true">!</span>
+        <h2>Guide unavailable</h2>
+        <p>${escapeHtml(error.message || "The movie guide could not be loaded.")}</p>
+        <button id="guideErrorBackButton" class="back-button" type="button">
+          ← Back to Movie
+        </button>
+      </div>`;
+
+    byId("guideErrorBackButton").addEventListener(
+      "click",
+      () => showMovieDetail(movie)
+    );
+  }
+}
+
 function showMovieDetail(movie) {
   const format = getMovieFormat(movie), title = escapeHtml(movie.title || "Untitled");
   const poster = escapeHtml(assetPath(movie.poster));
@@ -449,8 +807,12 @@ function showMovieDetail(movie) {
           <div class="detail-meta">${movie.year ? `<span>${escapeHtml(movie.year)}</span>` : ""}${movie.rating ? `<span>${escapeHtml(movie.rating)}</span>` : ""}${movie.runtime ? `<span>${escapeHtml(movie.runtime)}</span>` : ""}${format ? `<span>${escapeHtml(format)}</span>` : ""}</div>
           ${movie.collection ? `<section class="detail-section"><h3>Collection</h3><p>${escapeHtml(movie.collection)}</p></section>` : ""}
           ${movie.franchise ? `<section class="detail-section"><h3>Franchise</h3><p>${escapeHtml(movie.franchise)}</p></section>` : ""}
-        </div><div class="detail-actions"><button id="detailBackButton" class="back-button" type="button">← Back to Movies</button></div>
+        </div><div class="detail-actions detail-actions-stack">
+          <button id="movieGuideButton" class="movie-guide-button" type="button">JFT Movie Guide</button>
+          <button id="detailBackButton" class="back-button" type="button">← Back to Movies</button>
+        </div>
       </div></article>`;
+  byId("movieGuideButton").addEventListener("click", () => showMovieGuide(movie));
   byId("detailBackButton").addEventListener("click", showMovieLibrary);
   showView(movieDetailView, "movies");
 }

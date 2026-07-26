@@ -996,23 +996,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Paul
-  // ==================================================
-
-  {
-    id: "paul",
-    collection: "Paul",
-    franchise: "",
-    boothGroup: "Paul",
-    title: "Paul",
-    edition: "Blu Ray",
-    year: "2011",
-    rating: "R",
-    runtime: "1hr 44min",
-    poster: "/assets/posters/movies/paul.jpg"
-  },
-
-  // ==================================================
   // Pixels
   // ==================================================
 

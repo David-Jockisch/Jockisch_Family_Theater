@@ -1328,3 +1328,558 @@ button {
     display: inline;
   }
 }
+
+
+/* JFT Movie Guide */
+
+.detail-actions-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.movie-guide-button {
+  min-height: 3.25rem;
+  padding: 0 1.1rem;
+  border: 1px solid rgba(212, 154, 98, 0.62);
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212, 154, 98, 0.24),
+      rgba(184, 115, 51, 0.08)
+    ),
+    var(--panel-soft);
+  color: var(--accent-light);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.movie-guide-button:hover,
+.movie-guide-button:focus-visible {
+  border-color: var(--accent-light);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212, 154, 98, 0.34),
+      rgba(184, 115, 51, 0.14)
+    ),
+    #202020;
+}
+
+.guide-card {
+  position: relative;
+  min-height: calc(100vh - 2.5rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--panel-bg);
+  box-shadow: var(--shadow);
+}
+
+.guide-content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 68rem);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.guide-hero {
+  display: grid;
+  gap: 1.25rem;
+  align-items: end;
+}
+
+.guide-poster {
+  width: min(58vw, 14rem);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.guide-heading h2 {
+  margin: 0;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: clamp(2.2rem, 10vw, 5rem);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.guide-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+}
+
+.guide-score,
+.guide-classification {
+  display: grid;
+  align-content: center;
+  min-height: 6.2rem;
+  padding: 0.9rem 1.05rem;
+  border: 1px solid rgba(212, 154, 98, 0.4);
+  border-radius: 1rem;
+  background: rgba(17, 17, 17, 0.78);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.guide-score {
+  min-width: 7.5rem;
+  text-align: center;
+}
+
+.guide-score-value {
+  color: var(--accent-light);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.guide-score-label,
+.guide-classification span {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.guide-classification strong {
+  margin-top: 0.3rem;
+  color: var(--text-main);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.guide-sections {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.guide-section {
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: rgba(17, 17, 17, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.guide-section h3 {
+  margin: 0 0 0.7rem;
+  color: var(--accent-light);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.guide-section p,
+.guide-section ul {
+  margin: 0;
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+.guide-section ul {
+  padding-left: 1.2rem;
+}
+
+.guide-breakdown {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.guide-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-breakdown-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.guide-breakdown-row span {
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.guide-breakdown-row strong {
+  color: var(--accent-light);
+}
+
+.guide-coming-soon,
+.guide-loading {
+  width: min(100%, 40rem);
+  margin: 2rem auto;
+  padding: 2rem 1.25rem;
+  border: 1px dashed rgba(212, 154, 98, 0.45);
+  border-radius: 1rem;
+  background: rgba(17, 17, 17, 0.82);
+  text-align: center;
+}
+
+.guide-coming-soon > span,
+.guide-loading-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(212, 154, 98, 0.48);
+  border-radius: 50%;
+  color: var(--accent-light);
+  font-weight: 900;
+}
+
+.guide-coming-soon h2,
+.guide-coming-soon h3 {
+  margin: 0;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-weight: 500;
+}
+
+.guide-coming-soon p,
+.guide-loading p {
+  margin: 0.85rem auto 0;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.guide-coming-soon .back-button {
+  margin-top: 1.25rem;
+}
+
+.guide-actions {
+  margin-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+@media (min-width: 48rem) {
+  .guide-content {
+    padding: 2rem;
+  }
+
+  .guide-hero {
+    grid-template-columns: minmax(12rem, 16rem) 1fr;
+  }
+
+  .guide-poster {
+    width: 100%;
+    margin: 0;
+  }
+
+  .guide-sections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guide-section:first-child,
+  .guide-section:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* JFT Movie Guide — grouped review layout */
+.guide-body {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.guide-rating-lockup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.guide-classification-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(212, 154, 98, 0.55);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(184, 115, 51, 0.28), rgba(17, 17, 17, 0.9));
+  color: var(--accent-light);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+}
+
+.guide-classification-badge span {
+  font-size: 1rem;
+}
+
+.guide-score-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.guide-score-line strong {
+  color: var(--accent-light);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.25rem, 12vw, 6.5rem);
+  font-weight: 500;
+  line-height: 0.86;
+}
+
+.guide-score-line span {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.guide-tagline {
+  max-width: 42rem;
+  margin: 1.15rem 0 0;
+  color: #e7ddd3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 3.5vw, 1.55rem);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.guide-panel,
+.guide-major-section {
+  padding: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: rgba(17, 17, 17, 0.86);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+.guide-panel h3,
+.guide-section-heading span {
+  margin: 0 0 0.8rem;
+  color: var(--accent-light);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.guide-panel p,
+.guide-major-section p {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.guide-why ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-why-item {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.035);
+  line-height: 1.45;
+}
+
+.guide-why-item > span:first-child {
+  font-weight: 900;
+  text-align: center;
+}
+
+.guide-why-item.positive > span:first-child {
+  color: #8fd19e;
+}
+
+.guide-why-item.warning > span:first-child {
+  color: #e5b56d;
+}
+
+.guide-section-heading {
+  margin-bottom: 1rem;
+}
+
+.guide-section-heading span {
+  display: block;
+  margin-bottom: 0.45rem;
+}
+
+.guide-section-heading h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 500;
+}
+
+.guide-section-intro {
+  max-width: 54rem;
+  margin-bottom: 1rem !important;
+  color: var(--text-muted);
+}
+
+.guide-experience-grid,
+.guide-ownership-grid,
+.guide-demo-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.guide-experience-card,
+.guide-ownership-card,
+.guide-demo-card,
+.guide-discernment-overview {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.guide-experience-card h4,
+.guide-ownership-card h4,
+.guide-demo-card h4,
+.guide-discernment-overview h4 {
+  margin: 0 0 0.55rem;
+  color: var(--accent-light);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.guide-experience-card p,
+.guide-ownership-card p,
+.guide-demo-card p,
+.guide-discernment-overview p {
+  color: #e8e0d8;
+}
+
+.guide-discernment-note {
+  margin: 0 0 1rem !important;
+  padding: 0.8rem 0.9rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(184, 115, 51, 0.1);
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.guide-discernment-overview {
+  margin-bottom: 0.8rem;
+}
+
+.guide-accordion-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.guide-accordion {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.guide-accordion summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  color: var(--text-main);
+  font-weight: 800;
+  list-style: none;
+}
+
+.guide-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-accordion summary span {
+  color: var(--accent-light);
+  font-size: 1.2rem;
+  transition: transform 160ms ease;
+}
+
+.guide-accordion[open] summary span {
+  transform: rotate(45deg);
+}
+
+.guide-accordion p {
+  padding: 0 1rem 1rem;
+  color: var(--text-muted);
+}
+
+.guide-ownership {
+  border-color: rgba(212, 154, 98, 0.3);
+  background:
+    linear-gradient(145deg, rgba(184, 115, 51, 0.12), transparent 45%),
+    rgba(17, 17, 17, 0.9);
+}
+
+.guide-demo-card {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.guide-demo-number {
+  color: var(--accent-light);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.guide-final-thoughts {
+  border-color: rgba(212, 154, 98, 0.35);
+}
+
+@media (min-width: 42rem) {
+  .guide-why ul,
+  .guide-experience-grid,
+  .guide-ownership-grid,
+  .guide-demo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .guide-content {
+    width: min(100%, 76rem);
+  }
+
+  .guide-panel,
+  .guide-major-section {
+    padding: 1.5rem;
+  }
+}

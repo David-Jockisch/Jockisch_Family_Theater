@@ -35,13 +35,16 @@ echo.
 echo     %LIGHT%[2]%RESET%  Movie Library Importer
 echo          %GRAY%Search TMDb, add metadata, and download poster artwork.%RESET%
 echo.
-echo     %LIGHT%[3]%RESET%  Save and Push Changes
+echo     %LIGHT%[3]%RESET%  Generate JFT Movie Guide Files
+echo          %GRAY%Create missing review files and rebuild the ratings index.%RESET%
+echo.
+echo     %LIGHT%[4]%RESET%  Save and Push Changes
 echo          %GRAY%Stage, commit, and publish updates to GitHub.%RESET%
 echo.
-echo     %LIGHT%[4]%RESET%  View Git Status
+echo     %LIGHT%[5]%RESET%  View Git Status
 echo          %GRAY%Review every changed file before publishing.%RESET%
 echo.
-echo     %LIGHT%[5]%RESET%  Close Developer Console
+echo     %LIGHT%[6]%RESET%  Close Developer Console
 echo.
 echo   %COPPER%──────────────────────────────────────────────────────────────────────────%RESET%
 echo.
@@ -50,11 +53,12 @@ set /p "choice=  %LIGHT%Select an option:%RESET% "
 
 if "%choice%"=="1" goto game_importer
 if "%choice%"=="2" goto movie_importer
-if "%choice%"=="3" goto save_and_push
-if "%choice%"=="4" goto git_status
-if "%choice%"=="5" goto close_tools
+if "%choice%"=="3" goto movie_guide_generator
+if "%choice%"=="4" goto save_and_push
+if "%choice%"=="5" goto git_status
+if "%choice%"=="6" goto close_tools
 
-call :warning "Invalid selection. Please choose 1 through 5."
+call :warning "Invalid selection. Please choose 1 through 6."
 call :press_any_key
 goto menu
 
@@ -84,6 +88,21 @@ if not "%tool_exit%"=="0" (
   call :error_message "Movie Importer exited with error code %tool_exit%."
 ) else (
   call :success "Movie Importer finished successfully."
+)
+call :press_any_key
+goto menu
+
+:movie_guide_generator
+call :draw_header "JFT MOVIE GUIDE"
+echo   %GRAY%Creating missing movie guide files and rebuilding the ratings index...%RESET%
+echo.
+call node "tools\ratings\generate-rating-files.js"
+set "tool_exit=%errorlevel%"
+echo.
+if not "%tool_exit%"=="0" (
+  call :error_message "JFT Movie Guide generator exited with error code %tool_exit%."
+) else (
+  call :success "JFT Movie Guide files are up to date."
 )
 call :press_any_key
 goto menu

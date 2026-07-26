@@ -1,4 +1,4 @@
-const CACHE_VERSION = "jft-collection-v6";
+const CACHE_VERSION = "jft-collection-v8";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
 
