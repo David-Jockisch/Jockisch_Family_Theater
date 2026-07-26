@@ -200,23 +200,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Bio-Dome
-  // ==================================================
-
-  {
-    id: "bio-dome",
-    collection: "Bio-Dome",
-    franchise: "",
-    boothGroup: "Bio-Dome",
-    title: "Bio-Dome",
-    edition: "Digital",
-    year: "1996",
-    rating: "PG-13",
-    runtime: "1hr 35min",
-    poster: "/assets/posters/movies/bio-dome.jpg"
-  },
-
-  // ==================================================
   // Black Panther
   // ==================================================
 
@@ -805,19 +788,6 @@ const movieLibrary = [,
     rating: "PG",
     runtime: "1hr 42min",
     poster: "/assets/posters/movies/king-of-kings/the-king-of-kings.jpg"
-  },
-
-  {
-    id: "the-passion-of-the-christ",
-    collection: "King of Kings",
-    franchise: "King of Kings",
-    boothGroup: "King of Kings",
-    title: "The Passion of the Christ",
-    edition: "Digital",
-    year: "2004",
-    rating: "R",
-    runtime: "2hr 7min",
-    poster: "/assets/posters/movies/the-passion-of-the-christ.jpg"
   },
 
   // ==================================================

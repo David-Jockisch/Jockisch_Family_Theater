@@ -200,23 +200,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Bio-Dome
-  // ==================================================
-
-  {
-    id: "bio-dome",
-    collection: "Bio-Dome",
-    franchise: "",
-    boothGroup: "Bio-Dome",
-    title: "Bio-Dome",
-    edition: "Digital",
-    year: "1996",
-    rating: "PG-13",
-    runtime: "1hr 35min",
-    poster: "/assets/posters/movies/bio-dome.jpg"
-  },
-
-  // ==================================================
   // Black Panther
   // ==================================================
 
@@ -807,19 +790,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/king-of-kings/the-king-of-kings.jpg"
   },
 
-  {
-    id: "the-passion-of-the-christ",
-    collection: "King of Kings",
-    franchise: "King of Kings",
-    boothGroup: "King of Kings",
-    title: "The Passion of the Christ",
-    edition: "Digital",
-    year: "2004",
-    rating: "R",
-    runtime: "2hr 7min",
-    poster: "/assets/posters/movies/the-passion-of-the-christ.jpg"
-  },
-
   // ==================================================
   // Lethal Weapon
   // ==================================================
@@ -1378,36 +1348,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // The Grinch
-  // ==================================================
-
-  {
-    id: "the-grinch",
-    collection: "The Grinch",
-    franchise: "",
-    boothGroup: "The Grinch",
-    title: "The Grinch",
-    edition: "Digital",
-    year: "2018",
-    rating: "PG",
-    runtime: "1hr 25min",
-    poster: "/assets/posters/movies/the-grinch.jpg"
-  },
-
-  {
-    id: "how-the-grinch-stole-christmas",
-    collection: "The Grinch",
-    franchise: "The Grinch",
-    boothGroup: "The Grinch",
-    title: "How the Grinch Stole Christmas",
-    edition: "Digital",
-    year: "2000",
-    rating: "PG",
-    runtime: "1hr 45min",
-    poster: "/assets/posters/movies/The Grinch/how-the-grinch-stole-christmas.jpg"
-  },
-
-  // ==================================================
   // The Incredible Hulk
   // ==================================================
 
@@ -1422,23 +1362,6 @@ const movieLibrary = [,
     rating: "PG-13",
     runtime: "1hr 54min",
     poster: "/assets/posters/movies/the-incredible-hulk.jpg"
-  },
-
-  // ==================================================
-  // The Lorax
-  // ==================================================
-
-  {
-    id: "the-lorax",
-    collection: "The Lorax",
-    franchise: "",
-    boothGroup: "The Lorax",
-    title: "The Lorax",
-    edition: "Digital",
-    year: "2012",
-    rating: "PG",
-    runtime: "1hr 26min",
-    poster: "/assets/posters/movies/the-lorax.jpg"
   },
 
   // ==================================================

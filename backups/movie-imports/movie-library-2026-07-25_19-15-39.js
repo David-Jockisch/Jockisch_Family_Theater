@@ -200,23 +200,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Bio-Dome
-  // ==================================================
-
-  {
-    id: "bio-dome",
-    collection: "Bio-Dome",
-    franchise: "",
-    boothGroup: "Bio-Dome",
-    title: "Bio-Dome",
-    edition: "Digital",
-    year: "1996",
-    rating: "PG-13",
-    runtime: "1hr 35min",
-    poster: "/assets/posters/movies/bio-dome.jpg"
-  },
-
-  // ==================================================
   // Black Panther
   // ==================================================
 
@@ -558,19 +541,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/grumpy-old-men/grumpy-old-men.jpg"
   },
 
-  {
-    id: "grumpier-old-men",
-    collection: "Grumpy Old Men",
-    franchise: "Grumpy Old Men",
-    boothGroup: "Grumpy Old Men",
-    title: "Grumpier Old Men",
-    edition: "Digital",
-    year: "1995",
-    rating: "PG-13",
-    runtime: "1hr 41min",
-    poster: "/assets/posters/movies/grumpy-old-men/grumpier-old-men.jpg"
-  },
-
   // ==================================================
   // Guardians of the Galaxy
   // ==================================================
@@ -807,19 +777,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/king-of-kings/the-king-of-kings.jpg"
   },
 
-  {
-    id: "the-passion-of-the-christ",
-    collection: "King of Kings",
-    franchise: "King of Kings",
-    boothGroup: "King of Kings",
-    title: "The Passion of the Christ",
-    edition: "Digital",
-    year: "2004",
-    rating: "R",
-    runtime: "2hr 7min",
-    poster: "/assets/posters/movies/the-passion-of-the-christ.jpg"
-  },
-
   // ==================================================
   // Lethal Weapon
   // ==================================================
@@ -996,23 +953,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Pixels
-  // ==================================================
-
-  {
-    id: "pixels",
-    collection: "Pixels",
-    franchise: "",
-    boothGroup: "Pixels",
-    title: "Pixels",
-    edition: "Digital",
-    year: "2015",
-    rating: "PG-13",
-    runtime: "1hr 46min",
-    poster: "/assets/posters/movies/pixels.jpg"
-  },
-
-  // ==================================================
   // Pokémon Detective Pikachu
   // ==================================================
 
@@ -1027,23 +967,6 @@ const movieLibrary = [,
     rating: "PG",
     runtime: "1hr 45min",
     poster: "/assets/posters/movies/pokemon-detective-pikachu.jpg"
-  },
-
-  // ==================================================
-  // Scoob!
-  // ==================================================
-
-  {
-    id: "scoob",
-    collection: "Scoob!",
-    franchise: "",
-    boothGroup: "Scoob!",
-    title: "Scoob!",
-    edition: "Digital",
-    year: "2020",
-    rating: "PG",
-    runtime: "1hr 34min",
-    poster: "/assets/posters/movies/scoob.jpg"
   },
 
   // ==================================================
@@ -1100,36 +1023,6 @@ const movieLibrary = [,
     rating: "PG",
     runtime: "1hr 33min",
     poster: "/assets/posters/movies/shrek/shrek-forever-after.jpg"
-  },
-
-  // ==================================================
-  // Space Jam
-  // ==================================================
-
-  {
-    id: "space-jam",
-    collection: "Space Jam",
-    franchise: "Space Jam",
-    boothGroup: "Space Jam",
-    title: "Space Jam",
-    edition: "Digital",
-    year: "1996",
-    rating: "PG",
-    runtime: "1hr 27min",
-    poster: "/assets/posters/movies/space-jam/space-jam.jpg"
-  },
-
-  {
-    id: "space-jam-a-new-legacy",
-    collection: "Space Jam",
-    franchise: "Space Jam",
-    boothGroup: "Space Jam",
-    title: "Space Jam: A New Legacy",
-    edition: "Digital",
-    year: "2021",
-    rating: "PG",
-    runtime: "1hr 55min",
-    poster: "/assets/posters/movies/space-jam/space-jam-a-new-legacy.jpg"
   },
 
   // ==================================================
@@ -1378,36 +1271,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // The Grinch
-  // ==================================================
-
-  {
-    id: "the-grinch",
-    collection: "The Grinch",
-    franchise: "",
-    boothGroup: "The Grinch",
-    title: "The Grinch",
-    edition: "Digital",
-    year: "2018",
-    rating: "PG",
-    runtime: "1hr 25min",
-    poster: "/assets/posters/movies/the-grinch.jpg"
-  },
-
-  {
-    id: "how-the-grinch-stole-christmas",
-    collection: "The Grinch",
-    franchise: "The Grinch",
-    boothGroup: "The Grinch",
-    title: "How the Grinch Stole Christmas",
-    edition: "Digital",
-    year: "2000",
-    rating: "PG",
-    runtime: "1hr 45min",
-    poster: "/assets/posters/movies/The Grinch/how-the-grinch-stole-christmas.jpg"
-  },
-
-  // ==================================================
   // The Incredible Hulk
   // ==================================================
 
@@ -1422,23 +1285,6 @@ const movieLibrary = [,
     rating: "PG-13",
     runtime: "1hr 54min",
     poster: "/assets/posters/movies/the-incredible-hulk.jpg"
-  },
-
-  // ==================================================
-  // The Lorax
-  // ==================================================
-
-  {
-    id: "the-lorax",
-    collection: "The Lorax",
-    franchise: "",
-    boothGroup: "The Lorax",
-    title: "The Lorax",
-    edition: "Digital",
-    year: "2012",
-    rating: "PG",
-    runtime: "1hr 26min",
-    poster: "/assets/posters/movies/the-lorax.jpg"
   },
 
   // ==================================================

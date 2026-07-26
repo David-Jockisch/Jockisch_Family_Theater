@@ -200,23 +200,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Bio-Dome
-  // ==================================================
-
-  {
-    id: "bio-dome",
-    collection: "Bio-Dome",
-    franchise: "",
-    boothGroup: "Bio-Dome",
-    title: "Bio-Dome",
-    edition: "Digital",
-    year: "1996",
-    rating: "PG-13",
-    runtime: "1hr 35min",
-    poster: "/assets/posters/movies/bio-dome.jpg"
-  },
-
-  // ==================================================
   // Black Panther
   // ==================================================
 
