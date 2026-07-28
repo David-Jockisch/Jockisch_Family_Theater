@@ -1658,6 +1658,22 @@ button {
   letter-spacing: 0.08em;
 }
 
+
+.guide-type-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.25rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid rgba(212, 154, 98, 0.42);
+  border-radius: 999px;
+  background: rgba(184, 115, 51, 0.12);
+  color: var(--accent-light);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .guide-tagline {
   max-width: 42rem;
   margin: 1.15rem 0 0;

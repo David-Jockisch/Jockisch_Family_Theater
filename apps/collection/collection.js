@@ -570,6 +570,7 @@ function renderDiscernmentSection(section) {
     ["Sexual Content", section.sexualContent],
     ["Nudity", section.nudity],
     ["Substances", section.substances],
+    ["LGBT Influence", section.lgbtInfluence],
     ["Spiritual Themes", section.spiritualThemes],
     ["Family Suitability", section.familySuitability]
   ].filter(([, value]) => value);
@@ -596,9 +597,15 @@ function renderDiscernmentSection(section) {
 
 function renderOwnershipSection(ownership) {
   if (!ownership) return "";
-  if (typeof ownership === "string") return paragraphSection("Ownership Guide", ownership, "guide-ownership");
+  if (typeof ownership === "string") {
+    return paragraphSection("Best Edition", ownership, "guide-ownership");
+  }
 
+  // The first two fields are the simplified format used by new guides.
+  // The remaining fields preserve compatibility with guides already created.
   const rows = [
+    ["Recommended Edition", ownership.bestEdition],
+    ["Why", ownership.why],
     ["Preferred Format", ownership.preferredFormat],
     ["Streaming Comparison", ownership.streamingComparison],
     ["Upgrade Value", ownership.upgradeValue],
@@ -610,8 +617,8 @@ function renderOwnershipSection(ownership) {
   return `
     <section class="guide-major-section guide-ownership">
       <div class="guide-section-heading">
-        <span>Ownership Guide</span>
-        <h3>${escapeHtml(ownership.recommendation || "Physical Media Guidance")}</h3>
+        <span>Best Edition</span>
+        <h3>${escapeHtml(ownership.recommendation || "Home Theater Recommendation")}</h3>
       </div>
       <div class="guide-ownership-grid">
         ${rows.map(([title, value]) => `
@@ -706,10 +713,14 @@ function renderMovieGuide(movie, guide) {
             <h2>${title}</h2>
             ${edition ? `<p class="detail-edition">${escapeHtml(edition)}</p>` : ""}
 
-            <div class="guide-rating-lockup">
-              ${classification ? `<div class="guide-classification-badge"><span>★</span>${escapeHtml(classification)}</div>` : ""}
-              ${score !== "" ? `<div class="guide-score-line"><strong>${escapeHtml(score)}</strong><span>/ 10</span></div>` : ""}
-            </div>
+            ${score !== "" || classification ? `
+              <div class="guide-rating-lockup">
+                ${classification ? `<div class="guide-classification-badge"><span>★</span>${escapeHtml(classification)}</div>` : ""}
+                ${score !== "" ? `<div class="guide-score-line"><strong>${escapeHtml(score)}</strong><span>/ 10</span></div>` : ""}
+              </div>
+            ` : completed ? `
+              <div class="guide-type-badge">Collection Guide</div>
+            ` : ""}
 
             ${tagline ? `<p class="guide-tagline">${escapeHtml(tagline)}</p>` : ""}
           </div>

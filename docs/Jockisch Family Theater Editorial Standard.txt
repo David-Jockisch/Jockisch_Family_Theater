@@ -1,0 +1,2959 @@
+===============================================================================
+JOCKISCH FAMILY THEATER
+MOVIE GUIDE EDITORIAL STANDARD
+Version 1.0
+===============================================================================
+
+PART I
+FOUNDATION
+===============================================================================
+
+1.1 PURPOSE
+
+The Jockisch Family Theater (JFT) Movie Guide exists to provide consistent,
+professional, family-oriented evaluations of films within the Jockisch Family
+Theater collection.
+
+Unlike commercial review sites, the JFT Movie Guide is not intended to judge
+whether a film is "good" or "bad" based on popularity, critical reception,
+financial success, or awards. It is also not intended to persuade viewers to
+adopt a particular opinion of a film.
+
+Instead, every guide exists to answer two completely independent questions.
+
+Question 1
+
+How good is this movie as a home theater experience?
+
+Question 2
+
+Is there anything a Christian family should know before choosing to watch it?
+
+These questions intentionally remain independent throughout every review.
+
+The technical quality of a film is represented by the JFT Score.
+
+Family awareness is represented by the Biblical Discernment section.
+
+Neither category influences the other.
+
+===============================================================================
+
+1.2 MISSION STATEMENT
+
+The mission of the Jockisch Family Theater Movie Guide is to celebrate
+exceptional filmmaking while equipping families with factual, balanced
+information that helps them make informed viewing decisions.
+
+The guide values craftsmanship, artistic excellence, immersive home theater
+experiences, and honest discernment without sensationalism or unnecessary
+criticism.
+
+Every review should encourage appreciation for filmmaking while respecting that
+every family applies biblical convictions differently.
+
+===============================================================================
+
+1.3 CORE PRINCIPLES
+
+The following principles govern every review written under the JFT standard.
+
+Principle One
+
+Technical excellence is evaluated independently from biblical discernment.
+
+A technically outstanding movie should receive the score it deserves regardless
+of its worldview or content.
+
+Likewise, a wholesome family movie should not receive a higher score simply
+because its message aligns with Christian values.
+
+The JFT Score measures presentation—not morality.
+
+-------------------------------------------------------------------------------
+
+Principle Two
+
+Biblical Discernment exists to inform, not condemn.
+
+The Biblical Discernment section provides objective information that allows
+parents and families to make their own decisions.
+
+Its purpose is awareness.
+
+It is never intended to shame viewers or assign spiritual value to a film.
+
+-------------------------------------------------------------------------------
+
+Principle Three
+
+Accuracy is more important than opinion.
+
+Every statement should be truthful, balanced, and supported by the content of
+the film whenever possible.
+
+Avoid exaggeration.
+
+Avoid minimizing.
+
+Describe rather than persuade.
+
+-------------------------------------------------------------------------------
+
+Principle Four
+
+Consistency builds trust.
+
+Every movie should be evaluated using the same standards.
+
+The popularity of a franchise...
+
+The nostalgia attached to a film...
+
+The opinions of critics...
+
+The personal preferences of the reviewer...
+
+None of these should significantly alter how a movie is scored.
+
+If two films deliver nearly identical technical experiences, they should receive
+similar scores regardless of genre or popularity.
+
+-------------------------------------------------------------------------------
+
+Principle Five
+
+Celebrate great filmmaking.
+
+The JFT Movie Guide exists because movies are capable of remarkable artistic
+achievement.
+
+Great cinematography.
+
+Beautiful music.
+
+Exceptional performances.
+
+Groundbreaking visual effects.
+
+Immersive Dolby Atmos sound.
+
+Reference-quality HDR.
+
+Creative storytelling.
+
+These qualities should be recognized and celebrated whenever they appear.
+
+-------------------------------------------------------------------------------
+
+Principle Six
+
+Maintain a hopeful perspective.
+
+Even when discussing difficult content, reviews should remain respectful,
+professional, and constructive.
+
+The guide should never sound cynical, angry, sarcastic, or dismissive.
+
+Instead, reviews should acknowledge both strengths and weaknesses with humility
+and fairness.
+
+===============================================================================
+
+1.4 WHAT THE JFT MOVIE GUIDE IS NOT
+
+The JFT Movie Guide is NOT:
+
+• A replacement for IMDb.
+
+• A replacement for Rotten Tomatoes.
+
+• A replacement for Letterboxd.
+
+• A replacement for professional film criticism.
+
+• A theological review.
+
+• A parental control system.
+
+• A content filtering service.
+
+Instead, it is a personalized editorial guide created specifically for the
+Jockisch Family Theater that combines home theater evaluation with factual
+family awareness.
+
+===============================================================================
+
+1.5 TARGET AUDIENCE
+
+The JFT Movie Guide is written primarily for:
+
+• The Jockisch family.
+
+• Friends visiting the theater.
+
+• Guests choosing a movie.
+
+• Home theater enthusiasts.
+
+• Christian families who appreciate objective content awareness.
+
+The guide assumes readers enjoy movies and want to appreciate excellent
+filmmaking while remaining informed about potentially objectionable content.
+
+===============================================================================
+
+1.6 LONG-TERM VISION
+
+The long-term goal of the JFT Movie Guide is to become a complete editorial
+library covering every movie owned by the Jockisch Family Theater.
+
+Every guide should appear as though it was written by the same editor, following
+the same philosophy, using the same terminology, and applying the same scoring
+standards.
+
+As the library grows beyond one hundred films, consistency becomes increasingly
+important. Every future addition should integrate seamlessly with guides written
+years earlier, ensuring that the collection remains cohesive and trustworthy.
+
+This document serves as the authoritative reference for maintaining that
+consistency.
+
+===============================================================================
+PART II
+GUIDE TYPES AND REVIEW STRUCTURE
+===============================================================================
+
+2.1 TWO TYPES OF JFT MOVIE GUIDES
+
+Every movie in the Jockisch Family Theater collection shall receive one of two
+guide types.
+
+The guide type is determined solely by the highest-quality edition owned.
+
+No exceptions.
+
+This distinction exists because the JFT Score evaluates the complete home
+theater experience. If the best presentation is not available in the collection,
+the guide should avoid assigning a technical score that the theater cannot
+currently represent.
+
+===============================================================================
+
+2.2 FULL JFT REVIEW
+
+A Full JFT Review represents the definitive evaluation of a movie.
+
+This guide is reserved for movies owned in their highest-quality consumer
+presentation.
+
+Examples include:
+
+• 4K UHD Blu-ray
+• Blu-ray when no official 4K release exists
+
+The assumption is that the Jockisch Family Theater can reproduce the movie in
+its intended premium home theater presentation.
+
+A Full Review includes every section of the guide.
+
+Required sections:
+
+• Movie Information
+• JFT Score
+• Classification
+• Tagline
+• Why It Earned Its Score
+• Theater Experience
+• Biblical Discernment
+• Best Edition
+• Demo Scenes
+• Final Thoughts
+
+The Full Review represents the "complete" JFT evaluation.
+
+===============================================================================
+
+2.3 COLLECTION GUIDE
+
+A Collection Guide exists for movies that are owned but cannot yet receive a
+complete technical evaluation.
+
+Examples include:
+
+• Digital ownership
+• DVD ownership
+• Blu-ray ownership when a superior 4K edition exists
+
+The purpose of a Collection Guide is to provide useful information while
+acknowledging that the definitive home theater presentation has not yet been
+added to the collection.
+
+Collection Guides intentionally omit the technical scoring system.
+
+Included sections:
+
+• Movie Information
+• Biblical Discernment
+• Best Edition
+• Final Thoughts
+
+Omitted sections:
+
+• JFT Score
+• Classification
+• Tagline
+• Why It Earned Its Score
+• Theater Experience
+• Demo Scenes
+
+Within the guide data structure these omitted sections shall be represented as:
+
+rating: null
+
+theater: null
+
+demo: null
+
+The Collection App is responsible for hiding these sections during rendering.
+
+===============================================================================
+
+2.4 FUTURE UPGRADES
+
+Collection Guides are not permanent.
+
+Whenever a movie is upgraded to its best available edition, the Collection Guide
+shall be replaced by a Full JFT Review.
+
+Examples:
+
+Digital → 4K UHD Blu-ray
+
+DVD → Blu-ray
+
+Blu-ray → 4K UHD Blu-ray
+
+The existing Biblical Discernment and Final Thoughts may be retained and refined
+during the upgrade process.
+
+A new technical evaluation shall then be completed.
+
+===============================================================================
+
+2.5 REVIEW TEMPLATE
+
+Every Full Review follows the exact same order.
+
+Movie Information
+
+↓
+
+JFT Score
+
+↓
+
+Classification
+
+↓
+
+Tagline
+
+↓
+
+Why It Earned Its Score
+
+↓
+
+Theater Experience
+
+↓
+
+Biblical Discernment
+
+↓
+
+Best Edition
+
+↓
+
+Demo Scenes
+
+↓
+
+Final Thoughts
+
+This order shall never change.
+
+Consistency in presentation allows readers to immediately locate information
+without relearning the layout for each guide.
+
+===============================================================================
+
+2.6 COLLECTION GUIDE TEMPLATE
+
+Collection Guides follow a simplified structure.
+
+Movie Information
+
+↓
+
+Collection Guide Badge
+
+↓
+
+Biblical Discernment
+
+↓
+
+Best Edition
+
+↓
+
+Final Thoughts
+
+The simplified format intentionally communicates that the movie is part of the
+collection but has not yet received its definitive JFT Review.
+
+===============================================================================
+
+2.7 DATA STRUCTURE
+
+Every guide shall use the same JavaScript structure regardless of guide type.
+
+module.exports = {
+
+    info: {},
+
+    rating: null,
+
+    theater: null,
+
+    biblicalDiscernment: {},
+
+    ownership: {},
+
+    demo: null,
+
+    finalThoughts: ""
+
+};
+
+Using a universal structure greatly simplifies rendering within the Collection
+App while maintaining consistency between Full Reviews and Collection Guides.
+
+Unused sections shall always be set to null.
+
+Placeholder text such as "N/A" shall never be used.
+
+===============================================================================
+
+2.8 RENDERING PHILOSOPHY
+
+The Collection App should never need to know whether a guide is a Full Review or
+a Collection Guide.
+
+Instead, it should simply render every section that contains data and hide every
+section that is null.
+
+This philosophy keeps the rendering engine simple while allowing future guide
+types to be added without changing the application.
+
+===============================================================================
+
+2.9 FUTURE EXPANSION
+
+The universal guide structure has been intentionally designed to allow future
+sections to be added without redesigning existing reviews.
+
+Possible future additions include:
+
+• Awards
+• Historical Significance
+• Trivia
+• Behind the Scenes
+• Reference Theater Rankings
+• Director Spotlight
+• Franchise Timeline
+
+Future sections should remain optional whenever possible to preserve backwards
+compatibility with existing guides.
+
+===============================================================================
+
+===============================================================================
+PART III
+THE JFT SCORING STANDARD
+===============================================================================
+
+3.1 PURPOSE OF THE JFT SCORE
+
+The JFT Score measures the technical presentation of a movie as experienced in
+the Jockisch Family Theater.
+
+It is not a review of the movie itself.
+
+It is not a measure of storytelling quality.
+
+It is not a recommendation based on personal enjoyment.
+
+Instead, the JFT Score answers one question:
+
+"How well does this movie demonstrate the capabilities of the Jockisch Family
+Theater?"
+
+The score exists to evaluate the home theater experience—not the film's artistic
+or narrative merit.
+
+===============================================================================
+
+3.2 THE JFT SCORE IS A HOME THEATER PRESENTATION RATING
+
+The JFT Score should be viewed as a technical benchmark.
+
+A movie with an average story may receive an outstanding JFT Score if it offers
+reference-quality picture and sound.
+
+Likewise, a beloved classic may receive a modest JFT Score if its presentation
+does not fully utilize the capabilities of a modern home theater.
+
+The JFT Score intentionally differs from traditional movie ratings.
+
+It is designed specifically for home theater enthusiasts who want to know how
+well a film showcases their equipment.
+
+===============================================================================
+
+3.3 WHAT THE JFT SCORE MEASURES
+
+Every score represents the overall technical presentation of the movie.
+
+The reviewer should consider how effectively the film demonstrates the
+capabilities of a high-quality home theater.
+
+Primary considerations include:
+
+• Picture Quality
+
+• HDR Presentation
+
+• Contrast
+
+• Black Levels
+
+• Shadow Detail
+
+• Highlight Detail
+
+• Color Accuracy
+
+• Color Volume
+
+• Sharpness
+
+• Fine Detail
+
+• Dolby Atmos Presentation
+
+• Surround Activity
+
+• Height Channel Usage
+
+• Dialogue Clarity
+
+• Dynamic Range
+
+• Bass Performance
+
+• Audio Fidelity
+
+• Sound Design
+
+• Visual Effects Presentation
+
+• Demo Value
+
+No individual category receives its own numerical value.
+
+Instead, these elements combine to form an overall impression of the technical
+experience.
+
+===============================================================================
+
+3.4 WHAT THE JFT SCORE DOES NOT MEASURE
+
+The following subjects shall never influence the JFT Score.
+
+• Story quality
+
+• Screenplay
+
+• Acting performances
+
+• Character development
+
+• Emotional impact
+
+• Humor
+
+• Genre preference
+
+• Personal enjoyment
+
+• Nostalgia
+
+• Awards
+
+• Critical reception
+
+• Box office performance
+
+• Franchise popularity
+
+• Political viewpoints
+
+• Biblical worldview
+
+• Violence
+
+• Language
+
+• Sexual content
+
+• Nudity
+
+• Drug or alcohol use
+
+• Personal agreement with the themes of the film
+
+These subjects may be discussed elsewhere within the guide but shall never
+increase or decrease the JFT Score.
+
+===============================================================================
+
+3.5 THE REVIEWER'S MINDSET
+
+When assigning a score, the reviewer should imagine inviting someone into the
+Jockisch Family Theater for the first time.
+
+The question is not:
+
+"Would I recommend this movie?"
+
+Instead ask:
+
+"Would this movie effectively demonstrate what this theater is capable of?"
+
+A technically exceptional movie should receive the score it deserves regardless
+of whether the reviewer enjoys the story.
+
+Likewise, a favorite movie should not receive a higher score simply because it
+holds sentimental value.
+
+===============================================================================
+
+3.6 DEMO VALUE
+
+Demo Value is one of the most important considerations within the JFT Score.
+
+Movies with high Demo Value immediately showcase the strengths of the theater.
+
+Examples include:
+
+• Spectacular HDR
+
+• Powerful Dolby Atmos
+
+• Active surround effects
+
+• Deep, clean bass
+
+• Stunning visual effects
+
+• Exceptional image clarity
+
+• Memorable reference scenes
+
+Movies frequently used to demonstrate a home theater naturally trend toward the
+highest JFT Scores.
+
+===============================================================================
+
+3.7 THE COMPLETE PRESENTATION
+
+The JFT Score reflects the complete technical presentation rather than isolated
+specifications.
+
+For example:
+
+Excellent HDR cannot fully compensate for weak audio.
+
+Likewise, incredible Atmos cannot completely overcome a poor transfer.
+
+The score should represent the entire presentation working together to create an
+immersive home theater experience.
+
+===============================================================================
+
+3.8 CONSISTENCY OVER SUBJECTIVITY
+
+Every movie should be evaluated using the same technical standards.
+
+The reviewer should avoid allowing personal opinions to influence the score.
+
+A movie should not receive additional points because:
+
+• It is a favorite.
+
+• It won awards.
+
+• It has nostalgic value.
+
+• It is critically acclaimed.
+
+Likewise, a movie should not lose points because:
+
+• The reviewer dislikes the story.
+
+• The reviewer disagrees with its message.
+
+• The reviewer dislikes the genre.
+
+Consistency builds confidence in the guide and ensures meaningful comparisons
+between every review.
+
+===============================================================================
+
+3.9 SCORE STABILITY
+
+The JFT Score should remain stable over time.
+
+Scores should only change when meaningful technical reasons exist.
+
+Examples include:
+
+• A superior 4K restoration.
+
+• A remastered Dolby Atmos mix.
+
+• Discovery of previously overlooked technical issues.
+
+• Recalibration after comparison with established JFT reference titles.
+
+Scores should never fluctuate simply because public opinion changes.
+
+===============================================================================
+
+3.10 THE JFT REFERENCE STANDARD
+
+As the JFT library grows, previously reviewed films become calibration
+benchmarks.
+
+Every new review should be compared against established reference titles.
+
+The reviewer should continually ask:
+
+"Is this presentation better than Dune: Part Two?"
+
+"Is this Atmos mix stronger than Top Gun: Maverick?"
+
+"Does this HDR presentation exceed Blade Runner 2049?"
+
+Using existing reviews as anchors produces a scoring system that remains
+consistent across hundreds of movies.
+
+The goal is not mathematical precision.
+
+The goal is dependable consistency.
+
+===============================================================================
+
+===============================================================================
+PART IV
+TECHNICAL EVALUATION STANDARDS
+===============================================================================
+
+4.1 PURPOSE
+
+The Technical Evaluation Standards define the qualities that contribute to the
+JFT Score.
+
+These categories exist to help the reviewer consistently evaluate a movie's
+presentation.
+
+They are not individually scored.
+
+Instead, they form the foundation of the reviewer's overall impression of the
+home theater experience.
+
+===============================================================================
+
+4.2 PICTURE QUALITY
+
+Picture Quality evaluates the overall clarity and fidelity of the image.
+
+Considerations include:
+
+• Image sharpness
+• Fine detail
+• Compression artifacts
+• Source quality
+• Overall cleanliness
+
+Questions to consider:
+
+Does the image appear exceptionally detailed?
+
+Does the transfer appear clean and free of distracting artifacts?
+
+Does the presentation feel worthy of a premium home theater?
+
+===============================================================================
+
+4.3 HDR PRESENTATION
+
+HDR Presentation evaluates how effectively High Dynamic Range enhances the
+viewing experience.
+
+Considerations include:
+
+• Bright highlights
+• Deep blacks
+• Dynamic contrast
+• Specular highlights
+• Natural lighting
+• HDR consistency
+
+Questions to consider:
+
+Does HDR create a noticeable improvement?
+
+Do bright scenes feel vibrant without losing detail?
+
+Do dark scenes preserve shadow detail while maintaining deep blacks?
+
+===============================================================================
+
+4.4 COLOR PRESENTATION
+
+Color Presentation evaluates the richness, accuracy, and artistic use of color.
+
+Considerations include:
+
+• Natural skin tones
+• Wide color gamut
+• Saturation
+• Color separation
+• Artistic grading
+
+Questions to consider:
+
+Do colors appear lifelike?
+
+Does the grading enhance the atmosphere?
+
+Are colors vibrant without appearing exaggerated?
+
+===============================================================================
+
+4.5 CONTRAST AND DEPTH
+
+Contrast evaluates the perceived dimensionality of the image.
+
+Considerations include:
+
+• Separation between light and dark
+• Depth perception
+• Black level performance
+• Shadow definition
+
+Questions to consider:
+
+Does the image feel three-dimensional?
+
+Do scenes maintain detail in both bright and dark areas?
+
+===============================================================================
+
+4.6 DOLBY ATMOS PRESENTATION
+
+Atmos Presentation evaluates how effectively the soundtrack creates an
+immersive sound field.
+
+Considerations include:
+
+• Surround activity
+• Height channel usage
+• Object movement
+• Spatial accuracy
+• Immersion
+
+Questions to consider:
+
+Does the soundtrack fully utilize the theater?
+
+Are sounds placed naturally throughout the room?
+
+Do overhead effects feel intentional rather than occasional?
+
+===============================================================================
+
+4.7 DIALOGUE CLARITY
+
+Dialogue should remain intelligible throughout the movie.
+
+Considerations include:
+
+• Center channel clarity
+• Vocal balance
+• Consistency
+• Natural tone
+
+Questions to consider:
+
+Can dialogue be understood without increasing the volume?
+
+Does speech remain clear during loud action sequences?
+
+===============================================================================
+
+4.8 DYNAMIC RANGE
+
+Dynamic Range evaluates the difference between the quietest and loudest
+moments.
+
+Considerations include:
+
+• Quiet ambience
+• Sudden impact
+• Crescendos
+• Overall realism
+
+Questions to consider:
+
+Does the soundtrack feel alive?
+
+Do loud moments have genuine impact?
+
+Do quiet scenes create tension rather than sounding flat?
+
+===============================================================================
+
+4.9 BASS PERFORMANCE
+
+Bass Performance evaluates low-frequency impact and integration.
+
+Considerations include:
+
+• Extension
+• Cleanliness
+• Impact
+• Control
+• Integration
+
+Questions to consider:
+
+Does bass feel powerful without becoming overwhelming?
+
+Does it support the scene rather than distract from it?
+
+Are low frequencies tight and well controlled?
+
+===============================================================================
+
+4.10 SURROUND IMMERSION
+
+Surround Immersion evaluates how convincingly the movie places the viewer
+inside its environment.
+
+Considerations include:
+
+• Ambient effects
+• Environmental realism
+• Seamless transitions
+• Room-filling presentation
+
+Questions to consider:
+
+Do you feel surrounded by the environment?
+
+Does the room disappear during key scenes?
+
+===============================================================================
+
+4.11 VISUAL EFFECTS PRESENTATION
+
+This category evaluates how convincingly visual effects integrate into the
+presentation.
+
+The emphasis is not on the quantity of effects, but on their quality.
+
+Considerations include:
+
+• Realism
+• Integration
+• Image stability
+• Believability
+
+Questions to consider:
+
+Do effects appear convincing?
+
+Do they enhance immersion rather than distract from it?
+
+===============================================================================
+
+4.12 DEMO VALUE
+
+Demo Value reflects how often scenes from the movie would be selected to
+demonstrate the capabilities of the Jockisch Family Theater.
+
+Movies with exceptional Demo Value often contain memorable scenes featuring:
+
+• Outstanding HDR
+
+• Reference-quality Atmos
+
+• Powerful bass
+
+• Exceptional cinematography
+
+• Immersive sound design
+
+• Stunning visual moments
+
+Demo Value is not determined by the quality of the story.
+
+===============================================================================
+
+4.13 OVERALL PRESENTATION
+
+No movie excels equally in every category.
+
+Some films feature remarkable HDR but conservative Atmos mixes.
+
+Others deliver spectacular sound while offering modest visuals.
+
+The reviewer should evaluate how successfully every technical element works
+together to create a cohesive home theater experience.
+
+The final JFT Score represents the complete presentation—not the average of
+individual strengths and weaknesses.
+
+===============================================================================
+
+4.14 REVIEWER REMINDER
+
+Throughout the evaluation process, remember the purpose of the JFT Score.
+
+Do not ask:
+
+"Did I enjoy this movie?"
+
+Instead ask:
+
+"Did this movie allow the Jockisch Family Theater to perform at its highest
+potential?"
+
+That question should guide every technical evaluation.
+===============================================================================
+
+===============================================================================
+PART V
+BIBLICAL DISCERNMENT STANDARD
+===============================================================================
+
+5.1 PURPOSE
+
+The Biblical Discernment section exists to provide factual, balanced awareness
+of content that Christian families may wish to consider before viewing a movie.
+
+It is not intended to replace personal conviction.
+
+It is not intended to condemn a film.
+
+It is not intended to determine whether someone should or should not watch a
+movie.
+
+Instead, it provides information that allows every family to make informed
+decisions according to their own biblical convictions.
+
+The Biblical Discernment section never influences the JFT Score.
+
+===============================================================================
+
+5.2 PHILOSOPHY
+
+The JFT Movie Guide recognizes that faithful Christians may reach different
+conclusions regarding entertainment.
+
+For this reason, Biblical Discernment should always be presented objectively.
+
+The reviewer should describe content honestly without exaggeration,
+sensationalism, or unnecessary detail.
+
+The goal is awareness.
+
+Not persuasion.
+
+===============================================================================
+
+5.3 WRITING STYLE
+
+Biblical Discernment should always remain:
+
+• Respectful
+
+• Objective
+
+• Factual
+
+• Balanced
+
+• Concise
+
+Avoid emotionally charged language.
+
+Avoid sarcasm.
+
+Avoid ridicule.
+
+Avoid speculation regarding the intentions of filmmakers.
+
+State what appears in the film rather than assuming motives behind it.
+
+===============================================================================
+
+5.4 OVERVIEW
+
+The Overview serves as a brief summary of the movie's overall content.
+
+It should highlight the most significant areas families may wish to know before
+watching the film.
+
+The Overview should normally consist of one concise paragraph.
+
+Example:
+
+"This action film contains frequent combat violence, several strong language
+occurrences, and occasional frightening scenes. While themes of sacrifice and
+courage are present, parents should be aware of the film's intense action
+throughout."
+
+===============================================================================
+
+5.5 VIOLENCE
+
+Describe violence factually.
+
+Consider:
+
+• Frequency
+
+• Intensity
+
+• Realism
+
+• Graphic detail
+
+• Emotional impact
+
+Examples of observations include:
+
+Frequent action violence.
+
+Fantasy combat.
+
+Military warfare.
+
+Gunfire.
+
+Explosions.
+
+Martial arts.
+
+Blood.
+
+Graphic injuries.
+
+Torture.
+
+Execution.
+
+Avoid assigning moral judgments.
+
+Describe what the viewer will encounter.
+
+===============================================================================
+
+5.6 LANGUAGE
+
+Summarize notable language without attempting to document every occurrence.
+
+Mention:
+
+• Mild profanity
+
+• Moderate profanity
+
+• Strong profanity
+
+• Repeated coarse language
+
+When appropriate, mention if language is infrequent or pervasive.
+
+===============================================================================
+
+5.7 SEXUAL CONTENT
+
+Describe romantic or sexual content objectively.
+
+Possible observations include:
+
+Flirting.
+
+Romantic relationships.
+
+Passionate kissing.
+
+Sexual references.
+
+Implied intimacy.
+
+Sex scenes.
+
+The emphasis should remain factual rather than graphic.
+
+===============================================================================
+
+5.8 NUDITY
+
+If nudity is present, describe it factually.
+
+Examples include:
+
+Brief non-sexual nudity.
+
+Partial nudity.
+
+Extended nudity.
+
+Non-explicit bathing scenes.
+
+Explicit nudity.
+
+Avoid unnecessary detail.
+
+===============================================================================
+
+5.9 SUBSTANCES
+
+Describe the use of:
+
+Alcohol.
+
+Smoking.
+
+Drugs.
+
+Intoxication.
+
+Drug abuse.
+
+When appropriate, indicate whether the behavior is portrayed positively,
+negatively, or simply exists within the story.
+
+===============================================================================
+
+5.10 LGBT INFLUENCE
+
+This section exists to acknowledge notable LGBT-related content when present.
+
+Possible observations include:
+
+Background representation.
+
+Supporting characters.
+
+Primary characters.
+
+Romantic relationships.
+
+Marriage.
+
+Dialogue promoting related viewpoints.
+
+The reviewer should simply describe what appears within the film.
+
+Avoid argumentative commentary.
+
+Avoid speculation.
+
+If no notable LGBT-related content exists, this section may be omitted.
+
+===============================================================================
+
+5.11 SPIRITUAL THEMES
+
+Describe spiritual elements appearing within the movie.
+
+Examples include:
+
+Prayer.
+
+Miracles.
+
+Angels.
+
+Demons.
+
+Occult practices.
+
+Magic.
+
+Necromancy.
+
+False religions.
+
+Witchcraft.
+
+Idolatry.
+
+Ghosts.
+
+Supernatural powers.
+
+Biblical themes.
+
+The goal is to inform families of spiritual subject matter rather than determine
+whether it is acceptable.
+
+===============================================================================
+
+5.12 Biblical Virtues
+
+Biblical Discernment should acknowledge positive virtues when they are clearly
+present.
+
+Examples include:
+
+Sacrifice.
+
+Forgiveness.
+
+Compassion.
+
+Faithfulness.
+
+Courage.
+
+Justice.
+
+Humility.
+
+Selflessness.
+
+Hope.
+
+Redemption.
+
+Perseverance.
+
+These observations should remain descriptive rather than preachy.
+
+===============================================================================
+
+5.13 FAMILY SUITABILITY
+
+Rather than assigning age recommendations, briefly summarize what types of
+viewers may find the content appropriate or challenging.
+
+Example:
+
+"Older teens and adults will likely handle the intensity well, while younger
+children may find several sequences frightening."
+
+Avoid presenting this section as an official parental rating.
+
+===============================================================================
+
+5.14 REVIEWER REMINDER
+
+The Biblical Discernment section should always answer one question:
+
+"What should a Christian family know before watching this movie?"
+
+It should never answer:
+
+"Should Christians watch this movie?"
+
+That decision belongs to each individual and family under their own convictions.
+
+===============================================================================
+
+===============================================================================
+PART VI
+EDITORIAL WRITING STANDARDS
+===============================================================================
+
+6.1 PURPOSE
+
+Every JFT Movie Guide should feel as though it was written by the same editor.
+
+Regardless of when a review is written or who contributes to it, readers should
+experience a consistent tone, vocabulary, structure, and level of detail.
+
+The purpose of these standards is to maintain a unified editorial voice across
+the entire Jockisch Family Theater library.
+
+===============================================================================
+
+6.2 EDITORIAL VOICE
+
+The JFT editorial voice should always be:
+
+• Professional
+
+• Knowledgeable
+
+• Warm
+
+• Respectful
+
+• Family-oriented
+
+• Encouraging
+
+• Objective
+
+Reviews should demonstrate enthusiasm for home theater without becoming overly
+technical or difficult to understand.
+
+The goal is to inform and encourage rather than impress.
+
+===============================================================================
+
+6.3 TONE
+
+Every guide should maintain a positive and balanced tone.
+
+Even when discussing weaknesses, avoid sounding dismissive or cynical.
+
+Instead of criticizing a movie, explain where its technical presentation falls
+short.
+
+Examples:
+
+Preferred:
+
+"The Atmos mix remains fairly restrained throughout much of the film."
+
+Avoid:
+
+"The Atmos mix is disappointing."
+
+Preferred:
+
+"HDR highlights are effective, though they are used sparingly."
+
+Avoid:
+
+"The HDR is weak."
+
+Describe.
+
+Do not dramatize.
+
+===============================================================================
+
+6.4 OBJECTIVITY
+
+Editorial opinions should always be supported by observable presentation.
+
+Avoid statements that cannot be reasonably defended.
+
+Preferred:
+
+"Surround activity is subtle for much of the film."
+
+Avoid:
+
+"The sound design is boring."
+
+Preferred:
+
+"Dialogue remains consistently clear, even during action sequences."
+
+Avoid:
+
+"The audio mix is perfect."
+
+Use measurable observations whenever possible.
+
+===============================================================================
+
+6.5 CONSISTENCY OF TERMINOLOGY
+
+Use consistent vocabulary throughout every review.
+
+Preferred terminology includes:
+
+Reference-quality
+
+Immersive
+
+Natural
+
+Subtle
+
+Dynamic
+
+Detailed
+
+Balanced
+
+Controlled
+
+Refined
+
+Clean
+
+Crisp
+
+Punchy
+
+Layered
+
+Atmospheric
+
+Avoid constantly inventing new ways to describe the same concepts.
+
+Consistency improves readability.
+
+===============================================================================
+
+6.6 AVOID HYPERBOLE
+
+Do not exaggerate.
+
+Avoid phrases such as:
+
+"Absolutely insane."
+
+"Mind-blowing."
+
+"The greatest ever."
+
+"Unbelievable."
+
+"The best Atmos mix in history."
+
+Instead, use professional language.
+
+Example:
+
+"The Atmos presentation ranks among the strongest currently available on disc."
+
+===============================================================================
+
+6.7 WRITE FOR THE READER
+
+Assume the reader enjoys movies but may not understand advanced home theater
+terminology.
+
+Explain technical concepts naturally.
+
+Instead of listing specifications, describe the viewing experience.
+
+Example:
+
+Preferred:
+
+"Rain falls convincingly around the listening position, creating a convincing
+sense of space."
+
+Avoid:
+
+"The soundtrack demonstrates aggressive object-based panning utilizing the
+height array."
+
+The guide should remain approachable for casual viewers.
+
+===============================================================================
+
+6.8 BE SPECIFIC
+
+Whenever possible, describe what the viewer will actually experience.
+
+Preferred:
+
+"Explosions produce deep, room-filling bass with excellent control."
+
+Avoid:
+
+"The bass is good."
+
+Preferred:
+
+"Bright reflections on metal surfaces demonstrate excellent HDR."
+
+Avoid:
+
+"The HDR looks nice."
+
+Specific observations create more useful reviews.
+
+===============================================================================
+
+6.9 AVOID SPOILERS
+
+Movie Guides should remain largely spoiler-free.
+
+When discussing demo scenes or technical presentation, describe the sequence
+without revealing important plot developments.
+
+Preferred:
+
+"A nighttime chase sequence demonstrates exceptional surround immersion."
+
+Avoid:
+
+"The climactic battle after the main character..."
+
+Protect the viewing experience whenever possible.
+
+===============================================================================
+
+6.10 BALANCE
+
+Every review should acknowledge both strengths and weaknesses.
+
+Very few movies excel equally in every technical category.
+
+Likewise, very few movies fail completely.
+
+Balanced reviews build credibility.
+
+===============================================================================
+
+6.11 FINAL THOUGHTS
+
+The Final Thoughts section serves as the editorial conclusion.
+
+It should summarize:
+
+• The movie's technical presentation.
+
+• Who would appreciate it.
+
+• Whether it belongs in a serious home theater collection.
+
+Avoid repeating the numerical score.
+
+Instead, reinforce the overall impression left by the presentation.
+
+===============================================================================
+
+6.12 EDITORIAL INTEGRITY
+
+Never adjust a score to match:
+
+IMDb ratings.
+
+Rotten Tomatoes scores.
+
+Public opinion.
+
+Online rankings.
+
+Awards.
+
+Personal nostalgia.
+
+The JFT Guide exists to evaluate the home theater presentation independently.
+
+Readers should trust that every score reflects the same editorial philosophy.
+
+===============================================================================
+
+6.13 THE REVIEWER'S CHECKLIST
+
+Before publishing a guide, ask:
+
+✓ Does this review follow the JFT philosophy?
+
+✓ Is the score based only on technical presentation?
+
+✓ Is Biblical Discernment separate from the score?
+
+✓ Is every statement factual and balanced?
+
+✓ Have unnecessary spoilers been avoided?
+
+✓ Does the guide maintain the JFT editorial voice?
+
+✓ Would this review feel at home beside every other JFT guide?
+
+If every answer is yes, the review is ready for publication.
+
+===============================================================================
+
+===============================================================================
+PART VII
+RESEARCH & VERIFICATION STANDARDS
+===============================================================================
+
+7.1 PURPOSE
+
+Every JFT Movie Guide should be built upon a foundation of accurate research,
+careful observation, and honest evaluation.
+
+Research exists to provide context and technical information before viewing a
+film.
+
+The final JFT Score, however, must always be based upon the movie's actual
+performance within the Jockisch Family Theater.
+
+The goal of research is to inform the reviewer—not replace the reviewer's own
+experience.
+
+===============================================================================
+
+7.2 THE JFT REFERENCE THEATER
+
+All technical evaluations are performed using the Jockisch Family Theater as the
+official reference environment.
+
+Because every home theater differs in equipment, calibration, acoustics, and
+room design, individual experiences may vary.
+
+Reviews should reflect how the presentation performs within the reference
+theater and should not attempt to represent every possible viewing environment.
+
+Current Reference Theater Specifications
+
+Display
+• Hisense U8 85-inch Mini-LED QLED Television
+
+Disc Player
+• Panasonic DP-UB450 4K Ultra HD Blu-ray Player
+
+A/V Receiver
+• Onkyo TX-NR7100
+• Dirac Live Room Correction
+
+Speaker Configuration
+• 7.1.2 Dolby Atmos
+
+Subwoofers
+• Three 12-inch subwoofers
+
+Room Environment
+• Dedicated light-controlled home theater
+• Primary seating approximately 10–11 feet from the display
+
+Preferred Review Format
+
+• 4K Ultra HD Blu-ray whenever available
+• Blu-ray when no 4K edition exists
+• Digital editions only when no physical edition is owned
+
+These specifications should be updated whenever significant equipment changes
+occur.
+
+===============================================================================
+
+7.3 RESEARCH SOURCES
+
+Technical research should begin with trusted and established home theater
+sources.
+
+Examples include:
+
+• Blu-ray.com
+
+• High-Def Digest
+
+• AVS Forum
+
+• Home Theater Forum
+
+• Official studio specifications
+
+• Manufacturer documentation
+
+These resources provide valuable information regarding:
+
+• Video transfer quality
+
+• HDR implementation
+
+• Audio formats
+
+• Disc mastering
+
+• Restoration history
+
+• Special edition differences
+
+Research should establish technical context before viewing the film.
+
+===============================================================================
+
+7.4 COMMUNITY SOURCES
+
+Community discussions may provide useful observations and highlight areas worth
+evaluating.
+
+Examples include:
+
+• Reddit
+
+• Home theater discussion forums
+
+• YouTube home theater reviewers
+
+• Collector communities
+
+Community opinions should be viewed as supplemental information rather than
+editorial authority.
+
+===============================================================================
+
+7.5 PERSONAL EVALUATION
+
+Research concludes when playback begins.
+
+Once the movie starts, the reviewer should focus entirely on the presentation
+within the Jockisch Family Theater.
+
+Observe the movie carefully and evaluate the complete experience.
+
+Pay particular attention to:
+
+• Picture quality
+
+• HDR performance
+
+• Color reproduction
+
+• Contrast and black levels
+
+• Dolby Atmos presentation
+
+• Surround immersion
+
+• Dialogue clarity
+
+• Dynamic range
+
+• Bass performance
+
+• Demo-worthy sequences
+
+The final JFT Score should always reflect these personal observations.
+
+===============================================================================
+
+7.6 VERIFY — DO NOT COPY
+
+The JFT Movie Guide is an independent editorial publication.
+
+Outside reviews should never determine a JFT Score or influence the wording of a
+review.
+
+If multiple reviewers praise or criticize a particular aspect of a movie,
+attempt to verify those observations personally.
+
+Agreement should come through observation—not repetition.
+
+===============================================================================
+
+7.7 SCORE INDEPENDENCE
+
+The following should never influence a JFT Score:
+
+• IMDb ratings
+
+• Rotten Tomatoes
+
+• Metacritic
+
+• Letterboxd
+
+• Professional review scores
+
+• Award nominations
+
+• Award wins
+
+• Box office performance
+
+• Public opinion
+
+• Online rankings
+
+The JFT Score exists independently from every other rating system.
+
+===============================================================================
+
+7.8 WHEN EXPERTS DISAGREE
+
+Technical reviewers occasionally reach different conclusions regarding a video
+transfer or audio presentation.
+
+When disagreements occur:
+
+Research multiple respected sources.
+
+View the movie personally.
+
+Determine which observations best match the presentation experienced within the
+Jockisch Family Theater.
+
+Reasonable disagreement is acceptable.
+
+Independent evaluation is encouraged.
+
+===============================================================================
+
+7.9 EDITORIAL INTEGRITY
+
+Every published review should represent an honest technical evaluation.
+
+Never inflate a score because a movie is popular.
+
+Never lower a score because of personal preference.
+
+Never attempt to align a review with public expectations.
+
+Readers should trust that every JFT Score reflects the same editorial standards
+and review philosophy.
+
+===============================================================================
+
+7.10 THE FINAL AUTHORITY
+
+The Jockisch Family Theater is the final authority for every review.
+
+Research informs.
+
+Observation confirms.
+
+The purpose of every JFT Movie Guide is to document how a movie performs within
+the Jockisch Family Theater—not how it performs in someone else's system.
+
+Every review should ultimately answer one question:
+
+"How well did this movie showcase the capabilities of the Jockisch Family
+Theater?"
+
+That answer forms the foundation of every JFT Score.
+
+===============================================================================
+
+===============================================================================
+PART VIII
+JFT REFERENCE LIBRARY & SCORE CALIBRATION
+===============================================================================
+
+8.1 PURPOSE
+
+The purpose of the JFT Reference Library is to establish a stable foundation for
+the JFT Score.
+
+Rather than relying solely upon written descriptions of numerical scores, the
+JFT Score is calibrated against established reference presentations.
+
+Every new review should be compared against previously evaluated reference
+titles to maintain long-term consistency.
+
+===============================================================================
+
+8.2 WHY CALIBRATION MATTERS
+
+Without reference points, scoring naturally drifts over time.
+
+A movie that feels like a 9.5 today may feel like a 9.2 after several years of
+watching superior presentations.
+
+Likewise, an exceptional transfer may receive an inflated score if reviewed
+before experiencing true reference-quality material.
+
+The Reference Library prevents score inflation and ensures meaningful
+comparisons across the entire JFT collection.
+
+===============================================================================
+
+8.3 THE CALIBRATION QUESTION
+
+When assigning a JFT Score, avoid asking:
+
+"What number feels right?"
+
+Instead ask:
+
+"How does this presentation compare to the established JFT reference titles?"
+
+The answer should naturally guide the score.
+
+===============================================================================
+
+8.4 REFERENCE TITLES
+
+Reference titles represent benchmark presentations in one or more technical
+categories.
+
+They are not necessarily the highest-scoring movies.
+
+Instead, they define what excellence looks like in specific areas.
+
+Examples may include:
+
+• HDR performance
+
+• Dolby Atmos presentation
+
+• Bass performance
+
+• Contrast
+
+• Shadow detail
+
+• Color reproduction
+
+• Surround immersion
+
+• Overall presentation
+
+Reference titles may evolve as superior releases become available.
+
+===============================================================================
+
+8.5 CURRENT JFT REFERENCE LIBRARY
+
+The following films currently serve as calibration anchors.
+
+--------------------------------------------------------------------------
+
+Dune: Part Two
+
+Reference For:
+
+• Overall presentation
+
+• HDR
+
+• Contrast
+
+• Bass
+
+• Dynamic range
+
+• Atmos immersion
+
+--------------------------------------------------------------------------
+
+Top Gun: Maverick
+
+Reference For:
+
+• Object-based Atmos
+
+• Dynamic range
+
+• Flight sequences
+
+• Surround movement
+
+--------------------------------------------------------------------------
+
+Blade Runner 2049
+
+Reference For:
+
+• HDR grading
+
+• Black levels
+
+• Shadow detail
+
+• Cinematic atmosphere
+
+--------------------------------------------------------------------------
+
+1917
+
+Reference For:
+
+• Continuous immersion
+
+• Ambient surround activity
+
+• Environmental realism
+
+--------------------------------------------------------------------------
+
+Interstellar
+
+Reference For:
+
+• Musical integration
+
+• Bass extension
+
+• Dynamic range
+
+• Emotional scale through sound
+
+--------------------------------------------------------------------------
+
+Additional reference titles should be added only after demonstrating
+exceptional and repeatable technical excellence.
+
+===============================================================================
+
+8.6 COMPARATIVE SCORING
+
+Every new review should be mentally compared against existing reference titles.
+
+Example questions include:
+
+"Does this HDR presentation surpass Dune: Part Two?"
+
+"Is the Atmos mix more immersive than Top Gun: Maverick?"
+
+"Does the contrast exceed Blade Runner 2049?"
+
+"Is the environmental immersion comparable to 1917?"
+
+These comparisons naturally lead toward a consistent score.
+
+===============================================================================
+
+8.7 SCORE ADJUSTMENTS
+
+Occasionally, previously reviewed movies may require recalibration.
+
+Reasons may include:
+
+• Discovery of superior reference material
+
+• Improved technical understanding
+
+• New restoration releases
+
+• Updated Atmos mixes
+
+• Significant theater upgrades
+
+When adjustments occur, they should be applied consistently across the library.
+
+===============================================================================
+
+8.8 REFERENCE TITLES ARE NOT IMMUTABLE
+
+The Reference Library is intended to evolve.
+
+As new films push the boundaries of home theater presentation, they may become
+new calibration standards.
+
+Older references may be replaced when a clearly superior presentation becomes
+available.
+
+The goal is continuous improvement while maintaining historical consistency.
+
+===============================================================================
+
+8.9 SCORE DISTRIBUTION
+
+Perfect scores should remain exceptionally rare.
+
+Likewise, extremely poor scores should be uncommon.
+
+Most technically competent releases will naturally fall within the middle of
+the scale.
+
+Only presentations demonstrating truly exceptional technical achievement should
+occupy the highest tier.
+
+This approach preserves the significance of elite scores.
+
+===============================================================================
+
+8.10 THE REVIEWER'S REMINDER
+
+The purpose of the Reference Library is consistency.
+
+Do not attempt to force every movie into a predetermined score.
+
+Instead, compare the presentation honestly against the established reference
+titles.
+
+The JFT Score should reflect where the movie belongs within the library—not
+where it ranks among public opinion.
+
+Every review strengthens the Reference Library.
+
+Every reference title strengthens the JFT Score.
+
+===============================================================================
+
+===============================================================================
+PART IX
+PRESENTATION CLASSIFICATIONS
+===============================================================================
+
+9.1 PURPOSE
+
+While the JFT Score provides precise numerical evaluation, Presentation
+Classifications provide readers with an immediate understanding of a movie's
+overall technical quality.
+
+The classification complements the score but never replaces it.
+
+Every Full JFT Review shall include both a numerical JFT Score and a
+Presentation Classification.
+
+===============================================================================
+
+9.2 CLASSIFICATION PHILOSOPHY
+
+Presentation Classifications exist to translate technical scores into meaningful
+descriptions.
+
+Rather than interpreting numbers alone, readers can quickly understand where a
+movie fits within the JFT library.
+
+The classification should always reflect the movie's overall technical
+presentation and not its story, acting, popularity, or cultural significance.
+
+===============================================================================
+
+9.3 OFFICIAL CLASSIFICATIONS
+
+Reference Presentation
+
+Reserved for the finest home theater experiences currently available.
+
+These presentations demonstrate exceptional picture quality, outstanding HDR,
+reference-quality Dolby Atmos, remarkable bass performance, and consistently
+immersive presentation.
+
+Extremely rare.
+
+--------------------------------------------------------------------------
+
+Showcase Presentation
+
+An exceptional technical presentation that consistently impresses and serves as
+excellent demonstration material.
+
+Minor shortcomings may exist but do not significantly diminish the experience.
+
+--------------------------------------------------------------------------
+
+Outstanding Presentation
+
+A technically impressive presentation that excels in most areas while exhibiting
+only modest limitations.
+
+Highly recommended for home theater enthusiasts.
+
+--------------------------------------------------------------------------
+
+Excellent Presentation
+
+A consistently strong presentation that fully benefits from modern home theater
+equipment.
+
+Minor technical compromises prevent it from reaching the highest tiers.
+
+--------------------------------------------------------------------------
+
+Very Good Presentation
+
+Above-average technical quality with noticeable strengths.
+
+While not reference material, these movies provide an enjoyable and engaging
+home theater experience.
+
+--------------------------------------------------------------------------
+
+Good Presentation
+
+Competent technical presentation that performs well without standing out.
+
+Suitable for casual viewing but unlikely to be selected as demonstration
+material.
+
+--------------------------------------------------------------------------
+
+Average Presentation
+
+Technically adequate but largely unremarkable.
+
+Presentation neither significantly enhances nor detracts from the viewing
+experience.
+
+--------------------------------------------------------------------------
+
+Limited Presentation
+
+Noticeable technical shortcomings reduce the effectiveness of the home theater
+experience.
+
+Examples may include weak HDR, limited surround activity, poor transfers,
+compressed audio, or dated mastering.
+
+===============================================================================
+
+9.4 CLASSIFICATION CONSISTENCY
+
+Presentation Classifications should remain stable over time.
+
+Changes should occur only when:
+
+• The JFT Score changes.
+
+• A superior transfer becomes available.
+
+• A remastered audio presentation is released.
+
+• Significant recalibration of the JFT Reference Library occurs.
+
+===============================================================================
+
+9.5 REVIEWER REMINDER
+
+The classification should summarize the presentation—not influence the score.
+
+Assign the JFT Score first.
+
+Then determine which Presentation Classification best represents that score.
+
+===============================================================================
+
+===============================================================================
+PART X
+DEMO SCENE STANDARDS
+===============================================================================
+
+10.1 PURPOSE
+
+The Demo Scene section identifies moments within a movie that best demonstrate
+the capabilities of the Jockisch Family Theater.
+
+These scenes showcase exceptional technical presentation and serve as practical
+reference material for home theater demonstrations.
+
+Demo scenes should highlight the presentation—not the story.
+
+===============================================================================
+
+10.2 PHILOSOPHY
+
+A demo scene should answer one question:
+
+"If someone wanted to experience what this theater is capable of, what scene
+would you play?"
+
+A demo scene may demonstrate:
+
+• Outstanding HDR
+
+• Exceptional Dolby Atmos
+
+• Powerful bass
+
+• Outstanding picture quality
+
+• Surround immersion
+
+• Dynamic range
+
+• A combination of multiple technical strengths
+
+The purpose is to showcase the theater—not summarize the movie.
+
+===============================================================================
+
+10.3 SELECTION CRITERIA
+
+A scene should be included only if it demonstrates a clear technical strength.
+
+Consider:
+
+• Visual impact
+
+• Audio immersion
+
+• Dynamic range
+
+• Bass performance
+
+• Overall presentation
+
+Not every exciting scene qualifies as a demo scene.
+
+Technical excellence—not action—is the determining factor.
+
+===============================================================================
+
+10.4 NUMBER OF DEMO SCENES
+
+Quality is more important than quantity.
+
+Most movies should include between three and six demo scenes.
+
+Only the strongest technical sequences should be selected.
+
+Avoid listing every memorable moment.
+
+===============================================================================
+
+10.5 SCENE DESCRIPTIONS
+
+Descriptions should remain concise.
+
+Explain why the scene is noteworthy without revealing important plot details.
+
+Preferred example:
+
+"An early desert sequence demonstrates exceptional HDR, expansive Atmos
+effects, and deep bass."
+
+Avoid:
+
+"The final battle after..."
+
+Protect the viewing experience whenever possible.
+
+===============================================================================
+
+10.6 TIMESTAMPS
+
+Whenever possible, include an approximate timestamp.
+
+Example:
+
+00:18:40
+
+Timestamps allow viewers to quickly locate demonstration material.
+
+Minor variations between editions are acceptable.
+
+===============================================================================
+
+10.7 DEMO CATEGORIES
+
+Each demo scene should identify its primary technical strengths.
+
+Suggested categories include:
+
+HDR
+
+Picture Quality
+
+Dolby Atmos
+
+Surround Immersion
+
+Bass
+
+Dynamic Range
+
+Color
+
+Contrast
+
+Overall Showcase
+
+Multiple categories may be assigned when appropriate.
+
+===============================================================================
+
+10.8 SPOILER POLICY
+
+Demo scenes should remain largely spoiler-free.
+
+Avoid revealing:
+
+Major plot twists
+
+Character deaths
+
+Ending sequences
+
+Unexpected story developments
+
+When an excellent demo scene occurs late in the movie, describe the technical
+presentation without explaining its narrative significance.
+
+===============================================================================
+
+10.9 REFERENCE DEMO SCENES
+
+Some scenes may become permanent JFT reference demonstrations.
+
+These scenes are repeatedly used to evaluate:
+
+• New equipment
+
+• Calibration adjustments
+
+• Theater upgrades
+
+• Comparisons between formats
+
+Reference demo scenes should represent the highest technical standards currently
+available.
+
+===============================================================================
+
+10.10 REVIEWER REMINDER
+
+Demo scenes exist to demonstrate technical excellence.
+
+They should answer the question:
+
+"What scene best showcases the capabilities of the Jockisch Family Theater?"
+
+Every selected scene should earn its place through exceptional presentation.
+
+===============================================================================
+
+===============================================================================
+PART XI
+OFFICIAL REVIEW SCHEMA & AI GENERATION STANDARD
+===============================================================================
+
+11.1 PURPOSE
+
+This section defines the official output format for every JFT Movie Guide.
+
+All reviews should follow the same structure, property names, and formatting to
+ensure compatibility with the JFT Collection App and long-term consistency
+across the library.
+
+Regardless of whether a review is written manually or generated with AI, the
+final output shall conform to this standard.
+
+===============================================================================
+
+11.2 OFFICIAL SCHEMA
+
+Every Full JFT Review shall use the following structure:
+
+module.exports = {
+
+    info: {},
+
+    rating: {},
+
+    theater: {},
+
+    biblicalDiscernment: {},
+
+    ownership: {},
+
+    demo: [],
+
+    finalThoughts: ""
+
+};
+
+Collection Guides use the same schema while unused sections remain null.
+
+===============================================================================
+
+11.3 REQUIRED SECTION ORDER
+
+Reviews shall always follow the same order.
+
+1. Movie Information
+
+2. JFT Score
+
+3. Presentation Classification
+
+4. Tagline
+
+5. Why It Earned Its Score
+
+6. Theater Experience
+
+7. Biblical Discernment
+
+8. Best Edition
+
+9. Demo Scenes
+
+10. Final Thoughts
+
+Maintaining this order ensures consistency throughout the entire library.
+
+===============================================================================
+
+11.4 COLLECTION GUIDE FORMAT
+
+Collection Guides follow the same schema.
+
+Sections not applicable to Collection Guides shall remain null.
+
+No alternate schema shall be created.
+
+===============================================================================
+
+11.5 PROPERTY CONSISTENCY
+
+Property names shall remain consistent throughout the library.
+
+Avoid renaming fields once established.
+
+Future additions should extend the schema rather than replacing existing
+properties whenever practical.
+
+This ensures long-term compatibility with the Collection App.
+
+===============================================================================
+
+11.6 WRITING CONSTRAINTS
+
+Reviews should be concise while remaining informative.
+
+Avoid unnecessary repetition.
+
+Paragraphs should generally remain short and easily readable.
+
+Descriptions should prioritize clarity over length.
+
+===============================================================================
+
+11.7 AI GENERATION STANDARD
+
+When generating a JFT Movie Guide with artificial intelligence, the following
+requirements apply:
+
+• Follow the current JFT Editorial Standard.
+
+• Follow the official schema.
+
+• Return only valid JavaScript that conforms to the official JFT schema. 
+Do not include Markdown, explanations, commentary, code fences, or 
+reasoning. The output should be immediately ready for inclusion within 
+the JFT Collection App.
+
+• Use the official JFT editorial voice.
+
+• Keep Biblical Discernment separate from the JFT Score.
+
+• Avoid spoilers whenever practical.
+
+• Base the JFT Score solely on technical presentation.
+
+• Return output that is immediately ready for use within the Collection App.
+
+===============================================================================
+
+11.8 REVIEW VALIDATION
+
+Before a review is considered complete, verify:
+
+✓ The official schema is followed.
+
+✓ All required fields are present.
+
+✓ The property names are correct.
+
+✓ Formatting is consistent.
+
+✓ The output contains valid JavaScript.
+
+✓ The review follows the Editorial Standard.
+
+===============================================================================
+
+11.9 FUTURE COMPATIBILITY
+
+The official schema is intended to remain stable.
+
+Future revisions should preserve backward compatibility whenever practical.
+
+If major structural changes become necessary, they should be introduced through
+a new version of the Editorial Standard.
+
+===============================================================================
+
+11.10 FINAL PRINCIPLE
+
+The JFT Movie Guide is more than a collection of reviews.
+
+It is a curated record of the technical and cinematic experiences shared within
+the Jockisch Family Theater.
+
+Every review should reflect the standards, integrity, and consistency
+established throughout this Editorial Standard.
+
+===============================================================================
+
+===============================================================================
+PART XII
+OFFICIAL REVIEW SCHEMA & AI GENERATION STANDARD
+===============================================================================
+
+12.1 PURPOSE
+
+This section defines the official output format for every JFT Movie Guide.
+
+All reviews shall follow the same structure, property names, and formatting to
+ensure compatibility with the JFT Collection App and long-term consistency
+across the library.
+
+Regardless of whether a review is written manually or generated with artificial
+intelligence, the final output shall conform to this standard.
+
+===============================================================================
+
+12.2 OFFICIAL SCHEMA
+
+Every Full JFT Review shall use the following JavaScript structure.
+
+module.exports = {
+
+    info: {},
+
+    rating: {},
+
+    theater: {},
+
+    biblicalDiscernment: {},
+
+    ownership: {},
+
+    demo: [],
+
+    finalThoughts: ""
+
+};
+
+Collection Guides shall use the same schema while unused sections remain null.
+
+No alternate schemas shall be created.
+
+===============================================================================
+
+12.3 OFFICIAL PROPERTY NAMES
+
+To ensure compatibility with the JFT Collection App, the following property
+names are considered official and shall remain consistent throughout every
+review.
+
+• info
+
+• rating
+
+• theater
+
+• biblicalDiscernment
+
+• ownership
+
+• demo
+
+• finalThoughts
+
+Property names should never be renamed or abbreviated.
+
+Future additions should extend the schema rather than replacing existing
+properties whenever practical.
+
+===============================================================================
+
+12.4 REQUIRED SECTION ORDER
+
+Every Full JFT Review shall present information in the following order.
+
+1. Movie Information
+
+2. JFT Score
+
+3. Presentation Classification
+
+4. Tagline
+
+5. Why It Earned Its Score
+
+6. Theater Experience
+
+7. Biblical Discernment
+
+8. Best Edition
+
+9. Demo Scenes
+
+10. Final Thoughts
+
+Maintaining this order ensures readers can quickly locate information while
+preserving consistency throughout the library.
+
+===============================================================================
+
+12.5 COLLECTION GUIDE FORMAT
+
+Collection Guides shall follow the same official schema.
+
+The following sections shall remain null.
+
+rating
+
+theater
+
+demo
+
+The Collection App is responsible for hiding null sections during rendering.
+
+===============================================================================
+
+12.6 DEMO SCENE OBJECT
+
+Each Demo Scene shall use a consistent object structure.
+
+Example:
+
+{
+
+    timestamp: "",
+
+    category: [],
+
+    description: ""
+
+}
+
+Recommended category values include:
+
+• HDR
+
+• Picture Quality
+
+• Dolby Atmos
+
+• Surround Immersion
+
+• Bass
+
+• Dynamic Range
+
+• Color
+
+• Contrast
+
+• Overall Showcase
+
+Multiple categories may be assigned when appropriate.
+
+===============================================================================
+
+12.7 WRITING CONSTRAINTS
+
+Reviews should remain concise while providing meaningful information.
+
+Avoid unnecessary repetition.
+
+Paragraphs should generally remain short and easily readable.
+
+Descriptions should prioritize clarity over length.
+
+Maintain the official JFT editorial voice throughout every section.
+
+===============================================================================
+
+12.8 AI GENERATION STANDARD
+
+When generating a JFT Movie Guide with artificial intelligence, the following
+requirements shall apply.
+
+• Follow the current JFT Editorial Standard.
+
+• Follow the official review schema.
+
+• Use the official property names.
+
+• Maintain the required section order.
+
+• Return only valid JavaScript.
+
+• Do not include Markdown.
+
+• Do not include code fences.
+
+• Do not include explanations, commentary, or reasoning.
+
+• Use the official JFT editorial voice.
+
+• Keep Biblical Discernment completely independent from the JFT Score.
+
+• Base the JFT Score solely upon technical presentation.
+
+• Avoid spoilers whenever practical.
+
+• Return output that is immediately ready for inclusion within the JFT
+  Collection App without modification.
+
+===============================================================================
+
+12.9 REVIEW VALIDATION
+
+Before a review is considered complete, verify the following.
+
+✓ The official schema is followed.
+
+✓ The official property names are correct.
+
+✓ All required sections are present.
+
+✓ Demo Scene objects follow the official format.
+
+✓ Formatting is consistent.
+
+✓ The output contains valid JavaScript.
+
+✓ Biblical Discernment remains separate from the JFT Score.
+
+✓ The review follows the JFT Editorial Standard.
+
+===============================================================================
+
+12.10 FUTURE COMPATIBILITY
+
+The official review schema is intended to remain stable.
+
+Future revisions should preserve backward compatibility whenever practical.
+
+If significant structural changes become necessary, they should be introduced
+through a new version of the Editorial Standard.
+
+Existing reviews should continue to function without requiring unnecessary
+modification.
+
+===============================================================================
+
+12.11 FINAL PRINCIPLE
+
+The JFT Movie Guide is more than a collection of reviews.
+
+It is a curated record of the technical experiences shared within the Jockisch
+Family Theater while providing thoughtful Biblical Discernment for families.
+
+Every review should reflect the standards, consistency, integrity, and
+professionalism established throughout this Editorial Standard.
+
+Regardless of whether a guide is written by hand or generated through artificial
+intelligence, every published review should read as though it was written by the
+same editor, following the same philosophy and applying the same standards.
+
+The integrity of the JFT Movie Guide depends not on who writes each review, but
+on faithfully following the Editorial Standard that governs them all.
+
+===============================================================================
