@@ -1480,19 +1480,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-mockingjay-part-2.jpg"
   },
 
-  {
-    id: "the-hunger-games-the-ballad-of-songbirds-and-snakes",
-    collection: "The Hunger Games",
-    franchise: "The Hunger Games",
-    boothGroup: "The Hunger Games",
-    title: "The Hunger Games: The Ballad of Songbirds & Snakes",
-    edition: "Blu Ray",
-    year: "2023",
-    rating: "PG-13",
-    runtime: "2hr 37min",
-    poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-the-ballad-of-songbirds-and-snakes.jpg"
-  },
-
   // ==================================================
   // The Incredible Hulk
   // ==================================================

@@ -1441,58 +1441,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/the-hunger-games/the-hunger-games.jpg"
   },
 
-  {
-    id: "the-hunger-games-catching-fire",
-    collection: "The Hunger Games",
-    franchise: "The Hunger Games",
-    boothGroup: "The Hunger Games",
-    title: "The Hunger Games: Catching Fire",
-    edition: "Blu Ray",
-    year: "2013",
-    rating: "PG-13",
-    runtime: "2hr 26min",
-    poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-catching-fire.jpg"
-  },
-
-  {
-    id: "the-hunger-games-mockingjay-part-1",
-    collection: "The Hunger Games",
-    franchise: "The Hunger Games",
-    boothGroup: "The Hunger Games",
-    title: "The Hunger Games: Mockingjay - Part 1",
-    edition: "Blu Ray",
-    year: "2014",
-    rating: "PG-13",
-    runtime: "2hr 3min",
-    poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-mockingjay-part-1.jpg"
-  },
-
-  {
-    id: "the-hunger-games-mockingjay-part-2",
-    collection: "The Hunger Games",
-    franchise: "The Hunger Games",
-    boothGroup: "The Hunger Games",
-    title: "The Hunger Games: Mockingjay - Part 2",
-    edition: "Blu Ray",
-    year: "2015",
-    rating: "PG-13",
-    runtime: "2hr 17min",
-    poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-mockingjay-part-2.jpg"
-  },
-
-  {
-    id: "the-hunger-games-the-ballad-of-songbirds-and-snakes",
-    collection: "The Hunger Games",
-    franchise: "The Hunger Games",
-    boothGroup: "The Hunger Games",
-    title: "The Hunger Games: The Ballad of Songbirds & Snakes",
-    edition: "Blu Ray",
-    year: "2023",
-    rating: "PG-13",
-    runtime: "2hr 37min",
-    poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-the-ballad-of-songbirds-and-snakes.jpg"
-  },
-
   // ==================================================
   // The Incredible Hulk
   // ==================================================
