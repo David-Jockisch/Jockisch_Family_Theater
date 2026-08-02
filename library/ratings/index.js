@@ -89,6 +89,11 @@ const theAmazingSpiderMan = require("./movies/the-amazing-spider-man.js");
 const theAmazingSpiderMan2 = require("./movies/the-amazing-spider-man-2.js");
 const theAvengers = require("./movies/the-avengers.js");
 const theGrinch = require("./movies/the-grinch.js");
+const theHungerGames = require("./movies/the-hunger-games.js");
+const theHungerGamesCatchingFire = require("./movies/the-hunger-games-catching-fire.js");
+const theHungerGamesMockingjayPart1 = require("./movies/the-hunger-games-mockingjay-part-1.js");
+const theHungerGamesMockingjayPart2 = require("./movies/the-hunger-games-mockingjay-part-2.js");
+const theHungerGamesTheBalladOfSongbirdsAndSnakes = require("./movies/the-hunger-games-the-ballad-of-songbirds-and-snakes.js");
 const theIncredibleHulk = require("./movies/the-incredible-hulk.js");
 const theKingOfKings = require("./movies/the-king-of-kings.js");
 const theLorax = require("./movies/the-lorax.js");
@@ -206,6 +211,11 @@ const movieRatings = [
   theAmazingSpiderMan2,
   theAvengers,
   theGrinch,
+  theHungerGames,
+  theHungerGamesCatchingFire,
+  theHungerGamesMockingjayPart1,
+  theHungerGamesMockingjayPart2,
+  theHungerGamesTheBalladOfSongbirdsAndSnakes,
   theIncredibleHulk,
   theKingOfKings,
   theLorax,
