@@ -860,27 +860,120 @@ function showGameDetail(game) {
 }
 
 
-const PLAYLIST_PROGRESS_PREFIX = "jft-playlist-progress:";
+const MEDIA_PROGRESS_KEY = "jft-media-progress";
+const LEGACY_PLAYLIST_PROGRESS_PREFIX = "jft-playlist-progress:";
 
-function getPlaylistProgressKey(playlistId) {
-  return `${PLAYLIST_PROGRESS_PREFIX}${playlistId}`;
+function loadMediaProgress() {
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem(MEDIA_PROGRESS_KEY) || "{}"
+    );
+
+    return saved && typeof saved === "object" && !Array.isArray(saved)
+      ? saved
+      : {};
+  } catch (error) {
+    console.warn("Could not read JFT media progress:", error);
+    return {};
+  }
 }
 
-function getPlaylistProgress(playlistId, itemCount) {
-  const saved = Number.parseInt(
-    localStorage.getItem(getPlaylistProgressKey(playlistId)) || "0",
-    10
-  );
-
-  if (!Number.isInteger(saved)) return 0;
-  return Math.min(Math.max(saved, 0), Math.max(itemCount, 0));
-}
-
-function setPlaylistProgress(playlistId, itemIndex) {
+function saveMediaProgress(progress) {
   localStorage.setItem(
-    getPlaylistProgressKey(playlistId),
-    String(Math.max(0, itemIndex))
+    MEDIA_PROGRESS_KEY,
+    JSON.stringify(progress)
   );
+}
+
+function getMediaProgressId(item) {
+  if (item.displayType === "episode") {
+    return `episode:${item.ref}:s${item.season}:e${item.episode}`;
+  }
+
+  if (item.displayType === "special") {
+    return `special:${item.id || item.progressId || item.ref}`;
+  }
+
+  return `movie:${item.ref}`;
+}
+
+function isPlaylistItemWatched(item, progress = loadMediaProgress()) {
+  const entry = progress[getMediaProgressId(item)];
+
+  if (entry === true) return true;
+
+  return Boolean(
+    entry &&
+    typeof entry === "object" &&
+    entry.watched === true
+  );
+}
+
+function setPlaylistItemWatched(item, watched) {
+  const progress = loadMediaProgress();
+  const progressId = getMediaProgressId(item);
+
+  if (watched) {
+    progress[progressId] = {
+      watched: true,
+      watchedAt: new Date().toISOString()
+    };
+  } else {
+    delete progress[progressId];
+  }
+
+  saveMediaProgress(progress);
+}
+
+function getPlaylistProgressState(items) {
+  const progress = loadMediaProgress();
+  const watchedStates = items.map(item =>
+    isPlaylistItemWatched(item, progress)
+  );
+
+  const watchedCount = watchedStates.filter(Boolean).length;
+  const currentIndex = watchedStates.findIndex(watched => !watched);
+
+  return {
+    watchedStates,
+    watchedCount,
+    remainingCount: Math.max(items.length - watchedCount, 0),
+    currentIndex: currentIndex === -1 ? items.length : currentIndex,
+    currentItem: currentIndex === -1 ? null : items[currentIndex],
+    isComplete: items.length > 0 && watchedCount === items.length
+  };
+}
+
+function getPreviousWatchedItem(items, currentIndex) {
+  const progress = loadMediaProgress();
+
+  for (
+    let index = Math.min(currentIndex - 1, items.length - 1);
+    index >= 0;
+    index -= 1
+  ) {
+    if (isPlaylistItemWatched(items[index], progress)) {
+      return items[index];
+    }
+  }
+
+  for (let index = items.length - 1; index >= 0; index -= 1) {
+    if (isPlaylistItemWatched(items[index], progress)) {
+      return items[index];
+    }
+  }
+
+  return null;
+}
+
+function resetPlaylistMediaProgress(items) {
+  const progress = loadMediaProgress();
+
+  items.forEach(item => {
+    delete progress[getMediaProgressId(item)];
+  });
+
+  saveMediaProgress(progress);
 }
 
 function resolvePlaylistMedia(ref) {
@@ -997,6 +1090,47 @@ function expandPlaylistItems(playlist) {
 
   return expanded;
 }
+
+function migrateLegacyPlaylistProgress() {
+  const mediaProgress = loadMediaProgress();
+  let changed = false;
+
+  playlistLibrary.forEach(playlist => {
+    const legacyKey =
+      `${LEGACY_PLAYLIST_PROGRESS_PREFIX}${playlist.id}`;
+
+    const legacyValue = localStorage.getItem(legacyKey);
+    if (legacyValue === null) return;
+
+    const watchedCount = Number.parseInt(legacyValue, 10);
+    const items = expandPlaylistItems(playlist);
+
+    if (Number.isInteger(watchedCount) && watchedCount > 0) {
+      items
+        .slice(0, Math.min(watchedCount, items.length))
+        .forEach(item => {
+          const progressId = getMediaProgressId(item);
+
+          if (!mediaProgress[progressId]) {
+            mediaProgress[progressId] = {
+              watched: true,
+              watchedAt: new Date().toISOString(),
+              migratedFrom: playlist.id
+            };
+
+            changed = true;
+          }
+        });
+    }
+
+    localStorage.removeItem(legacyKey);
+  });
+
+  if (changed) {
+    saveMediaProgress(mediaProgress);
+  }
+}
+
 function playlistItemLabel(item) {
   if (item.displayType === "episode") {
     const episodeCode = `S${item.season} E${item.episode}`;
@@ -1206,9 +1340,13 @@ function renderPlaylistEventCard(eventData) {
 function createPlaylistCard(playlist) {
   const card = document.createElement("button");
   const items = expandPlaylistItems(playlist);
-  const currentIndex = getPlaylistProgress(playlist.id, items.length);
-  const currentItem = items[currentIndex];
-  const eventData = calculatePlaylistEvent(playlist, items.length, currentIndex);
+  const progressState = getPlaylistProgressState(items);
+  const currentItem = progressState.currentItem;
+  const eventData = calculatePlaylistEvent(
+    playlist,
+    items.length,
+    progressState.watchedCount
+  );
   const artwork = escapeHtml(assetPath(playlist.poster || currentItem?.poster));
 
   card.className = "playlist-card";
@@ -1234,7 +1372,13 @@ function createPlaylistCard(playlist) {
           `
           : ""
       }
-      ${currentItem ? `<strong>Up next: ${escapeHtml(currentItem.title)}${currentItem.displayType === "episode" ? ` — ${escapeHtml(playlistItemLabel(currentItem))}` : ""}</strong>` : ""}
+      ${
+        currentItem
+          ? `<strong>Up next: ${escapeHtml(currentItem.title)}${currentItem.displayType === "episode" ? ` — ${escapeHtml(playlistItemLabel(currentItem))}` : ""}</strong>`
+          : items.length
+            ? `<strong>Playlist complete ✓</strong>`
+            : ""
+      }
     </div>`;
 
   card.addEventListener("click", () => showPlaylistDetail(playlist));
@@ -1249,13 +1393,18 @@ function renderPlaylists() {
 }
 
 
-function renderPlaylistItemsBySection(items, currentIndex) {
+function renderPlaylistItemsBySection(
+  items,
+  watchedStates,
+  currentIndex
+) {
   let previousSection = null;
 
   return items
     .map((item, index) => {
+      const isWatched = watchedStates[index];
       const state =
-        index < currentIndex
+        isWatched
           ? "watched"
           : index === currentIndex
             ? "current"
@@ -1280,9 +1429,9 @@ function renderPlaylistItemsBySection(items, currentIndex) {
         <li class="playlist-item ${state}">
           <span class="playlist-item-status" aria-hidden="true">
             ${
-              state === "watched"
+              isWatched
                 ? "✓"
-                : state === "current"
+                : index === currentIndex
                   ? "▶"
                   : index + 1
             }
@@ -1316,73 +1465,176 @@ function renderPlaylistItemsBySection(items, currentIndex) {
 
 function showPlaylistDetail(playlist) {
   const items = expandPlaylistItems(playlist);
-  let currentIndex = getPlaylistProgress(playlist.id, items.length);
 
   function renderDetail() {
-    currentIndex = getPlaylistProgress(playlist.id, items.length);
-    const currentItem = items[currentIndex];
-    const eventData = calculatePlaylistEvent(playlist, items.length, currentIndex);
-    const heroPoster = escapeHtml(assetPath(playlist.poster || currentItem?.poster));
+    const progressState = getPlaylistProgressState(items);
+    const currentItem = progressState.currentItem;
+    const eventData = calculatePlaylistEvent(
+      playlist,
+      items.length,
+      progressState.watchedCount
+    );
+
+    const heroPoster = escapeHtml(
+      assetPath(playlist.poster || currentItem?.poster)
+    );
 
     playlistDetail.innerHTML = `
       <article class="playlist-detail-card" style="--detail-bg: url('${heroPoster}')">
         <div class="detail-backdrop"></div>
         <div class="playlist-detail-content">
-          <button id="playlistBackButton" class="detail-back-button" type="button">← Back to Playlists</button>
+          <button id="playlistBackButton" class="detail-back-button" type="button">
+            ← Back to Playlists
+          </button>
 
           <header class="playlist-detail-header">
-            ${heroPoster ? `<img class="playlist-detail-poster" src="${heroPoster}" alt="${escapeHtml(playlist.title)}">` : ""}
+            ${
+              heroPoster
+                ? `<img class="playlist-detail-poster" src="${heroPoster}" alt="${escapeHtml(playlist.title)}">`
+                : ""
+            }
+
             <div>
               <p class="eyebrow">JFT Playlist</p>
               <h1>${escapeHtml(playlist.title)}</h1>
               <p>${escapeHtml(playlist.description || "")}</p>
+
               <div class="playlist-progress-summary">
-                <span>${currentIndex} watched</span>
-                <span>${Math.max(items.length - currentIndex, 0)} remaining</span>
+                <span>${progressState.watchedCount} watched</span>
+                <span>${progressState.remainingCount} remaining</span>
               </div>
             </div>
           </header>
 
           ${renderPlaylistEventCard(eventData)}
 
-          ${currentItem ? `
-            <section class="up-next-card">
-              <p class="eyebrow">Up Next</p>
-              <div class="up-next-main">
-                ${currentItem.poster ? `<img src="${escapeHtml(assetPath(currentItem.poster))}" alt="">` : ""}
-                <div>
-                  <h2>${escapeHtml(currentItem.title)}</h2>
-                  <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
-                  <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">${escapeHtml(currentItem.availabilityLabel)}</span>
-                </div>
-              </div>
-              <div class="playlist-progress-actions">
-                <button id="playlistPreviousButton" class="secondary-button" type="button" ${currentIndex === 0 ? "disabled" : ""}>Previous</button>
-                <button id="playlistWatchedButton" class="movie-guide-button" type="button" ${currentIndex >= items.length ? "disabled" : ""}>Mark Watched</button>
-                <button id="playlistResetButton" class="secondary-button" type="button">Reset</button>
-              </div>
-            </section>` : ""}
+          ${
+            currentItem
+              ? `
+                <section class="up-next-card">
+                  <p class="eyebrow">Up Next</p>
+
+                  <div class="up-next-main">
+                    ${
+                      currentItem.poster
+                        ? `<img src="${escapeHtml(assetPath(currentItem.poster))}" alt="">`
+                        : ""
+                    }
+
+                    <div>
+                      <h2>${escapeHtml(currentItem.title)}</h2>
+                      <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
+
+                      <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">
+                        ${escapeHtml(currentItem.availabilityLabel)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="playlist-progress-actions">
+                    <button
+                      id="playlistPreviousButton"
+                      class="secondary-button"
+                      type="button"
+                      ${progressState.watchedCount === 0 ? "disabled" : ""}
+                    >
+                      Previous
+                    </button>
+
+                    <button
+                      id="playlistWatchedButton"
+                      class="movie-guide-button"
+                      type="button"
+                    >
+                      Mark Watched
+                    </button>
+
+                    <button
+                      id="playlistResetButton"
+                      class="secondary-button"
+                      type="button"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </section>
+              `
+              : items.length
+                ? `
+                  <section class="up-next-card playlist-complete-card">
+                    <p class="eyebrow">Playlist Complete</p>
+                    <h2>Ready for ${escapeHtml(
+                      playlist.event?.title || playlist.title
+                    )}</h2>
+                    <p>Every entry in this playlist is marked watched.</p>
+
+                    <div class="playlist-progress-actions">
+                      <button
+                        id="playlistPreviousButton"
+                        class="secondary-button"
+                        type="button"
+                      >
+                        Previous
+                      </button>
+
+                      <button
+                        id="playlistResetButton"
+                        class="secondary-button"
+                        type="button"
+                      >
+                        Reset
+                      </button>
+                    </div>
+                  </section>
+                `
+                : ""
+          }
 
           <ol class="playlist-item-list">
-            ${renderPlaylistItemsBySection(items, currentIndex)}
+            ${renderPlaylistItemsBySection(
+              items,
+              progressState.watchedStates,
+              progressState.currentIndex
+            )}
           </ol>
         </div>
-      </article>`;
+      </article>
+    `;
 
-    byId("playlistBackButton").addEventListener("click", showPlaylistLibrary);
+    byId("playlistBackButton").addEventListener(
+      "click",
+      showPlaylistLibrary
+    );
 
     byId("playlistPreviousButton")?.addEventListener("click", () => {
-      setPlaylistProgress(playlist.id, currentIndex - 1);
-      renderDetail();
+      const previousItem = getPreviousWatchedItem(
+        items,
+        progressState.currentIndex
+      );
+
+      if (previousItem) {
+        setPlaylistItemWatched(previousItem, false);
+        renderDetail();
+      }
     });
 
     byId("playlistWatchedButton")?.addEventListener("click", () => {
-      setPlaylistProgress(playlist.id, currentIndex + 1);
-      renderDetail();
+      if (currentItem) {
+        setPlaylistItemWatched(currentItem, true);
+        renderDetail();
+      }
     });
 
     byId("playlistResetButton")?.addEventListener("click", () => {
-      setPlaylistProgress(playlist.id, 0);
+      const confirmed = window.confirm(
+        "Reset watched progress for every item in this playlist? " +
+        "Because progress is shared, matching items will also become " +
+        "unwatched in other playlists."
+      );
+
+      if (!confirmed) return;
+
+      resetPlaylistMediaProgress(items);
       renderDetail();
     });
   }
@@ -1459,6 +1711,7 @@ byId("gameCountButton").addEventListener("click", showGameLibrary);
 byId("movieCount").textContent = String(getCollectionMovies().length);
 byId("gameCount").textContent = String(getCollectionGames().length);
 populateFilters();
+migrateLegacyPlaylistProgress();
 renderMovies();
 renderGames();
 renderPlaylists();
