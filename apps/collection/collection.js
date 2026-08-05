@@ -873,7 +873,7 @@ function getPlaylistProgress(playlistId, itemCount) {
   );
 
   if (!Number.isInteger(saved)) return 0;
-  return Math.min(Math.max(saved, 0), Math.max(itemCount - 1, 0));
+  return Math.min(Math.max(saved, 0), Math.max(itemCount, 0));
 }
 
 function setPlaylistProgress(playlistId, itemIndex) {
@@ -1017,11 +1017,198 @@ function playlistItemLabel(item) {
   return parts.join(" · ");
 }
 
+
+const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+
+function parsePlaylistEventDate(dateValue) {
+  if (!dateValue) return null;
+
+  const parts = String(dateValue).split("-").map(Number);
+  if (parts.length !== 3 || parts.some(part => !Number.isInteger(part))) {
+    return null;
+  }
+
+  const [year, month, day] = parts;
+  const date = new Date(year, month - 1, day);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatPlaylistEventDate(date) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  }).format(date);
+}
+
+function getPlaylistEventStatus(weeklyGoal, remainingEntries, daysRemaining) {
+  if (remainingEntries === 0) return { label: "Complete", level: "complete" };
+  if (daysRemaining < 0) return { label: "Target Passed", level: "behind" };
+  if (weeklyGoal <= 2) return { label: "Comfortably On Track", level: "ahead" };
+  if (weeklyGoal <= 5) return { label: "On Track", level: "on-track" };
+  if (weeklyGoal <= 8) return { label: "Pick Up the Pace", level: "warning" };
+  return { label: "Marathon Mode", level: "behind" };
+}
+
+function getPlaylistEventUrgency(daysRemaining, remainingEntries) {
+  if (remainingEntries === 0) return "complete";
+  if (daysRemaining < 0) return "passed";
+  if (daysRemaining <= 7) return "urgent";
+  if (daysRemaining <= 30) return "near";
+  if (daysRemaining <= 90) return "approaching";
+  return "normal";
+}
+
+function getWeeklyGoalMessage(weeklyGoal, remainingEntries) {
+  if (remainingEntries === 0) return "You are ready for the event.";
+  if (weeklyGoal <= 2) return "A light week should keep you comfortably on pace.";
+  if (weeklyGoal <= 5) return "A few viewing sessions this week should keep you on track.";
+  if (weeklyGoal <= 8) return "Plan a couple of longer sessions or a weekend binge.";
+  if (weeklyGoal <= 12) return "Several binge sessions will help bring the goal back down.";
+  return "A major catch-up week is needed to finish by the target date.";
+}
+
+function calculatePlaylistEvent(playlist, itemCount, completedEntries) {
+  const eventDate = parsePlaylistEventDate(playlist.event?.date);
+  if (!eventDate) return null;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  eventDate.setHours(0, 0, 0, 0);
+
+  const daysRemaining = Math.ceil(
+    (eventDate.getTime() - today.getTime()) / DAY_IN_MILLISECONDS
+  );
+
+  const remainingEntries = Math.max(itemCount - completedEntries, 0);
+  const weeksRemaining = daysRemaining > 0 ? daysRemaining / 7 : 0;
+
+  const weeklyGoal =
+    remainingEntries === 0
+      ? 0
+      : weeksRemaining > 0
+        ? Math.ceil(remainingEntries / weeksRemaining)
+        : remainingEntries;
+
+  const percentComplete =
+    itemCount > 0
+      ? Math.round((completedEntries / itemCount) * 100)
+      : 0;
+
+  const status = getPlaylistEventStatus(
+    weeklyGoal,
+    remainingEntries,
+    daysRemaining
+  );
+
+  return {
+    title: playlist.event.title || playlist.title,
+    date: eventDate,
+    formattedDate: formatPlaylistEventDate(eventDate),
+    daysRemaining,
+    remainingEntries,
+    completedEntries,
+    totalEntries: itemCount,
+    weeklyGoal,
+    percentComplete,
+    status,
+    urgency: getPlaylistEventUrgency(daysRemaining, remainingEntries),
+    weeklyGoalMessage: getWeeklyGoalMessage(weeklyGoal, remainingEntries)
+  };
+}
+
+function playlistCountdownLabel(eventData) {
+  if (eventData.remainingEntries === 0) return "Ready";
+  if (eventData.daysRemaining < 0) {
+    const daysPast = Math.abs(eventData.daysRemaining);
+    return `${daysPast} ${daysPast === 1 ? "day" : "days"} past`;
+  }
+  if (eventData.daysRemaining === 0) return "Today";
+
+  return `${eventData.daysRemaining} ${
+    eventData.daysRemaining === 1 ? "day" : "days"
+  } remaining`;
+}
+
+function renderPlaylistEventCard(eventData) {
+  if (!eventData) return "";
+
+  return `
+    <section class="playlist-event-card urgency-${escapeHtml(eventData.urgency)}">
+      <div class="playlist-event-heading">
+        <div>
+          <p class="eyebrow">Upcoming Event</p>
+          <h2>${escapeHtml(eventData.title)}</h2>
+          <p>${escapeHtml(eventData.formattedDate)}</p>
+        </div>
+
+        <div class="playlist-event-countdown">
+          <strong>${
+            eventData.daysRemaining < 0
+              ? Math.abs(eventData.daysRemaining)
+              : eventData.daysRemaining
+          }</strong>
+          <span>${
+            eventData.daysRemaining < 0
+              ? "Days Past"
+              : eventData.daysRemaining === 0
+                ? "Today"
+                : "Days Remaining"
+          }</span>
+        </div>
+      </div>
+
+      <div class="playlist-event-progress">
+        <div class="playlist-event-progress-copy">
+          <span>Progress</span>
+          <strong>${eventData.completedEntries} / ${eventData.totalEntries} Entries</strong>
+        </div>
+
+        <div
+          class="playlist-event-progress-track"
+          role="progressbar"
+          aria-label="Playlist progress"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="${eventData.percentComplete}"
+        >
+          <span style="width: ${eventData.percentComplete}%"></span>
+        </div>
+
+        <span class="playlist-event-percentage">${eventData.percentComplete}%</span>
+      </div>
+
+      <div class="playlist-event-stats">
+        <div class="playlist-event-stat">
+          <span>Weekly Goal</span>
+          <strong>${eventData.weeklyGoal}</strong>
+          <small>${eventData.weeklyGoal === 1 ? "Entry Per Week" : "Entries Per Week"}</small>
+        </div>
+
+        <div class="playlist-event-stat">
+          <span>Remaining</span>
+          <strong>${eventData.remainingEntries}</strong>
+          <small>${eventData.remainingEntries === 1 ? "Entry" : "Entries"}</small>
+        </div>
+
+        <div class="playlist-event-stat">
+          <span>Status</span>
+          <strong class="playlist-event-status status-${escapeHtml(eventData.status.level)}">
+            ${escapeHtml(eventData.status.label)}
+          </strong>
+          <small>${escapeHtml(eventData.weeklyGoalMessage)}</small>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function createPlaylistCard(playlist) {
   const card = document.createElement("button");
   const items = expandPlaylistItems(playlist);
   const currentIndex = getPlaylistProgress(playlist.id, items.length);
   const currentItem = items[currentIndex];
+  const eventData = calculatePlaylistEvent(playlist, items.length, currentIndex);
   const artwork = escapeHtml(assetPath(playlist.poster || currentItem?.poster));
 
   card.className = "playlist-card";
@@ -1036,6 +1223,17 @@ function createPlaylistCard(playlist) {
       <p class="eyebrow">Playlist</p>
       <h2>${escapeHtml(playlist.title)}</h2>
       <p>${escapeHtml(playlist.description || "")}</p>
+      ${
+        eventData
+          ? `
+            <div class="playlist-card-event">
+              <span>${escapeHtml(eventData.title)}</span>
+              <strong>${escapeHtml(playlistCountdownLabel(eventData))}</strong>
+              <small>Weekly Goal: ${eventData.weeklyGoal} ${eventData.weeklyGoal === 1 ? "entry" : "entries"}</small>
+            </div>
+          `
+          : ""
+      }
       ${currentItem ? `<strong>Up next: ${escapeHtml(currentItem.title)}${currentItem.displayType === "episode" ? ` — ${escapeHtml(playlistItemLabel(currentItem))}` : ""}</strong>` : ""}
     </div>`;
 
@@ -1123,6 +1321,7 @@ function showPlaylistDetail(playlist) {
   function renderDetail() {
     currentIndex = getPlaylistProgress(playlist.id, items.length);
     const currentItem = items[currentIndex];
+    const eventData = calculatePlaylistEvent(playlist, items.length, currentIndex);
     const heroPoster = escapeHtml(assetPath(playlist.poster || currentItem?.poster));
 
     playlistDetail.innerHTML = `
@@ -1144,6 +1343,8 @@ function showPlaylistDetail(playlist) {
             </div>
           </header>
 
+          ${renderPlaylistEventCard(eventData)}
+
           ${currentItem ? `
             <section class="up-next-card">
               <p class="eyebrow">Up Next</p>
@@ -1157,7 +1358,7 @@ function showPlaylistDetail(playlist) {
               </div>
               <div class="playlist-progress-actions">
                 <button id="playlistPreviousButton" class="secondary-button" type="button" ${currentIndex === 0 ? "disabled" : ""}>Previous</button>
-                <button id="playlistWatchedButton" class="movie-guide-button" type="button" ${currentIndex >= items.length - 1 ? "disabled" : ""}>Mark Watched</button>
+                <button id="playlistWatchedButton" class="movie-guide-button" type="button" ${currentIndex >= items.length ? "disabled" : ""}>Mark Watched</button>
                 <button id="playlistResetButton" class="secondary-button" type="button">Reset</button>
               </div>
             </section>` : ""}

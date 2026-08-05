@@ -8,6 +8,11 @@ const hungerGames = {
 
   poster: "/assets/playlists/the-hunger-games.jpg",
 
+  event: {
+    title: "The Hunger Games: Sunrise on the Reaping",
+    date: "2026-11-20"
+  },
+
   items: [
 
     // =====================================
@@ -59,6 +64,17 @@ const hungerGames = {
       section: "The 10th Hunger Games",
       type: "movie",
       ref: "the-hunger-games-the-ballad-of-songbirds-and-snakes"
+    },
+
+    // =====================================
+    // The 50th Hunger Games
+    // =====================================
+
+    {
+      id: "06-sunrise-on-the-reaping",
+      section: "The 50th Hunger Games (Second Quarter Quell)",
+      type: "movie",
+      ref: "the-hunger-games-sunrise-on-the-reaping"
     }
   ]
 };

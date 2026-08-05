@@ -317,15 +317,6 @@ const accessibleMediaLibrary = [
     year: "2025",
     provider: "Upcoming",
     poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
-  },
-
-  {
-    id: "the-hunger-games-sunrise-on-the-reaping",
-    mediaType: "movie",
-    title: "The Hunger Games: Sunrise on the Reaping",
-    year: "2026",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/the-hunger-games/the-hunger-games-sunrise-on-the-reaping.jpg"
   }
 
 ];

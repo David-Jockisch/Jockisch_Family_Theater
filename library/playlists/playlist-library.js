@@ -9,11 +9,11 @@ import jurassicUniverse from "./jurassic-universe.js";
 
 const playlistLibrary = [
   doomsdayPrep,
+  hungerGames,
   infinitySaga,
   marvelLegacy,
   spiderVerse,
   wizardingWorld,
-  hungerGames,
   worldWarII,
   jurassicUniverse
 ];

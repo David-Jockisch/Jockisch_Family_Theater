@@ -2226,3 +2226,194 @@ button {
   letter-spacing: 0.02em;
 }
 
+/* Playlist event countdown and reactive weekly goal */
+
+.playlist-card-event {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem;
+  border: 1px solid rgba(212, 154, 98, 0.28);
+  border-radius: 0.8rem;
+  background: rgba(184, 115, 51, 0.08);
+}
+
+.playlist-card-event span,
+.playlist-card-event small {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+.playlist-card-event strong {
+  color: var(--accent-light);
+  font-size: 0.95rem;
+}
+
+.playlist-event-card {
+  display: grid;
+  gap: 1.15rem;
+  margin-bottom: 1rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(212, 154, 98, 0.42);
+  border-radius: 1rem;
+  background:
+    linear-gradient(145deg, rgba(184, 115, 51, 0.16), transparent 48%),
+    rgba(17, 17, 17, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.playlist-event-card.urgency-approaching { border-color: rgba(229, 181, 109, 0.52); }
+.playlist-event-card.urgency-near { border-color: rgba(224, 138, 70, 0.72); }
+.playlist-event-card.urgency-urgent,
+.playlist-event-card.urgency-passed { border-color: rgba(224, 96, 70, 0.82); }
+.playlist-event-card.urgency-complete { border-color: rgba(143, 209, 158, 0.62); }
+
+.playlist-event-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.playlist-event-heading h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  font-weight: 500;
+}
+
+.playlist-event-heading p:not(.eyebrow) {
+  margin: 0.45rem 0 0;
+  color: var(--text-muted);
+}
+
+.playlist-event-countdown {
+  display: grid;
+  min-width: 7.5rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.9rem;
+  background: rgba(7, 7, 7, 0.56);
+  text-align: center;
+}
+
+.playlist-event-countdown strong {
+  color: var(--accent-light);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 8vw, 4rem);
+  font-weight: 500;
+  line-height: 0.9;
+}
+
+.playlist-event-countdown span {
+  margin-top: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.playlist-event-progress {
+  display: grid;
+  grid-template-columns: auto minmax(5rem, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.playlist-event-progress-copy {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.playlist-event-progress-copy span {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.playlist-event-progress-copy strong { font-size: 0.9rem; }
+
+.playlist-event-progress-track {
+  height: 0.65rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.playlist-event-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+
+.playlist-event-percentage {
+  color: var(--accent-light);
+  font-weight: 900;
+}
+
+.playlist-event-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.playlist-event-stat {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.playlist-event-stat > span {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.playlist-event-stat > strong {
+  color: var(--accent-light);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 5vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.playlist-event-stat > small {
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.playlist-event-stat .playlist-event-status {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.playlist-event-status.status-complete,
+.playlist-event-status.status-ahead,
+.playlist-event-status.status-on-track { color: #8fd19e; }
+
+.playlist-event-status.status-warning { color: #e5b56d; }
+.playlist-event-status.status-behind { color: #e08066; }
+
+@media (max-width: 44rem) {
+  .playlist-event-heading { grid-template-columns: 1fr; }
+  .playlist-event-countdown { width: 100%; }
+  .playlist-event-progress { grid-template-columns: 1fr auto; }
+  .playlist-event-progress-track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .playlist-event-stats { grid-template-columns: 1fr; }
+}
+

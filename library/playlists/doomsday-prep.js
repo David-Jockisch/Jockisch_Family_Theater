@@ -2,8 +2,13 @@ const doomsdayPrep = {
   id: "avengers-doomsday-prep",
   title: "Avengers: Doomsday Prep",
   description:
-    "A complete 69-entry Marvel watch order based on the supplied Marvel Watchlist page, including films, television seasons, and specially placed credit scenes.",
+    "A complete Marvel watch order based on the supplied Marvel Watchlist page, including films, television episodes, and specially placed credit scenes.",
   poster: "/assets/playlists/doomsday-prep.jpg",
+
+  event: {
+    title: "Avengers: Doomsday",
+    date: "2026-12-17"
+  },
 
   items: [
     // Legacy: WWII & The 1940s
