@@ -15,7 +15,7 @@
 
   <meta
     name="description"
-    content="Browse the Jockisch Family Theater movie and game collection."
+    content="Browse the Jockisch Family Theater movie, game, and playlist collection."
   >
 
   <meta
@@ -124,27 +124,35 @@
       </div>
     </header>
 
-    <nav
-      id="libraryNav"
-      class="library-nav"
-      aria-label="Collection libraries"
-    >
-      <button
-        id="movieTabButton"
-        class="library-tab"
-        type="button"
-      >
-        Movies
-      </button>
+<nav
+  id="libraryNav"
+  class="library-nav"
+  aria-label="Collection libraries"
+>
+  <button
+    id="movieTabButton"
+    class="library-tab"
+    type="button"
+  >
+    Movies
+  </button>
 
-      <button
-        id="gameTabButton"
-        class="library-tab"
-        type="button"
-      >
-        Games
-      </button>
-    </nav>
+  <button
+    id="gameTabButton"
+    class="library-tab"
+    type="button"
+  >
+    Games
+  </button>
+
+  <button
+    id="playlistTabButton"
+    class="library-tab"
+    type="button"
+  >
+    Playlists
+  </button>
+</nav>
 
     <main>
       <section
@@ -169,7 +177,7 @@
             </h1>
 
             <p class="home-description">
-              Browse movies by title or collection, or open the game library by console.
+              Browse movies, games, and ordered watch playlists.
             </p>
           </div>
         </div>
@@ -206,6 +214,25 @@
             <span class="library-choice-copy">
               <strong>Games</strong>
               <span>Browse games by console</span>
+            </span>
+
+            <span class="library-choice-arrow" aria-hidden="true">
+              →
+            </span>
+          </button>
+
+          <button
+            id="openPlaylistsButton"
+            class="library-choice"
+            type="button"
+          >
+            <span class="library-choice-icon" aria-hidden="true">
+              ▶
+            </span>
+
+            <span class="library-choice-copy">
+              <strong>Playlists</strong>
+              <span>Follow ordered movie and TV watch plans</span>
             </span>
 
             <span class="library-choice-arrow" aria-hidden="true">
@@ -382,6 +409,30 @@
         </div>
 
         <div id="gameGroups" class="game-groups" aria-live="polite"></div>
+      </section>
+
+
+      <section
+        id="playlistLibraryView"
+        class="view"
+        aria-label="Playlists"
+      >
+        <div class="section-heading playlist-heading">
+          <div>
+            <p class="eyebrow">What should we watch next?</p>
+            <h1>Playlists</h1>
+          </div>
+        </div>
+
+        <div id="playlistGrid" class="playlist-grid" aria-live="polite"></div>
+      </section>
+
+      <section
+        id="playlistDetailView"
+        class="view"
+        aria-label="Playlist Details"
+      >
+        <div id="playlistDetail"></div>
       </section>
 
       <section

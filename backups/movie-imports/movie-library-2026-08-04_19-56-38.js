@@ -1231,19 +1231,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/spider-man-no-way-home.jpg"
   },
 
-  {
-    id: "spider-man-across-the-spider-verse",
-    collection: "Spider-Man",
-    franchise: "Marvel Cinematic Universe",
-    boothGroup: "Marvel Cinematic Universe",
-    title: "Spider-Man: Across the Spider-Verse",
-    edition: "Digital",
-    year: "2023",
-    rating: "PG",
-    runtime: "2hr 20min",
-    poster: "/assets/posters/movies/marvel/spider-man-across-the-spider-verse.jpg"
-  },
-
   // ==================================================
   // Spider-Verse
   // ==================================================

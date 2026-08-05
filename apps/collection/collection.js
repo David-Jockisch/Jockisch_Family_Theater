@@ -1,7 +1,9 @@
 import gameLibrary from "../../library/games/game-library.js";
+import playlistLibrary from "../../library/playlists/playlist-library.js";
+import accessibleMediaLibrary from "../../library/accessible-media/accessible-media-library.js";
 
 const byId = id => document.getElementById(id);
-const views = ["homeView", "movieLibraryView", "movieDetailView", "movieGuideView", "gameLibraryView", "gameDetailView"].map(byId);
+const views = ["homeView", "movieLibraryView", "movieDetailView", "movieGuideView", "gameLibraryView", "gameDetailView", "playlistLibraryView", "playlistDetailView"].map(byId);
 
 const homeView = byId("homeView");
 const movieLibraryView = byId("movieLibraryView");
@@ -9,6 +11,8 @@ const movieDetailView = byId("movieDetailView");
 const movieGuideView = byId("movieGuideView");
 const gameLibraryView = byId("gameLibraryView");
 const gameDetailView = byId("gameDetailView");
+const playlistLibraryView = byId("playlistLibraryView");
+const playlistDetailView = byId("playlistDetailView");
 
 const movieGrid = byId("movieGrid");
 const movieDetail = byId("movieDetail");
@@ -32,6 +36,8 @@ const allMoviesViewButton = byId("allMoviesViewButton");
 const movieCollectionsViewButton = byId("movieCollectionsViewButton");
 const movieCollectionGrid = byId("movieCollectionGrid");
 const collectionEmptyState = byId("collectionEmptyState");
+const playlistGrid = byId("playlistGrid");
+const playlistDetail = byId("playlistDetail");
 
 const movieFiltersToggle = byId("movieFiltersToggle");
 const gameFiltersToggle = byId("gameFiltersToggle");
@@ -212,7 +218,8 @@ function setPageViewMode(targetView) {
   const isDetailView =
     targetView === movieDetailView ||
     targetView === movieGuideView ||
-    targetView === gameDetailView;
+    targetView === gameDetailView ||
+    targetView === playlistDetailView;
 
   document.body.classList.toggle("home-view-active", isHomeView);
   document.body.classList.toggle("detail-view-active", isDetailView);
@@ -222,6 +229,7 @@ function setPageViewMode(targetView) {
 function setActiveLibraryTab(activeLibrary) {
   byId("movieTabButton").classList.toggle("active", activeLibrary === "movies");
   byId("gameTabButton").classList.toggle("active", activeLibrary === "games");
+  byId("playlistTabButton").classList.toggle("active", activeLibrary === "playlists");
 }
 
 function showView(targetView, activeLibrary = "") {
@@ -236,6 +244,7 @@ function showView(targetView, activeLibrary = "") {
 function showHome() { showView(homeView); }
 function showMovieLibrary() { renderMovies(); showView(movieLibraryView, "movies"); }
 function showGameLibrary() { renderGames(); showView(gameLibraryView, "games"); }
+function showPlaylistLibrary() { renderPlaylists(); showView(playlistLibraryView, "playlists"); }
 
 function createMovieCard(movie) {
   const card = document.createElement("button");
@@ -849,6 +858,252 @@ function showGameDetail(game) {
   showView(gameDetailView, "games");
 }
 
+
+const PLAYLIST_PROGRESS_PREFIX = "jft-playlist-progress:";
+
+function getPlaylistProgressKey(playlistId) {
+  return `${PLAYLIST_PROGRESS_PREFIX}${playlistId}`;
+}
+
+function getPlaylistProgress(playlistId, itemCount) {
+  const saved = Number.parseInt(
+    localStorage.getItem(getPlaylistProgressKey(playlistId)) || "0",
+    10
+  );
+
+  if (!Number.isInteger(saved)) return 0;
+  return Math.min(Math.max(saved, 0), Math.max(itemCount - 1, 0));
+}
+
+function setPlaylistProgress(playlistId, itemIndex) {
+  localStorage.setItem(
+    getPlaylistProgressKey(playlistId),
+    String(Math.max(0, itemIndex))
+  );
+}
+
+function resolvePlaylistMedia(ref) {
+  const owned = getCollectionMovies().find(movie => movie.id === ref);
+  if (owned) {
+    return {
+      ...owned,
+      mediaType: owned.mediaType || "movie",
+      availabilityLabel: getMovieFormat(owned) || "Owned",
+      availabilityType: "owned"
+    };
+  }
+
+  const accessible = accessibleMediaLibrary.find(item => item.id === ref);
+  if (accessible) {
+    return {
+      ...accessible,
+      availabilityLabel: accessible.provider || "Available",
+      availabilityType: "accessible"
+    };
+  }
+
+  return {
+    id: ref,
+    title: ref,
+    mediaType: "unknown",
+    availabilityLabel: "Not in library",
+    availabilityType: "missing",
+    poster: ""
+  };
+}
+
+function expandPlaylistItems(playlist) {
+  const expanded = [];
+
+  (playlist.items || []).forEach(item => {
+    const media = resolvePlaylistMedia(item.ref);
+    const displayTitle = item.title || media.title;
+    const shared = {
+      ...media,
+      ...item,
+      title: displayTitle
+    };
+
+    if (item.type === "episode-list") {
+      (item.episodes || []).forEach(episode => {
+        expanded.push({
+          ...shared,
+          progressId:
+            episode.id ||
+            `${item.id || item.ref}-s${episode.season}-e${episode.episode}`,
+          displayType: "episode",
+          season: episode.season,
+          episode: episode.episode,
+          episodeTitle: episode.title || ""
+        });
+      });
+      return;
+    }
+
+    if (item.type === "season") {
+      const episodeCount = Number(item.episodeCount || 0);
+
+      for (let episode = 1; episode <= episodeCount; episode += 1) {
+        expanded.push({
+          ...shared,
+          progressId: `${item.id || item.ref}-e${episode}`,
+          displayType: "episode",
+          episode
+        });
+      }
+
+      return;
+    }
+
+    expanded.push({
+      ...shared,
+      progressId: item.id || item.ref,
+      displayType: item.type || media.mediaType || "movie"
+    });
+  });
+
+  return expanded;
+}
+
+function playlistItemLabel(item) {
+  if (item.displayType === "episode") {
+    const episodeCode = `S${item.season} E${item.episode}`;
+    return item.episodeTitle
+      ? `${episodeCode} — ${item.episodeTitle}`
+      : episodeCode;
+  }
+
+  if (item.displayType === "special") {
+    return item.note || "Specially placed credit scene";
+  }
+
+  const parts = [
+    item.year ? String(item.year) : "Movie",
+    item.priority
+  ].filter(Boolean);
+
+  return parts.join(" · ");
+}
+
+function createPlaylistCard(playlist) {
+  const card = document.createElement("button");
+  const items = expandPlaylistItems(playlist);
+  const currentIndex = getPlaylistProgress(playlist.id, items.length);
+  const currentItem = items[currentIndex];
+  const artwork = escapeHtml(assetPath(playlist.poster || currentItem?.poster));
+
+  card.className = "playlist-card";
+  card.type = "button";
+  card.innerHTML = `
+    <div class="playlist-card-artwork">
+      ${artwork ? `<img src="${artwork}" alt="" loading="lazy">` : ""}
+      <span class="playlist-card-overlay" aria-hidden="true"></span>
+      <span class="playlist-card-count">${items.length} items</span>
+    </div>
+    <div class="playlist-card-copy">
+      <p class="eyebrow">Playlist</p>
+      <h2>${escapeHtml(playlist.title)}</h2>
+      <p>${escapeHtml(playlist.description || "")}</p>
+      ${currentItem ? `<strong>Up next: ${escapeHtml(currentItem.title)}${currentItem.displayType === "episode" ? ` — ${escapeHtml(playlistItemLabel(currentItem))}` : ""}</strong>` : ""}
+    </div>`;
+
+  card.addEventListener("click", () => showPlaylistDetail(playlist));
+  return card;
+}
+
+function renderPlaylists() {
+  playlistGrid.innerHTML = "";
+  playlistLibrary.forEach(playlist => {
+    playlistGrid.appendChild(createPlaylistCard(playlist));
+  });
+}
+
+function showPlaylistDetail(playlist) {
+  const items = expandPlaylistItems(playlist);
+  let currentIndex = getPlaylistProgress(playlist.id, items.length);
+
+  function renderDetail() {
+    currentIndex = getPlaylistProgress(playlist.id, items.length);
+    const currentItem = items[currentIndex];
+    const heroPoster = escapeHtml(assetPath(playlist.poster || currentItem?.poster));
+
+    playlistDetail.innerHTML = `
+      <article class="playlist-detail-card" style="--detail-bg: url('${heroPoster}')">
+        <div class="detail-backdrop"></div>
+        <div class="playlist-detail-content">
+          <button id="playlistBackButton" class="detail-back-button" type="button">← Back to Playlists</button>
+
+          <header class="playlist-detail-header">
+            ${heroPoster ? `<img class="playlist-detail-poster" src="${heroPoster}" alt="${escapeHtml(playlist.title)}">` : ""}
+            <div>
+              <p class="eyebrow">JFT Playlist</p>
+              <h1>${escapeHtml(playlist.title)}</h1>
+              <p>${escapeHtml(playlist.description || "")}</p>
+              <div class="playlist-progress-summary">
+                <span>${currentIndex} watched</span>
+                <span>${Math.max(items.length - currentIndex, 0)} remaining</span>
+              </div>
+            </div>
+          </header>
+
+          ${currentItem ? `
+            <section class="up-next-card">
+              <p class="eyebrow">Up Next</p>
+              <div class="up-next-main">
+                ${currentItem.poster ? `<img src="${escapeHtml(assetPath(currentItem.poster))}" alt="">` : ""}
+                <div>
+                  <h2>${escapeHtml(currentItem.title)}</h2>
+                  <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
+                  <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">${escapeHtml(currentItem.availabilityLabel)}</span>
+                </div>
+              </div>
+              <div class="playlist-progress-actions">
+                <button id="playlistPreviousButton" class="secondary-button" type="button" ${currentIndex === 0 ? "disabled" : ""}>Previous</button>
+                <button id="playlistWatchedButton" class="movie-guide-button" type="button" ${currentIndex >= items.length - 1 ? "disabled" : ""}>Mark Watched</button>
+                <button id="playlistResetButton" class="secondary-button" type="button">Reset</button>
+              </div>
+            </section>` : ""}
+
+          <ol class="playlist-item-list">
+            ${items.map((item, index) => {
+              const state = index < currentIndex ? "watched" : index === currentIndex ? "current" : "upcoming";
+              return `
+                <li class="playlist-item ${state}">
+                  <span class="playlist-item-status" aria-hidden="true">${state === "watched" ? "✓" : state === "current" ? "▶" : index + 1}</span>
+                  ${item.poster ? `<img src="${escapeHtml(assetPath(item.poster))}" alt="" loading="lazy">` : ""}
+                  <div class="playlist-item-copy">
+                    <strong>${escapeHtml(item.title)}</strong>
+                    <span>${escapeHtml(playlistItemLabel(item))}</span>
+                  </div>
+                  <span class="availability-badge ${escapeHtml(item.availabilityType)}">${escapeHtml(item.availabilityLabel)}</span>
+                </li>`;
+            }).join("")}
+          </ol>
+        </div>
+      </article>`;
+
+    byId("playlistBackButton").addEventListener("click", showPlaylistLibrary);
+
+    byId("playlistPreviousButton")?.addEventListener("click", () => {
+      setPlaylistProgress(playlist.id, currentIndex - 1);
+      renderDetail();
+    });
+
+    byId("playlistWatchedButton")?.addEventListener("click", () => {
+      setPlaylistProgress(playlist.id, currentIndex + 1);
+      renderDetail();
+    });
+
+    byId("playlistResetButton")?.addEventListener("click", () => {
+      setPlaylistProgress(playlist.id, 0);
+      renderDetail();
+    });
+  }
+
+  renderDetail();
+  showView(playlistDetailView, "playlists");
+}
+
 function clearMovieFilters() {
   movieSearch.value = "";
   movieFormatFilter.value = "";
@@ -907,8 +1162,10 @@ platformGamesViewButton.addEventListener("click", () => setGameViewMode("platfor
 byId("homeButton").addEventListener("click", showHome);
 byId("movieTabButton").addEventListener("click", showMovieLibrary);
 byId("gameTabButton").addEventListener("click", showGameLibrary);
+byId("playlistTabButton").addEventListener("click", showPlaylistLibrary);
 byId("openMoviesButton").addEventListener("click", showMovieLibrary);
 byId("openGamesButton").addEventListener("click", showGameLibrary);
+byId("openPlaylistsButton").addEventListener("click", showPlaylistLibrary);
 byId("movieCountButton").addEventListener("click", showMovieLibrary);
 byId("gameCountButton").addEventListener("click", showGameLibrary);
 
@@ -917,6 +1174,7 @@ byId("gameCount").textContent = String(getCollectionGames().length);
 populateFilters();
 renderMovies();
 renderGames();
+renderPlaylists();
 showHome();
 
 

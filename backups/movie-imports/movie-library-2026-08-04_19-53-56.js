@@ -1231,19 +1231,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/spider-man-no-way-home.jpg"
   },
 
-  {
-    id: "spider-man-across-the-spider-verse",
-    collection: "Spider-Man",
-    franchise: "Marvel Cinematic Universe",
-    boothGroup: "Marvel Cinematic Universe",
-    title: "Spider-Man: Across the Spider-Verse",
-    edition: "Digital",
-    year: "2023",
-    rating: "PG",
-    runtime: "2hr 20min",
-    poster: "/assets/posters/movies/marvel/spider-man-across-the-spider-verse.jpg"
-  },
-
   // ==================================================
   // Spider-Verse
   // ==================================================
@@ -1748,19 +1735,6 @@ const movieLibrary = [,
     rating: "PG-13",
     runtime: "1hr 49min",
     poster: "/assets/posters/movies/marvel/venom-the-last-dance.jpg"
-  },
-
-  {
-    id: "venom-let-there-be-carnage",
-    collection: "Venom",
-    franchise: "Venom-verse",
-    boothGroup: "Spider-Man",
-    title: "Venom: Let There Be Carnage",
-    edition: "Digital",
-    year: "2021",
-    rating: "PG-13",
-    runtime: "1hr 37min",
-    poster: "/assets/posters/movies/marvel/venom-let-there-be-carnage.jpg"
   },
 
   // ==================================================

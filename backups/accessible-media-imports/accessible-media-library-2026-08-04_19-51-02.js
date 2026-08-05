@@ -239,44 +239,7 @@ const accessibleMediaLibrary = [
     year: "2026",
     provider: "Upcoming",
     poster: "/assets/posters/shows/marvel/visionquest.jpg"
-  },
-
-  {
-    id: "morbius",
-    mediaType: "movie",
-    title: "Morbius",
-    year: "2022",
-    provider: "Disney+",
-    poster: "/assets/posters/movies/morbius.jpg"
-  },
-
-  {
-    id: "madame-web",
-    mediaType: "movie",
-    title: "Madame Web",
-    year: "2024",
-    provider: "Disney+",
-    poster: "/assets/posters/movies/madame-web.jpg"
-  },
-
-  {
-    id: "kraven-the-hunter",
-    mediaType: "movie",
-    title: "Kraven the Hunter",
-    year: "2024",
-    provider: "Netflix",
-    poster: "/assets/posters/movies/kraven-the-hunter.jpg"
-  },
-
-  {
-    id: "spider-man-beyond-the-spider-verse",
-    mediaType: "movie",
-    title: "Spider-Man: Beyond the Spider-Verse",
-    year: "2027",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/marvel/spider-man-beyond-the-spider-verse.jpg"
   }
-
 ];
 
 export default accessibleMediaLibrary;

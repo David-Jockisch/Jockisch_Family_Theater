@@ -266,15 +266,6 @@ const accessibleMediaLibrary = [
     year: "2024",
     provider: "Netflix",
     poster: "/assets/posters/movies/kraven-the-hunter.jpg"
-  },
-
-  {
-    id: "spider-man-beyond-the-spider-verse",
-    mediaType: "movie",
-    title: "Spider-Man: Beyond the Spider-Verse",
-    year: "2027",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/marvel/spider-man-beyond-the-spider-verse.jpg"
   }
 
 ];
