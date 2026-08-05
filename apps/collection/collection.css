@@ -2194,3 +2194,35 @@ button {
     grid-column: 3;
   }
 }
+
+/* Playlist section headings rendered from each item's `section` field */
+
+.playlist-section-heading {
+  display: block;
+  margin: 1.5rem 0 0.65rem;
+  padding: 0;
+  list-style: none;
+}
+
+.playlist-section-heading:first-child {
+  margin-top: 0;
+}
+
+.playlist-section-heading span {
+  display: block;
+  padding: 0.7rem 0.85rem;
+  border-left: 3px solid var(--accent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(184, 115, 51, 0.13),
+      transparent
+    );
+  color: var(--accent-light);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+

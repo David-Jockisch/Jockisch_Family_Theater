@@ -1050,6 +1050,72 @@ function renderPlaylists() {
   });
 }
 
+
+function renderPlaylistItemsBySection(items, currentIndex) {
+  let previousSection = null;
+
+  return items
+    .map((item, index) => {
+      const state =
+        index < currentIndex
+          ? "watched"
+          : index === currentIndex
+            ? "current"
+            : "upcoming";
+
+      const section = item.section || "Playlist";
+
+      const sectionHeading =
+        section !== previousSection
+          ? `
+            <li class="playlist-section-heading">
+              <span>${escapeHtml(section)}</span>
+            </li>
+          `
+          : "";
+
+      previousSection = section;
+
+      return `
+        ${sectionHeading}
+
+        <li class="playlist-item ${state}">
+          <span class="playlist-item-status" aria-hidden="true">
+            ${
+              state === "watched"
+                ? "✓"
+                : state === "current"
+                  ? "▶"
+                  : index + 1
+            }
+          </span>
+
+          ${
+            item.poster
+              ? `
+                <img
+                  src="${escapeHtml(assetPath(item.poster))}"
+                  alt=""
+                  loading="lazy"
+                >
+              `
+              : ""
+          }
+
+          <div class="playlist-item-copy">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span>${escapeHtml(playlistItemLabel(item))}</span>
+          </div>
+
+          <span class="availability-badge ${escapeHtml(item.availabilityType)}">
+            ${escapeHtml(item.availabilityLabel)}
+          </span>
+        </li>
+      `;
+    })
+    .join("");
+}
+
 function showPlaylistDetail(playlist) {
   const items = expandPlaylistItems(playlist);
   let currentIndex = getPlaylistProgress(playlist.id, items.length);
@@ -1097,19 +1163,7 @@ function showPlaylistDetail(playlist) {
             </section>` : ""}
 
           <ol class="playlist-item-list">
-            ${items.map((item, index) => {
-              const state = index < currentIndex ? "watched" : index === currentIndex ? "current" : "upcoming";
-              return `
-                <li class="playlist-item ${state}">
-                  <span class="playlist-item-status" aria-hidden="true">${state === "watched" ? "✓" : state === "current" ? "▶" : index + 1}</span>
-                  ${item.poster ? `<img src="${escapeHtml(assetPath(item.poster))}" alt="" loading="lazy">` : ""}
-                  <div class="playlist-item-copy">
-                    <strong>${escapeHtml(item.title)}</strong>
-                    <span>${escapeHtml(playlistItemLabel(item))}</span>
-                  </div>
-                  <span class="availability-badge ${escapeHtml(item.availabilityType)}">${escapeHtml(item.availabilityLabel)}</span>
-                </li>`;
-            }).join("")}
+            ${renderPlaylistItemsBySection(items, currentIndex)}
           </ol>
         </div>
       </article>`;

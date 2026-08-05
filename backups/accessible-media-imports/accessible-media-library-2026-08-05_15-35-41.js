@@ -299,24 +299,6 @@ const accessibleMediaLibrary = [
     year: "2015",
     provider: "Upcoming",
     poster: "/assets/posters/movies/jurassic-park/jurassic-world.jpg"
-  },
-
-  {
-    id: "jurassic-world-dominion",
-    mediaType: "movie",
-    title: "Jurassic World Dominion",
-    year: "2022",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world-dominion.jpg"
-  },
-
-  {
-    id: "jurassic-world-rebirth",
-    mediaType: "movie",
-    title: "Jurassic World Rebirth",
-    year: "2025",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
   }
 
 ];

@@ -5,6 +5,7 @@ import marvelLegacy from "./marvel-legacy.js";
 import spiderVerse from "./spider-verse.js";
 import worldWarII from "./world-war-ii.js";
 import wizardingWorld from "./wizarding-world.js";
+import jurassicUniverse from "./jurassic-universe.js";
 
 const playlistLibrary = [
   doomsdayPrep,
@@ -13,7 +14,8 @@ const playlistLibrary = [
   spiderVerse,
   wizardingWorld,
   hungerGames,
-  worldWarII
+  worldWarII,
+  jurassicUniverse
 ];
 
 export default playlistLibrary;

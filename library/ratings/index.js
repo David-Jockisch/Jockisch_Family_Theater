@@ -24,6 +24,9 @@ const captainAmericaTheFirstAvenger = require("./movies/captain-america-the-firs
 const captainAmericaTheWinterSoldier = require("./movies/captain-america-the-winter-soldier.js");
 const captainMarvel = require("./movies/captain-marvel.js");
 const daredevil = require("./movies/daredevil.js");
+const deadpool = require("./movies/deadpool.js");
+const deadpool2 = require("./movies/deadpool-2.js");
+const deadpoolAndWolverine = require("./movies/deadpool-and-wolverine.js");
 const doctorStrange = require("./movies/doctor-strange.js");
 const dunePartOne = require("./movies/dune-part-one.js");
 const dunePartTwo = require("./movies/dune-part-two.js");
@@ -51,6 +54,7 @@ const interstellar = require("./movies/interstellar.js");
 const ironMan = require("./movies/iron-man.js");
 const ironMan2 = require("./movies/iron-man-2.js");
 const ironMan3 = require("./movies/iron-man-3.js");
+const jurassicPark = require("./movies/jurassic-park.js");
 const jurassicWorldFallenKingdom = require("./movies/jurassic-world-fallen-kingdom.js");
 const lethalWeapon = require("./movies/lethal-weapon.js");
 const lethalWeapon2 = require("./movies/lethal-weapon-2.js");
@@ -68,6 +72,7 @@ const onceUponADeadpool = require("./movies/once-upon-a-deadpool.js");
 const paul = require("./movies/paul.js");
 const pixels = require("./movies/pixels.js");
 const pokemonDetectivePikachu = require("./movies/pokemon-detective-pikachu.js");
+const savingPrivateRyan = require("./movies/saving-private-ryan.js");
 const scoob = require("./movies/scoob.js");
 const shrek = require("./movies/shrek.js");
 const shrek2 = require("./movies/shrek-2.js");
@@ -78,6 +83,7 @@ const spaceJamANewLegacy = require("./movies/space-jam-a-new-legacy.js");
 const spiderMan = require("./movies/spider-man.js");
 const spiderMan2 = require("./movies/spider-man-2.js");
 const spiderMan3 = require("./movies/spider-man-3.js");
+const spiderManAcrossTheSpiderVerse = require("./movies/spider-man-across-the-spider-verse.js");
 const spiderManFarFromHome = require("./movies/spider-man-far-from-home.js");
 const spiderManHomecoming = require("./movies/spider-man-homecoming.js");
 const spiderManIntoTheSpiderVerse = require("./movies/spider-man-into-the-spider-verse.js");
@@ -88,6 +94,7 @@ const teenageMutantNinjaTurtlesIii = require("./movies/teenage-mutant-ninja-turt
 const theAmazingSpiderMan = require("./movies/the-amazing-spider-man.js");
 const theAmazingSpiderMan2 = require("./movies/the-amazing-spider-man-2.js");
 const theAvengers = require("./movies/the-avengers.js");
+const theFantastic4FirstSteps = require("./movies/the-fantastic-4-first-steps.js");
 const theGrinch = require("./movies/the-grinch.js");
 const theHungerGames = require("./movies/the-hunger-games.js");
 const theHungerGamesCatchingFire = require("./movies/the-hunger-games-catching-fire.js");
@@ -114,6 +121,8 @@ const toyStory2 = require("./movies/toy-story-2.js");
 const toyStory3 = require("./movies/toy-story-3.js");
 const toyStory4 = require("./movies/toy-story-4.js");
 const venom = require("./movies/venom.js");
+const venomLetThereBeCarnage = require("./movies/venom-let-there-be-carnage.js");
+const venomTheLastDance = require("./movies/venom-the-last-dance.js");
 const weekendAtBernies = require("./movies/weekend-at-bernies.js");
 const xMen = require("./movies/x-men.js");
 const xMenApocalypse = require("./movies/x-men-apocalypse.js");
@@ -146,6 +155,9 @@ const movieRatings = [
   captainAmericaTheWinterSoldier,
   captainMarvel,
   daredevil,
+  deadpool,
+  deadpool2,
+  deadpoolAndWolverine,
   doctorStrange,
   dunePartOne,
   dunePartTwo,
@@ -173,6 +185,7 @@ const movieRatings = [
   ironMan,
   ironMan2,
   ironMan3,
+  jurassicPark,
   jurassicWorldFallenKingdom,
   lethalWeapon,
   lethalWeapon2,
@@ -190,6 +203,7 @@ const movieRatings = [
   paul,
   pixels,
   pokemonDetectivePikachu,
+  savingPrivateRyan,
   scoob,
   shrek,
   shrek2,
@@ -200,6 +214,7 @@ const movieRatings = [
   spiderMan,
   spiderMan2,
   spiderMan3,
+  spiderManAcrossTheSpiderVerse,
   spiderManFarFromHome,
   spiderManHomecoming,
   spiderManIntoTheSpiderVerse,
@@ -210,6 +225,7 @@ const movieRatings = [
   theAmazingSpiderMan,
   theAmazingSpiderMan2,
   theAvengers,
+  theFantastic4FirstSteps,
   theGrinch,
   theHungerGames,
   theHungerGamesCatchingFire,
@@ -236,6 +252,8 @@ const movieRatings = [
   toyStory3,
   toyStory4,
   venom,
+  venomLetThereBeCarnage,
+  venomTheLastDance,
   weekendAtBernies,
   xMen,
   xMenApocalypse,

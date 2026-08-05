@@ -281,42 +281,6 @@ const accessibleMediaLibrary = [
     year: "1997",
     provider: "Upcoming",
     poster: "/assets/posters/movies/jurassic-park/the-lost-world-jurassic-park.jpg"
-  },
-
-  {
-    id: "jurassic-park-iii",
-    mediaType: "movie",
-    title: "Jurassic Park III",
-    year: "2001",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-park-iii.jpg"
-  },
-
-  {
-    id: "jurassic-world",
-    mediaType: "movie",
-    title: "Jurassic World",
-    year: "2015",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world.jpg"
-  },
-
-  {
-    id: "jurassic-world-dominion",
-    mediaType: "movie",
-    title: "Jurassic World Dominion",
-    year: "2022",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world-dominion.jpg"
-  },
-
-  {
-    id: "jurassic-world-rebirth",
-    mediaType: "movie",
-    title: "Jurassic World Rebirth",
-    year: "2025",
-    provider: "Upcoming",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
   }
 
 ];

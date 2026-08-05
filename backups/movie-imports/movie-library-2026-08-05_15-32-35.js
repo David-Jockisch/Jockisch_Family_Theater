@@ -842,19 +842,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/jurassic-park/jurassic-world-fallen-kingdom.jpg"
   },
 
-  {
-    id: "jurassic-park",
-    collection: "Jurassic World",
-    franchise: "Jurassic Park",
-    boothGroup: "Jurassic Park",
-    title: "Jurassic Park",
-    edition: "Digital",
-    year: "1993",
-    rating: "PG-13",
-    runtime: "2hr 7min",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-park.jpg"
-  },
-
   // ==================================================
   // King of Kings
   // ==================================================
