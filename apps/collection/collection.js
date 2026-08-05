@@ -1,6 +1,7 @@
 import gameLibrary from "../../library/games/game-library.js";
 import playlistLibrary from "../../library/playlists/playlist-library.js";
 import accessibleMediaLibrary from "../../library/accessible-media/accessible-media-library.js";
+import seriesLibrary from "../../library/series/series-library.js";
 
 const byId = id => document.getElementById(id);
 const views = ["homeView", "movieLibraryView", "movieDetailView", "movieGuideView", "gameLibraryView", "gameDetailView", "playlistLibraryView", "playlistDetailView"].map(byId);
@@ -918,6 +919,7 @@ function expandPlaylistItems(playlist) {
   (playlist.items || []).forEach(item => {
     const media = resolvePlaylistMedia(item.ref);
     const displayTitle = item.title || media.title;
+
     const shared = {
       ...media,
       ...item,
@@ -937,18 +939,49 @@ function expandPlaylistItems(playlist) {
           episodeTitle: episode.title || ""
         });
       });
+
       return;
     }
 
     if (item.type === "season") {
+      const series = seriesLibrary.find(
+        entry => entry.id === item.ref
+      );
+
+      const seasonData = series?.seasons?.find(
+        season => Number(season.season) === Number(item.season)
+      );
+
+      const libraryEpisodes = seasonData?.episodes || [];
+
+      if (libraryEpisodes.length > 0) {
+        libraryEpisodes.forEach(episode => {
+          expanded.push({
+            ...shared,
+            progressId:
+              `${item.id || item.ref}-s${item.season}-e${episode.episode}`,
+            displayType: "episode",
+            season: item.season,
+            episode: episode.episode,
+            episodeTitle: episode.title || ""
+          });
+        });
+
+        return;
+      }
+
+      // Fallback for older playlist files that still use episodeCount.
       const episodeCount = Number(item.episodeCount || 0);
 
       for (let episode = 1; episode <= episodeCount; episode += 1) {
         expanded.push({
           ...shared,
-          progressId: `${item.id || item.ref}-e${episode}`,
+          progressId:
+            `${item.id || item.ref}-s${item.season}-e${episode}`,
           displayType: "episode",
-          episode
+          season: item.season,
+          episode,
+          episodeTitle: ""
         });
       }
 
@@ -964,7 +997,6 @@ function expandPlaylistItems(playlist) {
 
   return expanded;
 }
-
 function playlistItemLabel(item) {
   if (item.displayType === "episode") {
     const episodeCode = `S${item.season} E${item.episode}`;

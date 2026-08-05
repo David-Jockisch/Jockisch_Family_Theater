@@ -1099,23 +1099,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Saving Private Ryan
-  // ==================================================
-
-  {
-    id: "saving-private-ryan",
-    collection: "Saving Private Ryan",
-    franchise: "",
-    boothGroup: "Saving Private Ryan",
-    title: "Saving Private Ryan",
-    edition: "Digital",
-    year: "1998",
-    rating: "R",
-    runtime: "2hr 49min",
-    poster: "/assets/posters/movies/saving-private-ryan.jpg"
-  },
-
-  // ==================================================
   // Scoob!
   // ==================================================
 
