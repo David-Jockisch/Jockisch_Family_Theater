@@ -1,6 +1,6 @@
 const doomsdayPrep = {
   id: "avengers-doomsday-prep",
-  title: "Avengers: Doomsday Prep",
+  title: "Avengers: Doomsday Full Prep",
   description:
     "A complete Marvel watch order based on the supplied Marvel Watchlist page, including films, television episodes, and specially placed credit scenes.",
   poster: "/assets/playlists/doomsday-prep.jpg",

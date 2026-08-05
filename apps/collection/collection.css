@@ -2495,3 +2495,73 @@ button {
     align-items: center;
   }
 }
+
+/* Playlist credit-scene / special-entry cards */
+
+.playlist-item.special {
+  grid-template-columns: 2rem 3.2rem minmax(0, 1fr);
+  align-items: start;
+  border-color: rgba(212, 154, 98, 0.3);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(184, 115, 51, 0.09),
+      transparent 48%
+    ),
+    rgba(17, 17, 17, 0.88);
+}
+
+.playlist-item.special.current {
+  border-color: rgba(212, 154, 98, 0.68);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(184, 115, 51, 0.18),
+      transparent 55%
+    ),
+    rgba(17, 17, 17, 0.92);
+}
+
+.playlist-item-copy strong {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+
+.playlist-item-copy span {
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.playlist-special-label {
+  color: var(--accent-light) !important;
+  font-size: 0.74rem !important;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.playlist-special-note {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.5 !important;
+}
+
+.up-next-card .playlist-special-label,
+.up-next-card .playlist-special-note {
+  margin-top: 0.4rem;
+}
+
+.playlist-action-sheet .playlist-special-label {
+  margin-top: 0.55rem !important;
+}
+
+@media (max-width: 44rem) {
+  .playlist-item.special {
+    grid-template-columns: 1.75rem 2.8rem minmax(0, 1fr);
+  }
+}
+

@@ -1006,17 +1006,96 @@ function resolvePlaylistMedia(ref) {
   };
 }
 
+
+function specialParentCandidates(item) {
+  const candidates = [item.parentRef, item.mediaRef].filter(Boolean);
+  const ref = String(item.ref || "");
+
+  const stripped = ref
+    .replace(/-(all-)?credits?(-scene)?$/i, "")
+    .replace(/-(post|mid|end)-credits?(-scene)?$/i, "")
+    .replace(/-episode-\d+-(post|mid|end)-credits?(-scene)?$/i, "")
+    .replace(/-ep-\d+-(post|mid|end)-credits?(-scene)?$/i, "");
+
+  if (stripped && stripped !== ref) candidates.push(stripped);
+
+  const knownParents = {
+    "captain-america-the-first-avenger-credits":
+      "captain-america-the-first-avenger",
+    "wandavision-episode-9-mid-credit":
+      "wandavision",
+    "wandavision-ep-9-mid-credit-scene":
+      "wandavision"
+  };
+
+  if (knownParents[ref]) candidates.push(knownParents[ref]);
+
+  return [...new Set(candidates)];
+}
+
+function resolveSpecialParentMedia(item) {
+  for (const candidate of specialParentCandidates(item)) {
+    const media = resolvePlaylistMedia(candidate);
+    if (media.availabilityType !== "missing") return media;
+  }
+
+  return null;
+}
+
+function getSpecialLabel(item) {
+  if (item.specialLabel) return String(item.specialLabel);
+
+  const title = String(item.title || "");
+  const parentTitle = String(item.parentTitle || "");
+
+  if (parentTitle && title.startsWith(parentTitle)) {
+    const remainder = title
+      .slice(parentTitle.length)
+      .replace(/^[\s:–—-]+/, "")
+      .replace(/^\((.*)\)$/, "$1")
+      .trim();
+
+    if (remainder) return remainder;
+  }
+
+  const ref = normalizeText(item.ref);
+
+  if (ref.includes("all-credits")) return "All Credits";
+  if (ref.includes("mid-credit")) return "Mid-Credit Scene";
+  if (ref.includes("post-credit")) return "Post-Credit Scene";
+  if (ref.includes("end-credit")) return "End-Credit Scene";
+  if (ref.endsWith("-credits")) return "Credits";
+
+  return "Credit Scene";
+}
+
 function expandPlaylistItems(playlist) {
   const expanded = [];
 
   (playlist.items || []).forEach(item => {
-    const media = resolvePlaylistMedia(item.ref);
-    const displayTitle = item.title || media.title;
+    const isSpecial = item.type === "special";
+    const directMedia = resolvePlaylistMedia(item.ref);
+    const parentMedia = isSpecial
+      ? resolveSpecialParentMedia(item)
+      : null;
+
+    const media = parentMedia || directMedia;
+    const displayTitle = isSpecial
+      ? parentMedia?.title || item.parentTitle || item.title || directMedia.title
+      : item.title || media.title;
 
     const shared = {
       ...media,
       ...item,
-      title: displayTitle
+      title: displayTitle,
+      parentTitle: parentMedia?.title || item.parentTitle || "",
+      poster: item.poster || parentMedia?.poster || media.poster || "",
+      specialLabel: isSpecial
+        ? getSpecialLabel({
+            ...item,
+            parentTitle: parentMedia?.title || item.parentTitle || ""
+          })
+        : ""
     };
 
     if (item.type === "episode-list") {
@@ -1425,6 +1504,11 @@ function openPlaylistActionSheet(item, isWatched, rerender) {
         <h2 id="playlistActionSheetTitle">
           ${escapeHtml(item.title)}
         </h2>
+        ${
+          item.displayType === "special"
+            ? `<p class="playlist-special-label">🎬 ${escapeHtml(item.specialLabel)}</p>`
+            : ""
+        }
         <p>${escapeHtml(playlistItemLabel(item))}</p>
       </div>
 
@@ -1618,7 +1702,7 @@ function renderPlaylistItemsBySection(
         ${sectionHeading}
 
         <li
-          class="playlist-item ${state}"
+          class="playlist-item ${state} ${item.displayType === "special" ? "special" : ""}"
           data-playlist-index="${index}"
           tabindex="0"
           aria-label="${escapeHtml(item.title)}. Press and hold for actions."
@@ -1647,12 +1731,32 @@ function renderPlaylistItemsBySection(
 
           <div class="playlist-item-copy">
             <strong>${escapeHtml(item.title)}</strong>
-            <span>${escapeHtml(playlistItemLabel(item))}</span>
+
+            ${
+              item.displayType === "special"
+                ? `
+                  <span class="playlist-special-label">
+                    🎬 ${escapeHtml(item.specialLabel)}
+                  </span>
+                  <span class="playlist-special-note">
+                    ${escapeHtml(playlistItemLabel(item))}
+                  </span>
+                `
+                : `
+                  <span>${escapeHtml(playlistItemLabel(item))}</span>
+                `
+            }
           </div>
 
-          <span class="availability-badge ${escapeHtml(item.availabilityType)}">
-            ${escapeHtml(item.availabilityLabel)}
-          </span>
+          ${
+            item.displayType !== "special"
+              ? `
+                <span class="availability-badge ${escapeHtml(item.availabilityType)}">
+                  ${escapeHtml(item.availabilityLabel)}
+                </span>
+              `
+              : ""
+          }
         </li>
       `;
     })
@@ -1719,11 +1823,24 @@ function showPlaylistDetail(playlist) {
 
                     <div>
                       <h2>${escapeHtml(currentItem.title)}</h2>
-                      <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
 
-                      <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">
-                        ${escapeHtml(currentItem.availabilityLabel)}
-                      </span>
+                      ${
+                        currentItem.displayType === "special"
+                          ? `
+                            <p class="playlist-special-label">
+                              🎬 ${escapeHtml(currentItem.specialLabel)}
+                            </p>
+                            <p class="playlist-special-note">
+                              ${escapeHtml(playlistItemLabel(currentItem))}
+                            </p>
+                          `
+                          : `
+                            <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
+                            <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">
+                              ${escapeHtml(currentItem.availabilityLabel)}
+                            </span>
+                          `
+                      }
                     </div>
                   </div>
 
