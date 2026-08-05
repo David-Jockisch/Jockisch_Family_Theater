@@ -550,19 +550,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/fantastic-four-rise-of-the-silver-surfer.jpg"
   },
 
-  {
-    id: "the-fantastic-4-first-steps",
-    collection: "Fantastic Four",
-    franchise: "Fantastic Four",
-    boothGroup: "Fantastic Four",
-    title: "The Fantastic 4: First Steps",
-    edition: "Digital",
-    year: "2025",
-    rating: "PG-13",
-    runtime: "1hr 55min",
-    poster: "/assets/posters/movies/marvel/the-fantastic-4-first-steps.jpg"
-  },
-
   // ==================================================
   // Ghostbusters
   // ==================================================

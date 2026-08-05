@@ -417,45 +417,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/once-upon-a-deadpool.jpg"
   },
 
-  {
-    id: "deadpool",
-    collection: "Deadpool",
-    franchise: "X-Men",
-    boothGroup: "X-Men",
-    title: "Deadpool",
-    edition: "Digital",
-    year: "2016",
-    rating: "R",
-    runtime: "1hr 48min",
-    poster: "/assets/posters/movies/marvel/deadpool.jpg"
-  },
-
-  {
-    id: "deadpool-2",
-    collection: "Deadpool",
-    franchise: "X-Men",
-    boothGroup: "X-Men",
-    title: "Deadpool 2",
-    edition: "Digital",
-    year: "2018",
-    rating: "R",
-    runtime: "2hr",
-    poster: "/assets/posters/movies/marvel/deadpool-2.jpg"
-  },
-
-  {
-    id: "deadpool-and-wolverine",
-    collection: "Deadpool",
-    franchise: "X-Men",
-    boothGroup: "X-Men",
-    title: "Deadpool & Wolverine",
-    edition: "Digital",
-    year: "2024",
-    rating: "R",
-    runtime: "2hr 8min",
-    poster: "/assets/posters/movies/marvel/deadpool-and-wolverine.jpg"
-  },
-
   // ==================================================
   // Doctor Strange
   // ==================================================
@@ -548,19 +509,6 @@ const movieLibrary = [,
     rating: "PG",
     runtime: "1hr 32min",
     poster: "/assets/posters/movies/marvel/fantastic-four-rise-of-the-silver-surfer.jpg"
-  },
-
-  {
-    id: "the-fantastic-4-first-steps",
-    collection: "Fantastic Four",
-    franchise: "Fantastic Four",
-    boothGroup: "Fantastic Four",
-    title: "The Fantastic 4: First Steps",
-    edition: "Digital",
-    year: "2025",
-    rating: "PG-13",
-    runtime: "1hr 55min",
-    poster: "/assets/posters/movies/marvel/the-fantastic-4-first-steps.jpg"
   },
 
   // ==================================================

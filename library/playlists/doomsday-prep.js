@@ -100,7 +100,7 @@ const doomsdayPrep = {
     { id: "65-daredevil-born-again-s2", section: "Phase 6 — Doomsday (2026)", type: "season", ref: "daredevil-born-again", season: 2, episodeCount: 8, priority: "Recommended", note: "Listed as premiering March 24, 2026 and concurrent with The Punisher: One Last Kill." },
     { id: "66-spider-man-brand-new-day", section: "Phase 6 — Doomsday (2026)", type: "movie", ref: "spider-man-brand-new-day", priority: "Essential" },
     { id: "67-visionquest-s1", section: "Phase 6 — Doomsday (2026)", type: "season", ref: "visionquest", season: 1, episodeCount: 8, priority: "Recommended", note: "Listed for mid-to-late 2026. Watch WandaVision and Agatha All Along first." },
-    { id: "68-fantastic-four-first-steps", section: "Phase 6 — Doomsday (2026)", type: "movie", ref: "the-fantastic-four-first-steps", priority: "Essential" },
+    { id: "68-the-fantastic-4-first-steps", section: "Phase 6 — Doomsday (2026)", type: "movie", ref: "the-fantastic-4-first-steps", priority: "Essential" },
     { id: "69-avengers-doomsday", section: "Phase 6 — Doomsday (2026)", type: "movie", ref: "avengers-doomsday", priority: "Essential" }
   ]
 };

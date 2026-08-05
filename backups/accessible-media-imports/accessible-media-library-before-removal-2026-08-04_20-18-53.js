@@ -14,7 +14,14 @@ const accessibleMediaLibrary = [
 
 
 
-
+  {
+    id: "deadpool-2",
+    mediaType: "movie",
+    title: "Deadpool 2",
+    year: "2018",
+    provider: "Disney+",
+    poster: "/assets/posters/movies/marvel/deadpool-2.jpg"
+  },
 
   {
     id: "avengers-endgame",
@@ -79,7 +86,14 @@ const accessibleMediaLibrary = [
     poster: "/assets/posters/movies/marvel/the-marvels.jpg"
   },
 
-
+  {
+    id: "deadpool-and-wolverine",
+    mediaType: "movie",
+    title: "Deadpool & Wolverine",
+    year: "2024",
+    provider: "Disney+",
+    poster: "/assets/posters/movies/marvel/deadpool-and-wolverine.jpg"
+  },
 
   {
     id: "captain-america-brave-new-world",
@@ -97,6 +111,15 @@ const accessibleMediaLibrary = [
     year: "2025",
     provider: "Disney+",
     poster: "/assets/posters/movies/marvel/thunderbolts.jpg"
+  },
+
+  {
+    id: "the-fantastic-four-first-steps",
+    mediaType: "movie",
+    title: "The Fantastic Four: First Steps",
+    year: "2025",
+    provider: "Disney+",
+    poster: "/assets/posters/movies/marvel/the-fantastic-four-first-steps.jpg"
   },
 
   {
