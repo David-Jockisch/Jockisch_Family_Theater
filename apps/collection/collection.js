@@ -1393,6 +1393,197 @@ function renderPlaylists() {
 }
 
 
+
+const PLAYLIST_LONG_PRESS_MS = 650;
+let playlistLongPressTimer = null;
+let playlistLongPressTriggered = false;
+let playlistActionSheet = null;
+
+function closePlaylistActionSheet() {
+  playlistActionSheet?.remove();
+  playlistActionSheet = null;
+}
+
+function openPlaylistActionSheet(item, isWatched, rerender) {
+  closePlaylistActionSheet();
+
+  const sheet = document.createElement("div");
+  sheet.className = "playlist-action-sheet-backdrop";
+  sheet.setAttribute("role", "presentation");
+
+  sheet.innerHTML = `
+    <div
+      class="playlist-action-sheet"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="playlistActionSheetTitle"
+    >
+      <div class="playlist-action-sheet-handle" aria-hidden="true"></div>
+
+      <div class="playlist-action-sheet-copy">
+        <p class="eyebrow">Playlist Item</p>
+        <h2 id="playlistActionSheetTitle">
+          ${escapeHtml(item.title)}
+        </h2>
+        <p>${escapeHtml(playlistItemLabel(item))}</p>
+      </div>
+
+      <div class="playlist-action-sheet-actions">
+        <button
+          id="playlistToggleWatchedButton"
+          class="${isWatched ? "secondary-button" : "movie-guide-button"}"
+          type="button"
+        >
+          ${isWatched ? "Mark Unwatched" : "Mark Watched"}
+        </button>
+
+        <button
+          id="playlistActionCancelButton"
+          class="secondary-button"
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(sheet);
+  playlistActionSheet = sheet;
+
+  const toggleButton = sheet.querySelector(
+    "#playlistToggleWatchedButton"
+  );
+
+  const cancelButton = sheet.querySelector(
+    "#playlistActionCancelButton"
+  );
+
+  toggleButton.addEventListener("click", () => {
+    setPlaylistItemWatched(item, !isWatched);
+    closePlaylistActionSheet();
+    rerender();
+  });
+
+  cancelButton.addEventListener(
+    "click",
+    closePlaylistActionSheet
+  );
+
+  sheet.addEventListener("click", event => {
+    if (event.target === sheet) {
+      closePlaylistActionSheet();
+    }
+  });
+
+  document.addEventListener(
+    "keydown",
+    function handleEscape(event) {
+      if (event.key !== "Escape") return;
+
+      closePlaylistActionSheet();
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+    }
+  );
+
+  window.setTimeout(() => {
+    toggleButton.focus();
+  }, 0);
+}
+
+function attachPlaylistItemActions(
+  container,
+  items,
+  watchedStates,
+  rerender
+) {
+  container
+    .querySelectorAll(".playlist-item[data-playlist-index]")
+    .forEach(row => {
+      const index = Number.parseInt(
+        row.dataset.playlistIndex,
+        10
+      );
+
+      const item = items[index];
+      if (!item) return;
+
+      const isWatched = Boolean(watchedStates[index]);
+
+      const clearLongPress = () => {
+        window.clearTimeout(playlistLongPressTimer);
+        playlistLongPressTimer = null;
+      };
+
+      const startLongPress = event => {
+        if (
+          event.pointerType === "mouse" &&
+          event.button !== 0
+        ) {
+          return;
+        }
+
+        playlistLongPressTriggered = false;
+        clearLongPress();
+
+        playlistLongPressTimer = window.setTimeout(() => {
+          playlistLongPressTriggered = true;
+
+          if (navigator.vibrate) {
+            navigator.vibrate(35);
+          }
+
+          openPlaylistActionSheet(
+            item,
+            isWatched,
+            rerender
+          );
+        }, PLAYLIST_LONG_PRESS_MS);
+      };
+
+      row.addEventListener("pointerdown", startLongPress);
+      row.addEventListener("pointerup", clearLongPress);
+      row.addEventListener("pointercancel", clearLongPress);
+      row.addEventListener("pointerleave", clearLongPress);
+
+      row.addEventListener("contextmenu", event => {
+        event.preventDefault();
+        clearLongPress();
+
+        openPlaylistActionSheet(
+          item,
+          isWatched,
+          rerender
+        );
+      });
+
+      row.addEventListener("keydown", event => {
+        if (event.key !== "Enter" && event.key !== " ") {
+          return;
+        }
+
+        event.preventDefault();
+
+        openPlaylistActionSheet(
+          item,
+          isWatched,
+          rerender
+        );
+      });
+
+      row.addEventListener("click", event => {
+        if (!playlistLongPressTriggered) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        playlistLongPressTriggered = false;
+      });
+    });
+}
+
 function renderPlaylistItemsBySection(
   items,
   watchedStates,
@@ -1426,7 +1617,12 @@ function renderPlaylistItemsBySection(
       return `
         ${sectionHeading}
 
-        <li class="playlist-item ${state}">
+        <li
+          class="playlist-item ${state}"
+          data-playlist-index="${index}"
+          tabindex="0"
+          aria-label="${escapeHtml(item.title)}. Press and hold for actions."
+        >
           <span class="playlist-item-status" aria-hidden="true">
             ${
               isWatched
@@ -1538,7 +1734,7 @@ function showPlaylistDetail(playlist) {
                       type="button"
                       ${progressState.watchedCount === 0 ? "disabled" : ""}
                     >
-                      Previous
+                      Undo Last
                     </button>
 
                     <button
@@ -1600,6 +1796,13 @@ function showPlaylistDetail(playlist) {
         </div>
       </article>
     `;
+
+    attachPlaylistItemActions(
+      playlistDetail,
+      items,
+      progressState.watchedStates,
+      renderDetail
+    );
 
     byId("playlistBackButton").addEventListener(
       "click",
