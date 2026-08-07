@@ -6,7 +6,7 @@ const doomsdayEssentials = {
   description:
     "The essential Marvel watch order leading into Avengers: Doomsday.",
 
-  poster: "/assets/playlists/doomsday-prep.jpg",
+  poster: "/assets/playlists/doomsday-prep-essentials.jpg",
 
   event: {
     title: "Avengers: Doomsday",

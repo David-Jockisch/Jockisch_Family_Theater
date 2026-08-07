@@ -863,6 +863,12 @@ function showGameDetail(game) {
 const MEDIA_PROGRESS_KEY = "jft-media-progress";
 const LEGACY_PLAYLIST_PROGRESS_PREFIX = "jft-playlist-progress:";
 
+// Playlist planner settings.
+// JavaScript day numbers: 0 = Sunday, 1 = Monday, ... 6 = Saturday.
+const PLAYLIST_SETTINGS = {
+  weekStartsOn: 1
+};
+
 function loadMediaProgress() {
   try {
     const saved = JSON.parse(
@@ -1233,6 +1239,104 @@ function playlistItemLabel(item) {
 
 const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 
+function getStartOfPlaylistWeek(date = new Date()) {
+  const start = new Date(date);
+  start.setHours(0, 0, 0, 0);
+
+  const currentDay = start.getDay();
+  const daysSinceWeekStart =
+    (currentDay - PLAYLIST_SETTINGS.weekStartsOn + 7) % 7;
+
+  start.setDate(start.getDate() - daysSinceWeekStart);
+  return start;
+}
+
+function getEndOfPlaylistWeek(date = new Date()) {
+  const end = getStartOfPlaylistWeek(date);
+  end.setDate(end.getDate() + 7);
+  return end;
+}
+
+function getPlaylistWeekProgress(items, weeklyGoal) {
+  const progress = loadMediaProgress();
+  const now = new Date();
+  const weekStart = getStartOfPlaylistWeek(now);
+  const weekEnd = getEndOfPlaylistWeek(now);
+
+  const watchedThisWeek = items.reduce((count, item) => {
+    const entry = progress[getMediaProgressId(item)];
+
+    if (
+      !entry ||
+      typeof entry !== "object" ||
+      entry.watched !== true ||
+      !entry.watchedAt ||
+      entry.migratedFrom
+    ) {
+      return count;
+    }
+
+    const watchedAt = new Date(entry.watchedAt);
+
+    if (
+      Number.isNaN(watchedAt.getTime()) ||
+      watchedAt < weekStart ||
+      watchedAt >= weekEnd
+    ) {
+      return count;
+    }
+
+    return count + 1;
+  }, 0);
+
+  const remainingThisWeek = Math.max(weeklyGoal - watchedThisWeek, 0);
+  const aheadBy = Math.max(watchedThisWeek - weeklyGoal, 0);
+  const progressPercent =
+    weeklyGoal > 0
+      ? Math.min(Math.round((watchedThisWeek / weeklyGoal) * 100), 100)
+      : 100;
+
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+
+  const daysUntilReset = Math.max(
+    Math.ceil((weekEnd.getTime() - today.getTime()) / DAY_IN_MILLISECONDS),
+    0
+  );
+
+  let resetLabel = "";
+  if (daysUntilReset <= 1) {
+    resetLabel = "Resets tomorrow";
+  } else {
+    resetLabel = `Resets in ${daysUntilReset} days`;
+  }
+
+  let paceLabel = "";
+  if (weeklyGoal === 0) {
+    paceLabel = "Goal complete";
+  } else if (aheadBy > 0) {
+    paceLabel = `+${aheadBy} ahead`;
+  } else if (remainingThisWeek === 0) {
+    paceLabel = "Weekly goal complete";
+  } else {
+    paceLabel = `${remainingThisWeek} remaining this week`;
+  }
+
+  return {
+    watchedThisWeek,
+    weeklyGoal,
+    remainingThisWeek,
+    aheadBy,
+    progressPercent,
+    weekStart,
+    weekEnd,
+    resetLabel,
+    paceLabel
+  };
+}
+
+
+
 function parsePlaylistEventDate(dateValue) {
   if (!dateValue) return null;
 
@@ -1314,6 +1418,9 @@ function calculatePlaylistEvent(playlist, itemCount, completedEntries) {
     daysRemaining
   );
 
+  const items = expandPlaylistItems(playlist);
+  const weekProgress = getPlaylistWeekProgress(items, weeklyGoal);
+
   return {
     title: playlist.event.title || playlist.title,
     date: eventDate,
@@ -1326,7 +1433,8 @@ function calculatePlaylistEvent(playlist, itemCount, completedEntries) {
     percentComplete,
     status,
     urgency: getPlaylistEventUrgency(daysRemaining, remainingEntries),
-    weeklyGoalMessage: getWeeklyGoalMessage(weeklyGoal, remainingEntries)
+    weeklyGoalMessage: getWeeklyGoalMessage(weeklyGoal, remainingEntries),
+    weekProgress
   };
 }
 
@@ -1391,9 +1499,36 @@ function renderPlaylistEventCard(eventData) {
         <span class="playlist-event-percentage">${eventData.percentComplete}%</span>
       </div>
 
+      <div class="playlist-weekly-tracker">
+        <div class="playlist-weekly-heading">
+          <div>
+            <span>This Week</span>
+            <strong>
+              ${eventData.weekProgress.watchedThisWeek} / ${eventData.weekProgress.weeklyGoal}
+            </strong>
+          </div>
+
+          <div class="playlist-weekly-copy">
+            <strong>${escapeHtml(eventData.weekProgress.paceLabel)}</strong>
+            <small>${escapeHtml(eventData.weekProgress.resetLabel)}</small>
+          </div>
+        </div>
+
+        <div
+          class="playlist-weekly-progress-track"
+          role="progressbar"
+          aria-label="This week's playlist goal"
+          aria-valuemin="0"
+          aria-valuemax="${Math.max(eventData.weekProgress.weeklyGoal, 1)}"
+          aria-valuenow="${eventData.weekProgress.watchedThisWeek}"
+        >
+          <span style="width: ${eventData.weekProgress.progressPercent}%"></span>
+        </div>
+      </div>
+
       <div class="playlist-event-stats">
         <div class="playlist-event-stat">
-          <span>Weekly Goal</span>
+          <span>To Finish On Time</span>
           <strong>${eventData.weeklyGoal}</strong>
           <small>${eventData.weeklyGoal === 1 ? "Entry Per Week" : "Entries Per Week"}</small>
         </div>
@@ -1846,28 +1981,11 @@ function showPlaylistDetail(playlist) {
 
                   <div class="playlist-progress-actions">
                     <button
-                      id="playlistPreviousButton"
-                      class="secondary-button"
-                      type="button"
-                      ${progressState.watchedCount === 0 ? "disabled" : ""}
-                    >
-                      Undo Last
-                    </button>
-
-                    <button
                       id="playlistWatchedButton"
                       class="movie-guide-button"
                       type="button"
                     >
                       Mark Watched
-                    </button>
-
-                    <button
-                      id="playlistResetButton"
-                      class="secondary-button"
-                      type="button"
-                    >
-                      Reset
                     </button>
                   </div>
                 </section>
@@ -1880,24 +1998,6 @@ function showPlaylistDetail(playlist) {
                       playlist.event?.title || playlist.title
                     )}</h2>
                     <p>Every entry in this playlist is marked watched.</p>
-
-                    <div class="playlist-progress-actions">
-                      <button
-                        id="playlistPreviousButton"
-                        class="secondary-button"
-                        type="button"
-                      >
-                        Previous
-                      </button>
-
-                      <button
-                        id="playlistResetButton"
-                        class="secondary-button"
-                        type="button"
-                      >
-                        Reset
-                      </button>
-                    </div>
                   </section>
                 `
                 : ""
@@ -1910,6 +2010,30 @@ function showPlaylistDetail(playlist) {
               progressState.currentIndex
             )}
           </ol>
+
+          ${
+            items.length
+              ? `
+                <section class="playlist-reset-zone">
+                  <div class="playlist-reset-copy">
+                    <strong>Reset Playlist Progress</strong>
+                    <span>
+                      Clears watched progress for every item in this playlist.
+                      Shared items will also become unwatched in overlapping playlists.
+                    </span>
+                  </div>
+
+                  <button
+                    id="playlistResetButton"
+                    class="danger-button"
+                    type="button"
+                  >
+                    Reset Playlist
+                  </button>
+                </section>
+              `
+              : ""
+          }
         </div>
       </article>
     `;
@@ -1925,18 +2049,6 @@ function showPlaylistDetail(playlist) {
       "click",
       showPlaylistLibrary
     );
-
-    byId("playlistPreviousButton")?.addEventListener("click", () => {
-      const previousItem = getPreviousWatchedItem(
-        items,
-        progressState.currentIndex
-      );
-
-      if (previousItem) {
-        setPlaylistItemWatched(previousItem, false);
-        renderDetail();
-      }
-    });
 
     byId("playlistWatchedButton")?.addEventListener("click", () => {
       if (currentItem) {
