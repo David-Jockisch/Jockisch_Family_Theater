@@ -2009,18 +2009,12 @@ button {
 }
 
 .playlist-detail-header {
-  display: grid;
-  gap: 1.25rem;
-  align-items: end;
-  margin-bottom: 1.25rem;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .playlist-detail-poster {
-  width: min(55vw, 13rem);
-  margin: 0 auto;
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: var(--shadow);
+  display: none;
 }
 
 .playlist-detail-header h1 {
@@ -2164,12 +2158,7 @@ button {
   }
 
   .playlist-detail-header {
-    grid-template-columns: 13rem minmax(0, 1fr);
-  }
-
-  .playlist-detail-poster {
-    width: 100%;
-    margin: 0;
+    display: block;
   }
 }
 
@@ -2705,6 +2694,84 @@ button {
 
   .danger-button {
     min-width: 11rem;
+  }
+}
+
+/* Playlist detail dashboard — Phase 1 */
+
+.playlist-detail-heading-copy {
+  width: min(100%, 54rem);
+}
+
+.playlist-detail-heading-copy > p:not(.eyebrow) {
+  max-width: 46rem;
+  margin-top: 0.7rem;
+}
+
+.up-next-hero {
+  position: relative;
+  overflow: hidden;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1.15rem;
+  border-color: rgba(212, 154, 98, 0.55);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(184, 115, 51, 0.18),
+      rgba(17, 17, 17, 0.88) 48%
+    );
+}
+
+.up-next-hero .up-next-main {
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  align-items: center;
+}
+
+.up-next-hero .up-next-main img {
+  width: 5.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.up-next-hero h2 {
+  font-size: clamp(1.55rem, 5vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.up-next-hero .playlist-progress-actions {
+  margin-top: 0.15rem;
+}
+
+.up-next-hero .movie-guide-button {
+  width: 100%;
+}
+
+.playlist-event-card {
+  margin-top: 0;
+}
+
+@media (min-width: 48rem) {
+  .playlist-detail-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .up-next-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(11rem, 15rem);
+    align-items: end;
+    padding: 1.35rem;
+  }
+
+  .up-next-hero .up-next-main {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+  }
+
+  .up-next-hero .up-next-main img {
+    width: 6.5rem;
+  }
+
+  .up-next-hero .playlist-progress-actions {
+    align-self: end;
   }
 }
 

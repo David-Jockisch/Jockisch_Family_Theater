@@ -473,23 +473,6 @@ const ps5Games = [
     ownership: ["digital"],
     poster: "/assets/posters/games/ps5/sackboy-a-big-adventure.jpg",
     theaterEnabled: true
-  },
-
-  {
-    id: "crimson-desert",
-    title: "Crimson Desert",
-    sortTitle: "Crimson Desert",
-    platform: "ps5",
-    release: "2026",
-    publisher: "Pearl Abyss",
-    developer: "Pearl Abyss",
-    genre: "Adventure",
-    players: "Unknown",
-    rating: "Unknown",
-    collection: "Crimson Desert",
-    ownership: ["digital"],
-    poster: "/assets/posters/games/ps5/crimson-desert.jpg",
-    theaterEnabled: true
   }
 ];
 

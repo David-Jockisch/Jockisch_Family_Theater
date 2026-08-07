@@ -1911,7 +1911,7 @@ function showPlaylistDetail(playlist) {
     );
 
     const heroPoster = escapeHtml(
-      assetPath(playlist.poster || currentItem?.poster)
+      assetPath(currentItem?.poster || playlist.poster)
     );
 
     playlistDetail.innerHTML = `
@@ -1923,13 +1923,7 @@ function showPlaylistDetail(playlist) {
           </button>
 
           <header class="playlist-detail-header">
-            ${
-              heroPoster
-                ? `<img class="playlist-detail-poster" src="${heroPoster}" alt="${escapeHtml(playlist.title)}">`
-                : ""
-            }
-
-            <div>
+            <div class="playlist-detail-heading-copy">
               <p class="eyebrow">JFT Playlist</p>
               <h1>${escapeHtml(playlist.title)}</h1>
               <p>${escapeHtml(playlist.description || "")}</p>
@@ -1941,41 +1935,41 @@ function showPlaylistDetail(playlist) {
             </div>
           </header>
 
-          ${renderPlaylistEventCard(eventData)}
-
           ${
             currentItem
               ? `
-                <section class="up-next-card">
-                  <p class="eyebrow">Up Next</p>
+                <section class="up-next-card up-next-hero">
+                  <div class="up-next-hero-copy">
+                    <p class="eyebrow">Up Next</p>
 
-                  <div class="up-next-main">
-                    ${
-                      currentItem.poster
-                        ? `<img src="${escapeHtml(assetPath(currentItem.poster))}" alt="">`
-                        : ""
-                    }
-
-                    <div>
-                      <h2>${escapeHtml(currentItem.title)}</h2>
-
+                    <div class="up-next-main">
                       ${
-                        currentItem.displayType === "special"
-                          ? `
-                            <p class="playlist-special-label">
-                              🎬 ${escapeHtml(currentItem.specialLabel)}
-                            </p>
-                            <p class="playlist-special-note">
-                              ${escapeHtml(playlistItemLabel(currentItem))}
-                            </p>
-                          `
-                          : `
-                            <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
-                            <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">
-                              ${escapeHtml(currentItem.availabilityLabel)}
-                            </span>
-                          `
+                        currentItem.poster
+                          ? `<img src="${escapeHtml(assetPath(currentItem.poster))}" alt="">`
+                          : ""
                       }
+
+                      <div>
+                        <h2>${escapeHtml(currentItem.title)}</h2>
+
+                        ${
+                          currentItem.displayType === "special"
+                            ? `
+                              <p class="playlist-special-label">
+                                🎬 ${escapeHtml(currentItem.specialLabel)}
+                              </p>
+                              <p class="playlist-special-note">
+                                ${escapeHtml(playlistItemLabel(currentItem))}
+                              </p>
+                            `
+                            : `
+                              <p>${escapeHtml(playlistItemLabel(currentItem))}</p>
+                              <span class="availability-badge ${escapeHtml(currentItem.availabilityType)}">
+                                ${escapeHtml(currentItem.availabilityLabel)}
+                              </span>
+                            `
+                        }
+                      </div>
                     </div>
                   </div>
 
@@ -1992,7 +1986,7 @@ function showPlaylistDetail(playlist) {
               `
               : items.length
                 ? `
-                  <section class="up-next-card playlist-complete-card">
+                  <section class="up-next-card playlist-complete-card up-next-hero">
                     <p class="eyebrow">Playlist Complete</p>
                     <h2>Ready for ${escapeHtml(
                       playlist.event?.title || playlist.title
@@ -2002,6 +1996,8 @@ function showPlaylistDetail(playlist) {
                 `
                 : ""
           }
+
+          ${renderPlaylistEventCard(eventData)}
 
           <ol class="playlist-item-list">
             ${renderPlaylistItemsBySection(
