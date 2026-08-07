@@ -35,16 +35,19 @@ echo.
 echo     %LIGHT%[2]%RESET%  Movie Library Importer
 echo          %GRAY%Search TMDb, add metadata, and download poster artwork.%RESET%
 echo.
-echo     %LIGHT%[3]%RESET%  Generate JFT Movie Guide Files
+echo     %LIGHT%[3]%RESET%  Wishlist Importer
+echo          %GRAY%Add a wanted movie using TMDb and shared poster artwork.%RESET%
+echo.
+echo     %LIGHT%[4]%RESET%  Generate JFT Movie Guide Files
 echo          %GRAY%Create missing review files and rebuild the ratings index.%RESET%
 echo.
-echo     %LIGHT%[4]%RESET%  Save and Push Changes
+echo     %LIGHT%[5]%RESET%  Save and Push Changes
 echo          %GRAY%Stage, commit, and publish updates to GitHub.%RESET%
 echo.
-echo     %LIGHT%[5]%RESET%  View Git Status
+echo     %LIGHT%[6]%RESET%  View Git Status
 echo          %GRAY%Review every changed file before publishing.%RESET%
 echo.
-echo     %LIGHT%[6]%RESET%  Close Developer Console
+echo     %LIGHT%[7]%RESET%  Close Developer Console
 echo.
 echo   %COPPER%──────────────────────────────────────────────────────────────────────────%RESET%
 echo.
@@ -53,12 +56,13 @@ set /p "choice=  %LIGHT%Select an option:%RESET% "
 
 if "%choice%"=="1" goto game_importer
 if "%choice%"=="2" goto movie_importer
-if "%choice%"=="3" goto movie_guide_generator
-if "%choice%"=="4" goto save_and_push
-if "%choice%"=="5" goto git_status
-if "%choice%"=="6" goto close_tools
+if "%choice%"=="3" goto wishlist_importer
+if "%choice%"=="4" goto movie_guide_generator
+if "%choice%"=="5" goto save_and_push
+if "%choice%"=="6" goto git_status
+if "%choice%"=="7" goto close_tools
 
-call :warning "Invalid selection. Please choose 1 through 6."
+call :warning "Invalid selection. Please choose 1 through 7."
 call :press_any_key
 goto menu
 
@@ -88,6 +92,21 @@ if not "%tool_exit%"=="0" (
   call :error_message "Movie Importer exited with error code %tool_exit%."
 ) else (
   call :success "Movie Importer finished successfully."
+)
+call :press_any_key
+goto menu
+
+:wishlist_importer
+call :draw_header "WISHLIST IMPORTER"
+echo   %GRAY%Launching the Wishlist Importer...%RESET%
+echo.
+call node "tools\importers\wishlist-importer.js"
+set "tool_exit=%errorlevel%"
+echo.
+if not "%tool_exit%"=="0" (
+  call :error_message "Wishlist Importer exited with error code %tool_exit%."
+) else (
+  call :success "Wishlist Importer finished successfully."
 )
 call :press_any_key
 goto menu

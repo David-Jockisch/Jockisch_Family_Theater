@@ -1722,23 +1722,16 @@ async function main() {
   const posterFile = getPosterFilePath(mediaObject.poster);
   const posterAlreadyExisted = fs.existsSync(posterFile);
 
-  let overwritePoster = true;
+  const overwritePoster = !posterAlreadyExisted;
 
   if (posterAlreadyExisted) {
-    console.log("\nA poster already exists at:");
+    console.log("\nShared poster artwork already exists at:");
     console.log(posterFile);
-
-    overwritePoster = await confirm(
-      "Replace it with the current TMDb poster"
-    );
-  }
-
-  if (overwritePoster) {
-    console.log("\nDownloading poster...");
+    console.log("Reusing the existing poster.");
+  } else {
+    console.log("\nDownloading poster to the shared poster library...");
     await downloadPoster(media.poster_path, posterFile);
     console.log("Poster downloaded successfully.");
-  } else {
-    console.log("\nKeeping the existing poster.");
   }
 
   let result;

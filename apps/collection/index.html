@@ -15,7 +15,7 @@
 
   <meta
     name="description"
-    content="Browse the Jockisch Family Theater movie, game, and playlist collection."
+    content="Browse the Jockisch Family Theater movie, game, playlist, and wishlist collection."
   >
 
   <meta
@@ -121,6 +121,16 @@
           <span id="gameCount">0</span>
           <span>Games</span>
         </button>
+
+        <button
+          id="wishlistCountButton"
+          class="library-count"
+          type="button"
+          aria-label="Open wishlist"
+        >
+          <span id="wishlistCount">0</span>
+          <span>Wanted</span>
+        </button>
       </div>
     </header>
 
@@ -152,6 +162,14 @@
   >
     Playlists
   </button>
+
+  <button
+    id="wishlistTabButton"
+    class="library-tab"
+    type="button"
+  >
+    Wishlist
+  </button>
 </nav>
 
     <main>
@@ -177,7 +195,7 @@
             </h1>
 
             <p class="home-description">
-              Browse movies, games, and ordered watch playlists.
+              Browse movies, games, ordered watch playlists, and future additions.
             </p>
           </div>
         </div>
@@ -239,6 +257,25 @@
               →
             </span>
           </button>
+          <button
+            id="openWishlistButton"
+            class="library-choice wishlist-choice"
+            type="button"
+          >
+            <span class="library-choice-icon" aria-hidden="true">
+              ★
+            </span>
+
+            <span class="library-choice-copy">
+              <strong>Wishlist</strong>
+              <span>Keep track of movies you want to add</span>
+            </span>
+
+            <span class="library-choice-arrow" aria-hidden="true">
+              →
+            </span>
+          </button>
+
         </div>
       </section>
 
@@ -435,6 +472,46 @@
         <div id="playlistDetail"></div>
       </section>
 
+
+      <section
+        id="wishlistLibraryView"
+        class="view"
+        aria-label="Wishlist"
+      >
+        <div class="section-heading wishlist-heading">
+          <div>
+            <p class="eyebrow">Future additions</p>
+            <h1>Wishlist</h1>
+          </div>
+        </div>
+
+        <div class="filter-panel wishlist-filter-panel">
+          <label class="search-field" for="wishlistSearch">
+            <span class="search-label">Search Wishlist</span>
+            <input id="wishlistSearch" type="search" placeholder="Search by title..." autocomplete="off">
+          </label>
+
+          <label class="filter-field" for="wishlistFormatFilter">
+            <span>Desired Format</span>
+            <select id="wishlistFormatFilter"><option value="">All Formats</option></select>
+          </label>
+        </div>
+
+        <div id="wishlistEmptyState" class="empty-state" hidden>
+          <h2>No wishlist titles found</h2>
+          <p>Add a movie with the Wishlist Importer in Developer Tools.</p>
+        </div>
+
+        <div id="wishlistGrid" class="movie-grid wishlist-grid" aria-live="polite"></div>
+      </section>
+
+      <section
+        id="wishlistDetailView"
+        class="view"
+        aria-label="Wishlist Details"
+      >
+        <div id="wishlistDetail"></div>
+      </section>
       <section
         id="gameDetailView"
         class="view"

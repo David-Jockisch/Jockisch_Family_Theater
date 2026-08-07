@@ -2,9 +2,10 @@ import gameLibrary from "../../library/games/game-library.js";
 import playlistLibrary from "../../library/playlists/playlist-library.js";
 import accessibleMediaLibrary from "../../library/accessible-media/accessible-media-library.js";
 import seriesLibrary from "../../library/series/series-library.js";
+import wishlistLibrary from "../../library/wishlist/wishlist-library.js";
 
 const byId = id => document.getElementById(id);
-const views = ["homeView", "movieLibraryView", "movieDetailView", "movieGuideView", "gameLibraryView", "gameDetailView", "playlistLibraryView", "playlistDetailView"].map(byId);
+const views = ["homeView", "movieLibraryView", "movieDetailView", "movieGuideView", "gameLibraryView", "gameDetailView", "playlistLibraryView", "playlistDetailView", "wishlistLibraryView", "wishlistDetailView"].map(byId);
 
 const homeView = byId("homeView");
 const movieLibraryView = byId("movieLibraryView");
@@ -14,6 +15,8 @@ const gameLibraryView = byId("gameLibraryView");
 const gameDetailView = byId("gameDetailView");
 const playlistLibraryView = byId("playlistLibraryView");
 const playlistDetailView = byId("playlistDetailView");
+const wishlistLibraryView = byId("wishlistLibraryView");
+const wishlistDetailView = byId("wishlistDetailView");
 
 const movieGrid = byId("movieGrid");
 const movieDetail = byId("movieDetail");
@@ -39,6 +42,11 @@ const movieCollectionGrid = byId("movieCollectionGrid");
 const collectionEmptyState = byId("collectionEmptyState");
 const playlistGrid = byId("playlistGrid");
 const playlistDetail = byId("playlistDetail");
+const wishlistGrid = byId("wishlistGrid");
+const wishlistDetail = byId("wishlistDetail");
+const wishlistEmptyState = byId("wishlistEmptyState");
+const wishlistSearch = byId("wishlistSearch");
+const wishlistFormatFilter = byId("wishlistFormatFilter");
 
 const movieFiltersToggle = byId("movieFiltersToggle");
 const gameFiltersToggle = byId("gameFiltersToggle");
@@ -125,6 +133,27 @@ function getCollectionGames() {
   return Array.isArray(gameLibrary) ? gameLibrary.slice() : [];
 }
 
+function getWishlistMovies() {
+  return Array.isArray(wishlistLibrary) ? wishlistLibrary.slice() : [];
+}
+
+function wishlistSearchText(movie) {
+  return [movie.title, movie.year, movie.desiredFormat]
+    .filter(Boolean).join(" ").toLowerCase();
+}
+
+function getFilteredWishlist() {
+  const query = normalizeText(wishlistSearch.value);
+  const desiredFormat = wishlistFormatFilter.value;
+
+  return getWishlistMovies()
+    .filter(movie =>
+      (!query || wishlistSearchText(movie).includes(query)) &&
+      (!desiredFormat || movie.desiredFormat === desiredFormat)
+    )
+    .sort(compareTitles);
+}
+
 function movieSearchText(movie) {
   return [movie.title, movie.sortTitle, movie.year, movie.rating, movie.edition,
     movie.collection, movie.franchise, getMovieFormat(movie)].filter(Boolean).join(" ").toLowerCase();
@@ -160,6 +189,12 @@ function populateFilters() {
   const platforms = sortPlatforms(uniqueSorted(games.map(game => game.platform)));
   fillSelect(gamePlatformFilter, platforms, "All Platforms", platform => platformNames[platform] || platform);
   fillSelect(gameGenreFilter, uniqueSorted(games.flatMap(game => valueList(game.genre))), "All Genres");
+
+  fillSelect(
+    wishlistFormatFilter,
+    uniqueSorted(getWishlistMovies().map(movie => movie.desiredFormat)),
+    "All Formats"
+  );
 }
 
 function getFilteredMovies() {
@@ -220,7 +255,8 @@ function setPageViewMode(targetView) {
     targetView === movieDetailView ||
     targetView === movieGuideView ||
     targetView === gameDetailView ||
-    targetView === playlistDetailView;
+    targetView === playlistDetailView ||
+    targetView === wishlistDetailView;
 
   document.body.classList.toggle("home-view-active", isHomeView);
   document.body.classList.toggle("detail-view-active", isDetailView);
@@ -231,6 +267,7 @@ function setActiveLibraryTab(activeLibrary) {
   byId("movieTabButton").classList.toggle("active", activeLibrary === "movies");
   byId("gameTabButton").classList.toggle("active", activeLibrary === "games");
   byId("playlistTabButton").classList.toggle("active", activeLibrary === "playlists");
+  byId("wishlistTabButton").classList.toggle("active", activeLibrary === "wishlist");
 }
 
 function showView(targetView, activeLibrary = "") {
@@ -246,6 +283,7 @@ function showHome() { showView(homeView); }
 function showMovieLibrary() { renderMovies(); showView(movieLibraryView, "movies"); }
 function showGameLibrary() { renderGames(); showView(gameLibraryView, "games"); }
 function showPlaylistLibrary() { renderPlaylists(); showView(playlistLibraryView, "playlists"); }
+function showWishlistLibrary() { renderWishlist(); showView(wishlistLibraryView, "wishlist"); }
 
 function createMovieCard(movie) {
   const card = document.createElement("button");
@@ -359,6 +397,66 @@ function setMovieViewMode(mode) {
     : "Search collections...";
 
   renderMovies();
+}
+
+function createWishlistCard(movie) {
+  const card = document.createElement("button");
+  const title = escapeHtml(movie.title || "Untitled");
+  const poster = escapeHtml(assetPath(movie.poster));
+  const desiredFormat = escapeHtml(movie.desiredFormat || "Wanted");
+
+  card.className = "movie-card wishlist-card";
+  card.type = "button";
+  card.innerHTML = `
+    <div class="movie-poster-shell">
+      <img src="${poster}" alt="${title}" loading="lazy">
+      <span class="format-badge wishlist-badge">${desiredFormat}</span>
+    </div>
+    <div class="movie-card-copy">
+      <h2 class="movie-card-title">${title}</h2>
+      <p class="movie-card-meta">${escapeHtml(movie.year || "Year unknown")}</p>
+    </div>`;
+
+  card.addEventListener("click", () => showWishlistDetail(movie));
+  return card;
+}
+
+function renderWishlist() {
+  const movies = getFilteredWishlist();
+  wishlistGrid.innerHTML = "";
+  movies.forEach(movie => wishlistGrid.appendChild(createWishlistCard(movie)));
+  wishlistEmptyState.hidden = movies.length !== 0;
+}
+
+function showWishlistDetail(movie) {
+  const title = escapeHtml(movie.title || "Untitled");
+  const poster = escapeHtml(assetPath(movie.poster));
+
+  wishlistDetail.innerHTML = `
+    <article class="detail-card" style="--detail-bg: url('${poster}')">
+      <div class="detail-backdrop"></div>
+      <div class="detail-content">
+        <img class="detail-poster" src="${poster}" alt="${title}">
+        <div class="detail-copy">
+          <p class="eyebrow">Wishlist</p>
+          <h2>${title}</h2>
+          <div class="detail-meta">
+            ${movie.year ? `<span>${escapeHtml(movie.year)}</span>` : ""}
+            ${movie.desiredFormat ? `<span>${escapeHtml(movie.desiredFormat)}</span>` : ""}
+          </div>
+          <section class="detail-section">
+            <h3>Status</h3>
+            <p>Wanted for the JFT collection.</p>
+          </section>
+        </div>
+        <div class="detail-actions">
+          <button id="wishlistDetailBackButton" class="back-button" type="button">← Back to Wishlist</button>
+        </div>
+      </div>
+    </article>`;
+
+  byId("wishlistDetailBackButton").addEventListener("click", showWishlistLibrary);
+  showView(wishlistDetailView, "wishlist");
 }
 
 function createGameCard(game) {
@@ -2097,6 +2195,9 @@ function clearGameFilters() {
     );
   });
 
+wishlistSearch.addEventListener("input", renderWishlist);
+wishlistFormatFilter.addEventListener("change", renderWishlist);
+
 [gameSearch, gamePlatformFilter, gameGenreFilter]
   .forEach(control => {
     control.addEventListener(
@@ -2130,19 +2231,24 @@ byId("homeButton").addEventListener("click", showHome);
 byId("movieTabButton").addEventListener("click", showMovieLibrary);
 byId("gameTabButton").addEventListener("click", showGameLibrary);
 byId("playlistTabButton").addEventListener("click", showPlaylistLibrary);
+byId("wishlistTabButton").addEventListener("click", showWishlistLibrary);
 byId("openMoviesButton").addEventListener("click", showMovieLibrary);
 byId("openGamesButton").addEventListener("click", showGameLibrary);
 byId("openPlaylistsButton").addEventListener("click", showPlaylistLibrary);
+byId("openWishlistButton").addEventListener("click", showWishlistLibrary);
 byId("movieCountButton").addEventListener("click", showMovieLibrary);
 byId("gameCountButton").addEventListener("click", showGameLibrary);
+byId("wishlistCountButton").addEventListener("click", showWishlistLibrary);
 
 byId("movieCount").textContent = String(getCollectionMovies().length);
 byId("gameCount").textContent = String(getCollectionGames().length);
+byId("wishlistCount").textContent = String(getWishlistMovies().length);
 populateFilters();
 migrateLegacyPlaylistProgress();
 renderMovies();
 renderGames();
 renderPlaylists();
+renderWishlist();
 showHome();
 
 
