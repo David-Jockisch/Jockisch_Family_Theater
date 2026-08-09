@@ -434,13 +434,13 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/once-upon-a-deadpool.jpg"
   },
 
-    {
+  {
     id: "deadpool",
     collection: "Deadpool",
     franchise: "X-Men",
     boothGroup: "X-Men",
     title: "Deadpool",
-    edition: "Blu Ray",
+    edition: "Digital",
     year: "2016",
     rating: "R",
     runtime: "1hr 48min",
@@ -1510,19 +1510,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles-iii.jpg"
   },
 
-  {
-    id: "teenage-mutant-ninja-turtles-out-of-the-shadows",
-    collection: "Teenage Mutant Ninja Turtles",
-    franchise: "Teenage Mutant Ninja Turtles",
-    boothGroup: "Teenage Mutant Ninja Turtles",
-    title: "Teenage Mutant Ninja Turtles: Out of the Shadows",
-    edition: "Blu Ray",
-    year: "2016",
-    rating: "PG-13",
-    runtime: "1hr 52min",
-    poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles-out-of-the-shadows.jpg"
-  },
-
   // ==================================================
   // The Amazing Spider-Man
   // ==================================================
@@ -2092,19 +2079,6 @@ const movieLibrary = [,
   runtime: "2hr 17min",
   poster: "/assets/posters/movies/marvel/logan-noir.jpg"
 },
-
-  {
-    id: "x-men-origins-wolverine",
-    collection: "X-Men",
-    franchise: "X-Men",
-    boothGroup: "X-Men",
-    title: "X-Men Origins: Wolverine",
-    edition: "Blu Ray",
-    year: "2009",
-    rating: "PG-13",
-    runtime: "1hr 47min",
-    poster: "/assets/posters/movies/marvel/x-men-origins-wolverine.jpg"
-  },
 
   // ==================================================
   // Games

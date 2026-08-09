@@ -18,6 +18,7 @@ const blackPanther = require("./movies/black-panther.js");
 const blackSheep = require("./movies/black-sheep.js");
 const blade = require("./movies/blade.js");
 const bladeIi = require("./movies/blade-ii.js");
+const bladeRunner = require("./movies/blade-runner.js");
 const bladeTrinity = require("./movies/blade-trinity.js");
 const captainAmericaCivilWar = require("./movies/captain-america-civil-war.js");
 const captainAmericaTheFirstAvenger = require("./movies/captain-america-the-first-avenger.js");
@@ -34,8 +35,11 @@ const dunkirk = require("./movies/dunkirk.js");
 const elektra = require("./movies/elektra.js");
 const fantasticFour = require("./movies/fantastic-four.js");
 const fantasticFourRiseOfTheSilverSurfer = require("./movies/fantastic-four-rise-of-the-silver-surfer.js");
+const ghostRider = require("./movies/ghost-rider.js");
 const ghostbusters = require("./movies/ghostbusters.js");
 const ghostbustersIi = require("./movies/ghostbusters-ii.js");
+const godsNotDead = require("./movies/gods-not-dead.js");
+const godsNotDead2 = require("./movies/gods-not-dead-2.js");
 const grumpierOldMen = require("./movies/grumpier-old-men.js");
 const grumpyOldMen = require("./movies/grumpy-old-men.js");
 const guardiansOfTheGalaxy = require("./movies/guardians-of-the-galaxy.js");
@@ -50,6 +54,7 @@ const harryPotterOrderPhoenix = require("./movies/harry-potter-order-phoenix.js"
 const harryPotterPrisonerAzkaban = require("./movies/harry-potter-prisoner-azkaban.js");
 const harryPotterSorcerersStone = require("./movies/harry-potter-sorcerers-stone.js");
 const howTheGrinchStoleChristmas = require("./movies/how-the-grinch-stole-christmas.js");
+const iCanOnlyImagine = require("./movies/i-can-only-imagine.js");
 const interstellar = require("./movies/interstellar.js");
 const ironMan = require("./movies/iron-man.js");
 const ironMan2 = require("./movies/iron-man-2.js");
@@ -78,6 +83,7 @@ const shrek = require("./movies/shrek.js");
 const shrek2 = require("./movies/shrek-2.js");
 const shrekForeverAfter = require("./movies/shrek-forever-after.js");
 const shrekTheThird = require("./movies/shrek-the-third.js");
+const sonOfGod = require("./movies/son-of-god.js");
 const spaceJam = require("./movies/space-jam.js");
 const spaceJamANewLegacy = require("./movies/space-jam-a-new-legacy.js");
 const spiderMan = require("./movies/spider-man.js");
@@ -91,6 +97,7 @@ const spiderManNoWayHome = require("./movies/spider-man-no-way-home.js");
 const teenageMutantNinjaTurtles = require("./movies/teenage-mutant-ninja-turtles.js");
 const teenageMutantNinjaTurtlesIiTheSecretOfTheOoze = require("./movies/teenage-mutant-ninja-turtles-ii-the-secret-of-the-ooze.js");
 const teenageMutantNinjaTurtlesIii = require("./movies/teenage-mutant-ninja-turtles-iii.js");
+const teenageMutantNinjaTurtlesOutOfTheShadows = require("./movies/teenage-mutant-ninja-turtles-out-of-the-shadows.js");
 const theAmazingSpiderMan = require("./movies/the-amazing-spider-man.js");
 const theAmazingSpiderMan2 = require("./movies/the-amazing-spider-man-2.js");
 const theAvengers = require("./movies/the-avengers.js");
@@ -109,6 +116,7 @@ const theMummyReturns = require("./movies/the-mummy-returns.js");
 const theMummyTombDragonEmperor = require("./movies/the-mummy-tomb-dragon-emperor.js");
 const thePacific = require("./movies/the-pacific.js");
 const thePassionOfTheChrist = require("./movies/the-passion-of-the-christ.js");
+const thePunisher = require("./movies/the-punisher.js");
 const theSuperMarioBrosMovie = require("./movies/the-super-mario-bros-movie.js");
 const theSuperMarioGalaxyMovie = require("./movies/the-super-mario-galaxy-movie.js");
 const thor = require("./movies/thor.js");
@@ -128,6 +136,7 @@ const xMen = require("./movies/x-men.js");
 const xMenApocalypse = require("./movies/x-men-apocalypse.js");
 const xMenDaysOfFuturePast = require("./movies/x-men-days-of-future-past.js");
 const xMenFirstClass = require("./movies/x-men-first-class.js");
+const xMenOriginsWolverine = require("./movies/x-men-origins-wolverine.js");
 const xMenTheLastStand = require("./movies/x-men-the-last-stand.js");
 const x2XMenUnited = require("./movies/x2-x-men-united.js");
 
@@ -149,6 +158,7 @@ const movieRatings = [
   blackSheep,
   blade,
   bladeIi,
+  bladeRunner,
   bladeTrinity,
   captainAmericaCivilWar,
   captainAmericaTheFirstAvenger,
@@ -165,8 +175,11 @@ const movieRatings = [
   elektra,
   fantasticFour,
   fantasticFourRiseOfTheSilverSurfer,
+  ghostRider,
   ghostbusters,
   ghostbustersIi,
+  godsNotDead,
+  godsNotDead2,
   grumpierOldMen,
   grumpyOldMen,
   guardiansOfTheGalaxy,
@@ -181,6 +194,7 @@ const movieRatings = [
   harryPotterPrisonerAzkaban,
   harryPotterSorcerersStone,
   howTheGrinchStoleChristmas,
+  iCanOnlyImagine,
   interstellar,
   ironMan,
   ironMan2,
@@ -209,6 +223,7 @@ const movieRatings = [
   shrek2,
   shrekForeverAfter,
   shrekTheThird,
+  sonOfGod,
   spaceJam,
   spaceJamANewLegacy,
   spiderMan,
@@ -222,6 +237,7 @@ const movieRatings = [
   teenageMutantNinjaTurtles,
   teenageMutantNinjaTurtlesIiTheSecretOfTheOoze,
   teenageMutantNinjaTurtlesIii,
+  teenageMutantNinjaTurtlesOutOfTheShadows,
   theAmazingSpiderMan,
   theAmazingSpiderMan2,
   theAvengers,
@@ -240,6 +256,7 @@ const movieRatings = [
   theMummyTombDragonEmperor,
   thePacific,
   thePassionOfTheChrist,
+  thePunisher,
   theSuperMarioBrosMovie,
   theSuperMarioGalaxyMovie,
   thor,
@@ -259,6 +276,7 @@ const movieRatings = [
   xMenApocalypse,
   xMenDaysOfFuturePast,
   xMenFirstClass,
+  xMenOriginsWolverine,
   xMenTheLastStand,
   x2XMenUnited
 ];

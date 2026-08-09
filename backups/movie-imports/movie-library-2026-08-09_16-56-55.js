@@ -294,23 +294,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Blade Runner
-  // ==================================================
-
-  {
-    id: "blade-runner",
-    collection: "Blade Runner",
-    franchise: "Blade Runner",
-    boothGroup: "Blade Runner",
-    title: "Blade Runner",
-    edition: "Blu Ray",
-    year: "1982",
-    rating: "R",
-    runtime: "1hr 58min",
-    poster: "/assets/posters/movies/blade_runner/blade-runner.jpg"
-  },
-
-  // ==================================================
   // Captain America
   // ==================================================
 
@@ -434,26 +417,26 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/once-upon-a-deadpool.jpg"
   },
 
-    {
+  {
     id: "deadpool",
     collection: "Deadpool",
     franchise: "X-Men",
     boothGroup: "X-Men",
     title: "Deadpool",
-    edition: "Blu Ray",
+    edition: "Digital",
     year: "2016",
     rating: "R",
     runtime: "1hr 48min",
     poster: "/assets/posters/movies/marvel/deadpool.jpg"
   },
 
-    {
+  {
     id: "deadpool-2",
     collection: "Deadpool",
     franchise: "X-Men",
     boothGroup: "X-Men",
     title: "Deadpool 2",
-    edition: "Blu Ray Super Cut",
+    edition: "Digital",
     year: "2018",
     rating: "R",
     runtime: "2hr",
@@ -578,23 +561,6 @@ const movieLibrary = [,
     rating: "PG-13",
     runtime: "1hr 55min",
     poster: "/assets/posters/movies/marvel/the-fantastic-4-first-steps.jpg"
-  },
-
-  // ==================================================
-  // Ghost Rider
-  // ==================================================
-
-  {
-    id: "ghost-rider",
-    collection: "Ghost Rider",
-    franchise: "Ghost Rider",
-    boothGroup: "Ghost Rider",
-    title: "Ghost Rider",
-    edition: "Blu Ray",
-    year: "2007",
-    rating: "PG-13",
-    runtime: "1hr 54min",
-    poster: "/assets/posters/movies/ghost_rider/ghost-rider.jpg"
   },
 
   // ==================================================
@@ -813,23 +779,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // I Can Only Imagine
-  // ==================================================
-
-  {
-    id: "i-can-only-imagine",
-    collection: "I Can Only Imagine",
-    franchise: "I Can Only Imagine",
-    boothGroup: "I Can Only Imagine",
-    title: "I Can Only Imagine",
-    edition: "Blu Ray",
-    year: "2018",
-    rating: "PG",
-    runtime: "1hr 50min",
-    poster: "/assets/posters/movies/i-can-only-imagine/i-can-only-imagine.jpg"
-  },
-
-  // ==================================================
   // Interstellar
   // ==================================================
 
@@ -934,32 +883,6 @@ const movieLibrary = [,
     rating: "R",
     runtime: "2hr 7min",
     poster: "/assets/posters/movies/the-passion-of-the-christ.jpg"
-  },
-
-  {
-    id: "gods-not-dead",
-    collection: "King of Kings",
-    franchise: "King of Kings",
-    boothGroup: "King of Kings",
-    title: "God's Not Dead",
-    edition: "Blu Ray",
-    year: "2014",
-    rating: "PG",
-    runtime: "1hr 53min",
-    poster: "/assets/posters/movies/King of Kings/gods-not-dead.jpg"
-  },
-
-  {
-    id: "gods-not-dead-2",
-    collection: "King of Kings",
-    franchise: "King of Kings",
-    boothGroup: "King of Kings",
-    title: "God's Not Dead 2",
-    edition: "Blu Ray",
-    year: "2016",
-    rating: "PG",
-    runtime: "2hr 1min",
-    poster: "/assets/posters/movies/King of Kings/gods-not-dead-2.jpg"
   },
 
   // ==================================================
@@ -1279,23 +1202,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // Son of God
-  // ==================================================
-
-  {
-    id: "son-of-god",
-    collection: "Son of God",
-    franchise: "",
-    boothGroup: "Son of God",
-    title: "Son of God",
-    edition: "Blu Ray",
-    year: "2014",
-    rating: "PG-13",
-    runtime: "2hr 18min",
-    poster: "/assets/posters/movies/son-of-god.jpg"
-  },
-
-  // ==================================================
   // Space Jam
   // ==================================================
 
@@ -1508,19 +1414,6 @@ const movieLibrary = [,
     rating: "PG",
     runtime: "1hr 35min",
     poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles-iii.jpg"
-  },
-
-  {
-    id: "teenage-mutant-ninja-turtles-out-of-the-shadows",
-    collection: "Teenage Mutant Ninja Turtles",
-    franchise: "Teenage Mutant Ninja Turtles",
-    boothGroup: "Teenage Mutant Ninja Turtles",
-    title: "Teenage Mutant Ninja Turtles: Out of the Shadows",
-    edition: "Blu Ray",
-    year: "2016",
-    rating: "PG-13",
-    runtime: "1hr 52min",
-    poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles-out-of-the-shadows.jpg"
   },
 
   // ==================================================
@@ -1790,23 +1683,6 @@ const movieLibrary = [,
   },
 
   // ==================================================
-  // The Punisher
-  // ==================================================
-
-  {
-    id: "the-punisher",
-    collection: "The Punisher",
-    franchise: "The Punisher",
-    boothGroup: "The Punisher",
-    title: "The Punisher",
-    edition: "Blu Ray",
-    year: "2004",
-    rating: "R",
-    runtime: "2hr 4min",
-    poster: "/assets/posters/movies/the-punisher/the-punisher.jpg"
-  },
-
-  // ==================================================
   // Thor
   // ==================================================
 
@@ -1956,13 +1832,13 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/marvel/venom-the-last-dance.jpg"
   },
 
-    {
+  {
     id: "venom-let-there-be-carnage",
     collection: "Venom",
     franchise: "Venom-verse",
     boothGroup: "Spider-Man",
     title: "Venom: Let There Be Carnage",
-    edition: "Blu Ray",
+    edition: "Digital",
     year: "2021",
     rating: "PG-13",
     runtime: "1hr 37min",
@@ -2092,19 +1968,6 @@ const movieLibrary = [,
   runtime: "2hr 17min",
   poster: "/assets/posters/movies/marvel/logan-noir.jpg"
 },
-
-  {
-    id: "x-men-origins-wolverine",
-    collection: "X-Men",
-    franchise: "X-Men",
-    boothGroup: "X-Men",
-    title: "X-Men Origins: Wolverine",
-    edition: "Blu Ray",
-    year: "2009",
-    rating: "PG-13",
-    runtime: "1hr 47min",
-    poster: "/assets/posters/movies/marvel/x-men-origins-wolverine.jpg"
-  },
 
   // ==================================================
   // Games

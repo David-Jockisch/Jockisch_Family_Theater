@@ -2093,19 +2093,6 @@ const movieLibrary = [,
   poster: "/assets/posters/movies/marvel/logan-noir.jpg"
 },
 
-  {
-    id: "x-men-origins-wolverine",
-    collection: "X-Men",
-    franchise: "X-Men",
-    boothGroup: "X-Men",
-    title: "X-Men Origins: Wolverine",
-    edition: "Blu Ray",
-    year: "2009",
-    rating: "PG-13",
-    runtime: "1hr 47min",
-    poster: "/assets/posters/movies/marvel/x-men-origins-wolverine.jpg"
-  },
-
   // ==================================================
   // Games
   // ==================================================
