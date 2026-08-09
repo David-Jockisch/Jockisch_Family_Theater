@@ -47,6 +47,13 @@ const wishlistDetail = byId("wishlistDetail");
 const wishlistEmptyState = byId("wishlistEmptyState");
 const wishlistSearch = byId("wishlistSearch");
 const wishlistFormatFilter = byId("wishlistFormatFilter");
+const wishlistPlatformFilter = byId("wishlistPlatformFilter");
+const wishlistFormatFilterField = byId("wishlistFormatFilterField");
+const wishlistPlatformFilterField = byId("wishlistPlatformFilterField");
+const wishlistMoviesTabButton = byId("wishlistMoviesTabButton");
+const wishlistGamesTabButton = byId("wishlistGamesTabButton");
+const wishlistSearchLabel = byId("wishlistSearchLabel");
+const wishlistEmptyMessage = byId("wishlistEmptyMessage");
 
 const movieFiltersToggle = byId("movieFiltersToggle");
 const gameFiltersToggle = byId("gameFiltersToggle");
@@ -55,6 +62,7 @@ const gameFilterOptions = byId("gameFilterOptions");
 
 let movieViewMode = "all";
 let gameViewMode = "all";
+let wishlistViewMode = "movies";
 
 const platformOrder = [
   "ps5", "ps4", "ps3", "ps2", "ps1", "psvr", "psvita", "psp",
@@ -133,19 +141,43 @@ function getCollectionGames() {
   return Array.isArray(gameLibrary) ? gameLibrary.slice() : [];
 }
 
-function getWishlistMovies() {
+function getWishlistItems() {
   return Array.isArray(wishlistLibrary) ? wishlistLibrary.slice() : [];
 }
 
-function wishlistSearchText(movie) {
-  return [movie.title, movie.year, movie.desiredFormat]
-    .filter(Boolean).join(" ").toLowerCase();
+function getWishlistMovies() {
+  return getWishlistItems().filter(item => (item.mediaType || "movie") === "movie");
+}
+
+function getWishlistGames() {
+  return getWishlistItems().filter(item => item.mediaType === "game");
+}
+
+function wishlistSearchText(item) {
+  return [
+    item.title,
+    item.year,
+    item.release,
+    item.desiredFormat,
+    item.platform,
+    platformNames[item.platform]
+  ].filter(Boolean).join(" ").toLowerCase();
 }
 
 function getFilteredWishlist() {
   const query = normalizeText(wishlistSearch.value);
-  const desiredFormat = wishlistFormatFilter.value;
 
+  if (wishlistViewMode === "games") {
+    const platform = wishlistPlatformFilter.value;
+    return getWishlistGames()
+      .filter(game =>
+        (!query || wishlistSearchText(game).includes(query)) &&
+        (!platform || game.platform === platform)
+      )
+      .sort(compareTitles);
+  }
+
+  const desiredFormat = wishlistFormatFilter.value;
   return getWishlistMovies()
     .filter(movie =>
       (!query || wishlistSearchText(movie).includes(query)) &&
@@ -194,6 +226,16 @@ function populateFilters() {
     wishlistFormatFilter,
     uniqueSorted(getWishlistMovies().map(movie => movie.desiredFormat)),
     "All Formats"
+  );
+
+  const wishlistPlatforms = sortPlatforms(
+    uniqueSorted(getWishlistGames().map(game => game.platform))
+  );
+  fillSelect(
+    wishlistPlatformFilter,
+    wishlistPlatforms,
+    "All Platforms",
+    platform => platformNames[platform] || platform
   );
 }
 
@@ -399,38 +441,88 @@ function setMovieViewMode(mode) {
   renderMovies();
 }
 
-function createWishlistCard(movie) {
+function createWishlistCard(item) {
   const card = document.createElement("button");
-  const title = escapeHtml(movie.title || "Untitled");
-  const poster = escapeHtml(assetPath(movie.poster));
-  const desiredFormat = escapeHtml(movie.desiredFormat || "Wanted");
+  const title = escapeHtml(item.title || "Untitled");
+  const poster = escapeHtml(assetPath(item.poster));
+  const isGame = item.mediaType === "game";
+  const badge = isGame
+    ? escapeHtml(platformNames[item.platform] || item.platform || "Game")
+    : escapeHtml(item.desiredFormat || "Wanted");
 
-  card.className = "movie-card wishlist-card";
+  card.className = isGame
+    ? "game-card wishlist-card wishlist-game-card"
+    : "movie-card wishlist-card";
   card.type = "button";
-  card.innerHTML = `
-    <div class="movie-poster-shell">
-      <img src="${poster}" alt="${title}" loading="lazy">
-      <span class="format-badge wishlist-badge">${desiredFormat}</span>
-    </div>
-    <div class="movie-card-copy">
-      <h2 class="movie-card-title">${title}</h2>
-      <p class="movie-card-meta">${escapeHtml(movie.year || "Year unknown")}</p>
-    </div>`;
 
-  card.addEventListener("click", () => showWishlistDetail(movie));
+  if (isGame) {
+    card.innerHTML = `
+      <div class="game-poster-shell">
+        <img src="${poster}" alt="${title}" loading="lazy">
+        <span class="platform-badge wishlist-badge">${badge}</span>
+      </div>
+      <div class="game-card-copy">
+        <h3 class="game-card-title">${title}</h3>
+        <p class="game-card-meta">${escapeHtml(item.year || item.release || "Year unknown")}</p>
+      </div>`;
+  } else {
+    card.innerHTML = `
+      <div class="movie-poster-shell">
+        <img src="${poster}" alt="${title}" loading="lazy">
+        <span class="format-badge wishlist-badge">${badge}</span>
+      </div>
+      <div class="movie-card-copy">
+        <h2 class="movie-card-title">${title}</h2>
+        <p class="movie-card-meta">${escapeHtml(item.year || "Year unknown")}</p>
+      </div>`;
+  }
+
+  card.addEventListener("click", () => showWishlistDetail(item));
   return card;
 }
 
-function renderWishlist() {
-  const movies = getFilteredWishlist();
-  wishlistGrid.innerHTML = "";
-  movies.forEach(movie => wishlistGrid.appendChild(createWishlistCard(movie)));
-  wishlistEmptyState.hidden = movies.length !== 0;
+function updateWishlistViewControls() {
+  const showingGames = wishlistViewMode === "games";
+
+  wishlistMoviesTabButton.classList.toggle("active", !showingGames);
+  wishlistGamesTabButton.classList.toggle("active", showingGames);
+  wishlistMoviesTabButton.setAttribute("aria-selected", String(!showingGames));
+  wishlistGamesTabButton.setAttribute("aria-selected", String(showingGames));
+
+  wishlistFormatFilterField.hidden = showingGames;
+  wishlistPlatformFilterField.hidden = !showingGames;
+  wishlistSearchLabel.textContent = showingGames ? "Search Games" : "Search Movies";
+  wishlistSearch.placeholder = showingGames
+    ? "Search game wishlist..."
+    : "Search movie wishlist...";
+
+  wishlistGrid.classList.toggle("game-grid", showingGames);
+  wishlistGrid.classList.toggle("movie-grid", !showingGames);
+  wishlistEmptyMessage.textContent = showingGames
+    ? "Add a game with the Wishlist Importer in Developer Tools."
+    : "Add a movie with the Wishlist Importer in Developer Tools.";
 }
 
-function showWishlistDetail(movie) {
-  const title = escapeHtml(movie.title || "Untitled");
-  const poster = escapeHtml(assetPath(movie.poster));
+function setWishlistViewMode(mode) {
+  wishlistViewMode = mode === "games" ? "games" : "movies";
+  wishlistSearch.value = "";
+  updateWishlistViewControls();
+  renderWishlist();
+}
+
+function renderWishlist() {
+  updateWishlistViewControls();
+  const items = getFilteredWishlist();
+  wishlistGrid.innerHTML = "";
+  items.forEach(item => wishlistGrid.appendChild(createWishlistCard(item)));
+  wishlistEmptyState.hidden = items.length !== 0;
+}
+
+function showWishlistDetail(item) {
+  const title = escapeHtml(item.title || "Untitled");
+  const poster = escapeHtml(assetPath(item.poster));
+  const isGame = item.mediaType === "game";
+  const platformName = platformNames[item.platform] || item.platform || "Game";
 
   wishlistDetail.innerHTML = `
     <article class="detail-card" style="--detail-bg: url('${poster}')">
@@ -438,15 +530,16 @@ function showWishlistDetail(movie) {
       <div class="detail-content">
         <img class="detail-poster" src="${poster}" alt="${title}">
         <div class="detail-copy">
-          <p class="eyebrow">Wishlist</p>
+          <p class="eyebrow">${isGame ? "Game Wishlist" : "Movie Wishlist"}</p>
           <h2>${title}</h2>
           <div class="detail-meta">
-            ${movie.year ? `<span>${escapeHtml(movie.year)}</span>` : ""}
-            ${movie.desiredFormat ? `<span>${escapeHtml(movie.desiredFormat)}</span>` : ""}
+            ${(item.year || item.release) ? `<span>${escapeHtml(item.year || item.release)}</span>` : ""}
+            ${isGame && item.platform ? `<span>${escapeHtml(platformName)}</span>` : ""}
+            ${!isGame && item.desiredFormat ? `<span>${escapeHtml(item.desiredFormat)}</span>` : ""}
           </div>
           <section class="detail-section">
             <h3>Status</h3>
-            <p>Wanted for the JFT collection.</p>
+            <p>Wanted for the JFT ${isGame ? "game" : "movie"} collection.</p>
           </section>
         </div>
         <div class="detail-actions">
@@ -2197,6 +2290,9 @@ function clearGameFilters() {
 
 wishlistSearch.addEventListener("input", renderWishlist);
 wishlistFormatFilter.addEventListener("change", renderWishlist);
+wishlistPlatformFilter.addEventListener("change", renderWishlist);
+wishlistMoviesTabButton.addEventListener("click", () => setWishlistViewMode("movies"));
+wishlistGamesTabButton.addEventListener("click", () => setWishlistViewMode("games"));
 
 [gameSearch, gamePlatformFilter, gameGenreFilter]
   .forEach(control => {
@@ -2242,7 +2338,7 @@ byId("wishlistCountButton").addEventListener("click", showWishlistLibrary);
 
 byId("movieCount").textContent = String(getCollectionMovies().length);
 byId("gameCount").textContent = String(getCollectionGames().length);
-byId("wishlistCount").textContent = String(getWishlistMovies().length);
+byId("wishlistCount").textContent = String(getWishlistItems().length);
 populateFilters();
 migrateLegacyPlaylistProgress();
 renderMovies();

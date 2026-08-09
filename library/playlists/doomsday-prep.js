@@ -45,10 +45,8 @@ const doomsdayPrep = {
     { id: "21-guardians", section: "Phase 2 — HYDRA & The Infinity Stones (2012–2015)", type: "movie", ref: "guardians-of-the-galaxy", priority: "Recommended", note: "Watch all five credit scenes." },
 
     // Phase 3A
-    { id: "22-daredevil-s1", section: "Phase 3A — Street Level Heroes (2015–2016)", type: "season", ref: "daredevil-series", season: 1, episodeCount: 13, priority: "Recommended" },
     { id: "23-age-of-ultron", section: "Phase 3A — Street Level Heroes (2015–2016)", type: "movie", ref: "avengers-age-of-ultron", priority: "Essential", note: "Watch the mid-credit scene featuring Thanos." },
     { id: "24-ant-man", section: "Phase 3A — Street Level Heroes (2015–2016)", type: "movie", ref: "ant-man", priority: "Recommended", note: "Watch credits." },
-    { id: "25-daredevil-s2", section: "Phase 3A — Street Level Heroes (2015–2016)", type: "season", ref: "daredevil-series", season: 2, episodeCount: 13, priority: "Recommended" },
 
     // Phase 3B
     { id: "26-civil-war", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "movie", ref: "captain-america-civil-war", priority: "Essential", note: "Watch credits." },
@@ -57,7 +55,6 @@ const doomsdayPrep = {
     { id: "29-homecoming", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "movie", ref: "spider-man-homecoming", priority: "Recommended", note: "Watch credits." },
     { id: "30-doctor-strange", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "movie", ref: "doctor-strange", priority: "Essential", note: "Watch credits." },
     { id: "31-days-of-future-past", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "movie", ref: "x-men-days-of-future-past", priority: "Essential" },
-    { id: "32-daredevil-s3", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "season", ref: "daredevil-series", season: 3, episodeCount: 13, priority: "Recommended" },
     { id: "33-deadpool", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "movie", ref: "deadpool", priority: "Recommended", note: "Watch before Deadpool & Wolverine." },
     { id: "34-deadpool-2", section: "Phase 3B — Civil War & Fallout (2016–2018)", type: "movie", ref: "deadpool-2", priority: "Recommended", note: "Watch before Deadpool & Wolverine." },
 
@@ -97,12 +94,10 @@ const doomsdayPrep = {
     { id: "59-loki-s2", section: "Phase 5 — The Multiverse War (2025–2026)", type: "season", ref: "loki", season: 2, episodeCount: 6, priority: "Essential" },
     { id: "60-what-if-s3", section: "Phase 5 — The Multiverse War (2025–2026)", type: "season", ref: "what-if", season: 3, episodeCount: 9, priority: "Essential" },
     { id: "61-deadpool-wolverine", section: "Phase 5 — The Multiverse War (2025–2026)", type: "movie", ref: "deadpool-and-wolverine", priority: "Essential", note: "Watch Logan first for the full impact." },
-    { id: "62-daredevil-born-again-s1", section: "Phase 5 — The Multiverse War (2025–2026)", type: "season", ref: "daredevil-born-again", season: 1, episodeCount: 9, priority: "Essential" },
     { id: "63-brave-new-world", section: "Phase 5 — The Multiverse War (2025–2026)", type: "movie", ref: "captain-america-brave-new-world", priority: "Essential" },
     { id: "64-thunderbolts", section: "Phase 5 — The Multiverse War (2025–2026)", type: "movie", ref: "thunderbolts", priority: "Essential" },
 
     // Phase 6
-    { id: "65-daredevil-born-again-s2", section: "Phase 6 — Doomsday (2026)", type: "season", ref: "daredevil-born-again", season: 2, episodeCount: 8, priority: "Recommended", note: "Listed as premiering March 24, 2026 and concurrent with The Punisher: One Last Kill." },
     { id: "66-spider-man-brand-new-day", section: "Phase 6 — Doomsday (2026)", type: "movie", ref: "spider-man-brand-new-day", priority: "Essential" },
     { id: "67-visionquest-s1", section: "Phase 6 — Doomsday (2026)", type: "season", ref: "visionquest", season: 1, episodeCount: 8, priority: "Recommended", note: "Listed for mid-to-late 2026. Watch WandaVision and Agatha All Along first." },
     { id: "68-the-fantastic-4-first-steps", section: "Phase 6 — Doomsday (2026)", type: "movie", ref: "the-fantastic-4-first-steps", priority: "Essential" },

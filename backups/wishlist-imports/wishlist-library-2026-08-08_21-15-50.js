@@ -141,15 +141,6 @@ const wishlistLibrary = [
     year: "2025",
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/marvel/the-fantastic-4-first-steps.jpg"
-  },
-
-  {
-    id: "007-first-light",
-    mediaType: "game",
-    title: "007 First Light",
-    year: "2026",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/007-first-light.jpg"
   }
 
 ];

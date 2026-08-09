@@ -268,7 +268,7 @@
 
             <span class="library-choice-copy">
               <strong>Wishlist</strong>
-              <span>Keep track of movies you want to add</span>
+              <span>Keep track of movies and games you want to add</span>
             </span>
 
             <span class="library-choice-arrow" aria-hidden="true">
@@ -485,21 +485,48 @@
           </div>
         </div>
 
+        <div class="library-subnav wishlist-subnav" role="tablist" aria-label="Wishlist types">
+          <button
+            id="wishlistMoviesTabButton"
+            class="subview-tab active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+          >
+            Movies
+          </button>
+
+          <button
+            id="wishlistGamesTabButton"
+            class="subview-tab"
+            type="button"
+            role="tab"
+            aria-selected="false"
+          >
+            Games
+          </button>
+        </div>
+
         <div class="filter-panel wishlist-filter-panel">
           <label class="search-field" for="wishlistSearch">
-            <span class="search-label">Search Wishlist</span>
-            <input id="wishlistSearch" type="search" placeholder="Search by title..." autocomplete="off">
+            <span id="wishlistSearchLabel" class="search-label">Search Movies</span>
+            <input id="wishlistSearch" type="search" placeholder="Search movie wishlist..." autocomplete="off">
           </label>
 
-          <label class="filter-field" for="wishlistFormatFilter">
+          <label id="wishlistFormatFilterField" class="filter-field" for="wishlistFormatFilter">
             <span>Desired Format</span>
             <select id="wishlistFormatFilter"><option value="">All Formats</option></select>
+          </label>
+
+          <label id="wishlistPlatformFilterField" class="filter-field" for="wishlistPlatformFilter" hidden>
+            <span>Platform</span>
+            <select id="wishlistPlatformFilter"><option value="">All Platforms</option></select>
           </label>
         </div>
 
         <div id="wishlistEmptyState" class="empty-state" hidden>
           <h2>No wishlist titles found</h2>
-          <p>Add a movie with the Wishlist Importer in Developer Tools.</p>
+          <p id="wishlistEmptyMessage">Add a movie with the Wishlist Importer in Developer Tools.</p>
         </div>
 
         <div id="wishlistGrid" class="movie-grid wishlist-grid" aria-live="polite"></div>
