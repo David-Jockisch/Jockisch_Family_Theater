@@ -145,7 +145,7 @@ const wishlistLibrary = [
     mediaType: "movie",
     title: "The Matrix",
     year: "1999",
-    desiredFormat: "4k Blu Ray",
+    desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/the-matrix/the-matrix.jpg"
   }
 

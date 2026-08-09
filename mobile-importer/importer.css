@@ -484,3 +484,13 @@ textarea:focus {
     padding: 2rem;
   }
 }
+
+
+/* V1.3.1 — Header scroll behavior fix */
+.topbar {
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
