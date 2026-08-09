@@ -138,15 +138,6 @@ const wishlistLibrary = [
     year: "2026",
     platform: "seriesx",
     poster: "/assets/posters/games/seriesx/gears-of-war-e-day.jpg"
-  },
-
-  {
-    id: "the-matrix",
-    mediaType: "movie",
-    title: "The Matrix",
-    year: "1999",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/the-matrix/the-matrix.jpg"
   }
 
 ];

@@ -15,7 +15,6 @@ const state = {
 
 const API = '/api/importer';
 const GIT_API = '/api/git';
-const HOLD_MS = 620;
 
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
@@ -53,51 +52,10 @@ function bindNav() {
   document.querySelectorAll('[data-route]').forEach(button => button.addEventListener('click', () => setRoute(button.dataset.route)));
 }
 
-function enableHold(element, callback) {
-  let timer = null;
-  let start = 0;
-  let frame = null;
-  let fired = false;
-
-  const reset = () => {
-    clearTimeout(timer);
-    cancelAnimationFrame(frame);
-    timer = null;
-    element.classList.remove('holding');
-    element.style.setProperty('--press', '0deg');
-    element.style.setProperty('--hold-progress', '0');
-  };
-
-  const tick = () => {
-    if (!timer) return;
-    const progress = Math.min(1, (performance.now() - start) / HOLD_MS);
-    element.style.setProperty('--press', `${progress * 360}deg`);
-    element.style.setProperty('--hold-progress', String(progress));
-    if (progress < 1) frame = requestAnimationFrame(tick);
-  };
-
-  const begin = event => {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
-    fired = false;
-    start = performance.now();
-    element.classList.add('holding');
-    timer = setTimeout(() => {
-      fired = true;
-      reset();
-      if (navigator.vibrate) navigator.vibrate(35);
-      callback();
-    }, HOLD_MS);
-    frame = requestAnimationFrame(tick);
-  };
-
-  element.addEventListener('pointerdown', begin);
-  ['pointerup','pointercancel','pointerleave'].forEach(name => element.addEventListener(name, () => { if (!fired) reset(); }));
-  element.addEventListener('contextmenu', event => event.preventDefault());
-  element.addEventListener('click', event => { if (fired) { event.preventDefault(); event.stopPropagation(); } });
-}
-
-function bindHold(selector, callback) {
-  document.querySelectorAll(selector).forEach(element => enableHold(element, () => callback(element)));
+function bindTap(selector, callback) {
+  document.querySelectorAll(selector).forEach(element => {
+    element.addEventListener('click', () => callback(element));
+  });
 }
 
 function renderHome() {
@@ -142,8 +100,8 @@ async function runSearch(kind, query) {
     const url = kind === 'movies' ? `${API}/movies/search?q=${encodeURIComponent(query)}` : `${API}/games/search?q=${encodeURIComponent(query)}&platform=${encodeURIComponent(state.selectedPlatform)}`;
     const data = await api(url);
     if (!data.results.length) { results.innerHTML = '<div class="empty">No matches found.</div>'; return; }
-    results.innerHTML = `<div class="hold-tip"><span class="hold-ring mini"></span><span>Hold the correct result to continue.</span></div><div class="results-grid">${data.results.map(item => mediaCard(item, kind)).join('')}</div>`;
-    bindHold('.media-card', async card => {
+    results.innerHTML = `<div class="interaction-tip"><span class="tap-dot">✓</span><span>Tap the correct result to review it before saving.</span></div><div class="results-grid">${data.results.map(item => mediaCard(item, kind)).join('')}</div>`;
+    bindTap('.media-card', async card => {
       const id = card.dataset.id;
       results.innerHTML = '<div class="loader"></div>';
       try {
@@ -159,7 +117,7 @@ function mediaCard(item, kind, wishlist = false) {
   const poster = item.posterUrl || item.poster;
   const sub = wishlist ? (item.mediaType === 'movie' ? item.desiredFormat : platformLabel(item.platform)) : `${item.year || 'Unknown'}${kind === 'games' && item.type ? ` · ${item.type}` : ''}`;
   return `<article class="media-card" data-id="${escapeHtml(item.id)}" data-type="${escapeHtml(item.mediaType || kind)}" data-platform="${escapeHtml(item.platform || '')}">
-    <div class="poster-wrap">${poster ? `<img src="${escapeHtml(poster)}" alt="">` : '<div class="poster-placeholder">?</div>'}<div class="press-overlay"></div>${kind === 'games' && item.platformMatch ? '<div class="badges"><span class="badge match">PLATFORM MATCH</span></div>' : ''}</div>
+    <div class="poster-wrap">${poster ? `<img src="${escapeHtml(poster)}" alt="">` : '<div class="poster-placeholder">?</div>'}${kind === 'games' && item.platformMatch ? '<div class="badges"><span class="badge match">PLATFORM MATCH</span></div>' : ''}</div>
     <div class="card-body"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(sub || '')}</p></div>
   </article>`;
 }
@@ -180,9 +138,9 @@ function renderMovieDetail() {
     <section class="panel"><div class="field-grid two">
       ${field('title','Title',m.title)}${field('edition','Edition',m.edition)}${field('collection','Collection',m.collection)}${field('franchise','Franchise',m.franchise)}${field('boothGroup','Booth Group',m.boothGroup)}${field('posterFolder','Poster Folder',m.posterFolder)}${field('year','Year',m.year)}${field('rating','Rating',m.rating)}${field('runtime','Runtime',m.runtime)}
     </div></section>
-    <div class="action-stack"><button id="addMovie" class="primary-button hold-button" type="button">Hold to Add Movie</button><button id="wishlistMovie" class="secondary-button hold-button" type="button">Hold to Add to Wishlist</button></div>`;
-  enableHold(document.getElementById('addMovie'), () => saveMovie(false));
-  enableHold(document.getElementById('wishlistMovie'), () => saveMovie(true));
+    <div class="action-stack"><button id="addMovie" class="primary-button" type="button">Add Movie</button><button id="wishlistMovie" class="secondary-button" type="button">Add to Wishlist</button></div>`;
+  document.getElementById('addMovie').addEventListener('click', () => saveMovie(false));
+  document.getElementById('wishlistMovie').addEventListener('click', () => saveMovie(true));
 }
 
 async function saveMovie(wishlist) {
@@ -209,9 +167,9 @@ function renderGameDetail() {
       ${field('gameTitle','Title',g.title)}${field('gameCollection','Collection',g.collection)}${field('gamePublisher','Publisher',g.publisher)}${field('gameDeveloper','Developer',g.developer)}${field('gameGenre','Genre',g.genre)}${field('gamePlayers','Players',g.players)}${field('gameRating','Rating',g.rating)}
       <div class="field"><label>Ownership</label><select id="ownership"><option value="disc">Disc / Cartridge</option><option value="digital">Digital</option></select></div>
     </div></section>
-    <div class="action-stack"><button id="addGame" class="primary-button hold-button">Hold to Add Game</button><button id="wishlistGame" class="secondary-button hold-button">Hold to Add to Wishlist</button></div>`;
-  enableHold(document.getElementById('addGame'), () => saveGame(false));
-  enableHold(document.getElementById('wishlistGame'), () => saveGame(true));
+    <div class="action-stack"><button id="addGame" class="primary-button">Add Game</button><button id="wishlistGame" class="secondary-button">Add to Wishlist</button></div>`;
+  document.getElementById('addGame').addEventListener('click', () => saveGame(false));
+  document.getElementById('wishlistGame').addEventListener('click', () => saveGame(true));
 }
 
 async function saveGame(wishlist) {
@@ -235,10 +193,10 @@ async function renderWishlist() {
     const data = await api(`${API}/wishlist`);
     const filtered = data.items.filter(x => x.mediaType === state.wishlistTab);
     app.innerHTML = `<div class="segmented"><button data-tab="movie" class="${state.wishlistTab === 'movie' ? 'active' : ''}">Movies</button><button data-tab="game" class="${state.wishlistTab === 'game' ? 'active' : ''}">Games</button></div>
-      <div class="hold-tip"><span class="hold-ring mini"></span><span>Hold an item to open its Wishlist actions.</span></div>
+      <div class="interaction-tip"><span class="tap-dot">✓</span><span>Tap an item to open its Wishlist actions.</span></div>
       ${filtered.length ? `<div class="wishlist-grid">${filtered.map(x => mediaCard(x, x.mediaType === 'movie' ? 'movies' : 'games', true)).join('')}</div>` : '<div class="empty">Nothing in this Wishlist tab yet.</div>'}`;
     document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => { state.wishlistTab = button.dataset.tab; renderWishlist(); }));
-    bindHold('.media-card', card => {
+    bindTap('.media-card', card => {
       state.selected = data.items.find(x => x.mediaType === card.dataset.type && x.id === card.dataset.id && (!card.dataset.platform || x.platform === card.dataset.platform));
       setRoute('wishlist-detail');
     });
@@ -251,10 +209,10 @@ function renderWishlistDetail() {
   pageTitle.textContent = 'Wishlist Item'; backButton.classList.remove('hidden');
   const meta = item.mediaType === 'movie' ? `${item.year} · ${item.desiredFormat}` : `${item.year} · ${platformLabel(item.platform)}`;
   app.innerHTML = `${detailHero(item, item.poster, meta)}
-    <section class="panel"><p style="color:var(--muted);margin:0">Hold <strong style="color:var(--text)">Add to Library</strong> to open the purchase/import review flow. Removing an item requires a second confirmation.</p></section>
-    <div class="action-stack"><button id="moveWishlist" class="primary-button hold-button">Hold to Add to Library</button><button id="removeWishlist" class="danger-button hold-button">Hold to Remove from Wishlist</button></div>`;
-  enableHold(document.getElementById('moveWishlist'), () => prepareWishlistMove(item));
-  enableHold(document.getElementById('removeWishlist'), () => confirmRemove(item));
+    <section class="panel"><p style="color:var(--muted);margin:0">Tap <strong style="color:var(--text)">Add to Library</strong> to review the purchase/import details. Removing an item still requires confirmation.</p></section>
+    <div class="action-stack"><button id="moveWishlist" class="primary-button">Add to Library</button><button id="removeWishlist" class="danger-button">Remove from Wishlist</button></div>`;
+  document.getElementById('moveWishlist').addEventListener('click', () => prepareWishlistMove(item));
+  document.getElementById('removeWishlist').addEventListener('click', () => confirmRemove(item));
 }
 
 async function prepareWishlistMove(item) {
@@ -276,8 +234,8 @@ function renderWishlistMovieReview() {
   app.innerHTML = `${detailHero(m, wish.poster || m.poster, `${m.year} · ${m.rating || 'Unknown'} · ${m.runtime || 'Unknown'}`)}
     <section class="panel"><div class="field-grid two">
       ${field('wishEdition','Edition',wish.desiredFormat || m.edition || 'Blu Ray')}${field('wishCollection','Collection',m.collection || m.title)}${field('wishFranchise','Franchise',m.franchise || '')}${field('wishBooth','Booth Group',m.boothGroup || m.title)}${field('wishRating','Rating',m.rating || 'Unknown')}${field('wishRuntime','Runtime',m.runtime || 'Unknown')}
-    </div></section><button id="confirmWishMovie" class="primary-button hold-button" style="width:100%">Hold to Add & Remove from Wishlist</button>`;
-  enableHold(document.getElementById('confirmWishMovie'), async () => {
+    </div></section><button id="confirmWishMovie" class="primary-button" style="width:100%">Add to Library & Remove from Wishlist</button>`;
+  document.getElementById('confirmWishMovie').addEventListener('click', async () => {
     try {
       await api(`${API}/wishlist/movie/${encodeURIComponent(wish.id)}/move-to-library`, { method: 'POST', body: JSON.stringify({ edition: value('wishEdition'), collection: value('wishCollection'), franchise: value('wishFranchise'), boothGroup: value('wishBooth'), rating: value('wishRating'), runtime: value('wishRuntime') }) });
       showToast(`${wish.title} moved to Movie Library.`); state.selected = null; state.history = ['home']; setRoute('wishlist', { replace: true });
@@ -291,8 +249,8 @@ function renderWishlistGameReview() {
     <section class="panel"><div class="field-grid two">
       ${field('wishGameTitle','Title',g.title)}${field('wishGameCollection','Collection',g.collection)}${field('wishGamePublisher','Publisher',g.publisher)}${field('wishGameDeveloper','Developer',g.developer)}${field('wishGameGenre','Genre',g.genre)}${field('wishGamePlayers','Players',g.players)}${field('wishGameRating','Rating',g.rating)}
       <div class="field"><label>Ownership</label><select id="wishOwnership"><option value="disc">Disc / Cartridge</option><option value="digital">Digital</option></select></div>
-    </div></section><button id="confirmWishGame" class="primary-button hold-button" style="width:100%">Hold to Add & Remove from Wishlist</button>`;
-  enableHold(document.getElementById('confirmWishGame'), async () => {
+    </div></section><button id="confirmWishGame" class="primary-button" style="width:100%">Add to Library & Remove from Wishlist</button>`;
+  document.getElementById('confirmWishGame').addEventListener('click', async () => {
     try {
       const overrides = { title: value('wishGameTitle'), collection: value('wishGameCollection'), publisher: value('wishGamePublisher'), developer: value('wishGameDeveloper'), genre: value('wishGameGenre'), players: value('wishGamePlayers'), rating: value('wishGameRating') };
       await api(`${API}/wishlist/game/${encodeURIComponent(wish.id)}/move-to-library`, { method: 'POST', body: JSON.stringify({ platform: wish.platform, ownership: value('wishOwnership'), overrides }) });
@@ -304,10 +262,10 @@ function renderWishlistGameReview() {
 function confirmRemove(item) {
   const sheet = document.createElement('div');
   sheet.className = 'confirm-sheet';
-  sheet.innerHTML = `<div class="confirm-card"><h3>Remove ${escapeHtml(item.title)}?</h3><p>This removes it from the Wishlist only. Existing library entries and shared artwork are not changed.</p><div class="confirm-actions"><button class="secondary-button" data-cancel>Cancel</button><button class="danger-button hold-button" data-confirm>Hold to Remove</button></div></div>`;
+  sheet.innerHTML = `<div class="confirm-card"><h3>Remove ${escapeHtml(item.title)}?</h3><p>This removes it from the Wishlist only. Existing library entries and shared artwork are not changed.</p><div class="confirm-actions"><button class="secondary-button" data-cancel>Cancel</button><button class="danger-button" data-confirm>Remove</button></div></div>`;
   document.body.appendChild(sheet);
   sheet.querySelector('[data-cancel]').addEventListener('click', () => sheet.remove());
-  enableHold(sheet.querySelector('[data-confirm]'), async () => {
+  sheet.querySelector('[data-confirm]').addEventListener('click', async () => {
     try {
       const query = item.platform ? `?platform=${encodeURIComponent(item.platform)}` : '';
       await api(`${API}/wishlist/${item.mediaType}/${encodeURIComponent(item.id)}${query}`, { method: 'DELETE' });
@@ -386,8 +344,8 @@ async function renderGitConsole() {
     controls.innerHTML = `
       <p class="git-question">Stage all listed changes?</p>
       <p class="git-help">Matches the Developer Console flow: <code>git add -A</code>.</p>
-      <button id="gitStage" class="primary-button hold-button" style="width:100%">Hold to Stage All Changes</button>`;
-    enableHold(document.getElementById('gitStage'), stageGitChanges);
+      <button id="gitStage" class="primary-button" style="width:100%">Stage All Changes</button>`;
+    document.getElementById('gitStage').addEventListener('click', stageGitChanges);
   } catch (error) {
     appendTerminal(gitOutput(`[ERROR] ${error.message}`, 'error-text'));
     document.getElementById('gitControls').innerHTML = `<button class="secondary-button" id="gitRefresh" style="width:100%">Retry</button>`;
@@ -413,9 +371,9 @@ async function stageGitChanges() {
       <p class="git-question">Commit these staged files?</p>
       <div class="field"><label>Commit message</label><input id="gitCommitMessage" maxlength="180" value="Update JFT collection"></div>
       <div style="height:12px"></div>
-      <button id="gitCommit" class="primary-button hold-button" style="width:100%">Hold to Commit</button>
+      <button id="gitCommit" class="primary-button" style="width:100%">Commit Changes</button>
       <button id="gitCancelAfterStage" class="secondary-button" style="width:100%;margin-top:10px">Cancel — Leave Files Staged</button>`;
-    enableHold(document.getElementById('gitCommit'), commitGitChanges);
+    document.getElementById('gitCommit').addEventListener('click', commitGitChanges);
     document.getElementById('gitCancelAfterStage').addEventListener('click', () => {
       appendTerminal(gitOutput('[NOTICE] Commit canceled. The files remain staged.', 'notice-text'));
       controls.innerHTML = `<button class="secondary-button" id="gitReturnHome" style="width:100%">Return to Importer</button>`;
@@ -440,8 +398,8 @@ async function commitGitChanges() {
     appendTerminal(gitOutput(result.output.stdout || result.output.stderr || 'Commit created.', 'success-text'));
     controls.innerHTML = `
       <p class="git-question">Push the current branch to GitHub?</p>
-      <button id="gitPush" class="primary-button hold-button" style="width:100%">Hold to Push to GitHub</button>`;
-    enableHold(document.getElementById('gitPush'), pushGitChanges);
+      <button id="gitPush" class="primary-button" style="width:100%">Push to GitHub</button>`;
+    document.getElementById('gitPush').addEventListener('click', pushGitChanges);
   } catch (error) {
     appendTerminal(gitOutput(`[ERROR] Git could not create the commit.\n${error.message}`, 'error-text'));
     controls.innerHTML = `<button class="secondary-button" id="gitReload" style="width:100%">Reload Git Status</button>`;
@@ -472,8 +430,8 @@ async function pushGitChanges() {
     document.getElementById('gitCheckAgain').addEventListener('click', renderGitConsole);
   } catch (error) {
     appendTerminal(gitOutput(`[ERROR] The commit was created locally, but the GitHub push failed.\n${error.message}\nChoose Save & Push again to retry.`, 'error-text'));
-    controls.innerHTML = `<button id="gitRetryPush" class="primary-button hold-button" style="width:100%">Hold to Retry Push</button><button id="gitReturn" class="secondary-button" style="width:100%;margin-top:10px">Return to Importer</button>`;
-    enableHold(document.getElementById('gitRetryPush'), pushGitChanges);
+    controls.innerHTML = `<button id="gitRetryPush" class="primary-button" style="width:100%">Retry Push</button><button id="gitReturn" class="secondary-button" style="width:100%;margin-top:10px">Return to Importer</button>`;
+    document.getElementById('gitRetryPush').addEventListener('click', pushGitChanges);
     document.getElementById('gitReturn').addEventListener('click', () => setRoute('home'));
   }
 }
@@ -504,6 +462,18 @@ function render() {
   renderHome();
 }
 
+
+function registerServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./service-worker.js', { scope: './' })
+      .then(registration => registration.update())
+      .catch(error => console.warn('JFT Importer service worker registration failed:', error));
+  });
+}
+
 async function boot() {
   try {
     const [status, platforms] = await Promise.all([api(`${API}/status`), api(`${API}/platforms`)]);
@@ -517,4 +487,5 @@ async function boot() {
   render();
 }
 
+registerServiceWorker();
 boot();

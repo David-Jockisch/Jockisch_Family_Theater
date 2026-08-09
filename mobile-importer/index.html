@@ -4,7 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#0b0d12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="JFT Importer">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="JFT Importer">
   <title>JFT Mobile Importer</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <link rel="stylesheet" href="./importer.css">
 </head>
 <body>
@@ -27,7 +34,7 @@
     <section class="hero-card">
       <span class="hero-kicker">JFT COLLECTION TOOLS</span>
       <h2>Add media without the terminal.</h2>
-      <p>Search visually, hold the correct title, review the metadata, then hold to save.</p>
+      <p>Search visually, tap the correct title, review the metadata, then save with confirmation where needed.</p>
     </section>
     <section class="home-grid">
       <button class="nav-card" data-route="movies" type="button"><span class="nav-icon">🎬</span><span><strong>Movies</strong><small>Search TMDb and add to the library</small></span></button>
@@ -35,7 +42,7 @@
       <button class="nav-card" data-route="wishlist" type="button"><span class="nav-icon">♡</span><span><strong>Wishlist</strong><small>Browse, remove, or move to library</small></span></button>
       <button class="nav-card git-nav-card" data-route="git" type="button"><span class="nav-icon">⌘</span><span><strong>Save &amp; Push</strong><small>Review, commit, and publish changes to GitHub</small></span><span id="gitPendingBadge" class="pending-badge hidden"></span></button>
     </section>
-    <div class="hold-tip"><span class="hold-ring mini"></span><span>Media actions use press-and-hold to prevent accidental changes.</span></div>
+    <div class="interaction-tip"><span class="tap-dot">✓</span><span>Tap to navigate. Review screens and confirmations protect changes.</span></div>
   </template>
 
   <script src="./importer.js"></script>
