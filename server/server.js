@@ -10,6 +10,14 @@ const {
   PlaybackManager
 } = require("./playback");
 
+const {
+  registerImporterRoutes
+} = require("./importer-api");
+
+const {
+  registerGitRoutes
+} = require("./git-api");
+
 const app = express();
 const PORT = 3000;
 
@@ -361,6 +369,18 @@ app.get(
 );
 
 //
+// Mobile Importer API
+//
+
+registerImporterRoutes(app, {
+  projectRoot: PROJECT_ROOT
+});
+
+registerGitRoutes(app, {
+  projectRoot: PROJECT_ROOT
+});
+
+//
 // Website
 //
 
@@ -415,5 +435,8 @@ app.listen(PORT, () => {
     "  GET  /api/mpv/test"
   );
 
+  console.log("");
+  console.log("Mobile importer:");
+  console.log(`  http://localhost:${PORT}/mobile-importer/`);
   console.log("");
 });

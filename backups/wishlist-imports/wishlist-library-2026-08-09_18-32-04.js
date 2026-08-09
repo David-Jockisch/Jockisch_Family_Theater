@@ -129,15 +129,6 @@ const wishlistLibrary = [
     year: "2026",
     platform: "ps5",
     poster: "/assets/posters/games/ps5/007-first-light.jpg"
-  },
-
-  {
-    id: "gears-of-war-e-day",
-    mediaType: "game",
-    title: "Gears of War: E-Day",
-    year: "2026",
-    platform: "seriesx",
-    poster: "/assets/posters/games/seriesx/gears-of-war-e-day.jpg"
   }
 
 ];

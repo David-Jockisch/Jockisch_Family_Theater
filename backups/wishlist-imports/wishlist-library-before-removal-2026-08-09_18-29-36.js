@@ -82,9 +82,23 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/marvel/the-marvels.jpg"
   },
 
+  {
+    id: "deadpool",
+    mediaType: "movie",
+    title: "Deadpool",
+    year: "2016",
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/marvel/deadpool.jpg"
+  },
 
-
-
+  {
+    id: "deadpool-2",
+    mediaType: "movie",
+    title: "Deadpool 2",
+    year: "2018",
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/marvel/deadpool-2.jpg"
+  },
 
   {
     id: "deadpool-and-wolverine",
@@ -129,15 +143,6 @@ const wishlistLibrary = [
     year: "2026",
     platform: "ps5",
     poster: "/assets/posters/games/ps5/007-first-light.jpg"
-  },
-
-  {
-    id: "gears-of-war-e-day",
-    mediaType: "game",
-    title: "Gears of War: E-Day",
-    year: "2026",
-    platform: "seriesx",
-    poster: "/assets/posters/games/seriesx/gears-of-war-e-day.jpg"
   }
 
 ];

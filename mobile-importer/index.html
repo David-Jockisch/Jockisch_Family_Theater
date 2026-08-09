@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#0b0d12">
+  <title>JFT Mobile Importer</title>
+  <link rel="stylesheet" href="./importer.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button id="backButton" class="icon-button hidden" type="button" aria-label="Back">‹</button>
+      <div>
+        <div class="eyebrow">JOCKISCH FAMILY THEATER</div>
+        <h1 id="pageTitle">Mobile Importer</h1>
+      </div>
+      <div id="serverDot" class="server-dot" title="Server status"></div>
+    </header>
+
+    <main id="app"></main>
+
+    <div id="toast" class="toast hidden" role="status"></div>
+  </div>
+
+  <template id="homeTemplate">
+    <section class="hero-card">
+      <span class="hero-kicker">JFT COLLECTION TOOLS</span>
+      <h2>Add media without the terminal.</h2>
+      <p>Search visually, hold the correct title, review the metadata, then hold to save.</p>
+    </section>
+    <section class="home-grid">
+      <button class="nav-card" data-route="movies" type="button"><span class="nav-icon">🎬</span><span><strong>Movies</strong><small>Search TMDb and add to the library</small></span></button>
+      <button class="nav-card" data-route="games" type="button"><span class="nav-icon">🎮</span><span><strong>Games</strong><small>Search IGDB by platform</small></span></button>
+      <button class="nav-card" data-route="wishlist" type="button"><span class="nav-icon">♡</span><span><strong>Wishlist</strong><small>Browse, remove, or move to library</small></span></button>
+      <button class="nav-card git-nav-card" data-route="git" type="button"><span class="nav-icon">⌘</span><span><strong>Save &amp; Push</strong><small>Review, commit, and publish changes to GitHub</small></span><span id="gitPendingBadge" class="pending-badge hidden"></span></button>
+    </section>
+    <div class="hold-tip"><span class="hold-ring mini"></span><span>Media actions use press-and-hold to prevent accidental changes.</span></div>
+  </template>
+
+  <script src="./importer.js"></script>
+</body>
+</html>
