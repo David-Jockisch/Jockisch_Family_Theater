@@ -1471,19 +1471,6 @@ const movieLibrary = [,
   // Teenage Mutant Ninja Turtles
   // ==================================================
 
-    {
-    id: "teenage-mutant-ninja-turtles",
-    collection: "Teenage Mutant Ninja Turtles",
-    franchise: "Teenage Mutant Ninja Turtles",
-    boothGroup: "Teenage Mutant Ninja Turtles",
-    title: "Teenage Mutant Ninja Turtles",
-    edition: "Blu Ray",
-    year: "2014",
-    rating: "PG-13",
-    runtime: "1hr 41min",
-    poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles.jpg"
-  },
-
   {
     id: "teenage-mutant-ninja-turtles-ii-the-secret-of-the-ooze",
     collection: "Teenage Mutant Ninja Turtles",

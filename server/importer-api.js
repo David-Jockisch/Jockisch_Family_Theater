@@ -181,9 +181,16 @@ async function download(url, destination) {
 }
 
 function formatOwnedMovieObject(movie) {
-  return [
+  const lines = [
     '  {',
-    `    id: ${JSON.stringify(movie.id)},`,
+    `    id: ${JSON.stringify(movie.id)},`
+  ];
+
+  if (movie.tmdbId !== undefined && movie.tmdbId !== null && movie.tmdbId !== '') {
+    lines.push(`    tmdbId: ${JSON.stringify(Number(movie.tmdbId))},`);
+  }
+
+  lines.push(
     `    collection: ${JSON.stringify(movie.collection)},`,
     `    franchise: ${JSON.stringify(movie.franchise)},`,
     `    boothGroup: ${JSON.stringify(movie.boothGroup)},`,
@@ -194,7 +201,9 @@ function formatOwnedMovieObject(movie) {
     `    runtime: ${JSON.stringify(movie.runtime)},`,
     `    poster: ${JSON.stringify(movie.poster)}`,
     '  }'
-  ].join('\n');
+  );
+
+  return lines.join('\n');
 }
 
 function getSectionMatches(source) {
@@ -266,7 +275,12 @@ function removeObjectRange(source, range) {
 
 function formatWishlistObject(item) {
   const lines = ['  {', `    id: ${JSON.stringify(item.id)},`, `    mediaType: ${JSON.stringify(item.mediaType)},`, `    title: ${JSON.stringify(item.title)},`, `    year: ${JSON.stringify(item.year)},`];
-  if (item.mediaType === 'movie') lines.push(`    desiredFormat: ${JSON.stringify(item.desiredFormat)},`);
+  if (item.mediaType === 'movie') {
+    if (item.tmdbId !== undefined && item.tmdbId !== null && item.tmdbId !== '') {
+      lines.push(`    tmdbId: ${JSON.stringify(Number(item.tmdbId))},`);
+    }
+    lines.push(`    desiredFormat: ${JSON.stringify(item.desiredFormat)},`);
+  }
   if (item.mediaType === 'game') lines.push(`    platform: ${JSON.stringify(item.platform)},`);
   lines.push(`    poster: ${JSON.stringify(item.poster)}`, '  }');
   return lines.join('\n');
@@ -407,18 +421,105 @@ function registerImporterRoutes(app, options = {}) {
     return requestTMDb(token, `/movie/${Number(tmdbId)}`, { append_to_response: 'release_dates', language: 'en-US' });
   }
 
-  async function findTMDbByTitle(title) {
-    const data = await requestTMDb(token, '/search/movie', { query: title, include_adult: 'false', language: 'en-US' });
-    const exact = (data.results || []).find(x => normalize(x.title) === normalize(title));
-    const chosen = exact || data.results?.[0];
-    if (!chosen) throw new Error(`Could not find ${title} on TMDb.`);
-    return fullMovie(chosen.id);
+  async function findTMDbByTitle(title, year = "") {
+    const data = await requestTMDb(token, '/search/movie', {
+      query: title,
+      include_adult: 'false',
+      language: 'en-US'
+    });
+
+    const results = data.results || [];
+    if (!results.length) throw new Error(`Could not find ${title} on TMDb.`);
+
+    const normalizedTitle = normalize(title);
+    const normalizedYear = String(year || '').trim();
+
+    const exactTitleResults = results.filter(result =>
+      normalize(result.title) === normalizedTitle
+    );
+
+    const exactYearMatch = exactTitleResults.find(result =>
+      !normalizedYear || releaseYear(result.release_date) === normalizedYear
+    );
+
+    const selected =
+      exactYearMatch ||
+      exactTitleResults[0] ||
+      results.find(result =>
+        !normalizedYear || releaseYear(result.release_date) === normalizedYear
+      ) ||
+      results[0];
+
+    return fullMovie(selected.id);
   }
 
-  async function fullGame(gameId) {
-    const auth = await getIGDBToken(clientId, clientSecret);
-    const query = `fields id,name,slug,category,summary,storyline,first_release_date,platforms.name,genres.name,themes.name,game_modes.name,player_perspectives.name,involved_companies.company.name,involved_companies.developer,involved_companies.publisher,collection.name,franchises.name,cover.image_id,url;\nwhere id = ${Number(gameId)};\nlimit 1;`;
-    return (await requestIGDB(clientId, auth, query))[0] || null;
+  function sameMovieIdentity(item, movieOrObject) {
+    if (!item || !movieOrObject) return false;
+
+    const incomingTmdbId =
+      movieOrObject.tmdbId ??
+      movieOrObject.idFromTmdb;
+
+    if (
+      item.tmdbId !== undefined &&
+      item.tmdbId !== null &&
+      item.tmdbId !== '' &&
+      incomingTmdbId !== undefined &&
+      incomingTmdbId !== null &&
+      incomingTmdbId !== '' &&
+      Number(item.tmdbId) === Number(incomingTmdbId)
+    ) {
+      return true;
+    }
+
+    const incomingTitle = movieOrObject.title || '';
+    const incomingYear =
+      movieOrObject.year ||
+      releaseYear(movieOrObject.release_date);
+
+    return (
+      normalize(item.title) === normalize(incomingTitle) &&
+      String(item.year || '') === String(incomingYear || '')
+    );
+  }
+
+  function chooseMovieId(movies, movie, requestedId = '') {
+    const title = movie.title;
+    const year = releaseYear(movie.release_date);
+    const baseId = requestedId || slugify(title);
+
+    const sameIdentity = movies.find(item =>
+      sameMovieIdentity(item, {
+        tmdbId: movie.id,
+        title,
+        year
+      })
+    );
+
+    if (sameIdentity) return sameIdentity.id;
+
+    const idCollision = movies.some(item =>
+      normalize(item.id) === normalize(baseId)
+    );
+
+    if (!idCollision) return baseId;
+
+    const yearId = `${slugify(title)}-${year}`;
+    if (!movies.some(item => normalize(item.id) === normalize(yearId))) {
+      return yearId;
+    }
+
+    return `${yearId}-${movie.id}`;
+  }
+
+  function findExistingMovie(movies, movie, object) {
+    return movies.find(item =>
+      sameMovieIdentity(item, {
+        tmdbId: movie.id,
+        title: object.title,
+        year: object.year
+      })
+    ) || null;
   }
 
   async function findIGDBByTitle(title, platform) {
@@ -433,11 +534,14 @@ function registerImporterRoutes(app, options = {}) {
     const movies = loadMovies();
     const suggestions = buildMovieSuggestions(movies, movie);
     const title = overrides.title || movie.title;
-    const id = overrides.id || slugify(title);
+    const previewMovie = { ...movie, title };
+    const id = chooseMovieId(movies, previewMovie, overrides.id || '');
     const folder = overrides.posterFolder !== undefined ? overrides.posterFolder : suggestions.posterFolder;
     const poster = folder ? `/assets/posters/movies/${folder}/${id}.jpg` : `/assets/posters/movies/${id}.jpg`;
     return {
-      id, title,
+      id,
+      tmdbId: Number(movie.id),
+      title,
       collection: overrides.collection ?? suggestions.collection ?? title,
       franchise: overrides.franchise ?? suggestions.franchise ?? '',
       boothGroup: overrides.boothGroup ?? suggestions.boothGroup ?? suggestions.collection ?? title,
@@ -545,7 +649,7 @@ function registerImporterRoutes(app, options = {}) {
     const movie = await fullMovie(req.body.tmdbId);
     const object = moviePreview(movie, req.body);
     delete object.posterFolder; delete object.tmdbPosterPath; delete object.overview;
-    const existing = loadMovies().find(x => normalize(x.id) === normalize(object.id) || normalize(x.title) === normalize(object.title));
+    const existing = findExistingMovie(loadMovies(), movie, object);
     const posterFile = absoluteAsset(object.poster);
     if (!fs.existsSync(posterFile) && movie.poster_path) await download(`${TMDB_IMAGE_BASE}${movie.poster_path}`, posterFile);
     const backup = writeMovie(object, existing?.id || '');
@@ -597,12 +701,45 @@ function registerImporterRoutes(app, options = {}) {
     const movies = loadMovies();
     const suggestions = buildMovieSuggestions(movies, movie);
     const title = req.body.title || movie.title;
-    const id = req.body.id || slugify(title);
-    const existing = loadWishlist().find(x => x.mediaType === 'movie' && (normalize(x.id) === normalize(id) || normalize(x.title) === normalize(title)));
-    const owned = movies.find(x => normalize(x.id) === normalize(id) || normalize(x.title) === normalize(title));
-    const folder = req.body.posterFolder !== undefined ? req.body.posterFolder : (getPosterFolderFromPath(owned?.poster) || suggestions.posterFolder || '');
-    const poster = owned?.poster || (folder ? `/assets/posters/movies/${folder}/${id}.jpg` : `/assets/posters/movies/${id}.jpg`);
-    const item = { id, mediaType: 'movie', title, year: req.body.year || releaseYear(movie.release_date), desiredFormat: req.body.desiredFormat || '4K Blu Ray', poster };
+    const year = req.body.year || releaseYear(movie.release_date);
+    const owned = movies.find(x =>
+      sameMovieIdentity(x, { tmdbId: movie.id, title, year })
+    );
+    const wishlist = loadWishlist();
+    const existing = wishlist.find(x =>
+      x.mediaType === 'movie' &&
+      sameMovieIdentity(x, { tmdbId: movie.id, title, year })
+    );
+
+    const allIdentityRecords = [
+      ...movies,
+      ...wishlist.filter(x => x.mediaType === 'movie')
+    ];
+
+    const id = existing?.id || owned?.id || chooseMovieId(
+      allIdentityRecords,
+      { ...movie, title },
+      req.body.id || ''
+    );
+
+    const folder = req.body.posterFolder !== undefined
+      ? req.body.posterFolder
+      : (getPosterFolderFromPath(owned?.poster) || suggestions.posterFolder || '');
+
+    const poster = owned?.poster ||
+      (folder
+        ? `/assets/posters/movies/${folder}/${id}.jpg`
+        : `/assets/posters/movies/${id}.jpg`);
+
+    const item = {
+      id,
+      mediaType: 'movie',
+      tmdbId: Number(movie.id),
+      title,
+      year,
+      desiredFormat: req.body.desiredFormat || '4K Blu Ray',
+      poster
+    };
     const posterFile = absoluteAsset(poster);
     if (!fs.existsSync(posterFile) && movie.poster_path) await download(`${TMDB_IMAGE_BASE}${movie.poster_path}`, posterFile);
     const backup = saveWishlist(item, existing?.id || '');
@@ -631,7 +768,9 @@ function registerImporterRoutes(app, options = {}) {
     if (!item) return res.status(404).json({ success: false, error: 'Wishlist item not found.' });
 
     if (mediaType === 'movie') {
-      const movie = await findTMDbByTitle(item.title);
+      const movie = item.tmdbId
+        ? await fullMovie(item.tmdbId)
+        : await findTMDbByTitle(item.title, item.year);
       const preview = moviePreview(movie, {
         title: item.title,
         id: item.id,
@@ -662,7 +801,9 @@ function registerImporterRoutes(app, options = {}) {
     if (!item) return res.status(404).json({ success: false, error: 'Wishlist item not found.' });
 
     if (mediaType === 'movie') {
-      const movie = await findTMDbByTitle(item.title);
+      const movie = item.tmdbId
+        ? await fullMovie(item.tmdbId)
+        : await findTMDbByTitle(item.title, item.year);
       const object = moviePreview(movie, { ...req.body, title: item.title, id: item.id, year: item.year, posterFolder: getPosterFolderFromPath(item.poster), edition: req.body.edition || item.desiredFormat || 'Blu Ray' });
       delete object.posterFolder; delete object.tmdbPosterPath; delete object.overview;
       const existing = loadMovies().find(x => normalize(x.id) === normalize(object.id) || normalize(x.title) === normalize(object.title));
