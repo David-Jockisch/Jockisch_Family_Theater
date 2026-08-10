@@ -176,16 +176,6 @@ const wishlistLibrary = [
     tmdbId: 83533,
     desiredFormat: "4K Blu Ray",
     poster: "/assets/posters/movies/avatar/avatar-fire-and-ash.jpg"
-  },
-
-  {
-    id: "the-patriot",
-    mediaType: "movie",
-    title: "The Patriot",
-    year: "2000",
-    tmdbId: 2024,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/the-patriot.jpg"
   }
 
 ];

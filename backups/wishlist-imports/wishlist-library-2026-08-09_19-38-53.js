@@ -156,36 +156,6 @@ const wishlistLibrary = [
     year: "2026",
     platform: "ps5",
     poster: "/assets/posters/games/ps5/assassins-creed-black-flag-resynced.jpg"
-  },
-
-  {
-    id: "avatar-the-way-of-water",
-    mediaType: "movie",
-    title: "Avatar: The Way of Water",
-    year: "2022",
-    tmdbId: 76600,
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/avatar/avatar-the-way-of-water.jpg"
-  },
-
-  {
-    id: "avatar-fire-and-ash",
-    mediaType: "movie",
-    title: "Avatar: Fire and Ash",
-    year: "2025",
-    tmdbId: 83533,
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/avatar/avatar-fire-and-ash.jpg"
-  },
-
-  {
-    id: "the-patriot",
-    mediaType: "movie",
-    title: "The Patriot",
-    year: "2000",
-    tmdbId: 2024,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/the-patriot.jpg"
   }
 
 ];
