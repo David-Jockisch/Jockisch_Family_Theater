@@ -147,15 +147,6 @@ const wishlistLibrary = [
     year: "1999",
     desiredFormat: "4k Blu Ray",
     poster: "/assets/posters/movies/the-matrix/the-matrix.jpg"
-  },
-
-  {
-    id: "assassins-creed-black-flag-resynced",
-    mediaType: "game",
-    title: "Assassin's Creed Black Flag Resynced",
-    year: "2026",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/assassins-creed-black-flag-resynced.jpg"
   }
 
 ];
