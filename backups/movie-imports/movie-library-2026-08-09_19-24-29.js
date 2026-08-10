@@ -1524,20 +1524,6 @@ const movieLibrary = [,
     poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles.jpg"
   },
 
-  {
-    id: "teenage-mutant-ninja-turtles-1990",
-    tmdbId: 1498,
-    collection: "Teenage Mutant Ninja Turtles",
-    franchise: "Teenage Mutant Ninja Turtles",
-    boothGroup: "Teenage Mutant Ninja Turtles",
-    title: "Teenage Mutant Ninja Turtles",
-    edition: "Blu Ray",
-    year: "1990",
-    rating: "PG",
-    runtime: "1hr 33min",
-    poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles-1990.jpg"
-  },
-
   // ==================================================
   // The Amazing Spider-Man
   // ==================================================
