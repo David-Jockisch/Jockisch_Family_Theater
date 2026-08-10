@@ -1521,7 +1521,7 @@ const movieLibrary = [,
     year: "2014",
     rating: "PG-13",
     runtime: "1hr 41min",
-    poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles.jpg"
+    poster: "/assets/posters/movies/teenage-mutant-ninja-turtles/teenage-mutant-ninja-turtles-2014.jpg"
   },
 
   {
