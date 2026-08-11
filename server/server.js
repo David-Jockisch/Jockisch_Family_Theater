@@ -233,10 +233,10 @@ app.post(
           false,
 
         demoCount:
-          req.body.demoCount ?? 2,
+          req.body.demoCount ?? 1,
 
         trailerCount:
-          req.body.trailerCount ?? 2,
+          req.body.trailerCount ?? 1,
 
         introFile:
           req.body.introFile || null,
