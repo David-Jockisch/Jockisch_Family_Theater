@@ -186,16 +186,6 @@ const wishlistLibrary = [
     tmdbId: 2024,
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/the-patriot.jpg"
-  },
-
-  {
-    id: "jurassic-world",
-    mediaType: "movie",
-    title: "Jurassic World",
-    year: "2015",
-    tmdbId: 135397,
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world.jpg"
   }
 
 ];

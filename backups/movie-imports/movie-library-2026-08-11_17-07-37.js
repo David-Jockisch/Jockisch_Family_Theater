@@ -906,20 +906,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/jurassic-park/jurassic-park.jpg"
   },
 
-  {
-    id: "jurassic-world-dominion",
-    tmdbId: 507086,
-    collection: "Jurassic World",
-    franchise: "Jurassic Park",
-    boothGroup: "Jurassic Park",
-    title: "Jurassic World Dominion",
-    edition: "4K Blu Ray",
-    year: "2022",
-    rating: "PG-13",
-    runtime: "2hr 27min",
-    poster: "/assets/posters/movies/jurassic-park/jurassic-world-dominion.jpg"
-  },
-
   // ==================================================
   // King of Kings
   // ==================================================
