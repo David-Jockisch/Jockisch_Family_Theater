@@ -6,9 +6,8 @@ const theaterConfig = {
   |   "game"  = game artwork screen
   */
 
-  mode: "movie",
-
-  mediaId: "iron-man",
+  mode: "idle",
+  mediaId: null,
 
   timings: {
     logoBuild: 6800,
@@ -24,9 +23,16 @@ const theaterConfig = {
 };
 
 async function loadTheaterState() {
-  const response = await fetch("/api/state");
+  const response = await fetch("/api/state", { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error(`State request failed with ${response.status}`);
+  }
+
   const state = await response.json();
 
-  theaterConfig.mode = state.mode;
-  theaterConfig.mediaId = state.mediaId;
+  theaterConfig.mode = state.mode || "idle";
+  theaterConfig.mediaId = state.mediaId || null;
+
+  console.log("[JFT Display] Initial state:", state);
 }

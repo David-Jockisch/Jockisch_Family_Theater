@@ -1,6 +1,11 @@
 function loadMediaInfo() {
   hideAllTemplates();
 
+  console.log("[JFT Display] Rendering state:", {
+    mode: theaterConfig.mode,
+    mediaId: theaterConfig.mediaId
+  });
+
   switch (theaterConfig.mode) {
     case "movie":
       loadMovieTemplate();
@@ -23,14 +28,55 @@ function hideAllTemplates() {
   document.getElementById("idleTemplate").classList.add("hidden");
 }
 
+function toServerPath(value) {
+  if (!value) return "";
+
+  const pathValue = String(value).trim();
+
+  if (/^(https?:|data:|blob:)/i.test(pathValue)) {
+    return pathValue;
+  }
+
+  return pathValue.startsWith("/")
+    ? pathValue
+    : `/${pathValue.replace(/^\.?\/?/, "")}`;
+}
+
+function setTheme(themeName) {
+  document.body.classList.remove(
+    "theme-movie",
+    "theme-ps5",
+    "theme-xbox",
+    "theme-switch",
+    "theme-seriesx",
+    "theme-xboxone",
+    "theme-ps4",
+    "theme-ps3"
+  );
+
+  if (themeName) {
+    document.body.classList.add(themeName);
+  }
+}
+
 function loadGameTemplate() {
-  const game = gameLibrary.find(
-    (item) => item.id === theaterConfig.mediaId
+  const library = Array.isArray(window.gameLibrary)
+    ? window.gameLibrary
+    : [];
+
+  if (library.length === 0) {
+    console.error("[JFT Display] Game library is unavailable.");
+    loadIdleTemplate("Game Library Unavailable");
+    return;
+  }
+
+  const game = library.find(
+    item => item && item.id === theaterConfig.mediaId
   );
 
   if (!game) {
-    console.error(`Game not found: ${theaterConfig.mediaId}`);
-    loadIdleTemplate();
+    console.error(`[JFT Display] Game not found: ${theaterConfig.mediaId}`);
+    loadIdleTemplate("Game Not Found");
     return;
   }
 
@@ -41,36 +87,46 @@ function loadGameTemplate() {
   const gameDetails = document.getElementById("gameDetails");
 
   gameTemplate.classList.remove("hidden");
-  
-  document.body.classList.remove(
-  "theme-movie",
-  "theme-ps5",
-  "theme-xbox",
-  "theme-switch"
-);
+  setTheme(`theme-${game.platform}`);
 
-document.body.classList.add(`theme-${game.platform}`);  
-  gameBackground.style.backgroundImage =
-    `url("../../${game.background}")`;
+  const background = toServerPath(
+    game.background || game.poster || game.cover
+  );
 
-  gameTitle.textContent = game.title;
+  gameBackground.style.backgroundImage = background
+    ? `url("${background}")`
+    : "none";
 
-  gamePlatformLogo.src =
-    `../../assets/platforms/${game.platform}.png`;
+  gameTitle.textContent = game.title || "Game Night";
 
-  gamePlatformLogo.alt = game.platform.toUpperCase();
+  gamePlatformLogo.src = `/assets/platforms/${game.platform}.png`;
+  gamePlatformLogo.alt = String(game.platform || "Game platform").toUpperCase();
 
   gameDetails.textContent = game.release || "";
+
+  console.log("[JFT Display] Game loaded:", game.title);
 }
 
 function loadMovieTemplate() {
-  const movie = movieLibrary.find(
-    (item) => item.id === theaterConfig.mediaId
+  const library = Array.isArray(window.movieLibrary)
+    ? window.movieLibrary
+    : (typeof movieLibrary !== "undefined" && Array.isArray(movieLibrary)
+      ? movieLibrary
+      : []);
+
+  if (library.length === 0) {
+    console.error("[JFT Display] Movie library is unavailable.");
+    loadIdleTemplate("Movie Library Unavailable");
+    return;
+  }
+
+  const movie = library.find(
+    item => item && item.id === theaterConfig.mediaId
   );
 
   if (!movie) {
-    console.error(`Movie not found: ${theaterConfig.mediaId}`);
-    loadIdleTemplate();
+    console.error(`[JFT Display] Movie not found: ${theaterConfig.mediaId}`);
+    loadIdleTemplate("Movie Not Found");
     return;
   }
 
@@ -79,38 +135,43 @@ function loadMovieTemplate() {
   const movieDetails = document.getElementById("movieDetails");
 
   movieTemplate.classList.remove("hidden");
+  setTheme("theme-movie");
 
-  document.body.classList.remove(
-    "theme-movie",
-    "theme-ps5",
-    "theme-xbox",
-    "theme-switch"
-  );
+  const posterPath = toServerPath(movie.poster);
 
-  document.body.classList.add("theme-movie");
+  moviePoster.src = posterPath;
+  moviePoster.alt = `${movie.title || "Movie"} poster`;
 
-  moviePoster.src = `../../${movie.poster}`;
-  moviePoster.alt = `${movie.title} poster`;
+  moviePoster.onerror = () => {
+    console.error(
+      `[JFT Display] Poster failed to load for ${movie.title}: ${posterPath}`
+    );
+  };
 
   const details = [
-    movie.release,
+    movie.year || movie.release,
     movie.runtime,
     movie.rating,
     movie.audio
   ].filter(Boolean);
 
   movieDetails.textContent = details.join(" • ");
+
+  console.log("[JFT Display] Movie loaded:", {
+    title: movie.title,
+    id: movie.id,
+    poster: posterPath
+  });
 }
 
-function loadIdleTemplate() {
+function loadIdleTemplate(message = "No Event Selected") {
   const idleTemplate = document.getElementById("idleTemplate");
+  const idleSubtitle = idleTemplate.querySelector(".idle-subtitle");
 
   idleTemplate.classList.remove("hidden");
+  setTheme("");
 
-  document.body.classList.remove(
-    "theme-movie",
-    "theme-ps5",
-    "theme-xbox",
-    "theme-switch"
-  );
+  if (idleSubtitle) {
+    idleSubtitle.textContent = message;
+  }
 }

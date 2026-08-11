@@ -1060,8 +1060,13 @@ function addOwnedMovieToLibrarySource(source, movieObject) {
       .replace(/,\s*$/, "");
     const after = normalizedSource.slice(insertionIndex);
 
+    // If this new collection sorts before the first existing collection,
+    // "before" ends at the opening "[". Do not add a comma there or the
+    // array will begin with an empty entry: const movieLibrary = [, ...
+    const separator = /\[\s*$/.test(before) ? "" : ",";
+
     updatedSource =
-      `${before},\n\n${createOwnedMovieSectionBlock(movieObject)},\n\n${after}`;
+      `${before}${separator}\n\n${createOwnedMovieSectionBlock(movieObject)},\n\n${after}`;
   }
 
   return updatedSource.replace(/\n/g, lineEnding);

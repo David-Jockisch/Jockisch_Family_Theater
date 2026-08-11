@@ -16,13 +16,13 @@
     <!-- Scene 1: Logo Intro -->
     <section id="scene1" class="scene active">
       <div id="logoScene">
-<img class="logo-layer glow" src="../../assets/logos/logo-cross-glow.png" alt="">
-<img class="logo-layer cross" src="../../assets/logos/logo-cross.png" alt="">
-<img class="logo-layer ring" src="../../assets/logos/logo-ring.png" alt="">
-<img class="logo-layer j" src="../../assets/logos/logo-j.png" alt="">
-<img class="logo-layer jockisch" src="../../assets/logos/logo-jockisch.png" alt="">
-<img class="logo-layer family" src="../../assets/logos/logo-family.png" alt="">
-<img class="logo-layer private" src="../../assets/logos/logo-private.png" alt="">      </div>
+<img class="logo-layer glow" src="/assets/logos/logo-cross-glow.png" alt="">
+<img class="logo-layer cross" src="/assets/logos/logo-cross.png" alt="">
+<img class="logo-layer ring" src="/assets/logos/logo-ring.png" alt="">
+<img class="logo-layer j" src="/assets/logos/logo-j.png" alt="">
+<img class="logo-layer jockisch" src="/assets/logos/logo-jockisch.png" alt="">
+<img class="logo-layer family" src="/assets/logos/logo-family.png" alt="">
+<img class="logo-layer private" src="/assets/logos/logo-private.png" alt="">      </div>
     </section>
 
 <!-- Scene 2: Media Display -->
@@ -82,10 +82,13 @@
 </section>
   </div>
 
-<script src="../../library/movies/movie-library.js"></script>
-<script src="../../library/games/game-library.js"></script>
-<script src="../../library/demos/demo-library.js"></script>
-<script src="../../library/platforms/platforms.js"></script>
+<script src="/library/movies/movie-library.js"></script>
+<script type="module">
+  import gameLibrary from "/library/games/game-library.js";
+  window.gameLibrary = gameLibrary;
+</script>
+<script src="/library/demos/demo-library.js"></script>
+<script src="/library/platforms/platforms.js"></script>
 
 <script src="./js/config.js"></script>
 <script src="./js/media.js"></script>

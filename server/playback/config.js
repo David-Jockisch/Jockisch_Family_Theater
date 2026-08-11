@@ -80,9 +80,9 @@ module.exports = {
 
         introEnabled: true,
 
-        demoCount: 2,
+        demoCount: 1,
 
-        trailerCount: 2,
+        trailerCount: 1,
 
         featurePresentationEnabled: true,
 

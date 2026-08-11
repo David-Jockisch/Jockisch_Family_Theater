@@ -177,7 +177,7 @@ function showGameLibrary() {
 }
 
 function renderGameLibrary() {
-  const grouped = groupGamesByPlatform(gameLibrary);
+  const grouped = groupGamesByPlatform(window.gameLibrary || []);
   const platforms = Object.keys(grouped).sort();
 
   gameRows.innerHTML = "";
@@ -431,8 +431,8 @@ function buildPresentationPlan(movie) {
     intro: Boolean(introEnabled),
     demos: Boolean(demosEnabled),
     randomTrailers: Boolean(trailersEnabled),
-    demoCount: demosEnabled ? 2 : 0,
-    trailerCount: trailersEnabled ? 2 : 0
+    demoCount: demosEnabled ? 1 : 0,
+    trailerCount: trailersEnabled ? 1 : 0
   };
 }
 

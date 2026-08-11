@@ -76,7 +76,10 @@
 
 <!-- Shared Data -->
 <script src="/library/movies/movie-library.js"></script>
-<script src="/library/games/game-library.js"></script>
+<script type="module">
+  import gameLibrary from "/library/games/game-library.js";
+  window.gameLibrary = gameLibrary;
+</script>
 <script src="/library/platforms/platforms.js"></script>
 <script src="/library/demos/demo-library.js"></script>
 

@@ -95,6 +95,8 @@ class PlaybackManager {
 
         this.validateMpv();
 
+    console.log("PLAYBACK OPTIONS:", options);
+    
         const presentationPlaylist =
             playlist.build({
 

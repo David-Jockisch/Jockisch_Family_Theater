@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadTheaterState();
+  try {
+    await loadTheaterState();
+  } catch (error) {
+    console.error("[JFT Display] Initial theater state failed:", error);
+    theaterConfig.mode = "idle";
+    theaterConfig.mediaId = null;
+  }
+
   loadMediaInfo();
   runTheaterLoop();
 
@@ -7,26 +14,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function checkForStateChange() {
-  const response = await fetch("/api/state");
-  const state = await response.json();
+  try {
+    const response = await fetch("/api/state", { cache: "no-store" });
 
-  const stateChanged =
-    state.mode !== theaterConfig.mode ||
-    state.mediaId !== theaterConfig.mediaId;
+    if (!response.ok) {
+      throw new Error(`State request failed with ${response.status}`);
+    }
 
-  if (!stateChanged) return;
+    const state = await response.json();
 
-  theaterConfig.mode = state.mode;
-  theaterConfig.mediaId = state.mediaId;
+    const stateChanged =
+      state.mode !== theaterConfig.mode ||
+      state.mediaId !== theaterConfig.mediaId;
 
-  loadMediaInfo();
+    if (!stateChanged) return;
+
+    console.log("[JFT Display] State changed:", state);
+
+    theaterConfig.mode = state.mode;
+    theaterConfig.mediaId = state.mediaId;
+
+    loadMediaInfo();
+  } catch (error) {
+    console.error("[JFT Display] State poll failed:", error);
+  }
 }
+
 function getTiming() {
   return theaterConfig.timings;
 }
 
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function runTheaterLoop() {
@@ -65,12 +84,12 @@ async function runTheaterLoop() {
 function playLogoIntro() {
   const logoLayers = document.querySelectorAll(".logo-layer");
 
-  logoLayers.forEach((layer) => {
+  logoLayers.forEach(layer => {
     layer.classList.remove("animate-logo");
   });
 
   setTimeout(() => {
-    logoLayers.forEach((layer) => {
+    logoLayers.forEach(layer => {
       layer.classList.add("animate-logo");
     });
   }, 50);
