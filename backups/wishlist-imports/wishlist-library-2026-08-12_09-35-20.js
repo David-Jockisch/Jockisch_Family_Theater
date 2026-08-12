@@ -309,15 +309,6 @@ const wishlistLibrary = [
     year: "2019",
     desiredFormat: "4K Blu Ray",
     poster: "/assets/posters/movies/marvel/dark-phoenix.jpg"
-  },
-
-  {
-    id: "guardians-of-the-galaxy-vol-3",
-    mediaType: "movie",
-    title: "Guardians of the Galaxy Vol. 3",
-    year: "2023",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/marvel/guardians-of-the-galaxy-vol-3.jpg"
   }
 
 ];

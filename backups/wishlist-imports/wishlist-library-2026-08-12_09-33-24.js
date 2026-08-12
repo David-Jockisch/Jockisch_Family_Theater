@@ -273,51 +273,6 @@ const wishlistLibrary = [
     year: "2024",
     desiredFormat: "4K Blu Ray",
     poster: "/assets/posters/movies/sonic-the-hedgehog/sonic-the-hedgehog-3.jpg"
-  },
-
-  {
-    id: "fantastic-beasts-and-where-to-find-them",
-    mediaType: "movie",
-    title: "Fantastic Beasts and Where to Find Them",
-    year: "2016",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-and-where-to-find-them.jpg"
-  },
-
-  {
-    id: "fantastic-beasts-the-crimes-of-grindelwald",
-    mediaType: "movie",
-    title: "Fantastic Beasts: The Crimes of Grindelwald",
-    year: "2018",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-  },
-
-  {
-    id: "fantastic-beasts-the-secrets-of-dumbledore",
-    mediaType: "movie",
-    title: "Fantastic Beasts: The Secrets of Dumbledore",
-    year: "2022",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-secrets-of-dumbledore.jpg"
-  },
-
-  {
-    id: "dark-phoenix",
-    mediaType: "movie",
-    title: "Dark Phoenix",
-    year: "2019",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/marvel/dark-phoenix.jpg"
-  },
-
-  {
-    id: "guardians-of-the-galaxy-vol-3",
-    mediaType: "movie",
-    title: "Guardians of the Galaxy Vol. 3",
-    year: "2023",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/marvel/guardians-of-the-galaxy-vol-3.jpg"
   }
 
 ];
