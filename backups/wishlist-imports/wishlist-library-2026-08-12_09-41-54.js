@@ -336,24 +336,6 @@ const wishlistLibrary = [
     year: "2026",
     platform: "ps5",
     poster: "/assets/posters/games/ps5/grand-theft-auto-vi.jpg"
-  },
-
-  {
-    id: "fable",
-    mediaType: "game",
-    title: "Fable",
-    year: "2027",
-    platform: "seriesx",
-    poster: "/assets/posters/games/seriesx/fable.jpg"
-  },
-
-  {
-    id: "dune-awakening",
-    mediaType: "game",
-    title: "Dune: Awakening",
-    year: "2025",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/dune-awakening.jpg"
   }
 
 ];
