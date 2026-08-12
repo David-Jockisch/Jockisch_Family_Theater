@@ -248,16 +248,6 @@ const wishlistLibrary = [
     tmdbId: 76170,
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/marvel/the-wolverine.jpg"
-  },
-
-  {
-    id: "indiana-jones-and-the-temple-of-doom",
-    mediaType: "movie",
-    title: "Indiana Jones and the Temple of Doom",
-    year: "1984",
-    tmdbId: 87,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/indiana-jones/indiana-jones-and-the-temple-of-doom.jpg"
   }
 
 ];
