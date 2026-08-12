@@ -60,6 +60,7 @@ const ironMan = require("./movies/iron-man.js");
 const ironMan2 = require("./movies/iron-man-2.js");
 const ironMan3 = require("./movies/iron-man-3.js");
 const jurassicPark = require("./movies/jurassic-park.js");
+const jurassicWorldDominion = require("./movies/jurassic-world-dominion.js");
 const jurassicWorldFallenKingdom = require("./movies/jurassic-world-fallen-kingdom.js");
 const lethalWeapon = require("./movies/lethal-weapon.js");
 const lethalWeapon2 = require("./movies/lethal-weapon-2.js");
@@ -95,6 +96,7 @@ const spiderManHomecoming = require("./movies/spider-man-homecoming.js");
 const spiderManIntoTheSpiderVerse = require("./movies/spider-man-into-the-spider-verse.js");
 const spiderManNoWayHome = require("./movies/spider-man-no-way-home.js");
 const teenageMutantNinjaTurtles = require("./movies/teenage-mutant-ninja-turtles.js");
+const teenageMutantNinjaTurtles1990 = require("./movies/teenage-mutant-ninja-turtles-1990.js");
 const teenageMutantNinjaTurtlesIiTheSecretOfTheOoze = require("./movies/teenage-mutant-ninja-turtles-ii-the-secret-of-the-ooze.js");
 const teenageMutantNinjaTurtlesIii = require("./movies/teenage-mutant-ninja-turtles-iii.js");
 const teenageMutantNinjaTurtlesOutOfTheShadows = require("./movies/teenage-mutant-ninja-turtles-out-of-the-shadows.js");
@@ -200,6 +202,7 @@ const movieRatings = [
   ironMan2,
   ironMan3,
   jurassicPark,
+  jurassicWorldDominion,
   jurassicWorldFallenKingdom,
   lethalWeapon,
   lethalWeapon2,
@@ -235,6 +238,7 @@ const movieRatings = [
   spiderManIntoTheSpiderVerse,
   spiderManNoWayHome,
   teenageMutantNinjaTurtles,
+  teenageMutantNinjaTurtles1990,
   teenageMutantNinjaTurtlesIiTheSecretOfTheOoze,
   teenageMutantNinjaTurtlesIii,
   teenageMutantNinjaTurtlesOutOfTheShadows,
