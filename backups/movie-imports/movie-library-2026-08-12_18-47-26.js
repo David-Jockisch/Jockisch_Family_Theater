@@ -880,17 +880,16 @@ const movieLibrary = [
   // Jurassic World
   // ==================================================
 
-    {
+  {
     id: "jurassic-world-fallen-kingdom",
-    tmdbId: 351286,
     collection: "Jurassic World",
     franchise: "Jurassic Park",
     boothGroup: "Jurassic Park",
     title: "Jurassic World: Fallen Kingdom",
-    edition: "4K Blu Ray",
+    edition: "Blu Ray",
     year: "2018",
     rating: "PG-13",
-    runtime: "2hr 9min",
+    runtime: "2hr 8min",
     poster: "/assets/posters/movies/jurassic-park/jurassic-world-fallen-kingdom.jpg"
   },
 

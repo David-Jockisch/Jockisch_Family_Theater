@@ -208,7 +208,15 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
   },
 
-
+  {
+    id: "jurassic-world-fallen-kingdom",
+    mediaType: "movie",
+    title: "Jurassic World: Fallen Kingdom",
+    year: "2018",
+    tmdbId: 351286,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-world-fallen-kingdom.jpg"
+  },
 
   {
     id: "jurassic-park",
