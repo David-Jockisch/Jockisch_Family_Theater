@@ -127,9 +127,68 @@ function registerGitRoutes(app, options = {}) {
 
   app.post("/api/git/push", async (req, res) => {
     try {
-      const push = await runGit(projectRoot, ["push"]);
+      const before = await getStatus(projectRoot);
+
+      if (!before.clean) {
+        return res.status(400).json({
+          success: false,
+          error: "Uncommitted changes remain. Stage and commit them before pushing."
+        });
+      }
+
+      if (!before.branch || before.branch === "Detached HEAD") {
+        return res.status(400).json({
+          success: false,
+          error: "Cannot safely sync while Git is in detached HEAD state."
+        });
+      }
+
+      // The Mini PC may be behind GitHub if another computer (for example,
+      // the laptop Developer Tools) pushed to this same branch earlier.
+      // Fetch first, then replay the Mini PC's newly-created importer commit(s)
+      // on top of the latest remote branch before pushing.
+      const fetch = await runGit(projectRoot, ["fetch", "origin", before.branch]);
+
+      let rebase = null;
+      try {
+        rebase = await runGit(projectRoot, [
+          "rebase",
+          `origin/${before.branch}`
+        ]);
+      } catch (error) {
+        // Never leave the always-on Mini PC repository stuck in a rebase.
+        try {
+          await runGit(projectRoot, ["rebase", "--abort"]);
+        } catch {
+          // Best effort only; preserve the original rebase error.
+        }
+
+        const wrapped = new Error(
+          "GitHub has changes that conflict with this Mobile Importer update. " +
+          "The automatic sync was cancelled and your local commit was preserved. " +
+          "Resolve the branch on a computer, then try Save & Push again."
+        );
+        wrapped.status = 409;
+        wrapped.result = error.result || null;
+        throw wrapped;
+      }
+
+      const push = await runGit(projectRoot, [
+        "push",
+        "origin",
+        before.branch
+      ]);
+
       const status = await getStatus(projectRoot);
-      return res.json({ success: true, output: push, status });
+
+      return res.json({
+        success: true,
+        synced: true,
+        fetch,
+        rebase,
+        output: push,
+        status
+      });
     } catch (error) {
       return sendGitError(res, error);
     }
