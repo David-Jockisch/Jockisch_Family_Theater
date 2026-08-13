@@ -258,6 +258,9 @@ const wishlistLibrary = [
     tmdbId: 87,
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/indiana-jones/indiana-jones-and-the-temple-of-doom.jpg"
+  },
+  
+   {
     id: "sonic-the-hedgehog",
     mediaType: "movie",
     title: "Sonic the Hedgehog",
