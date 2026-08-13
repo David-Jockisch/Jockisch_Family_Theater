@@ -208,7 +208,15 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
   },
 
-
+  {
+    id: "jurassic-world-fallen-kingdom",
+    mediaType: "movie",
+    title: "Jurassic World: Fallen Kingdom",
+    year: "2018",
+    tmdbId: 351286,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-world-fallen-kingdom.jpg"
+  },
 
   {
     id: "jurassic-park",
@@ -241,23 +249,6 @@ const wishlistLibrary = [
   },
 
   {
-    id: "the-wolverine",
-    mediaType: "movie",
-    title: "The Wolverine",
-    year: "2013",
-    tmdbId: 76170,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/marvel/the-wolverine.jpg"
-  },
-
-  {
-    id: "indiana-jones-and-the-temple-of-doom",
-    mediaType: "movie",
-    title: "Indiana Jones and the Temple of Doom",
-    year: "1984",
-    tmdbId: 87,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/indiana-jones/indiana-jones-and-the-temple-of-doom.jpg"
     id: "sonic-the-hedgehog",
     mediaType: "movie",
     title: "Sonic the Hedgehog",
@@ -354,15 +345,6 @@ const wishlistLibrary = [
     year: "2027",
     platform: "seriesx",
     poster: "/assets/posters/games/seriesx/fable.jpg"
-  },
-
-  {
-    id: "dune-awakening",
-    mediaType: "game",
-    title: "Dune: Awakening",
-    year: "2025",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/dune-awakening.jpg"
   }
 
 ];
