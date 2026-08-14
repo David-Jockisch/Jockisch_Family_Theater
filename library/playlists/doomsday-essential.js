@@ -312,75 +312,11 @@ const doomsdayEssentials = {
       note: "Block out three hours."
     },
 
-    {
-      id: "29-wandavision-s1",
-      section: "Phase 4 — The Blip & New Beginnings (2023)",
-      type: "season",
-      ref: "wandavision",
-      season: 1,
-      episodeCount: 9,
-      priority: "Essential",
-      note:
-        "Stop before Episode 9's mid-credit scene. It is listed separately next."
-    },
-
-    {
-      id: "30-wandavision-mid-credit",
-      section: "Phase 4 — The Blip & New Beginnings (2023)",
-      type: "special",
-      ref: "wandavision",
-      title: "WandaVision (Episode 9 Mid-Credit Scene)",
-      parentRef: "wandavision",
-      specialLabel: "Episode 9 Mid-Credit Scene",
-      priority: "Essential",
-      note:
-        "Watch immediately after WandaVision Episode 9."
-    },
-
-    {
-      id: "31-falcon-and-winter-soldier-s1",
-      section: "Phase 4 — The Blip & New Beginnings (2023)",
-      type: "season",
-      ref: "the-falcon-and-the-winter-soldier",
-      season: 1,
-      episodeCount: 6,
-      priority: "Essential"
-    },
-
-    {
-      id: "32-loki-s1",
-      section: "Phase 4 — The Blip & New Beginnings (2023)",
-      type: "season",
-      ref: "loki",
-      season: 1,
-      episodeCount: 6,
-      priority: "Essential"
-    },
-
-    {
-      id: "33-what-if-s1",
-      section: "Phase 4 — The Blip & New Beginnings (2023)",
-      type: "season",
-      ref: "what-if",
-      season: 1,
-      episodeCount: 9,
-      priority: "Essential"
-    },
 
     // =====================================
     // Phase 4 — The Multiverse Opens
     // =====================================
 
-    {
-      id: "34-hawkeye-s1",
-      section: "Phase 4 — The Multiverse Opens (2024–2025)",
-      type: "season",
-      ref: "hawkeye",
-      season: 1,
-      episodeCount: 6,
-      priority: "Essential",
-      note: "Watch before Wakanda Forever."
-    },
 
     {
       id: "35-shang-chi",
@@ -409,15 +345,6 @@ const doomsdayEssentials = {
       priority: "Essential"
     },
 
-    {
-      id: "38-ms-marvel-s1",
-      section: "Phase 4 — The Multiverse Opens (2024–2025)",
-      type: "season",
-      ref: "ms-marvel",
-      season: 1,
-      episodeCount: 6,
-      priority: "Essential"
-    },
 
     {
       id: "39-thor-love-and-thunder",
@@ -435,15 +362,6 @@ const doomsdayEssentials = {
       priority: "Essential"
     },
 
-    {
-      id: "41-ironheart-s1",
-      section: "Phase 4 — The Multiverse Opens (2024–2025)",
-      type: "season",
-      ref: "ironheart",
-      season: 1,
-      episodeCount: 6,
-      priority: "Essential"
-    },
 
     {
       id: "42-quantumania",
@@ -465,25 +383,6 @@ const doomsdayEssentials = {
     // Phase 5 — The Multiverse War
     // =====================================
 
-    {
-      id: "44-loki-s2",
-      section: "Phase 5 — The Multiverse War (2025–2026)",
-      type: "season",
-      ref: "loki",
-      season: 2,
-      episodeCount: 6,
-      priority: "Essential"
-    },
-
-    {
-      id: "45-what-if-s3",
-      section: "Phase 5 — The Multiverse War (2025–2026)",
-      type: "season",
-      ref: "what-if",
-      season: 3,
-      episodeCount: 9,
-      priority: "Essential"
-    },
 
     {
       id: "46-deadpool-and-wolverine",
