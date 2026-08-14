@@ -208,7 +208,15 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
   },
 
-
+  {
+    id: "jurassic-world-fallen-kingdom",
+    mediaType: "movie",
+    title: "Jurassic World: Fallen Kingdom",
+    year: "2018",
+    tmdbId: 351286,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-world-fallen-kingdom.jpg"
+  },
 
   {
     id: "jurassic-park",
@@ -248,124 +256,6 @@ const wishlistLibrary = [
     tmdbId: 76170,
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/marvel/the-wolverine.jpg"
-  },
-
-  {
-    id: "indiana-jones-and-the-temple-of-doom",
-    mediaType: "movie",
-    title: "Indiana Jones and the Temple of Doom",
-    year: "1984",
-    tmdbId: 87,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/indiana-jones/indiana-jones-and-the-temple-of-doom.jpg"
-  },
-  
-   {
-    id: "sonic-the-hedgehog",
-    mediaType: "movie",
-    title: "Sonic the Hedgehog",
-    year: "2020",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/sonic-the-hedgehog/sonic-the-hedgehog.jpg"
-  },
-
-  {
-    id: "sonic-the-hedgehog-2",
-    mediaType: "movie",
-    title: "Sonic the Hedgehog 2",
-    year: "2022",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/sonic-the-hedgehog/sonic-the-hedgehog-2.jpg"
-  },
-
-  {
-    id: "sonic-the-hedgehog-3",
-    mediaType: "movie",
-    title: "Sonic the Hedgehog 3",
-    year: "2024",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/sonic-the-hedgehog/sonic-the-hedgehog-3.jpg"
-  },
-
-  {
-    id: "fantastic-beasts-and-where-to-find-them",
-    mediaType: "movie",
-    title: "Fantastic Beasts and Where to Find Them",
-    year: "2016",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-and-where-to-find-them.jpg"
-  },
-
-  {
-    id: "fantastic-beasts-the-crimes-of-grindelwald",
-    mediaType: "movie",
-    title: "Fantastic Beasts: The Crimes of Grindelwald",
-    year: "2018",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-  },
-
-  {
-    id: "fantastic-beasts-the-secrets-of-dumbledore",
-    mediaType: "movie",
-    title: "Fantastic Beasts: The Secrets of Dumbledore",
-    year: "2022",
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-secrets-of-dumbledore.jpg"
-  },
-
-  {
-    id: "dark-phoenix",
-    mediaType: "movie",
-    title: "Dark Phoenix",
-    year: "2019",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/marvel/dark-phoenix.jpg"
-  },
-
-  {
-    id: "guardians-of-the-galaxy-vol-3",
-    mediaType: "movie",
-    title: "Guardians of the Galaxy Vol. 3",
-    year: "2023",
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/marvel/guardians-of-the-galaxy-vol-3.jpg"
-  },
-
-  {
-    id: "marvels-wolverine",
-    mediaType: "game",
-    title: "Marvel's Wolverine",
-    year: "2026",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/marvels-wolverine.jpg"
-  },
-
-  {
-    id: "grand-theft-auto-vi",
-    mediaType: "game",
-    title: "Grand Theft Auto VI",
-    year: "2026",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/grand-theft-auto-vi.jpg"
-  },
-
-  {
-    id: "fable",
-    mediaType: "game",
-    title: "Fable",
-    year: "2027",
-    platform: "seriesx",
-    poster: "/assets/posters/games/seriesx/fable.jpg"
-  },
-
-  {
-    id: "dune-awakening",
-    mediaType: "game",
-    title: "Dune: Awakening",
-    year: "2025",
-    platform: "ps5",
-    poster: "/assets/posters/games/ps5/dune-awakening.jpg"
   }
 
 ];
