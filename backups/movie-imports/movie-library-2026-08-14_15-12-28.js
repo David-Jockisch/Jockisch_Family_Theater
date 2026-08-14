@@ -1774,20 +1774,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/the-incredible-hulk.jpg"
   },
 
-  {
-    id: "hulk",
-    tmdbId: 1927,
-    collection: "The Incredible Hulk",
-    franchise: "",
-    boothGroup: "The Incredible Hulk",
-    title: "Hulk",
-    edition: "4K Blu Ray",
-    year: "2003",
-    rating: "PG-13",
-    runtime: "2hr 18min",
-    poster: "/assets/posters/movies/hulk.jpg"
-  },
-
   // ==================================================
   // The Lorax
   // ==================================================

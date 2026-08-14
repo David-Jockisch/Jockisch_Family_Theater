@@ -19,7 +19,14 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/marvel/avengers-endgame.jpg"
   },
 
-
+  {
+    id: "black-widow",
+    mediaType: "movie",
+    title: "Black Widow",
+    year: "2021",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/marvel/black-widow.jpg"
+  },
 
   {
     id: "shang-chi-and-the-legend-of-the-ten-rings",

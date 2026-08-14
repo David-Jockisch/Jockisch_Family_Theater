@@ -233,20 +233,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/marvel/black-panther.jpg"
   },
 
-  {
-    id: "black-widow",
-    tmdbId: 497698,
-    collection: "Black Panther",
-    franchise: "Marvel Cinematic Universe",
-    boothGroup: "Marvel Cinematic Universe",
-    title: "Black Widow",
-    edition: "Blu Ray",
-    year: "2021",
-    rating: "PG-13",
-    runtime: "2hr 14min",
-    poster: "/assets/posters/movies/marvel/black-widow.jpg"
-  },
-
   // ==================================================
   // Black Sheep
   // ==================================================
@@ -1772,20 +1758,6 @@ const movieLibrary = [
     rating: "PG-13",
     runtime: "1hr 54min",
     poster: "/assets/posters/movies/the-incredible-hulk.jpg"
-  },
-
-  {
-    id: "hulk",
-    tmdbId: 1927,
-    collection: "The Incredible Hulk",
-    franchise: "",
-    boothGroup: "The Incredible Hulk",
-    title: "Hulk",
-    edition: "4K Blu Ray",
-    year: "2003",
-    rating: "PG-13",
-    runtime: "2hr 18min",
-    poster: "/assets/posters/movies/hulk.jpg"
   },
 
   // ==================================================
