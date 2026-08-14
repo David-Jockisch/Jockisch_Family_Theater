@@ -399,16 +399,6 @@ const wishlistLibrary = [
     tmdbId: 624860,
     desiredFormat: "4K Blu Ray",
     poster: "/assets/posters/movies/the-matrix/the-matrix-resurrections.jpg"
-  },
-
-  {
-    id: "eternals",
-    mediaType: "movie",
-    title: "Eternals",
-    year: "2021",
-    tmdbId: 524434,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/eternals.jpg"
   }
 
 ];

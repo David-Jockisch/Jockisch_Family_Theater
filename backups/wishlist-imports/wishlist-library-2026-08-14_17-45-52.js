@@ -379,36 +379,6 @@ const wishlistLibrary = [
     tmdbId: 604,
     desiredFormat: "4K Blu Ray",
     poster: "/assets/posters/movies/the-matrix/the-matrix-reloaded.jpg"
-  },
-
-  {
-    id: "the-matrix-revolutions",
-    mediaType: "movie",
-    title: "The Matrix Revolutions",
-    year: "2003",
-    tmdbId: 605,
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/the-matrix/the-matrix-revolutions.jpg"
-  },
-
-  {
-    id: "the-matrix-resurrections",
-    mediaType: "movie",
-    title: "The Matrix Resurrections",
-    year: "2021",
-    tmdbId: 624860,
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/the-matrix/the-matrix-resurrections.jpg"
-  },
-
-  {
-    id: "eternals",
-    mediaType: "movie",
-    title: "Eternals",
-    year: "2021",
-    tmdbId: 524434,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/eternals.jpg"
   }
 
 ];
