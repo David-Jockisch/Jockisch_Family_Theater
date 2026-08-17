@@ -1414,20 +1414,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/smokey-and-the-bandit/smokey-and-the-bandit-ii.jpg"
   },
 
-  {
-    id: "smokey-and-the-bandit-part-3",
-    tmdbId: 15120,
-    collection: "Smokey and the Bandit",
-    franchise: "Smokey and the Bandit",
-    boothGroup: "Smokey and the Bandit",
-    title: "Smokey and the Bandit Part 3",
-    edition: "Blu Ray",
-    year: "1983",
-    rating: "PG",
-    runtime: "1hr 25min",
-    poster: "/assets/posters/movies/smokey-and-the-bandit/smokey-and-the-bandit-part-3.jpg"
-  },
-
   // ==================================================
   // Son of God
   // ==================================================
