@@ -978,20 +978,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/jurassic-park/jurassic-park-iii.jpg"
   },
 
-  {
-    id: "the-lost-world-jurassic-park",
-    tmdbId: 330,
-    collection: "Jurassic World",
-    franchise: "Jurassic Park",
-    boothGroup: "Jurassic Park",
-    title: "The Lost World: Jurassic Park",
-    edition: "4K Blu Ray",
-    year: "1997",
-    rating: "PG-13",
-    runtime: "2hr 9min",
-    poster: "/assets/posters/movies/jurassic-park/the-lost-world-jurassic-park.jpg"
-  },
-
   // ==================================================
   // King of Kings
   // ==================================================
@@ -1380,52 +1366,6 @@ const movieLibrary = [
     rating: "PG",
     runtime: "1hr 33min",
     poster: "/assets/posters/movies/shrek/shrek-forever-after.jpg"
-  },
-
-  // ==================================================
-  // Smokey and the Bandit
-  // ==================================================
-
-  {
-    id: "smokey-and-the-bandit",
-    tmdbId: 11006,
-    collection: "Smokey and the Bandit",
-    franchise: "Smokey and the Bandit",
-    boothGroup: "Smokey and the Bandit",
-    title: "Smokey and the Bandit",
-    edition: "Blu Ray",
-    year: "1977",
-    rating: "PG",
-    runtime: "1hr 36min",
-    poster: "/assets/posters/movies/smokey-and-the-bandit/smokey-and-the-bandit.jpg"
-  },
-
-  {
-    id: "smokey-and-the-bandit-ii",
-    tmdbId: 12705,
-    collection: "Smokey and the Bandit",
-    franchise: "Smokey and the Bandit",
-    boothGroup: "Smokey and the Bandit",
-    title: "Smokey and the Bandit II",
-    edition: "Blu Ray",
-    year: "1980",
-    rating: "PG",
-    runtime: "1hr 41min",
-    poster: "/assets/posters/movies/smokey-and-the-bandit/smokey-and-the-bandit-ii.jpg"
-  },
-
-  {
-    id: "smokey-and-the-bandit-part-3",
-    tmdbId: 15120,
-    collection: "Smokey and the Bandit",
-    franchise: "Smokey and the Bandit",
-    boothGroup: "Smokey and the Bandit",
-    title: "Smokey and the Bandit Part 3",
-    edition: "Blu Ray",
-    year: "1983",
-    rating: "PG",
-    runtime: "1hr 25min",
-    poster: "/assets/posters/movies/smokey-and-the-bandit/smokey-and-the-bandit-part-3.jpg"
   },
 
   // ==================================================

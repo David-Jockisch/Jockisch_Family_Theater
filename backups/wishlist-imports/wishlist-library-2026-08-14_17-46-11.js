@@ -181,17 +181,57 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/the-patriot.jpg"
   },
 
+  {
+    id: "jurassic-world",
+    mediaType: "movie",
+    title: "Jurassic World",
+    year: "2015",
+    tmdbId: 135397,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-world.jpg"
+  },
+
+  {
+    id: "jurassic-world-rebirth",
+    mediaType: "movie",
+    title: "Jurassic World Rebirth",
+    year: "2025",
+    tmdbId: 1234821,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-world-rebirth.jpg"
+  },
 
 
 
+  {
+    id: "jurassic-park",
+    mediaType: "movie",
+    title: "Jurassic Park",
+    year: "1993",
+    tmdbId: 329,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-park.jpg"
+  },
 
+  {
+    id: "jurassic-park-iii",
+    mediaType: "movie",
+    title: "Jurassic Park III",
+    year: "2001",
+    tmdbId: 331,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-park-iii.jpg"
+  },
 
-
-
-
-
-
-
+  {
+    id: "the-lost-world-jurassic-park",
+    mediaType: "movie",
+    title: "The Lost World: Jurassic Park",
+    year: "1997",
+    tmdbId: 330,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/the-lost-world-jurassic-park.jpg"
+  },
 
   {
     id: "the-wolverine",
@@ -349,26 +389,6 @@ const wishlistLibrary = [
     tmdbId: 605,
     desiredFormat: "4K Blu Ray",
     poster: "/assets/posters/movies/the-matrix/the-matrix-revolutions.jpg"
-  },
-
-  {
-    id: "the-matrix-resurrections",
-    mediaType: "movie",
-    title: "The Matrix Resurrections",
-    year: "2021",
-    tmdbId: 624860,
-    desiredFormat: "4K Blu Ray",
-    poster: "/assets/posters/movies/the-matrix/the-matrix-resurrections.jpg"
-  },
-
-  {
-    id: "eternals",
-    mediaType: "movie",
-    title: "Eternals",
-    year: "2021",
-    tmdbId: 524434,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/eternals.jpg"
   }
 
 ];

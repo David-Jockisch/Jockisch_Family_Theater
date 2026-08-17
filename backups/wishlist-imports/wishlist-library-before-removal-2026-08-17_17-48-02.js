@@ -189,9 +189,25 @@ const wishlistLibrary = [
 
 
 
+  {
+    id: "jurassic-park-iii",
+    mediaType: "movie",
+    title: "Jurassic Park III",
+    year: "2001",
+    tmdbId: 331,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/jurassic-park-iii.jpg"
+  },
 
-
-
+  {
+    id: "the-lost-world-jurassic-park",
+    mediaType: "movie",
+    title: "The Lost World: Jurassic Park",
+    year: "1997",
+    tmdbId: 330,
+    desiredFormat: "4K Blu Ray",
+    poster: "/assets/posters/movies/jurassic-park/the-lost-world-jurassic-park.jpg"
+  },
 
   {
     id: "the-wolverine",
