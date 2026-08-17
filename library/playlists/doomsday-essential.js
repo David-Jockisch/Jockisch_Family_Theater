@@ -4,7 +4,7 @@ const doomsdayEssentials = {
   title: "Marvel Confirmed Playlist",
 
   description:
-    "The movie-only Marvel confirmed watchlist leading into Avengers: Doomsday.",
+    "Marvel's confirmed watchlist leading into Avengers: Doomsday.",
 
   poster: "/assets/playlists/doomsday-prep-essentials.jpg",
 
@@ -29,20 +29,26 @@ const doomsdayEssentials = {
     { id: "06-endgame", section: "Infinity Saga", type: "movie", ref: "avengers-endgame", priority: "Confirmed" },
 
     // =====================================
-    // Multiverse Saga
+    // Multiverse Saga — Loki
     // =====================================
-    { id: "07-shang-chi", section: "Multiverse Saga", type: "movie", ref: "shang-chi-and-the-legend-of-the-ten-rings", priority: "Confirmed", note: "Watch credits." },
-    { id: "08-no-way-home", section: "Multiverse Saga", type: "movie", ref: "spider-man-no-way-home", priority: "Confirmed" },
-    { id: "09-wakanda-forever", section: "Multiverse Saga", type: "movie", ref: "black-panther-wakanda-forever", priority: "Confirmed" },
-    { id: "10-brave-new-world", section: "Multiverse Saga", type: "movie", ref: "captain-america-brave-new-world", priority: "Confirmed" },
-    { id: "11-deadpool-wolverine", section: "Multiverse Saga", type: "movie", ref: "deadpool-and-wolverine", priority: "Confirmed" },
-    { id: "12-multiverse-of-madness", section: "Multiverse Saga", type: "movie", ref: "doctor-strange-in-the-multiverse-of-madness", priority: "Confirmed" },
-    { id: "13-thunderbolts", section: "Multiverse Saga", type: "movie", ref: "thunderbolts", priority: "Confirmed" },
+    { id: "07-loki-s1", section: "Multiverse Saga", type: "season", ref: "loki", season: 1, episodeCount: 6, priority: "Confirmed" },
+    { id: "08-loki-s2", section: "Multiverse Saga", type: "season", ref: "loki", season: 2, episodeCount: 6, priority: "Confirmed" },
+
+    // =====================================
+    // Multiverse Saga — Movies
+    // =====================================
+    { id: "09-shang-chi", section: "Multiverse Saga", type: "movie", ref: "shang-chi-and-the-legend-of-the-ten-rings", priority: "Confirmed", note: "Watch credits." },
+    { id: "10-no-way-home", section: "Multiverse Saga", type: "movie", ref: "spider-man-no-way-home", priority: "Confirmed" },
+    { id: "11-wakanda-forever", section: "Multiverse Saga", type: "movie", ref: "black-panther-wakanda-forever", priority: "Confirmed" },
+    { id: "12-brave-new-world", section: "Multiverse Saga", type: "movie", ref: "captain-america-brave-new-world", priority: "Confirmed" },
+    { id: "13-deadpool-wolverine", section: "Multiverse Saga", type: "movie", ref: "deadpool-and-wolverine", priority: "Confirmed" },
+    { id: "14-multiverse-of-madness", section: "Multiverse Saga", type: "movie", ref: "doctor-strange-in-the-multiverse-of-madness", priority: "Confirmed" },
+    { id: "15-thunderbolts", section: "Multiverse Saga", type: "movie", ref: "thunderbolts", priority: "Confirmed" },
 
     // =====================================
     // Phase 6 — Doomsday
     // =====================================
-    { id: "14-the-fantastic-4-first-steps", section: "Phase 6 — Doomsday", type: "movie", ref: "the-fantastic-4-first-steps", priority: "Confirmed" }
+    { id: "16-the-fantastic-4-first-steps", section: "Phase 6 — Doomsday", type: "movie", ref: "the-fantastic-4-first-steps", priority: "Confirmed" }
   ]
 };
 
