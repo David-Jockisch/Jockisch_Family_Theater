@@ -242,9 +242,23 @@ const wishlistLibrary = [
 
 
 
+  {
+    id: "fantastic-beasts-the-crimes-of-grindelwald",
+    mediaType: "movie",
+    title: "Fantastic Beasts: The Crimes of Grindelwald",
+    year: "2018",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+  },
 
-
-
+  {
+    id: "fantastic-beasts-the-secrets-of-dumbledore",
+    mediaType: "movie",
+    title: "Fantastic Beasts: The Secrets of Dumbledore",
+    year: "2022",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-secrets-of-dumbledore.jpg"
+  },
 
   {
     id: "dark-phoenix",

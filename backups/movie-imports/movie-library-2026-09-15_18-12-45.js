@@ -287,34 +287,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/batman/batman-begins.jpg"
   },
 
-  {
-    id: "the-dark-knight",
-    tmdbId: 155,
-    collection: "Batman",
-    franchise: "Batman",
-    boothGroup: "Batman",
-    title: "The Dark Knight",
-    edition: "4K",
-    year: "2008",
-    rating: "PG-13",
-    runtime: "2hr 32min",
-    poster: "/assets/posters/movies/Batman/the-dark-knight.jpg"
-  },
-
-  {
-    id: "the-dark-knight-rises",
-    tmdbId: 49026,
-    collection: "Batman",
-    franchise: "Batman",
-    boothGroup: "Batman",
-    title: "The Dark Knight Rises",
-    edition: "4K",
-    year: "2012",
-    rating: "PG-13",
-    runtime: "2hr 45min",
-    poster: "/assets/posters/movies/batman/the-dark-knight-rises.jpg"
-  },
-
   // ==================================================
   // Bio-Dome
   // ==================================================

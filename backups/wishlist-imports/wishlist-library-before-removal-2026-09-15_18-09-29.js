@@ -244,7 +244,14 @@ const wishlistLibrary = [
 
 
 
-
+  {
+    id: "fantastic-beasts-the-secrets-of-dumbledore",
+    mediaType: "movie",
+    title: "Fantastic Beasts: The Secrets of Dumbledore",
+    year: "2022",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-secrets-of-dumbledore.jpg"
+  },
 
   {
     id: "dark-phoenix",

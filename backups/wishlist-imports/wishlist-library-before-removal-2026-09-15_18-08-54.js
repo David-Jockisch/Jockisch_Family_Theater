@@ -212,7 +212,7 @@ const wishlistLibrary = [
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/indiana-jones/indiana-jones-and-the-temple-of-doom.jpg"
   },
-
+  
    {
     id: "sonic-the-hedgehog",
     mediaType: "movie",
@@ -240,11 +240,32 @@ const wishlistLibrary = [
     poster: "/assets/posters/movies/sonic-the-hedgehog/sonic-the-hedgehog-3.jpg"
   },
 
+  {
+    id: "fantastic-beasts-and-where-to-find-them",
+    mediaType: "movie",
+    title: "Fantastic Beasts and Where to Find Them",
+    year: "2016",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-and-where-to-find-them.jpg"
+  },
 
+  {
+    id: "fantastic-beasts-the-crimes-of-grindelwald",
+    mediaType: "movie",
+    title: "Fantastic Beasts: The Crimes of Grindelwald",
+    year: "2018",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+  },
 
-
-
-
+  {
+    id: "fantastic-beasts-the-secrets-of-dumbledore",
+    mediaType: "movie",
+    title: "Fantastic Beasts: The Secrets of Dumbledore",
+    year: "2022",
+    desiredFormat: "Blu Ray",
+    poster: "/assets/posters/movies/harry-potter/fantastic-beasts-the-secrets-of-dumbledore.jpg"
+  },
 
   {
     id: "dark-phoenix",
