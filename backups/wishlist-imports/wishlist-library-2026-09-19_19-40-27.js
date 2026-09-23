@@ -358,16 +358,6 @@ const wishlistLibrary = [
     tmdbId: 888,
     desiredFormat: "Blu Ray",
     poster: "/assets/posters/movies/the-flintstones/the-flintstones.jpg"
-  },
-
-  {
-    id: "liar-liar",
-    mediaType: "movie",
-    title: "Liar Liar",
-    year: "1997",
-    tmdbId: 1624,
-    desiredFormat: "Blu Ray",
-    poster: "/assets/posters/movies/liar-liar.jpg"
   }
 
 ];

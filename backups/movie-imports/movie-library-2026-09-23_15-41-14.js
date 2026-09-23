@@ -2267,20 +2267,6 @@ const movieLibrary = [
     poster: "/assets/posters/movies/toy-story/toy-story-4.jpg"
   },
 
-  {
-    id: "toy-story-5",
-    tmdbId: 1084244,
-    collection: "Toy Story",
-    franchise: "Toy Story",
-    boothGroup: "Toy Story",
-    title: "Toy Story 5",
-    edition: "Digital",
-    year: "2026",
-    rating: "PG",
-    runtime: "1hr 42min",
-    poster: "/assets/posters/movies/toy-story/toy-story-5.jpg"
-  },
-
   // ==================================================
   // Venom
   // ==================================================
