@@ -1750,24 +1750,6 @@ const movieLibrary = [
   },
 
   // ==================================================
-  // Star Wars
-  // ==================================================
-
-  {
-    id: "star-wars",
-    tmdbId: 11,
-    collection: "Star Wars",
-    franchise: "Star Wars",
-    boothGroup: "Star Wars",
-    title: "Star Wars",
-    edition: "4K",
-    year: "1977",
-    rating: "PG",
-    runtime: "2hr 1min",
-    poster: "/assets/posters/movies/star-wars/star-wars.jpg"
-  },
-
-  // ==================================================
   // Super Mario
   // ==================================================
 
