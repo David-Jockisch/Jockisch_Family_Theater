@@ -1767,6 +1767,20 @@ const movieLibrary = [
     poster: "/assets/posters/movies/star-wars/star-wars.jpg"
   },
 
+  {
+    id: "the-empire-strikes-back",
+    tmdbId: 1891,
+    collection: "Star Wars",
+    franchise: "Star Wars",
+    boothGroup: "Star Wars",
+    title: "The Empire Strikes Back",
+    edition: "4K Blu Ray",
+    year: "1980",
+    rating: "PG",
+    runtime: "2hr 4min",
+    poster: "/assets/posters/movies/star-wars/the-empire-strikes-back.jpg"
+  },
+
   // ==================================================
   // Super Mario
   // ==================================================

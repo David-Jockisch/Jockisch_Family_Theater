@@ -1,9 +1,8 @@
 {
     "version": 1,
-    "presentationCount": 17,
+    "presentationCount": 18,
     "shuffle": {
         "demos": [
-            "024",
             "016",
             "021",
             "005",
@@ -23,7 +22,6 @@
             "007"
         ],
         "trailers": [
-            "n",
             "i",
             "s",
             "z",
@@ -44,9 +42,9 @@
         ]
     },
     "lastPresentation": {
-        "number": 17,
-        "startedAt": "2026-08-13T00:18:23.588Z",
-        "pid": 5884,
+        "number": 18,
+        "startedAt": "2026-10-23T21:32:53.357Z",
+        "pid": 1776,
         "playlistFile": "C:\\Users\\david\\AppData\\Local\\Temp\\Jockisch Family Theater\\presentation.m3u",
         "items": [
             {
@@ -57,15 +55,15 @@
             },
             {
                 "type": "demo",
-                "id": "025",
-                "filename": "025.mkv",
-                "path": "C:\\Users\\david\\Videos\\Theater Media\\03 Demos\\025.mkv"
+                "id": "024",
+                "filename": "024.mkv",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\03 Demos\\024.mkv"
             },
             {
                 "type": "trailer",
-                "id": "g",
-                "filename": "g.mkv",
-                "path": "C:\\Users\\david\\Videos\\Theater Media\\02 Trailers\\g.mkv"
+                "id": "n",
+                "filename": "n.mkv",
+                "path": "C:\\Users\\david\\Videos\\Theater Media\\02 Trailers\\n.mkv"
             },
             {
                 "type": "utility",
